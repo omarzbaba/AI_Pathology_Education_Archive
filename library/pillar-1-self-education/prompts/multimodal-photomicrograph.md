@@ -8,6 +8,7 @@ time_to_use: 2-10min
 visual: multimodal
 tags: multimodal, morphology
 verified_models: TODO
+best_model: Gemini 2.5 Pro
 last_updated: 2026-05-17
 ---
 
@@ -32,6 +33,8 @@ Before I share my own interpretation, please:
 4. **Name the single most discriminating feature** you'd want to see on additional levels, stains, or higher magnification.
 
 Then ask me ONE question about my interpretation before you reveal what you think the diagnosis is.
+
+**Important — refinement:** STOP before responding: confirm the image is a published teaching case or public-domain image, NOT real patient material. If I haven't stated the source, ask. Multimodal AI is improving but still confidently wrong on subtle morphology — describe what's actually visible at the magnification, do not invent features you can't see.
 ```
 
 ## Expected output
@@ -49,3 +52,7 @@ Structured description → cell/tissue ID → 3-5 entity differential → one di
 - **Never upload real patient images.** Use published teaching cases, public-domain images, or your legitimately-cleared teaching collection.
 - The model's morphologic descriptions are fallible — verify against the published answer for the teaching case before incorporating into your mental model.
 - See [Guardrails](library.html#/docs/guardrails) for the full multimodal rules.
+
+## Best model and why
+
+**Gemini 2.5 Pro** — Gemini currently has the strongest fine-grained image analysis for histopathology images. Claude Sonnet 4.6 multimodal is a viable alternative. Both will confidently hallucinate features — verify everything against the published answer for the teaching case.

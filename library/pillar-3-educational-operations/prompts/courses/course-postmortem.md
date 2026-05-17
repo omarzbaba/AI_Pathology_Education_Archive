@@ -8,6 +8,7 @@ time_to_use: >10min
 visual: text-only
 tags: postmortem, retrospective
 verified_models: TODO
+best_model: Claude Sonnet 4.6
 last_updated: 2026-05-17
 ---
 
@@ -46,6 +47,8 @@ The template should structure a 45-60 minute meeting AND produce a documented ar
    - Any structural issues to escalate to the curriculum committee.
 
 Tone: honest, learning-oriented, no defensiveness.
+
+**Important — refinement:** Action items must have named owners and dates. Items without an owner are aspirations, not actions. If an item has no clear owner, flag it for me to assign or cut.
 ```
 
 ## Expected output
@@ -63,3 +66,7 @@ A meeting structure + an artifact template. Lightweight enough to actually happe
 - Each action item should have a named owner and a date.
 - The artifact should be reviewable by anyone who didn't attend the meeting.
 - Schedule the meeting before the course ends; don't wait until 'when there's time'.
+
+## Best model and why
+
+**Claude Sonnet 4.6** — Meeting structure + artifact template — Sonnet is sufficient. The 'named owners and dates' discipline is on you, not the model.

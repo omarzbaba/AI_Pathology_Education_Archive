@@ -8,6 +8,7 @@ time_to_use: >10min
 visual: text-only
 tags: osce, assessment
 verified_models: TODO
+best_model: Claude Opus 4.7
 last_updated: 2026-05-17
 ---
 
@@ -33,6 +34,8 @@ The station should include:
 5. **A 'red flag' list** — actions that, if performed, indicate the examinee should be flagged for remediation.
 
 Length: realistic for a 7-10 minute station.
+
+**Important — refinement:** The patient/clinician script should handle the 3-4 most likely examinee openers. If I don't tell you what those openers are, ask before drafting the script.
 ```
 
 ## Expected output
@@ -50,3 +53,7 @@ A complete station packet ready for use: examinee instructions, script, action c
 - Pilot the station with a faculty member playing the examinee role before using it in formal assessment.
 - Have a second rater score a video of the pilot independently — if you don't get agreement, the rubric needs more behavioral anchoring.
 - Verify the clinical content (any lab values, drug names, dose adjustments) against current practice.
+
+## Best model and why
+
+**Claude Opus 4.7** — Multi-part OSCE artifacts (script, rubric, red-flag list) need internal consistency. Opus holds the parts together better than Sonnet.

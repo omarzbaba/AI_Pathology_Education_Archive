@@ -8,6 +8,7 @@ time_to_use: 2-10min
 visual: text-only
 tags: feedback, form
 verified_models: TODO
+best_model: Claude Sonnet 4.6
 last_updated: 2026-05-17
 ---
 
@@ -41,6 +42,8 @@ Sections:
 5. **Optional self-report on learning** (1 item): how much they think they learned, with a calibration note ('We'll compare this to pre/post assessment results').
 
 For each item, include the question, the response format, and a one-sentence rationale ('I'll use this to decide whether to drop Module X next year').
+
+**Important — refinement:** Every item must map to a specific decision I would make based on the response. If you can't name the decision for an item, cut the item. Survey length is the enemy of response rate.
 ```
 
 ## Expected output
@@ -58,3 +61,7 @@ A 5-minute form with item-by-item rationale. Should produce data you can actuall
 - Pilot with 2-3 learners and time them.
 - Confirm each item maps to a specific decision.
 - Plan how you'll analyze free text responses before sending the survey — otherwise the data won't get used.
+
+## Best model and why
+
+**Claude Sonnet 4.6** — Survey design balancing completion and signal — Sonnet handles this. Test the 'every item maps to a decision' discipline regardless of model.

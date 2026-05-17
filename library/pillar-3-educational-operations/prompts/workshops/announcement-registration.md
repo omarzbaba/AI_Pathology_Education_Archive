@@ -8,6 +8,7 @@ time_to_use: 2-10min
 visual: text-only
 tags: marketing, copy
 verified_models: TODO
+best_model: Claude Sonnet 4.6
 last_updated: 2026-05-17
 ---
 
@@ -40,6 +41,8 @@ Produce:
 3. A **registration confirmation email** template (~150 words) for attendees who sign up.
 
 Tone: professional, specific, slightly warmer than a journal abstract. Avoid 'cutting-edge', 'revolutionary', and similar empty intensifiers.
+
+**Important — refinement:** Avoid empty intensifiers ('cutting-edge', 'revolutionary', 'transformative'). If you use one, replace it with a specific concrete outcome attendees will achieve.
 ```
 
 ## Expected output
@@ -57,3 +60,7 @@ Three deliverables: blurb, announcement, confirmation email. Each calibrated to 
 - Check faculty bios with each faculty member before publishing.
 - Verify dates, venue, registration link, and any CME credit claims.
 - Confirm registration cap is realistic for the venue.
+
+## Best model and why
+
+**Claude Sonnet 4.6** — Marketing copy that avoids empty intensifiers — Sonnet is reasonably disciplined about this. Add explicit 'no cutting-edge, no revolutionary' instructions to any model.

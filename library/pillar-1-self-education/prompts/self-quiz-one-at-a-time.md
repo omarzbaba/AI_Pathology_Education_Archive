@@ -8,6 +8,7 @@ time_to_use: 2-10min
 visual: text-only
 tags: self-assessment, drilling
 verified_models: TODO
+best_model: Claude Sonnet 4.6
 last_updated: 2026-05-17
 ---
 
@@ -33,6 +34,8 @@ Ground rules — these are critical:
 5. Do NOT lecture between questions. Keep the rhythm tight.
 
 Start with a calibration question that helps you figure out my level on this topic.
+
+**Important — refinement:** If I correct you on a fact during the drill, stop and acknowledge the correction explicitly before moving on. Do not continue as if it didn't happen.
 ```
 
 ## Expected output
@@ -49,3 +52,7 @@ A back-and-forth conversation. Each model turn = one question + brief feedback o
 
 - The model's feedback on whether you got it right or wrong is itself fallible. If a question's correct answer surprises you, verify against an authoritative source before incorporating it into your mental model.
 - Watch for the model marking you 'partially correct' when you're actually wrong, which builds false confidence.
+
+## Best model and why
+
+**Claude Sonnet 4.6** — Sonnet respects the one-question-at-a-time rule and calibrates follow-ups well. Opus is overkill for this back-and-forth pacing; the interaction structure matters more than reasoning depth.

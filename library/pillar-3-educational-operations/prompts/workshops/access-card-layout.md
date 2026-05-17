@@ -8,6 +8,7 @@ time_to_use: <2min
 visual: text-only
 tags: design, access-cards
 verified_models: TODO
+best_model: Claude Haiku 4.5
 last_updated: 2026-05-17
 ---
 
@@ -44,6 +45,8 @@ Include:
 - File format expected by your print shop (PDF, AI, etc.).
 
 End with a sample of the front and back as ASCII art so I can visualize the layout.
+
+**Important — refinement:** QR code must be ≥25mm square and use error correction level H (30% recovery). Smaller codes or lower error correction levels fail when printed with imperfect ink coverage or scanned in low light.
 ```
 
 ## Expected output
@@ -60,3 +63,7 @@ Full specification + visualized layout. Should be print-shop-ready.
 
 - Print one prototype and scan the QR with multiple phone types and lighting conditions.
 - Verify the URL is correct and resolves to the intended destination.
+
+## Best model and why
+
+**Claude Haiku 4.5** — Card layout spec — Haiku is sufficient. The accessibility/QR constraints are the discipline; the model is the easy part.

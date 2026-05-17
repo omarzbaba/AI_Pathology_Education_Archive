@@ -8,6 +8,7 @@ time_to_use: 2-10min
 visual: text-only
 tags: learning-objectives, acgme, epa
 verified_models: TODO
+best_model: Claude Sonnet 4.6
 last_updated: 2026-05-17
 ---
 
@@ -32,6 +33,8 @@ Each objective should:
 4. Map to a specific **ACGME milestone sub-competency** (e.g., 'PC1.3 Interpretation of Diagnostic Studies') or **EPA** (if your program uses EPAs).
 
 After the objectives, identify which milestones are NOT addressed by these objectives — useful context for the program director.
+
+**Important — refinement:** Verify the milestone codes against the current Pathology Milestone document (ACGME publishes revisions periodically). If you're not sure which version is current, ask me to provide the milestone document or note which version you're referencing.
 ```
 
 ## Expected output
@@ -48,3 +51,7 @@ N objectives in proper format with explicit condition + behavior + criterion + m
 
 - Verify the milestone or EPA mapping against your program's official document. ACGME milestones are revised periodically; the model may reference an older version.
 - Run the objectives by your program director or CCC chair before using them in a formally documented session.
+
+## Best model and why
+
+**Claude Sonnet 4.6** — Sonnet produces well-structured objectives in the required 'will be able to' format with milestone mapping. Verify the milestone codes regardless of model — milestones get revised periodically and no model is reliably current.

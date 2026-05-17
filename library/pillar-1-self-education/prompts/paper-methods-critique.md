@@ -8,6 +8,7 @@ time_to_use: 2-10min
 visual: text-only
 tags: literature, critical-appraisal
 verified_models: TODO
+best_model: Claude Opus 4.7
 last_updated: 2026-05-17
 ---
 
@@ -42,6 +43,8 @@ Provide:
 If I haven't given you the full methods section, ask for it.
 
 Paper methods: [paste methods section or full paper]
+
+**Important — refinement:** If your critique relies on conventions you're not sure are current (e.g., 'this should follow CONSORT 2010 vs. the 2025 extension'), state your uncertainty about the convention version. Methodology guidelines update; don't critique against an outdated framework.
 ```
 
 ## Expected output
@@ -58,3 +61,7 @@ A structured checklist with adequacy ratings, three named consequential gaps, an
 
 - Cross-check the critique against the actual paper. The model will sometimes critique items the paper addresses (just not in the section the model expected).
 - If you're presenting this critique at journal club, run it by a faculty member with methods expertise — there's no substitute for human review of methodological critique.
+
+## Best model and why
+
+**Claude Opus 4.7** — Methods critique requires applying named reporting guidelines (CONSORT, STROBE) with precision. Opus is more reliable at the specific framework items than Sonnet or GPT models.

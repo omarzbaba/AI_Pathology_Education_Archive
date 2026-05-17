@@ -116,6 +116,7 @@
     time_to_use:     "Time to use",
     visual:          "Format",
     tags:            "Tags",
+    best_model:      "Best model",
     verified_models: "Verified on",
     last_updated:    "Updated"
   };

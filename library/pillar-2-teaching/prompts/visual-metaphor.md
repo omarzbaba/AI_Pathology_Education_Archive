@@ -8,6 +8,7 @@ time_to_use: <2min
 visual: text-only
 tags: lecture, metaphor
 verified_models: TODO
+best_model: Claude Opus 4.7
 last_updated: 2026-05-17
 ---
 
@@ -35,6 +36,8 @@ For each metaphor:
 Rank the list by (precision × accessibility), but acknowledge the trade-off — the most accessible metaphors are often the least precise.
 
 End with: which metaphor would you pick if I'm teaching to medical students vs. attendings, and why?
+
+**Important — refinement:** Be honest about precision: do not inflate precision scores. A metaphor that breaks down when pushed against an expert deserves a precision of 2, not 4. The trade-off is the point.
 ```
 
 ## Expected output
@@ -51,3 +54,7 @@ End with: which metaphor would you pick if I'm teaching to medical students vs. 
 
 - Push each metaphor to its breaking point with an expert in your subspecialty. The metaphors that survive expert pushback are the ones to use; those that don't will mislead learners.
 - Trust audience feedback over your own assessment — if the metaphor doesn't land in the room, the precision score doesn't matter.
+
+## Best model and why
+
+**Claude Opus 4.7** — Generating *diverse* metaphors (not variations of one) is a creativity task where Opus pulls away. Sonnet tends to converge on similar metaphors.

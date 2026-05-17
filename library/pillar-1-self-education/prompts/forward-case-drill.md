@@ -8,6 +8,7 @@ time_to_use: 2-10min
 visual: text-only
 tags: case-based, drilling
 verified_models: TODO
+best_model: Claude Opus 4.7
 last_updated: 2026-05-17
 ---
 
@@ -33,6 +34,8 @@ I'm studying [diagnosis] at a [PGY level] level. Generate the constellation of f
 For each finding, label it [Pathognomonic / Highly Supportive / Supportive / Common but non-specific].
 
 Then quiz me: ask me which findings I would prioritize on a sign-out and why.
+
+**Important — refinement:** Be strict about the 'pathognomonic' label. A finding is only pathognomonic if it is unique to this diagnosis. If a finding appears in >1 diagnosis, it's at most 'highly supportive'. Over-labeling pathognomonic findings is the most common error in this kind of teaching summary.
 ```
 
 ## Expected output
@@ -49,3 +52,7 @@ A structured constellation with all five sections, every finding labeled by diag
 
 - Verify which findings are truly pathognomonic vs merely supportive. The model overuses 'pathognomonic'.
 - Cross-reference the morphologic findings against your subspecialty's atlas or reference text — this is where confident-wrong answers are most likely.
+
+## Best model and why
+
+**Claude Opus 4.7** — Distinguishing pathognomonic from supportive findings requires medical-knowledge depth and discipline about labels. Opus is more careful with these distinctions than Sonnet.

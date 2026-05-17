@@ -8,6 +8,7 @@ time_to_use: 2-10min
 visual: text-only
 tags: handoff, peer
 verified_models: TODO
+best_model: Claude Sonnet 4.6
 last_updated: 2026-05-17
 ---
 
@@ -35,6 +36,8 @@ The template structures the outgoing resident's tacit knowledge into usable form
 7. **Open offer**: 'I'm happy to answer questions by [contact method] for the first week if you have them'.
 
 Tone: peer-to-peer, slightly informal, honest. This is NOT a formal evaluation document — it's collegial advice.
+
+**Important — refinement:** Strip patient identifiers from any case mentioned. Be diplomatic but honest about attendings — aim for 'Dr. X prefers a written preview before sign-out' rather than personal critique.
 ```
 
 ## Expected output
@@ -52,3 +55,7 @@ A template the outgoing resident can complete in 20 minutes that gives the incom
 - Strip patient identifiers from any cases described.
 - Be diplomatic about attendings; aim for accurate without being unkind.
 - The 'mistake' should be one the outgoing resident is comfortable putting in writing.
+
+## Best model and why
+
+**Claude Sonnet 4.6** — Peer-to-peer template with friendly voice — Sonnet is appropriate. Strip any PHI before pasting case content regardless of model.

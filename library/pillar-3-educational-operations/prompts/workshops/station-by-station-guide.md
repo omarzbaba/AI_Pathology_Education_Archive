@@ -8,6 +8,7 @@ time_to_use: >10min
 visual: text-only
 tags: operations, station-guide
 verified_models: TODO
+best_model: Claude Sonnet 4.6
 last_updated: 2026-05-17
 ---
 
@@ -41,6 +42,8 @@ For EACH station, produce:
 9. **If you have extra time:** an optional deepening activity.
 
 Format consistently across all stations so facilitators can quickly find what they need.
+
+**Important — refinement:** Each station's minute-by-minute should account for ~90% of the time allocation, leaving 10% as buffer for transitions and unexpected questions. Stations packed to 100% run over.
 ```
 
 ## Expected output
@@ -57,3 +60,7 @@ One guide per station, each in the same format. Total length: 1-2 pages per stat
 
 - Run through one station's guide as if you were the facilitator, with a stopwatch. Adjust timing.
 - Have each station's actual lead read and edit their own guide before the day.
+
+## Best model and why
+
+**Claude Sonnet 4.6** — Parallel structured documents (one per station, same format) is exactly Sonnet's strength.

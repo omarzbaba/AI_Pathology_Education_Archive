@@ -8,6 +8,7 @@ time_to_use: >10min
 visual: text-only
 tags: evaluation, rubric
 verified_models: TODO
+best_model: Claude Opus 4.7
 last_updated: 2026-05-17
 ---
 
@@ -39,6 +40,8 @@ Avoid:
 End with:
 - Estimated time for an attending to complete the rubric (target: 15 minutes).
 - The minimum number of observations required to assign each dimension fairly.
+
+**Important — refinement:** Behavioral anchors must describe observable behaviors, not personality traits. 'Shows enthusiasm' is not a behavior; 'arrives prepared to sign-out with a written preview of complex cases' is.
 ```
 
 ## Expected output
@@ -56,3 +59,7 @@ A rubric with 5-7 dimensions, 5 leveled behavioral anchors per dimension, narrat
 - Run the rubric by your CCC chair before use.
 - Pilot with two raters scoring the same resident independently. If inter-rater reliability is low, the anchors need refinement.
 - Verify milestone mapping against your program's current document.
+
+## Best model and why
+
+**Claude Opus 4.7** — Behavioral anchors that genuinely discriminate between levels are hard. Opus produces more differentiated anchors; Sonnet tends toward all-positive language.

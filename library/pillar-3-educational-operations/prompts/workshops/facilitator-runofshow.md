@@ -8,6 +8,7 @@ time_to_use: >10min
 visual: text-only
 tags: operations, run-of-show
 verified_models: TODO
+best_model: Claude Sonnet 4.6
 last_updated: 2026-05-17
 ---
 
@@ -44,6 +45,8 @@ Include explicit blocks for:
 End with:
 - A list of materials and AV needs by block.
 - The roles list: who does what (lead, support, AV, runner).
+
+**Important — refinement:** Build in 5-minute buffers between blocks. Real workshops always run long; the run-of-show should plan for this rather than assume perfect timing.
 ```
 
 ## Expected output
@@ -60,3 +63,7 @@ A document the lead facilitator can use to run the day without thinking. Should 
 
 - Walk through the run-of-show with the lead facilitator and at least one other staff member before the day.
 - Verify any AV needs with the venue.
+
+## Best model and why
+
+**Claude Sonnet 4.6** — Timed scheduling with contingencies — Sonnet handles this reliably. Verify the timing math regardless of model.

@@ -8,6 +8,7 @@ time_to_use: 2-10min
 visual: text-only
 tags: case-based, drilling
 verified_models: TODO
+best_model: Claude Opus 4.7
 last_updated: 2026-05-17
 ---
 
@@ -33,6 +34,8 @@ Generate a ranked list of findings or test results that would force me to recons
 For each finding, give a one-sentence rationale: why does this finding contradict the diagnosis?
 
 Then identify the **single most likely** alternative diagnosis if I'm wrong, and the one test I should order to discriminate between them.
+
+**Important — refinement:** Rank disconfirming findings by clinical likelihood, not by exoticism. The most likely way I'm wrong is usually a common condition presenting atypically, not a rare zebra. Surface the boring alternatives, not just the interesting ones.
 ```
 
 ## Expected output
@@ -49,3 +52,7 @@ A three-tier list of disconfirming findings with rationales, plus a named altern
 
 - This prompt is most useful as a thinking exercise; the model's specific suggestions are starting points, not definitive guidance.
 - If a specific test is recommended (e.g., 'order a flow cytometry'), verify the test is the right one for the discrimination you actually need.
+
+## Best model and why
+
+**Claude Opus 4.7** — Counterfactual reasoning (what would change the diagnosis) and ranking by *clinical likelihood* rather than exoticism is where Opus's depth helps. Sonnet tends to surface rarer alternatives first.

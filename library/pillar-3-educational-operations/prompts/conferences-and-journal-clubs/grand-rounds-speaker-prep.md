@@ -8,6 +8,7 @@ time_to_use: >10min
 visual: text-only
 tags: grand-rounds, speaker-prep
 verified_models: TODO
+best_model: Claude Opus 4.7
 last_updated: 2026-05-17
 ---
 
@@ -35,6 +36,8 @@ Help me prepare. Generate:
    - 1 from a trainee (the resident who wants the practical takeaway).
 5. **What to NOT do**: 2-3 framings, opening lines, or rhetorical moves that will misfire with this audience at this institution.
 6. **A 'walking away' line**: the one sentence the audience should remember 24 hours later.
+
+**Important — refinement:** If you don't know the host institution's culture, ASK me what would be a misfire (e.g., references to specific local politics, recent institutional events, in-jokes) before drafting 'what not to do'. Do not guess about a culture you don't know.
 ```
 
 ## Expected output
@@ -51,3 +54,7 @@ A prep document I can use to structure my preparation, not a script. Includes au
 
 - Run the audience profile by a colleague at the host institution if you can — they'll know specifics you don't.
 - The walking-away line should be testable: would the audience be able to repeat it tomorrow?
+
+## Best model and why
+
+**Claude Opus 4.7** — Reading the host institution's culture and anticipating sophisticated questions from content experts requires depth. Opus is the right tier.

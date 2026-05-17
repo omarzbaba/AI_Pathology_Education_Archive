@@ -8,6 +8,7 @@ time_to_use: 2-10min
 visual: text-only
 tags: spaced-repetition, anki
 verified_models: TODO
+best_model: Claude Haiku 4.5
 last_updated: 2026-05-17
 ---
 
@@ -37,6 +38,8 @@ Rules:
 5. Use the actual numbers, names, and details from the source. If you don't know a specific value, leave it blank rather than guessing.
 
 After the cards, add a one-sentence note about anything in the source you decided NOT to make a card for and why.
+
+**Important — refinement:** Mark any answer where you are uncertain about a specific value, gene name, or threshold with `[VERIFY]` at the end. Better to flag uncertainty than ship a wrong card into spaced repetition.
 ```
 
 ## Expected output
@@ -52,3 +55,7 @@ N tab-separated lines, one card per line, plus a brief note on what was delibera
 ## Required human verification
 
 - Scan the answers for any numerical value, drug dose, gene name, or specific reference range. Verify each against the source or an authoritative reference. The model will sometimes invent plausible-looking specifics.
+
+## Best model and why
+
+**Claude Haiku 4.5** — Flashcard conversion is a fast, structured task — Haiku handles it well and at a fraction of the cost. Bump to Sonnet only if the source material is dense (a methods-heavy paper, a complex algorithm).

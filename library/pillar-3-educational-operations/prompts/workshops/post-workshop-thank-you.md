@@ -8,6 +8,7 @@ time_to_use: <2min
 visual: text-only
 tags: comms, thank-you
 verified_models: TODO
+best_model: Claude Haiku 4.5
 last_updated: 2026-05-17
 ---
 
@@ -36,6 +37,8 @@ The email should:
 Tone: warm, specific, professional. Avoid 'we had such a great time' generic thanks.
 
 Length: under 200 words. Attendees skim email; don't waste their attention.
+
+**Important — refinement:** If I haven't given you a specific moment from the workshop to reference, leave the placeholder `[INSERT SPECIFIC MOMENT]` rather than inventing one. A fabricated reference signals to attendees that the email is templated.
 ```
 
 ## Expected output
@@ -52,3 +55,7 @@ A complete email ready to send, with placeholders only for the specific 'moment 
 
 - Verify all links work before sending.
 - The specific 'moment' line has to come from you — the model doesn't know what happened in the room.
+
+## Best model and why
+
+**Claude Haiku 4.5** — Short email under 200 words — Haiku is fast and sufficient. The specific moment from the workshop has to come from you regardless.

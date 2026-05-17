@@ -8,6 +8,7 @@ time_to_use: >10min
 visual: text-only
 tags: lor, narrative
 verified_models: TODO
+best_model: Claude Opus 4.7
 last_updated: 2026-05-17
 ---
 
@@ -39,6 +40,8 @@ Letter structure:
 4. Closing: explicit recommendation with appropriate strength, and an offer to discuss further.
 
 **Critical:** the letter MUST be heavily edited by me before sending. The model will produce structurally plausible prose that reads as generic to experienced LOR readers (program directors read hundreds and recognize template language). My job is to inject specificity, my actual voice, and the anecdotes only I would know.
+
+**Important — refinement:** Critical change to the flow: before drafting ANY of the letter body, ask me for at least 4 SPECIFIC anecdotes about this applicant — moments I observed, with enough detail that a reader would know this person could only have come from my pen. Do NOT begin the body paragraphs until you have those anecdotes. Generic LOR prose without specific anecdotes is the most common failure mode and the easiest one to detect from the reader's side.
 ```
 
 ## Expected output
@@ -57,3 +60,7 @@ A draft letter with placeholders where you'll need to insert specifics. The draf
 - Verify the applicant's accomplishments, dates, and dosing of praise.
 - LOR readers detect AI-template language. The differentiator is your specific voice and your specific knowledge — that has to come from you, not the model.
 - See [Guardrails](library.html#/docs/guardrails) on the structural plausibility failure mode.
+
+## Best model and why
+
+**Claude Opus 4.7** — LOR readers detect template language. Opus produces less formulaic prose than Sonnet, but the structural plausibility problem applies to all models — the differentiator is your specific anecdotes, not the model's prose.

@@ -8,6 +8,7 @@ time_to_use: 2-10min
 visual: text-only
 tags: mcq, board-prep
 verified_models: TODO
+best_model: Claude Opus 4.7
 last_updated: 2026-05-17
 ---
 
@@ -32,6 +33,8 @@ For each question:
 - After all questions, provide an answer key with a 2-3 sentence rationale for **each** answer choice, including why the wrong ones are wrong. The wrong-answer rationales are the most important part.
 
 Topic depth: assume the resident has read the relevant chapter once but has not drilled the material.
+
+**Important — refinement:** Do NOT reproduce or closely paraphrase real published board questions (RISE, ABPath in-service, etc.). Generate original questions only. If the topic is so narrow that you cannot safely generate originals without overlapping existing questions, tell me.
 ```
 
 ## Expected output
@@ -48,3 +51,7 @@ N questions in the requested format with full vignettes, five plausible choices 
 
 - **Critical:** verify the correct answer against an authoritative source before using the question for study or sharing. AI-generated MCQs routinely have plausible-looking-but-wrong correct answers, especially for nuanced topics.
 - Check that the question is not a near-duplicate of a real published board question (rare but possible).
+
+## Best model and why
+
+**Claude Opus 4.7** — Generating high-quality distractors with substantive wrong-answer rationales is where Opus pulls away from Sonnet. The rationales for incorrect choices are the highest-yield part of an MCQ; Sonnet rationales tend toward formulaic.

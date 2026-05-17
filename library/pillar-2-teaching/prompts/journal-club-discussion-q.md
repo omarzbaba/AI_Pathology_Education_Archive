@@ -8,6 +8,7 @@ time_to_use: <2min
 visual: text-only
 tags: journal-club, discussion
 verified_models: TODO
+best_model: Claude Sonnet 4.6
 last_updated: 2026-05-17
 ---
 
@@ -36,6 +37,8 @@ For each question, include:
 - The question itself.
 - One sentence on what makes it a productive question (what discussion does it open?).
 - The 'wrong' response that's most likely to come up early in discussion and how to redirect.
+
+**Important — refinement:** Pressure-test question 5 (the contested one): if it has a clear answer in current literature, it's not actually contested. Replace it with one that reasonable experts genuinely disagree about.
 ```
 
 ## Expected output
@@ -52,3 +55,7 @@ For each question, include:
 
 - Verify the methods-level question is answerable from the actual paper.
 - Pre-test the contested question with a colleague — if they immediately agree with you, it's not actually contested.
+
+## Best model and why
+
+**Claude Sonnet 4.6** — Question escalation across abstraction levels is well within Sonnet's range. Pressure-test the 'contested' question regardless of model.

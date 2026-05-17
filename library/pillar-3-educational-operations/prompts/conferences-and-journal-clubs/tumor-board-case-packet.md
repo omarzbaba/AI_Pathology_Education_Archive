@@ -8,6 +8,7 @@ time_to_use: 2-10min
 visual: text-only
 tags: tumor-board, packet
 verified_models: TODO
+best_model: Claude Sonnet 4.6
 last_updated: 2026-05-17
 ---
 
@@ -39,6 +40,8 @@ For each case in the packet:
 Plus a packet header with date, attendees, and any standing references (e.g., institutional treatment protocols).
 
 The packet should be PHI-free and suitable for retention as part of the case file.
+
+**Important — refinement:** STRONG REMINDER: strip ALL patient identifiers from each case. No name, no MRN, no accession number, no exact age (use 'in their 60s'), no exact date of service, no institutional identifiers, no rare-disease-plus-location combinations that enable re-identification. If a case feels like it cannot be sufficiently de-identified, tell me.
 ```
 
 ## Expected output
@@ -56,3 +59,7 @@ A template for the packet header + a per-case template. Together they support co
 - **Verify no PHI** in any case packet before circulating.
 - Confirm the 'outcome decision' field is filled in for every case (administrative discipline matters).
 - Match the packet format to institutional retention requirements.
+
+## Best model and why
+
+**Claude Sonnet 4.6** — Template generation — Sonnet is sufficient. The PHI discipline is the entire safety story here; verify before pasting case material regardless of model.

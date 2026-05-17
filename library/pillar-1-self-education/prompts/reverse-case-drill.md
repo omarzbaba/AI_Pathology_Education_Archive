@@ -8,6 +8,7 @@ time_to_use: 2-10min
 visual: text-only
 tags: case-based, drilling
 verified_models: TODO
+best_model: Claude Opus 4.7
 last_updated: 2026-05-17
 ---
 
@@ -35,6 +36,8 @@ After your walkthrough, I'll tell you what I actually concluded and we can compa
 
 Findings:
 [paste the findings — labs, imaging summary, morphology description, clinical context. De-identified, no PHI.]
+
+**Important — refinement:** Critical reminder: the findings I paste must be **de-identified** with NO patient identifiers — no name, MRN, accession number, exact date of service, exact age, institutional identifiers, or rare-finding combinations sufficient for re-identification. If you see anything that looks identifiable in what I paste, stop and tell me before proceeding.
 ```
 
 ## Expected output
@@ -51,3 +54,7 @@ A step-by-step differential walkthrough ending in a final diagnosis and a named 
 
 - **Never paste identifiable patient information.** Use de-identified findings, published teaching cases, or sufficiently genericized vignettes.
 - The model's final diagnosis is fallible. Treat the exercise as a structured comparison of *reasoning paths*, not as a second opinion on the case.
+
+## Best model and why
+
+**Claude Opus 4.7** — Explicit reasoning chains under uncertainty are Opus's strongest use case. Sonnet skips steps; Opus shows the work, which is the point of the drill.

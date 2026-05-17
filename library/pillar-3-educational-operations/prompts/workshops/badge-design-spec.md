@@ -8,6 +8,7 @@ time_to_use: 2-10min
 visual: text-only
 tags: design, badges
 verified_models: TODO
+best_model: Claude Haiku 4.5
 last_updated: 2026-05-17
 ---
 
@@ -35,6 +36,8 @@ The spec should include:
 - **Quantity to order** with at least 10% buffer for last-minute attendees and reprints.
 
 End with a print-shop-ready summary I can paste into an order form.
+
+**Important — refinement:** Verify font size meets accessibility minimums: name in ≥24pt for in-person events (legible from across a room). If institutional branding requirements conflict with accessibility, name the conflict explicitly.
 ```
 
 ## Expected output
@@ -51,3 +54,7 @@ A spec document plus a print-shop summary. Should be unambiguous enough that two
 
 - Print one prototype and test legibility from 6 feet.
 - Verify the lanyard/holder type matches the badges you're ordering.
+
+## Best model and why
+
+**Claude Haiku 4.5** — Print specification is fast and structured. Haiku is sufficient and cheap.

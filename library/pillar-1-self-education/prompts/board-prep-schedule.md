@@ -8,6 +8,7 @@ time_to_use: >10min
 visual: text-only
 tags: planning, board-prep
 verified_models: TODO
+best_model: Claude Sonnet 4.6
 last_updated: 2026-05-17
 ---
 
@@ -41,6 +42,8 @@ Generate a week-by-week schedule with:
 6. The last 48 hours: explicit instructions (sleep, light review, no caffeine experimentation).
 
 Be specific about resource use, not generic. If you don't have enough info about my resources, ask.
+
+**Important — refinement:** If my self-assessment looks internally inconsistent (e.g., I list a topic as 'Strong' but also list it as something I want extra time on), ask me to clarify before generating the schedule.
 ```
 
 ## Expected output
@@ -57,3 +60,7 @@ A multi-week schedule with daily breakdown, rest days, a rescue week, and explic
 
 - Run the schedule by a colleague who's recently taken the exam. They will see flaws an AI cannot (e.g., 'no one needs to spend a week on cytogenetics for this exam').
 - Adjust based on actual progress in week 2 — the initial plan is a hypothesis, not a contract.
+
+## Best model and why
+
+**Claude Sonnet 4.6** — Sonnet does week-by-week structured planning reliably. Opus is overkill unless your situation is unusual (e.g., a re-take with very limited time and complex constraints).

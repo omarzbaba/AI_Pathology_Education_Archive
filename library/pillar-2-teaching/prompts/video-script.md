@@ -8,6 +8,7 @@ time_to_use: >10min
 visual: text-only
 tags: video, scripting
 verified_models: TODO
+best_model: Claude Sonnet 4.6
 last_updated: 2026-05-17
 ---
 
@@ -36,6 +37,8 @@ Format:
 After the script, list:
 - The 2-3 shots/assets I'll need to produce or source.
 - The 1 sentence the viewer will remember 24 hours later.
+
+**Important — refinement:** Read the script aloud at conversational pace (~150 words/minute). If it overruns the target duration, cut narration first; do not cut visuals or beats.
 ```
 
 ## Expected output
@@ -53,3 +56,7 @@ Two-column script with timed beats, opening hook, specific visuals, and a final 
 - Read the script aloud at natural pace and time it. AI-generated scripts almost always overrun.
 - Verify any specific clinical content.
 - Source visuals from properly licensed material; do not use images without clear permission.
+
+## Best model and why
+
+**Claude Sonnet 4.6** — Two-column script with timed beats is a structured creative task — Sonnet handles it well. Aloud-test the script for natural pacing regardless of which model you use.

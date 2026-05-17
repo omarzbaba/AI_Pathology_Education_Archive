@@ -8,6 +8,7 @@ time_to_use: >10min
 visual: text-only
 tags: module, packet
 verified_models: TODO
+best_model: Claude Sonnet 4.6
 last_updated: 2026-05-17
 ---
 
@@ -42,6 +43,8 @@ The packet has two audiences:
 - Recommended further reading for learners who want to go deeper.
 
 Be specific about what learners produce. 'Discuss' is not enough — what's the artifact?
+
+**Important — refinement:** Verify every reading citation and confirm institutional library access. If you can't verify, mark with [VERIFY] rather than including unverified citations.
 ```
 
 ## Expected output
@@ -59,3 +62,7 @@ A two-audience packet: learner-facing (concise) and instructor-facing (detailed 
 - Verify reading citations and confirm availability through your institution's library.
 - Run the instructor section by a colleague who hasn't taught the week — would they be ready?
 - Check that the post-class assessment aligns to the stated learning outcome.
+
+## Best model and why
+
+**Claude Sonnet 4.6** — Two-audience structured doc — Sonnet is the right tier. Verify reading citations regardless of model.

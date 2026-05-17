@@ -8,6 +8,7 @@ time_to_use: 2-10min
 visual: text-only
 tags: vignette, differential
 verified_models: TODO
+best_model: Claude Opus 4.7
 last_updated: 2026-05-17
 ---
 
@@ -40,6 +41,8 @@ After both cases:
 
 - A side-by-side comparison showing which features they share and which differ.
 - The 'aha' question to use in teaching: when residents see both side by side, what question crystallizes the discrimination?
+
+**Important — refinement:** Before writing, confirm with me what specific discriminating feature should resolve the pair. Do not assume — ask one clarifying question if it's not obvious from my framing.
 ```
 
 ## Expected output
@@ -56,3 +59,7 @@ Two paired vignettes + intended diagnoses + named discriminators + side-by-side 
 
 - Verify the discriminating feature is actually the discriminator in current practice (not an outdated criterion).
 - Pressure-test with a resident who hasn't been taught the discrimination — do they notice it, or does the pair just feel like 'two cases'?
+
+## Best model and why
+
+**Claude Opus 4.7** — Parallel construction with a single deliberate difference is harder than it looks. Opus is more disciplined about NOT varying confounding features.

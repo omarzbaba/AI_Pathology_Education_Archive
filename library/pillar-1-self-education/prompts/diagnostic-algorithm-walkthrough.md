@@ -8,6 +8,7 @@ time_to_use: 2-10min
 visual: text-only
 tags: algorithm, diagnostic-workup
 verified_models: TODO
+best_model: Claude Opus 4.7
 last_updated: 2026-05-17
 ---
 
@@ -34,6 +35,8 @@ For each decision point in the algorithm:
 After walking through the full algorithm, end with: the single decision point where errors are most clinically consequential, and how to avoid those errors.
 
 Be specific to the published version of the algorithm; do not generalize to 'similar' protocols.
+
+**Important — refinement:** State which version of the algorithm you're walking through (year, society, edition). If the algorithm has been substantially revised in the last 5 years, note both the version you're describing and what changed.
 ```
 
 ## Expected output
@@ -50,3 +53,7 @@ A linear walk-through, one node at a time, with rationale and pitfalls at each. 
 
 - **Critical:** verify the algorithm against the actual published source (society guideline, original paper, institutional protocol). The model frequently mis-remembers cutoffs, the order of decision nodes, or which version of an algorithm it's describing.
 - If the algorithm has multiple versions (e.g., updated in 2020 and 2024), confirm which version the model is walking through.
+
+## Best model and why
+
+**Claude Opus 4.7** — Multi-step algorithm walkthroughs with specific guideline versions reward Opus's depth. Sonnet works but is more likely to conflate similar protocols.

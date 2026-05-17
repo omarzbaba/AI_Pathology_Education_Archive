@@ -8,6 +8,7 @@ time_to_use: 2-10min
 visual: text-only
 tags: feedback, mid-rotation
 verified_models: TODO
+best_model: Claude Sonnet 4.6
 last_updated: 2026-05-17
 ---
 
@@ -37,6 +38,8 @@ The template should structure a 10-15 minute conversation, not a written-only ev
 4. **What gets documented**: just the one strength, one growth area, one commitment. No surprises at the end-of-rotation evaluation.
 
 Tone: collaborative, low-stakes, course-correction oriented.
+
+**Important — refinement:** The meeting must fit in 15 minutes maximum. If the template you generate requires longer, cut sections. Mid-rotation feedback that becomes a 30-minute conversation gets cancelled by the third occurrence.
 ```
 
 ## Expected output
@@ -53,3 +56,7 @@ A structured template with prep questions, conversation flow, and minimal docume
 
 - Pilot with a willing attending-resident pair. Time the meeting; adjust if it consistently runs long.
 - Check that the documented commitment is observable enough to assess at end-of-rotation.
+
+## Best model and why
+
+**Claude Sonnet 4.6** — Template with a meeting structure — Sonnet handles this. The 15-min cap is the discipline; the model is the easy part.

@@ -8,6 +8,7 @@ time_to_use: >10min
 visual: text-only
 tags: lecture, slides
 verified_models: TODO
+best_model: Claude Sonnet 4.6
 last_updated: 2026-05-17
 ---
 
@@ -33,6 +34,8 @@ Structure:
 - **Identify the 2 slides that, if you only had 30 seconds, you'd use.** Those are the slides that anchor the lecture.
 
 After the outline, name the most likely point in the lecture where you'll run out of time, and the 2-3 slides you'd cut to recover.
+
+**Important — refinement:** After the outline, sum the suggested timing for each block and confirm it fits 60 minutes including the Q&A. If the total exceeds 60 min, name which blocks I should compress and by how much.
 ```
 
 ## Expected output
@@ -50,3 +53,7 @@ A 35-45 slide outline with titles, brief content, visuals, and interaction beats
 - Walk through the outline at presentation pace (~80 seconds per slide). Does the timing work?
 - Verify the substantive content for each beat against your subspecialty's reference. The model may sketch beats that turn out to be technically wrong.
 - The recommended visuals are starting points; you supply the actual images and verify they're properly licensed.
+
+## Best model and why
+
+**Claude Sonnet 4.6** — Slide outlines are structured planning — Sonnet handles this well. Use Opus only if the topic is unusually complex and you want richer visual suggestions.

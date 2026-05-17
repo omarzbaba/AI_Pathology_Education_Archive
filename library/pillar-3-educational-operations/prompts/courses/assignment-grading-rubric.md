@@ -8,6 +8,7 @@ time_to_use: 2-10min
 visual: text-only
 tags: rubric, grading
 verified_models: TODO
+best_model: Claude Opus 4.7
 last_updated: 2026-05-17
 ---
 
@@ -40,6 +41,8 @@ The rubric should have:
 End with:
 - **Common pitfalls** for this assignment type (what students typically get wrong) and how the rubric captures them.
 - **Estimated grading time** per submission.
+
+**Important — refinement:** Each dimension must be independently assessable. If two dimensions could be confused or rated together (e.g., 'writing quality' and 'organization'), merge them or rewrite to make the distinction sharper.
 ```
 
 ## Expected output
@@ -56,3 +59,7 @@ A rubric with 4-6 well-defined dimensions, 4 levels each, feedback prompts, pitf
 
 - Grade one sample submission with the rubric, then have a colleague grade the same one independently. Check for inter-rater agreement; refine where you disagree.
 - Verify the rubric assesses the stated learning objectives.
+
+## Best model and why
+
+**Claude Opus 4.7** — Independently-assessable dimensions and behavioral level descriptors require care. Opus produces sharper distinctions; Sonnet rubrics tend to have overlapping dimensions.

@@ -8,6 +8,7 @@ time_to_use: 2-10min
 visual: text-only
 tags: feedback, narrative
 verified_models: TODO
+best_model: Claude Opus 4.7
 last_updated: 2026-05-17
 ---
 
@@ -38,6 +39,8 @@ Format:
 Tone: warm but honest. Specific over generic. Behavioral over personality-based.
 
 Do NOT add observations that aren't in my notes. If something is missing, leave it out rather than padding.
+
+**Important — refinement:** Every claim in the note must be traceable to an observation I gave you. Do not extrapolate to praise the resident didn't earn or growth areas I didn't flag. If you find yourself padding to reach the target length, leave it short.
 ```
 
 ## Expected output
@@ -55,3 +58,7 @@ A feedback note in five sections that reads like a real attending wrote it — s
 - Re-read against your original observations. Anything in the note that's not in your notes is the model speaking, not you. Delete or rewrite.
 - Sanity-check the tone with how you'd actually talk to this resident.
 - Run formal feedback notes through your institution's required template format if one exists.
+
+## Best model and why
+
+**Claude Opus 4.7** — Voice and nuance matter here. Opus produces feedback that reads more like a thoughtful attending and less like a template, and is more disciplined about not adding observations you didn't provide.

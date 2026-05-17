@@ -8,6 +8,7 @@ time_to_use: 2-10min
 visual: text-only
 tags: informatics, lis
 verified_models: TODO
+best_model: Claude Opus 4.7
 last_updated: 2026-05-17
 ---
 
@@ -33,6 +34,8 @@ Structure:
 5. **One question I can ask in a vendor or IT meeting that distinguishes a good answer from a hand-wave.**
 
 Avoid jargon I haven't already heard — if you need to use a term, define it inline.
+
+**Important — refinement:** Cite the specific standard (HL7 segment name, LOINC code, FHIR resource, IHE profile) where applicable rather than paraphrasing it. If you're unsure whether a term is current vocabulary in this domain, say so.
 ```
 
 ## Expected output
@@ -49,3 +52,7 @@ The five-section breakdown, total ~300-500 words. The 'one question to ask' shou
 
 - Verify the technical specifics (e.g., HL7 segment names, LOINC structure) against authoritative documentation. The model sometimes mis-names protocol elements.
 - The 'question to ask' is a starting point — have an informatics colleague pressure-test it before relying on it in a high-stakes meeting.
+
+## Best model and why
+
+**Claude Opus 4.7** — Informatics standards (HL7, FHIR, LOINC) require depth and specificity. Opus 4.7 cites segment names and resource types more reliably. Sonnet works as a fallback but is more likely to paraphrase the standard rather than name it.

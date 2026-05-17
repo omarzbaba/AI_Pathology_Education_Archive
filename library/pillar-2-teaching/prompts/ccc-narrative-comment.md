@@ -8,6 +8,7 @@ time_to_use: 2-10min
 visual: text-only
 tags: ccc, narrative
 verified_models: TODO
+best_model: Claude Opus 4.7
 last_updated: 2026-05-17
 ---
 
@@ -38,6 +39,8 @@ Format the narrative:
 Tone: factual, evidence-based, defensible. The narrative should make sense to an external reviewer (PGY-1 ACGME visit) reading the file cold.
 
 Do NOT inflate beyond the evidence I provided. If the evidence supports level 3 but I've inadvertently described level 4 behaviors, flag the inconsistency.
+
+**Important — refinement:** Do NOT inflate the level beyond the evidence I provided. If you notice my evidence does not actually support my assigned level, stop and tell me before drafting. An inflated CCC narrative is worse than no narrative.
 ```
 
 ## Expected output
@@ -55,3 +58,7 @@ A four-sentence narrative tightly mapped to the milestone, with explicit evidenc
 - Read against your bullets — every claim in the narrative should be traceable to a bullet.
 - Have a colleague on the CCC read for tone consistency with how they'd write a similar narrative.
 - Verify the milestone level descriptors against your program's current milestone document — these get revised periodically.
+
+## Best model and why
+
+**Claude Opus 4.7** — CCC narratives need tight evidence-to-claim mapping and defensible level assignment. Opus is more conservative about inflation than Sonnet or GPT models.

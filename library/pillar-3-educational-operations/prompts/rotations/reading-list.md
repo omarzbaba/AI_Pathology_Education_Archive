@@ -8,6 +8,7 @@ time_to_use: 2-10min
 visual: text-only
 tags: reading-list, references
 verified_models: TODO
+best_model: Claude Opus 4.7
 last_updated: 2026-05-17
 ---
 
@@ -45,6 +46,8 @@ Include a mix of:
 - 1 piece of historical context (an older paper that explains why the field thinks the way it does).
 
 At the end, name the 2 items the resident should read in the first 48 hours.
+
+**Important — refinement:** Verify EVERY citation. Models routinely generate plausible-looking but non-existent paper titles. If you cannot verify a citation, leave it out and recommend I add one I know exists.
 ```
 
 ## Expected output
@@ -62,3 +65,7 @@ A prioritized reading list with rationale, time estimate, and check-question for
 - Verify every citation. Models routinely hallucinate paper titles and authors.
 - Check that landmark papers are still considered foundational in current practice.
 - Have an attending in the subspecialty review and prune.
+
+## Best model and why
+
+**Claude Opus 4.7** — Curation requires judgment about which papers are landmark vs current. Opus is more careful, but **verify every citation regardless of model** — hallucinated paper titles are common.

@@ -8,6 +8,7 @@ time_to_use: <2min
 visual: text-only
 tags: concepts, scaffolding
 verified_models: TODO
+best_model: Claude Sonnet 4.6
 last_updated: 2026-05-17
 ---
 
@@ -31,6 +32,8 @@ Explain [target concept] in three layers:
 3. The nuanced detail that distinguishes someone who has thought hard about this from someone who has just memorized it.
 
 After your explanation, ask me ONE follow-up question to check my understanding before moving on. Do not move on until I answer.
+
+**Important — refinement:** If any claim in any layer references a specific cutoff, drug name, gene, dose, or guideline year, source it explicitly (e.g., '2024 NCCN, version 2'). If you can't source a specific number, mark it [VERIFY] rather than stating it as fact.
 ```
 
 ## Expected output
@@ -47,3 +50,7 @@ Three-layer explanation in plain prose (not bullets) totaling 200-400 words. The
 
 - Cross-check the nuanced detail (layer 3) against an authoritative source: the relevant chapter in Robbins, a recent guideline, or a curated review article. The model is most likely to be confidently wrong at the level where you have least ability to catch it.
 - If a specific numerical threshold or cutoff is given, verify against the current reference range or guideline.
+
+## Best model and why
+
+**Claude Sonnet 4.6** — Sonnet 4.6 handles calibrated, layered explanations reliably without over-elaborating. Use Opus 4.7 if the topic is highly specialized and you want maximum depth at layer 3. Avoid Haiku — it tends to compress all three layers into the same level.

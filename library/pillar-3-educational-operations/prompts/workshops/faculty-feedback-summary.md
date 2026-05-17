@@ -8,6 +8,7 @@ time_to_use: 2-10min
 visual: text-only
 tags: comms, debrief
 verified_models: TODO
+best_model: Claude Opus 4.7
 last_updated: 2026-05-17
 ---
 
@@ -36,6 +37,8 @@ Structure the debrief:
 6. **A note on response rate and selection bias**: who responded and who didn't, and what that means for interpreting the data.
 
 Tone: data-forward, no defensiveness, no minimization of critical feedback. Faculty trust this kind of debrief when it's honest.
+
+**Important — refinement:** Quote selectively but accurately. If a quote could identify the respondent (small group, distinctive phrasing), paraphrase. Do NOT embellish or smooth out quotes to make them more readable — that erodes faculty trust in the data.
 ```
 
 ## Expected output
@@ -53,3 +56,7 @@ A debrief email with all six sections, paraphrased quotes for anonymity, and ran
 - Re-read against the raw feedback — confirm you haven't omitted significant negative themes.
 - Anonymize all quotes — even paraphrased, check that no quote could be traced to a specific person.
 - Run the debrief past one trusted faculty member before sending to the wider group.
+
+## Best model and why
+
+**Claude Opus 4.7** — Theme synthesis from raw feedback comments — Opus is better at the 'signal vs noise' distinction and more disciplined about preserving anonymity.

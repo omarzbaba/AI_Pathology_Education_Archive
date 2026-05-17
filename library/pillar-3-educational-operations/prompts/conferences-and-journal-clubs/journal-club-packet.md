@@ -8,6 +8,7 @@ time_to_use: 2-10min
 visual: text-only
 tags: journal-club, packet
 verified_models: TODO
+best_model: Claude Opus 4.7 with paper attached
 last_updated: 2026-05-17
 ---
 
@@ -45,6 +46,8 @@ The packet should include:
 6. **Attendee preparation note**: what they should think about before arriving.
 
 Length: 2-3 pages. No PHI.
+
+**Important — refinement:** If you don't have the full paper text, say so and refuse to generate the packet. Fabricated background, methods, or numbers in a journal club packet undermine the entire session.
 ```
 
 ## Expected output
@@ -62,3 +65,7 @@ A complete packet ready to send to attendees a week before journal club.
 - Verify all numbers against the actual paper.
 - Pre-test the contested question with a colleague.
 - Confirm citations are accurate.
+
+## Best model and why
+
+**Claude Opus 4.7 with paper attached** — Quality depends on actually reading the paper. Opus with PDF attached, or Gemini 2.5 Pro for very long papers. Refuse the prompt if you don't have the paper text.

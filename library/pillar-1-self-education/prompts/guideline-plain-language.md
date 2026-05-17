@@ -8,6 +8,7 @@ time_to_use: 2-10min
 visual: text-only
 tags: guidelines, plain-language
 verified_models: TODO
+best_model: Claude Sonnet 4.6
 last_updated: 2026-05-17
 ---
 
@@ -34,6 +35,8 @@ For each recommendation:
 Do NOT change the substantive content of the recommendation. If a guideline says 'consider X', do not translate it to 'do X' — preserve the conditional language.
 
 Guideline recommendations: [paste the recommendations]
+
+**Important — refinement:** Preserve every qualifier in the original guideline ('in selected patients', 'when available', 'if feasible'). Do not collapse conditional language into directives.
 ```
 
 ## Expected output
@@ -50,3 +53,7 @@ A list of plain-language recommendations, each with grade and evidence quality p
 
 - Cross-check the translated recommendations against the original guideline, particularly the strength of recommendation and any conditional language.
 - Confirm inline term translations are accurate at the target reading level.
+
+## Best model and why
+
+**Claude Sonnet 4.6** — Sonnet preserves conditional language ('consider', 'in selected patients') better than smaller models. Avoid GPT-4o here — it tends to flatten qualifiers into directives.

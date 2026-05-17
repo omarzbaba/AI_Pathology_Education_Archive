@@ -8,6 +8,7 @@ time_to_use: 2-10min
 visual: text-only
 tags: expectations, syllabus
 verified_models: TODO
+best_model: Claude Sonnet 4.6
 last_updated: 2026-05-17
 ---
 
@@ -37,6 +38,8 @@ Structure:
 This document should answer 'what is expected of me?' clearly enough that no resident has to guess.
 
 Specify any institutional-specific terms (e.g., 'sign-out', 'preview') and define them on first use.
+
+**Important — refinement:** Map every objective to a specific milestone sub-competency code (e.g., 'PC1.3 Interpretation of Diagnostic Studies'). Generic 'will demonstrate competence in X' is not useful for the CCC.
 ```
 
 ## Expected output
@@ -54,3 +57,7 @@ A complete expectations doc covering all seven areas. Suitable for the rotation 
 - Verify objectives map to actual milestones in your program's current document.
 - Run by the rotation director and at least one recent rotator before finalizing.
 - Confirm the supervision model is consistent with your program's policy and any institutional credentialing rules.
+
+## Best model and why
+
+**Claude Sonnet 4.6** — Structured doc with milestone mapping — Sonnet handles this. Verify milestone codes regardless of model.

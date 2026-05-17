@@ -8,6 +8,7 @@ time_to_use: 2-10min
 visual: text-only
 tags: lecture, speaker-notes
 verified_models: TODO
+best_model: Claude Sonnet 4.6
 last_updated: 2026-05-17
 ---
 
@@ -37,6 +38,8 @@ Mark moments to pause for questions or audience interaction.
 
 Slides:
 [paste slide titles + bullet content, one slide per block]
+
+**Important — refinement:** Notes should be in spoken voice. If a sentence reads like written prose ('It is important to recognize that...'), rewrite it for the ear ('Here's what to notice...'). Aloud-test as you write.
 ```
 
 ## Expected output
@@ -53,3 +56,7 @@ Per-slide speaker notes with transitions, expansions, specific examples, and bri
 
 - Verify any clinical content the model adds beyond what was on the slide. The model fills in gaps and sometimes fills them with confident-wrong content.
 - Rehearse the notes aloud. Spoken language reveals problems written language hides.
+
+## Best model and why
+
+**Claude Sonnet 4.6** — Expanding bullets into spoken-voice notes is a workhorse task. Sonnet's voice is more natural for spoken delivery than GPT-4o (which tends toward written register).

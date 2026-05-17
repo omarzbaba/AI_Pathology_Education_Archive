@@ -8,6 +8,7 @@ time_to_use: >10min
 visual: text-only
 tags: board-prep, gap-analysis
 verified_models: TODO
+best_model: Claude Opus 4.7
 last_updated: 2026-05-17
 ---
 
@@ -32,6 +33,8 @@ Analyze these misses and identify:
 2. **The priority order to address them**, with rationale (which gap, if filled, would resolve the most other questions?).
 3. **A specific review plan** for the top gap: which chapter or paper to read, which targeted qbank topic to drill next, an estimate of hours needed.
 4. **A 'don't worry about it' list** — anything in my misses that's low-yield for the exam and not worth fixing.
+
+**Important — refinement:** Distinguish between a genuine concept gap (I don't understand the underlying mechanism) and a recall failure (I knew the fact but couldn't retrieve it under time pressure). The interventions for each are different — say which one each cluster is.
 ```
 
 ## Expected output
@@ -48,3 +51,7 @@ Analyze these misses and identify:
 
 - Cross-check the concept clustering — are these really the right groupings, or is the model finding patterns that don't exist?
 - Validate the 'don't worry about it' list against your program's expectations for the exam.
+
+## Best model and why
+
+**Claude Opus 4.7** — Identifying the *underlying* concept gaps (not just surface-level misses) requires pattern recognition across questions. Opus pulls away from Sonnet on this kind of synthesis.

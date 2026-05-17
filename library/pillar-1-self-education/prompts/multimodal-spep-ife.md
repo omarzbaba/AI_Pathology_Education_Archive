@@ -8,6 +8,7 @@ time_to_use: 2-10min
 visual: multimodal
 tags: multimodal, spep, ife
 verified_models: TODO
+best_model: Claude Sonnet 4.6
 last_updated: 2026-05-17
 ---
 
@@ -33,6 +34,8 @@ I want to drill my interpretation, not just see the answer. Use this protocol:
 5. **Only after I've committed** to my interpretation, give me your full interpretation and the published diagnosis.
 
 Start with the broadest observation: what stands out about this trace compared to a normal one?
+
+**Important — refinement:** STOP before responding: confirm the trace is from a published teaching case or public-domain source, NOT institutional patient material. If unclear, ask. Describe only features visible in the trace; do not invent peaks or fractions you can't actually see.
 ```
 
 ## Expected output
@@ -50,3 +53,7 @@ A back-and-forth conversation, region by region, ending with your committed inte
 - **Use published teaching traces or public-domain images only.** No institutional cases, no de-identified real patient material.
 - Verify the model's morphologic descriptions and final interpretation against the published answer key for the teaching case.
 - See [Guardrails](library.html#/docs/guardrails).
+
+## Best model and why
+
+**Claude Sonnet 4.6** — Sonnet handles structured visual interpretation (graphs, gel traces) well and respects the quiz-first protocol. Gemini 2.5 Pro is comparable; pick whichever you have access to with image attachment.

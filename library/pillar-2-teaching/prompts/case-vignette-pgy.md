@@ -8,6 +8,7 @@ time_to_use: 2-10min
 visual: text-only
 tags: vignette, case-based
 verified_models: TODO
+best_model: Claude Opus 4.7
 last_updated: 2026-05-17
 ---
 
@@ -42,6 +43,8 @@ After the vignette, provide:
 - The intended diagnosis.
 - The 2-3 most likely wrong answers a resident at this level would give, and why.
 - One discussion question to use after the resident commits.
+
+**Important — refinement:** Vary patient demographics across cases. Do not default to middle-aged white male unless I specify. The demographic should reflect the actual epidemiology of the condition, not the textbook archetype.
 ```
 
 ## Expected output
@@ -59,3 +62,7 @@ The vignette + intended diagnosis + wrong-answer analysis + discussion question.
 - Pressure-test the vignette against a resident at the target level before using it in a session — is the difficulty actually right?
 - Check that the demographic detail is consistent with the diagnosis's actual epidemiology, not a stereotype.
 - No PHI, ever — this is fictional or genericized.
+
+## Best model and why
+
+**Claude Opus 4.7** — Calibrating difficulty to PGY level (red herrings, comorbidities, demographic variation) requires depth. Sonnet vignettes tend toward 'classic presentation' regardless of stated level.

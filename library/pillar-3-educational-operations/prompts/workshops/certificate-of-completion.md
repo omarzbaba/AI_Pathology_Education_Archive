@@ -8,6 +8,7 @@ time_to_use: 2-10min
 visual: text-only
 tags: design, certificates
 verified_models: TODO
+best_model: Claude Haiku 4.5
 last_updated: 2026-05-17
 ---
 
@@ -44,6 +45,8 @@ Produce both:
 2. A layout brief that a designer could use to produce the visual template.
 
 Avoid CME claims unless I've specified the workshop is CME-accredited.
+
+**Important — refinement:** Do NOT include CME, MOC, or any continuing education credit language unless I have explicitly confirmed the workshop is accredited for that credit. False credit claims are a regulatory issue.
 ```
 
 ## Expected output
@@ -61,3 +64,7 @@ The text content + the visual layout brief. Together they enable production of t
 - If claiming CME or any continuing education credit, verify accreditation status before including.
 - Confirm signers' titles are current.
 - Have one printed prototype reviewed for any layout issues at full size.
+
+## Best model and why
+
+**Claude Haiku 4.5** — Template generation suits Haiku. Verify CME/accreditation language regardless of model — false credit claims are a regulatory issue, not a model issue.

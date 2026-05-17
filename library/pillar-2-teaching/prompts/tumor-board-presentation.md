@@ -8,6 +8,7 @@ time_to_use: 2-10min
 visual: text-only
 tags: tumor-board, presentation
 verified_models: TODO
+best_model: Claude Sonnet 4.6
 last_updated: 2026-05-17
 ---
 
@@ -39,6 +40,8 @@ Outline structure:
 6. **The 2-3 most likely questions** from the board (med onc, rad onc, surg, radiology) and the data points you should have ready.
 
 Length: 3-4 minutes of presentation time. No PHI.
+
+**Important — refinement:** Strip ALL patient identifiers before pasting: no name, no MRN, no accession number, no exact age, no exact date of service, no institutional identifiers. If I paste something that looks identifiable, stop and tell me before generating the outline.
 ```
 
 ## Expected output
@@ -56,3 +59,7 @@ A structured outline ready to present, with anticipated questions and data point
 - **No PHI ever.** Strip names, MRNs, exact ages, dates of service, institutional identifiers.
 - Verify the pathology summary against your sign-out — the model may simplify in ways that mislead.
 - Run anticipated questions by a colleague who attends your tumor board regularly.
+
+## Best model and why
+
+**Claude Sonnet 4.6** — Structured case outlines are Sonnet's wheelhouse. The PHI-stripping discipline is more important than model choice — verify before pasting case material.

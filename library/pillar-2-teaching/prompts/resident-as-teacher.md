@@ -8,6 +8,7 @@ time_to_use: 2-10min
 visual: text-only
 tags: rat, teaching-skills
 verified_models: TODO
+best_model: Claude Sonnet 4.6
 last_updated: 2026-05-17
 ---
 
@@ -32,6 +33,8 @@ Help me think through this as a teaching exercise, not just a content delivery e
 4. **What is the simplest exercise** I could do in the session that would let me see whether they understood the one concept?
 5. **What's the question I should NOT try to answer in this session** — the related topic that would be a different talk?
 6. **How will I know if the session went well?** Give me 2-3 observable indicators during or right after the session.
+
+**Important — refinement:** Pressure-test the 'ONE concept': can a learner reasonably restate it in 30 seconds at the end of the session? If not, it's too broad — narrow it before continuing.
 ```
 
 ## Expected output
@@ -49,3 +52,7 @@ The six answers in order, with the 'one concept' and the 'one slide' being the c
 - Run the 'one concept' by a colleague at the target level: does it land?
 - The misconceptions list is most useful when validated by an attending who has taught this topic — they know which misconceptions are real.
 - The 'observable indicators' should be specific enough that you can actually check them after the session.
+
+## Best model and why
+
+**Claude Sonnet 4.6** — Reflective scaffolding (one concept, one slide, one exercise) suits Sonnet's pattern of producing clear, structured outputs.

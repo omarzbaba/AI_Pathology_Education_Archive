@@ -8,6 +8,7 @@ time_to_use: 2-10min
 visual: text-only
 tags: journal-club, preparation
 verified_models: TODO
+best_model: Claude Opus 4.7 with paper attached
 last_updated: 2026-05-17
 ---
 
@@ -35,6 +36,8 @@ Structure:
 Keep it to one page. Use specific numbers from the paper, not vague characterizations.
 
 Paper: [paste DOI, citation, or full text]
+
+**Important — refinement:** If you don't have the full paper text, say so and refuse to fabricate specific results, sample sizes, p-values, or quotes. A pre-read with invented numbers is worse than no pre-read.
 ```
 
 ## Expected output
@@ -52,3 +55,7 @@ A one-page document (~400-500 words) with the five sections above. The five disc
 - Verify all specific numbers (sample sizes, p-values, effect sizes) against the paper.
 - Check that the discussion questions are actually answerable from the paper or from background knowledge the attendees should have.
 - If the model couldn't access the paper, the pre-read is partly fabricated — discard and try with the paper text pasted in.
+
+## Best model and why
+
+**Claude Opus 4.7 with paper attached** — Pre-read quality depends on actually reading the paper. Use Opus 4.7 with the PDF attached, or Gemini 2.5 Pro for very long papers. Without the paper text, every model fabricates; with it, Opus produces the most defensible pre-read.

@@ -8,6 +8,7 @@ time_to_use: <2min
 visual: text-only
 tags: lecture, polls
 verified_models: TODO
+best_model: Claude Sonnet 4.6
 last_updated: 2026-05-17
 ---
 
@@ -37,6 +38,8 @@ For each poll, provide:
 - The intended placement in the lecture.
 - The likely audience distribution.
 - The teaching beat that follows.
+
+**Important — refinement:** Avoid polls where the correct answer is obvious to anyone awake. The polling moment fails — and engagement craters — if everyone gets it right immediately. The 'wrong' answer must be plausibly attractive.
 ```
 
 ## Expected output
@@ -53,3 +56,7 @@ N polls with placement, expected distribution, and follow-up teaching beats. The
 
 - Run the poll past a colleague at the target audience level. If they get the 'intended wrong answer' right cold, the poll won't work as designed.
 - Verify the correct answer.
+
+## Best model and why
+
+**Claude Sonnet 4.6** — Sonnet produces poll questions with reasonable predicted distributions. The 'plausibly wrong' answer is the discipline test — verify each poll passes that bar regardless of model.

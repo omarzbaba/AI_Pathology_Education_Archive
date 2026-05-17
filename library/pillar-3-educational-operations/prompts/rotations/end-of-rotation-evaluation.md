@@ -8,6 +8,7 @@ time_to_use: 2-10min
 visual: text-only
 tags: evaluation, end-of-rotation
 verified_models: TODO
+best_model: Claude Sonnet 4.6
 last_updated: 2026-05-17
 ---
 
@@ -35,6 +36,8 @@ The form should include:
 7. **Resident sign-off**: a box for the resident to acknowledge they received and discussed the evaluation.
 
 Make the form completable in 20-30 minutes by an attending who knows the resident well.
+
+**Important — refinement:** Include a 'minimum observations' gate at each dimension. An evaluator who has not observed a specific dimension should be able to mark 'unable to assess' rather than defaulting to 3/5. False data is worse than no data.
 ```
 
 ## Expected output
@@ -52,3 +55,7 @@ A complete evaluation form ready for use, with numeric and narrative sections an
 - Pilot with one attending on one resident; iterate the form based on what they say is hard.
 - Verify milestone alignment.
 - Check that the form complies with any institutional or ACGME documentation requirements.
+
+## Best model and why
+
+**Claude Sonnet 4.6** — Form generation with milestone alignment — Sonnet is sufficient. Verify milestone codes.

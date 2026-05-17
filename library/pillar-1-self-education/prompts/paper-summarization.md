@@ -8,6 +8,7 @@ time_to_use: <2min
 visual: text-only
 tags: literature, summarization
 verified_models: TODO
+best_model: Gemini 2.5 Pro
 last_updated: 2026-05-17
 ---
 
@@ -36,6 +37,8 @@ Use this structure:
 If you don't know the specific paper, tell me — do not summarize from the title alone.
 
 Paper: [paste DOI, citation, or the full text if you have it]
+
+**Important — refinement:** If you do not have direct access to the actual paper text (not just the title or abstract), say so explicitly at the top and refuse to summarize. Hallucinated paper summaries are the most common failure mode for this prompt and the most damaging — never bluff.
 ```
 
 ## Expected output
@@ -53,3 +56,7 @@ The six-section summary in the order above. Total length ~250-400 words. The thr
 - **Critical:** verify the headline finding and effect size against the actual paper. The model frequently misremembers numbers from papers it has 'seen'.
 - If the model invents a citation, that's a hallucination — discard the entire summary.
 - Confirm the three attending questions are actually answerable from the paper.
+
+## Best model and why
+
+**Gemini 2.5 Pro** — Best for papers attached as PDFs — Gemini's long-context handling of full-text PDFs is the strongest option. If working from pasted text only, Claude Opus 4.7 is comparable. Avoid models without document attachment if the paper is long.

@@ -8,6 +8,7 @@ time_to_use: 2-10min
 visual: text-only
 tags: survey, intake
 verified_models: TODO
+best_model: Claude Haiku 4.5
 last_updated: 2026-05-17
 ---
 
@@ -42,6 +43,8 @@ Format each question with:
 - Why the question is in the survey (what decision will I make with the answer?).
 
 End with a one-sentence email template for sending the survey link.
+
+**Important — refinement:** After generating the survey, estimate the actual completion time at a normal reading pace. If it exceeds 3 minutes, cut a question. Optimize for response rate.
 ```
 
 ## Expected output
@@ -58,3 +61,7 @@ A 5-8 question survey with response formats and explicit rationale for each ques
 
 - Pilot-test the survey with 2-3 representative attendees and time them. Adjust if it takes more than 3 minutes.
 - Map each question to a specific decision you'll make based on the result. If you can't map a question to a decision, cut it.
+
+## Best model and why
+
+**Claude Haiku 4.5** — Survey design is a quick structured task. Haiku is fast and sufficient. Bump to Sonnet only if the audience is unusual or you need novel question types.
