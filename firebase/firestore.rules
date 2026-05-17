@@ -1,25 +1,78 @@
 // Firestore security rules — AI in Pathology Education Companion Library
 //
-// Phase 1 scaffold. The real rules are authored in Phase 3 and enforce:
+// Deploy with:  firebase deploy --only firestore:rules
 //
-//   1. access_log:
-//      - create: allowed for anyone whose request passes App Check,
-//                AND whose payload matches the required document shape
-//                (field presence, length caps, role enum, server timestamp)
-//      - read / list: allowed only when request.auth.uid == ADMIN_UID
-//      - update / delete: denied for everyone, including the admin
-//        (append-only — protects the research evidence)
+// SECURITY MODEL
+// --------------
+// access_log:
+//   create  — allowed for anyone whose request passes App Check AND
+//             whose payload matches the required document shape.
+//   read    — allowed only when request.auth.uid == ADMIN_UID.
+//   list    — same as read.
+//   update  — denied for everyone, including the admin.  Append-only.
+//   delete  — denied for everyone, including the admin.  Append-only.
 //
-//   2. All other collections: deny by default.
+// All other collections deny all access by default.
 //
-// Deploy with:
-//   firebase deploy --only firestore:rules
+// App Check enforcement (configured in the Firebase console, not in
+// these rules) blocks requests without a valid App Check token BEFORE
+// these rules are even evaluated. That defends the create-allowed
+// endpoint against bots and scraped-config abuse.
+//
+// PLACEHOLDERS (filled in during Phase 3 console walkthrough):
+//   ADMIN_UID  — the Firebase Auth UID of the single admin user.
 
 rules_version = '2';
 
 service cloud.firestore {
   match /databases/{database}/documents {
-    // Phase 3 will populate this with the real rules.
+
+    // ---- helpers ----
+
+    function isAdmin() {
+      return request.auth != null
+        && request.auth.uid == 'REPLACE_ADMIN_UID';
+    }
+
+    function isValidAccessLogPayload() {
+      let data = request.resource.data;
+      let keys = data.keys();
+      let required = [
+        'timestamp', 'name', 'institution',
+        'email', 'role', 'referrer', 'user_agent'
+      ];
+      let allowedRoles = [
+        'resident', 'fellow', 'faculty',
+        'program_director', 'other'
+      ];
+
+      return
+        // exact key set — reject any extra fields
+        keys.hasAll(required) && keys.hasOnly(required)
+
+        // server-set timestamp only — clients cannot backdate
+        && data.timestamp == request.time
+
+        // shape & length caps
+        && data.name        is string && data.name.size() >= 1   && data.name.size() <= 120
+        && data.institution is string && data.institution.size() <= 200
+        && data.email       is string && data.email.size() >= 5  && data.email.size() <= 254
+        && data.email.matches('^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$')
+        && data.role        is string && data.role in allowedRoles
+        && data.referrer    is string && data.referrer.size() <= 500
+        && data.user_agent  is string && data.user_agent.size() <= 500;
+    }
+
+    // ---- access_log ----
+
+    match /access_log/{docId} {
+      allow create:        if isValidAccessLogPayload();
+      allow read, list:    if isAdmin();
+      allow update, delete: if false;
+    }
+
+    // ---- deny-by-default for everything else ----
+
     match /{document=**} {
       allow read, write: if false;
     }
