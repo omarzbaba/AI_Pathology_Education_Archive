@@ -10,28 +10,46 @@ tags: video, scripting
 verified_models: TODO
 last_updated: 2026-05-17
 ---
+
 ## What this prompt does
 
 Draft a video script and storyboard for a short educational explainer, with shot suggestions and on-screen text cues.
 
 ## When to use it
 
-*TODO: Dr. Baba to author.*
+When you're producing short educational content (2-5 min explainers, social media clips, asynchronous training) and need a script that thinks about visuals, not just dialogue.
 
 ## The prompt
 
 ```
-TODO: Dr. Baba to author the prompt body.
+Draft a script for a [duration]-minute educational video on [topic] for [audience].
+
+Format:
+
+- **Two columns:** left = narration; right = visuals/on-screen text/cuts.
+- **One row per beat**, with each beat being 5-15 seconds of video.
+- **Total length:** target the duration above; flag if the script will overrun.
+- **Hook:** the first 5 seconds must give the viewer a reason to keep watching. Stating the topic isn't a hook.
+- **Visuals:** 'cut to photomicrograph', 'animated diagram of antibody binding', 'on-screen text: NORMAL RANGE 4.0-11.0 K/uL'. Be specific about what's on screen at each beat.
+- **End with a single takeaway** that fits in 5 seconds.
+
+After the script, list:
+- The 2-3 shots/assets I'll need to produce or source.
+- The 1 sentence the viewer will remember 24 hours later.
 ```
 
 ## Expected output
 
-*TODO: describe what a good response looks like and what to do with it.*
+Two-column script with timed beats, opening hook, specific visuals, and a final takeaway. Plus an asset list and a stated 24-hour-takeaway.
 
 ## Common failure modes
 
-- *TODO: list specific ways this prompt typically goes wrong.*
+- The 'hook' is just the topic stated declaratively.
+- Visuals are placeholders ('relevant image') rather than specific.
+- The script is too dense to fit in the stated duration when read at natural pace.
 
 ## Required human verification
 
-- *TODO: name specifically what the user must verify before using the output.*
+- Read the script aloud at natural pace and time it. AI-generated scripts almost always overrun.
+- Verify any specific clinical content.
+- Source visuals from properly licensed material; do not use images without clear permission.

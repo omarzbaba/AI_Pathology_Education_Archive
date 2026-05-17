@@ -10,28 +10,45 @@ tags: comms, thank-you
 verified_models: TODO
 last_updated: 2026-05-17
 ---
+
 ## What this prompt does
 
 Draft a post-workshop thank-you email to attendees with a link to the companion materials and a feedback request.
 
 ## When to use it
 
-*TODO: Dr. Baba to author.*
+Within 24-48 hours after the workshop ends, while attendees still remember the experience.
 
 ## The prompt
 
 ```
-TODO: Dr. Baba to author the prompt body.
+Draft a post-workshop thank-you email to attendees of [workshop name] held on [date].
+
+The email should:
+
+1. **Subject line** (short, specific, recognizable in a busy inbox).
+2. **Opening** (1-2 sentences): brief thanks and a specific reference to a moment from the workshop (you'll need to fill this in with the actual moment).
+3. **What's available now**: links to the companion materials site, slides, recordings (if any), reading list — be explicit about what each link goes to.
+4. **What's coming**: anything you've promised that's still in production (e.g., 'we'll share the post-workshop summary by [date]').
+5. **Feedback request**: link to the survey, with a one-sentence explanation of why their feedback matters (this affects response rate). 5 minutes max.
+6. **Closing**: a forward-looking invitation (next workshop, contact for follow-up questions).
+
+Tone: warm, specific, professional. Avoid 'we had such a great time' generic thanks.
+
+Length: under 200 words. Attendees skim email; don't waste their attention.
 ```
 
 ## Expected output
 
-*TODO: describe what a good response looks like and what to do with it.*
+A complete email ready to send, with placeholders only for the specific 'moment from the workshop' line.
 
 ## Common failure modes
 
-- *TODO: list specific ways this prompt typically goes wrong.*
+- Generic 'thanks for attending' tone that signals you didn't actually pay attention.
+- Too many links — attendees won't click any.
+- Feedback survey buried.
 
 ## Required human verification
 
-- *TODO: name specifically what the user must verify before using the output.*
+- Verify all links work before sending.
+- The specific 'moment' line has to come from you — the model doesn't know what happened in the room.

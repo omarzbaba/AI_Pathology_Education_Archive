@@ -10,28 +10,45 @@ tags: journal-club, discussion
 verified_models: TODO
 last_updated: 2026-05-17
 ---
+
 ## What this prompt does
 
 Generate 5 discussion questions for a journal club paper, ranging from methods critique to clinical implications.
 
 ## When to use it
 
-*TODO: Dr. Baba to author.*
+When you're leading journal club and want a question set that escalates from concrete to abstract, ensuring the discussion doesn't stall at 'I liked the paper'.
 
 ## The prompt
 
 ```
-TODO: Dr. Baba to author the prompt body.
+Generate 5 discussion questions for a journal club discussion of [paper citation]. The audience is [PGY level] residents and faculty.
+
+Structure the questions to escalate:
+
+1. **A concrete methods question** — what specific design choice or analytic approach should we scrutinize? Answer should be in the paper.
+2. **A finding-level question** — how confident should we be in the headline result, given the design? Requires interpretation.
+3. **A generalizability question** — does this result apply to our patient population? Requires connecting paper to practice.
+4. **A practice-change question** — should this change what we do, and if so, how? Requires judgment.
+5. **A contested question** — one that reasonable people would disagree on. Should provoke real debate.
+
+For each question, include:
+- The question itself.
+- One sentence on what makes it a productive question (what discussion does it open?).
+- The 'wrong' response that's most likely to come up early in discussion and how to redirect.
 ```
 
 ## Expected output
 
-*TODO: describe what a good response looks like and what to do with it.*
+5 escalating questions with productivity notes and predicted-wrong-response handling. The fifth question should be genuinely contested.
 
 ## Common failure modes
 
-- *TODO: list specific ways this prompt typically goes wrong.*
+- All 5 questions are at the same level of abstraction.
+- The 'contested question' has an obvious right answer and doesn't actually provoke debate.
+- The 'wrong response' is straw-man rather than the real misconception.
 
 ## Required human verification
 
-- *TODO: name specifically what the user must verify before using the output.*
+- Verify the methods-level question is answerable from the actual paper.
+- Pre-test the contested question with a colleague — if they immediately agree with you, it's not actually contested.

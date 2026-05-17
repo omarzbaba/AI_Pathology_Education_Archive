@@ -10,28 +10,53 @@ tags: operations, run-of-show
 verified_models: TODO
 last_updated: 2026-05-17
 ---
+
 ## What this prompt does
 
 Generate a minute-by-minute facilitator run-of-show for a workshop, including transitions, contingencies, and named owners for each block.
 
 ## When to use it
 
-*TODO: Dr. Baba to author.*
+One week before the workshop. The run-of-show is the document the lead facilitator holds in their hand all day.
 
 ## The prompt
 
 ```
-TODO: Dr. Baba to author the prompt body.
+Generate a minute-by-minute facilitator run-of-show for [workshop title] on [date], from [start time] to [end time].
+
+Workshop structure: [paste the agenda with block names, durations, lead facilitators]
+
+For each block, the run-of-show should include:
+
+- **Time range** (e.g., 9:15-9:35)
+- **Block name and lead facilitator**
+- **One-line content summary**
+- **Setup needed** (room arrangement, AV, materials to distribute)
+- **Transition cue** (how does the lead facilitator hand off to the next block?)
+- **Contingencies:** what's the fallback if (a) the block runs long, (b) the block runs short, (c) the tech breaks?
+
+Include explicit blocks for:
+- Registration / check-in / coffee
+- Bathroom / coffee breaks (every 90-120 min)
+- Lunch (with timing for re-gathering)
+- Anything the lead facilitator needs to do behind the scenes (e.g., 'set up next station while panel runs')
+
+End with:
+- A list of materials and AV needs by block.
+- The roles list: who does what (lead, support, AV, runner).
 ```
 
 ## Expected output
 
-*TODO: describe what a good response looks like and what to do with it.*
+A document the lead facilitator can use to run the day without thinking. Should be print-friendly.
 
 ## Common failure modes
 
-- *TODO: list specific ways this prompt typically goes wrong.*
+- Blocks transition without explicit cues — leads to awkward silences.
+- No contingencies for running long/short.
+- Lunch timing doesn't account for re-gathering.
 
 ## Required human verification
 
-- *TODO: name specifically what the user must verify before using the output.*
+- Walk through the run-of-show with the lead facilitator and at least one other staff member before the day.
+- Verify any AV needs with the venue.

@@ -10,28 +10,52 @@ tags: module, packet
 verified_models: TODO
 last_updated: 2026-05-17
 ---
+
 ## What this prompt does
 
 Generate a weekly module learning packet with required reading, pre-class question prompts, in-class activities, and post-class assessment.
 
 ## When to use it
 
-*TODO: Dr. Baba to author.*
+One week before each module is delivered. The packet is what gets sent to learners + the instructor's preparation guide in one.
 
 ## The prompt
 
 ```
-TODO: Dr. Baba to author the prompt body.
+Generate a learning packet for Week [N] of [course name]. Topic: [topic]. Time: [duration of the in-class session].
+
+The packet has two audiences:
+
+**For the learners** (1-2 pages):
+- Week topic and learning outcome (the one thing they should be able to do after this week).
+- Required reading (1-3 items with full citations and a 1-sentence reading guide).
+- 3 pre-class reflection questions to think about while reading.
+- Pre-class assignment if any (brief, not a paper).
+
+**For the instructor** (2-3 pages):
+- Topic overview and where this week fits in the course arc.
+- Suggested in-class agenda with timing.
+- Active learning activities (1-2) with materials list.
+- Discussion questions for the in-class session (5-7).
+- Anticipated misconceptions and how to address them.
+- Post-class assessment items (3-5 questions for an online quiz or written response).
+- Recommended further reading for learners who want to go deeper.
+
+Be specific about what learners produce. 'Discuss' is not enough — what's the artifact?
 ```
 
 ## Expected output
 
-*TODO: describe what a good response looks like and what to do with it.*
+A two-audience packet: learner-facing (concise) and instructor-facing (detailed enough to teach the week without further prep).
 
 ## Common failure modes
 
-- *TODO: list specific ways this prompt typically goes wrong.*
+- Learner section is too long; learners skim or skip.
+- Instructor section doesn't actually help an instructor who hasn't taught the topic before.
+- Pre-class questions are surface-level recall.
 
 ## Required human verification
 
-- *TODO: name specifically what the user must verify before using the output.*
+- Verify reading citations and confirm availability through your institution's library.
+- Run the instructor section by a colleague who hasn't taught the week — would they be ready?
+- Check that the post-class assessment aligns to the stated learning outcome.

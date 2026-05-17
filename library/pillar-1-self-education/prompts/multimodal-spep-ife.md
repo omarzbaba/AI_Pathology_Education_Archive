@@ -10,28 +10,43 @@ tags: multimodal, spep, ife
 verified_models: TODO
 last_updated: 2026-05-17
 ---
+
 ## What this prompt does
 
 Upload a SPEP or IFE trace and have the model walk through the interpretation, with you predicting each step before the model reveals it.
 
 ## When to use it
 
-*TODO: Dr. Baba to author.*
+During your first month of clinical chemistry, when you've read the chapter but haven't yet built the pattern recognition. Use published teaching traces, not institutional cases.
 
 ## The prompt
 
 ```
-TODO: Dr. Baba to author the prompt body.
+I'm uploading a [serum protein electrophoresis / immunofixation electrophoresis] trace. This is a published teaching case.
+
+I want to drill my interpretation, not just see the answer. Use this protocol:
+
+1. **Quiz me first.** Ask me what I observe in [a specific region — e.g., 'the gamma region', 'between the beta-2 and gamma regions'] before you describe it.
+2. **After I answer, confirm or correct my observation.** If I'm wrong, name the specific morphologic feature I missed.
+3. **Move to the next region** with another question.
+4. **After we've worked through the trace**, ask me what additional testing I'd order and why.
+5. **Only after I've committed** to my interpretation, give me your full interpretation and the published diagnosis.
+
+Start with the broadest observation: what stands out about this trace compared to a normal one?
 ```
 
 ## Expected output
 
-*TODO: describe what a good response looks like and what to do with it.*
+A back-and-forth conversation, region by region, ending with your committed interpretation and then the model's. The interaction structure (quiz first, reveal later) is the point.
 
 ## Common failure modes
 
-- *TODO: list specific ways this prompt typically goes wrong.*
+- The model reveals the diagnosis prematurely. Push back: 'don't tell me yet — quiz me first.'
+- The model accepts a wrong observation without correcting it. Push back: 'be honest — was my observation correct?'
+- The model fabricates features that aren't visible in the trace.
 
 ## Required human verification
 
-- *TODO: name specifically what the user must verify before using the output.*
+- **Use published teaching traces or public-domain images only.** No institutional cases, no de-identified real patient material.
+- Verify the model's morphologic descriptions and final interpretation against the published answer key for the teaching case.
+- See [Guardrails](library.html#/docs/guardrails).

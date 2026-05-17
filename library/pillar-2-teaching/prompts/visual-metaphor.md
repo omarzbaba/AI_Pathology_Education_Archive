@@ -10,28 +10,44 @@ tags: lecture, metaphor
 verified_models: TODO
 last_updated: 2026-05-17
 ---
+
 ## What this prompt does
 
-Generate visual metaphors for an abstract concept, ranked by precision vs accessibility.
+Generate visual metaphors for an abstract concept, ranked by precision vs accessibility. The point is not to pick the metaphor for you but to surface options you wouldn't have generated alone.
 
 ## When to use it
 
-*TODO: Dr. Baba to author.*
+When you're explaining an abstract concept (gating in flow cytometry, antibody-antigen interactions, deconvolution) and your usual go-to metaphor isn't landing. Brainstorming fuel, not final answer.
 
 ## The prompt
 
 ```
-TODO: Dr. Baba to author the prompt body.
+Generate 5-7 visual metaphors for explaining [abstract concept] to [audience].
+
+For each metaphor:
+
+1. The metaphor in one sentence.
+2. **What it captures well** — which features of the concept does this metaphor faithfully represent?
+3. **Where it breaks down** — the feature of the concept the metaphor distorts or misses.
+4. **Precision score** (1-5): how technically accurate is the metaphor when pushed?
+5. **Accessibility score** (1-5): how immediately graspable is it for the target audience?
+
+Rank the list by (precision × accessibility), but acknowledge the trade-off — the most accessible metaphors are often the least precise.
+
+End with: which metaphor would you pick if I'm teaching to medical students vs. attendings, and why?
 ```
 
 ## Expected output
 
-*TODO: describe what a good response looks like and what to do with it.*
+5-7 ranked metaphors with strengths, weaknesses, and scores. Plus the differentiated recommendation for different audiences.
 
 ## Common failure modes
 
-- *TODO: list specific ways this prompt typically goes wrong.*
+- All metaphors are variants of one ('it's like a key in a lock' / 'it's like a key fitting a door').
+- Precision scores are inflated — every metaphor is rated 4-5 on precision.
+- The 'breaks down' analysis is superficial.
 
 ## Required human verification
 
-- *TODO: name specifically what the user must verify before using the output.*
+- Push each metaphor to its breaking point with an expert in your subspecialty. The metaphors that survive expert pushback are the ones to use; those that don't will mislead learners.
+- Trust audience feedback over your own assessment — if the metaphor doesn't land in the room, the precision score doesn't matter.

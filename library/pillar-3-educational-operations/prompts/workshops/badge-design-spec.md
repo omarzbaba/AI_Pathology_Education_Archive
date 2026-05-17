@@ -10,28 +10,44 @@ tags: design, badges
 verified_models: TODO
 last_updated: 2026-05-17
 ---
+
 ## What this prompt does
 
 Draft a specification for printable workshop badges — fields, dimensions, color, accessibility, and print-shop-ready dimensions.
 
 ## When to use it
 
-*TODO: Dr. Baba to author.*
+3-4 weeks before the workshop, when you're ordering supplies and need a spec to send to the print shop or graphic designer.
 
 ## The prompt
 
 ```
-TODO: Dr. Baba to author the prompt body.
+Draft a print specification for workshop attendee badges. Workshop: [name and date].
+
+The spec should include:
+
+- **Dimensions:** physical size of the badge (mm or inches), orientation (portrait/landscape), bleed area if printed professionally.
+- **Required fields:** what appears on the badge (name in large type, institution in smaller type, role, date or event name, etc.) with the relative font size and position of each.
+- **Optional fields:** any conditional content (faculty/attendee/staff color coding, table assignment, dietary marker if used).
+- **Color palette:** specific colors with hex codes; reasonable defaults if I don't specify.
+- **Font:** legible at distance, with size minimums for accessibility (e.g., name in 24-32pt).
+- **Lanyard / holder type:** clip vs lanyard, hole position, paper weight or material.
+- **Quantity to order** with at least 10% buffer for last-minute attendees and reprints.
+
+End with a print-shop-ready summary I can paste into an order form.
 ```
 
 ## Expected output
 
-*TODO: describe what a good response looks like and what to do with it.*
+A spec document plus a print-shop summary. Should be unambiguous enough that two designers would produce identical badges.
 
 ## Common failure modes
 
-- *TODO: list specific ways this prompt typically goes wrong.*
+- Font sizes too small to read from across a room.
+- No buffer quantity, so you run out at registration.
+- Color choices that don't meet WCAG contrast for the text-on-background.
 
 ## Required human verification
 
-- *TODO: name specifically what the user must verify before using the output.*
+- Print one prototype and test legibility from 6 feet.
+- Verify the lanyard/holder type matches the badges you're ordering.

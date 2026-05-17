@@ -10,28 +10,45 @@ tags: evaluation, end-of-rotation
 verified_models: TODO
 last_updated: 2026-05-17
 ---
+
 ## What this prompt does
 
 Generate an end-of-rotation evaluation form aligned to milestones, with both numeric and narrative sections.
 
 ## When to use it
 
-*TODO: Dr. Baba to author.*
+When you're updating an evaluation form or when residents and attendings both complain the current form doesn't capture what matters.
 
 ## The prompt
 
 ```
-TODO: Dr. Baba to author the prompt body.
+Generate an end-of-rotation evaluation form for [rotation name], [PGY level], using the evaluation rubric I've provided (or a new one if I haven't).
+
+The form should include:
+
+1. **Header**: resident name, rotation name, dates, supervising attending(s), number of weeks evaluated.
+2. **Numeric ratings**: each dimension from the rubric, rated 1-5 with the anchor text visible.
+3. **Narrative comment for each dimension**: prompted with a specific question ('Describe a specific instance where you observed this resident at this level').
+4. **Overall narrative**: 1-2 paragraph free text covering the resident's trajectory, strengths, and growth opportunities.
+5. **Specific commitment for next rotation**: 1-2 behavioral targets the resident should focus on.
+6. **Quality of evaluation gates**: a question to the evaluator about whether they had sufficient observation to evaluate this resident (mitigates the 'I'll just give 4s' default).
+7. **Resident sign-off**: a box for the resident to acknowledge they received and discussed the evaluation.
+
+Make the form completable in 20-30 minutes by an attending who knows the resident well.
 ```
 
 ## Expected output
 
-*TODO: describe what a good response looks like and what to do with it.*
+A complete evaluation form ready for use, with numeric and narrative sections and sufficient observation gating.
 
 ## Common failure modes
 
-- *TODO: list specific ways this prompt typically goes wrong.*
+- Narratives become 'no comments' because the prompts are weak.
+- Numeric ratings default to all-fours because the anchors don't distinguish levels.
+- The form takes so long that attendings rush it.
 
 ## Required human verification
 
-- *TODO: name specifically what the user must verify before using the output.*
+- Pilot with one attending on one resident; iterate the form based on what they say is hard.
+- Verify milestone alignment.
+- Check that the form complies with any institutional or ACGME documentation requirements.

@@ -10,28 +10,45 @@ tags: journal-club, preparation
 verified_models: TODO
 last_updated: 2026-05-17
 ---
+
 ## What this prompt does
 
-Generate a one-page pre-read for a journal club paper covering background, key results, and 5 discussion questions.
+Generate a one-page pre-read for a journal club paper covering background, key results, and 5 discussion questions. Designed to be sent to attendees the day before.
 
 ## When to use it
 
-*TODO: Dr. Baba to author.*
+When you're hosting journal club and want attendees to arrive prepared rather than reading the paper for the first time during the discussion.
 
 ## The prompt
 
 ```
-TODO: Dr. Baba to author the prompt body.
+Create a one-page pre-read for a journal club discussion of this paper. Target audience: [PGY level] pathology residents and faculty.
+
+Structure:
+
+1. **The clinical or scientific context** (3-4 sentences): why this question was worth asking, the state of the field before this paper.
+2. **The study in one paragraph** (5-7 sentences): population, methods, key results with numbers. No interpretation yet.
+3. **What this paper is good at**: 1-2 specific strengths of the design or analysis.
+4. **What this paper is not good at**: 1-2 specific limitations that constrain interpretation.
+5. **Five discussion questions**, ordered from concrete (methods, numbers) → abstract (implications, what would change practice). The fifth question should be one where reasonable people disagree.
+
+Keep it to one page. Use specific numbers from the paper, not vague characterizations.
+
+Paper: [paste DOI, citation, or full text]
 ```
 
 ## Expected output
 
-*TODO: describe what a good response looks like and what to do with it.*
+A one-page document (~400-500 words) with the five sections above. The five discussion questions should escalate in abstractness and end with a contested one.
 
 ## Common failure modes
 
-- *TODO: list specific ways this prompt typically goes wrong.*
+- The model fabricates specific numbers or quotes. If the model doesn't have the paper, it will sometimes guess.
+- Discussion questions are leading ('don't you think...?') rather than open.
+- The strengths and limitations are generic.
 
 ## Required human verification
 
-- *TODO: name specifically what the user must verify before using the output.*
+- Verify all specific numbers (sample sizes, p-values, effect sizes) against the paper.
+- Check that the discussion questions are actually answerable from the paper or from background knowledge the attendees should have.
+- If the model couldn't access the paper, the pre-read is partly fabricated — discard and try with the paper text pasted in.

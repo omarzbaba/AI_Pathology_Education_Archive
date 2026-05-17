@@ -10,28 +10,50 @@ tags: schedule, rotation
 verified_models: TODO
 last_updated: 2026-05-17
 ---
+
 ## What this prompt does
 
 Generate a quarterly or annual conference schedule with topic rotation across subspecialties and assigned presenters.
 
 ## When to use it
 
-*TODO: Dr. Baba to author.*
+Annually when you're planning the conference series for the academic year, or quarterly for shorter cycles.
 
 ## The prompt
 
 ```
-TODO: Dr. Baba to author the prompt body.
+Generate a [quarterly / annual] conference schedule for [conference series name — e.g., 'Tuesday morning CP didactics']. Audience: [target audience and level].
+
+Constraints:
+- **Frequency**: [weekly / biweekly]
+- **Number of sessions to fill**: [N]
+- **Available presenters**: [list of presenters with their subspecialties and rotation availability]
+- **Required topic coverage**: [subspecialties or specific topics that must be covered, e.g., RISE prep blocks]
+- **Standing items**: [recurring slots — journal club every Nth week, in-service review, etc.]
+
+Produce:
+
+1. A full schedule with date, topic, presenter, and any pre-reading.
+2. **Balance check**: distribution of topics across subspecialties. If some subspecialties are over- or under-represented, flag it and suggest adjustments.
+3. **Presenter load check**: distribution of sessions per presenter. Avoid overloading any one person.
+4. **Buffer sessions**: 1-2 unscheduled or flexible sessions per quarter to accommodate guest speakers, schedule slips, or topic substitutions.
+5. **Logistics**: room, AV needs, recording status, attendance tracking.
+
+End with: a draft email template I can use to invite each presenter with their assigned date and topic.
 ```
 
 ## Expected output
 
-*TODO: describe what a good response looks like and what to do with it.*
+A schedule + balance and load checks + buffer sessions + logistics + invitation template.
 
 ## Common failure modes
 
-- *TODO: list specific ways this prompt typically goes wrong.*
+- Schedule is balanced on paper but a single presenter has 3 sessions in a row.
+- No buffer sessions, so any schedule change cascades.
+- 'Required coverage' items get scheduled but in suboptimal weeks (e.g., RISE prep after the exam).
 
 ## Required human verification
 
-- *TODO: name specifically what the user must verify before using the output.*
+- Verify each presenter's availability before publishing.
+- Confirm room and AV bookings.
+- Validate the topic order against any sequencing constraints (e.g., a topic that's a prerequisite for another).

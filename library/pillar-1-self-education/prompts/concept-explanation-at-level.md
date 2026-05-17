@@ -10,28 +10,40 @@ tags: concepts, scaffolding
 verified_models: TODO
 last_updated: 2026-05-17
 ---
+
 ## What this prompt does
 
-Get an explanation of a pathology concept calibrated to your current level — not too elementary, not too advanced.
+Get an explanation of a pathology concept calibrated to your current level — neither too elementary nor too advanced. The output is an *adapted* explanation, not a generic textbook paragraph.
 
 ## When to use it
 
-*TODO: Dr. Baba to author.*
+When you encounter a concept you half-understand and want a targeted explanation that meets you where you are. Best used as the *first* step in a longer self-quizzing session; the calibration here sets the model's mental model of you for everything that follows.
 
 ## The prompt
 
 ```
-TODO: Dr. Baba to author the prompt body.
+I'm a [PGY level] pathology resident on my [N]th rotation in [subspecialty]. I have a [working / weak / strong] understanding of [adjacent concept]. I'm trying to understand [target concept] well enough to [specific goal — e.g., interpret a case in tomorrow's sign-out, write an MCQ for our didactics, answer a co-resident's question].
+
+Explain [target concept] in three layers:
+
+1. The one-sentence version a first-year medical student would understand.
+2. The mechanistic explanation a pathology resident at my level should know cold.
+3. The nuanced detail that distinguishes someone who has thought hard about this from someone who has just memorized it.
+
+After your explanation, ask me ONE follow-up question to check my understanding before moving on. Do not move on until I answer.
 ```
 
 ## Expected output
 
-*TODO: describe what a good response looks like and what to do with it.*
+Three-layer explanation in plain prose (not bullets) totaling 200-400 words. The third layer should surface a nuance you didn't previously know. The follow-up question at the end should target the most likely misunderstanding for your level.
 
 ## Common failure modes
 
-- *TODO: list specific ways this prompt typically goes wrong.*
+- The model defaults to the textbook framing and gives you back what you could read in Robbins. Mitigate by being specific about *which* aspect confuses you.
+- The model skips the level calibration and explains at one undifferentiated level. Mitigate by re-stating the level after the first response.
+- The "nuanced detail" turns out to be a half-remembered fact that's actually wrong. This is the failure mode that matters most for self-education — see verification below.
 
 ## Required human verification
 
-- *TODO: name specifically what the user must verify before using the output.*
+- Cross-check the nuanced detail (layer 3) against an authoritative source: the relevant chapter in Robbins, a recent guideline, or a curated review article. The model is most likely to be confidently wrong at the level where you have least ability to catch it.
+- If a specific numerical threshold or cutoff is given, verify against the current reference range or guideline.

@@ -10,28 +10,53 @@ tags: schedule, ops
 verified_models: TODO
 last_updated: 2026-05-17
 ---
+
 ## What this prompt does
 
 Generate a daily schedule template for a rotation, with placeholders for sign-out, didactics, case review, and protected reading time.
 
 ## When to use it
 
-*TODO: Dr. Baba to author.*
+When you're standardizing a rotation's day or when residents complain the day feels chaotic. The template doesn't constrain — it gives a default that everyone can plan around.
 
 ## The prompt
 
 ```
-TODO: Dr. Baba to author the prompt body.
+Generate a typical-day schedule template for [rotation name], [PGY level] resident.
+
+Format as a timed schedule from arrival to departure, with each block including:
+
+- Time range.
+- Activity name.
+- Who leads (resident, attending, fellow, tech, group).
+- Brief note on what happens in the block.
+
+Required blocks:
+- Arrival / chart review or prep.
+- Sign-out (morning or end-of-day per service convention — specify).
+- Didactics or conferences (state which days these occur).
+- Case review or workup blocks.
+- **Protected reading time** (this is the block residents say is most often eroded — protect it explicitly).
+- Lunch.
+- End-of-day wrap-up.
+
+Notes section after the schedule:
+- Days when this template doesn't apply (call days, conference days, etc.).
+- Common ways the schedule slips and what to do about each.
+- Who to tell if you're going to be off the schedule (e.g., late, leaving early).
 ```
 
 ## Expected output
 
-*TODO: describe what a good response looks like and what to do with it.*
+A timed template with all required blocks, plus notes on exceptions and slip handling.
 
 ## Common failure modes
 
-- *TODO: list specific ways this prompt typically goes wrong.*
+- Protected reading time is in the schedule but functionally unprotected.
+- No accommodation for clinical workload variability.
+- Schedule assumes residents start at 7 am if you don't specify.
 
 ## Required human verification
 
-- *TODO: name specifically what the user must verify before using the output.*
+- Validate against actual recent rotators — does the template match their real days?
+- Confirm with attendings that they expect residents to be available during the blocks the schedule suggests.

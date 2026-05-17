@@ -10,28 +10,48 @@ tags: syllabus, course
 verified_models: TODO
 last_updated: 2026-05-17
 ---
+
 ## What this prompt does
 
 Generate a course syllabus with weekly topics, learning objectives, assessment plan, and policy language.
 
 ## When to use it
 
-*TODO: Dr. Baba to author.*
+When you're designing a new longitudinal course (residency didactic series, fellowship curriculum, elective course) and need a starting structure.
 
 ## The prompt
 
 ```
-TODO: Dr. Baba to author the prompt body.
+Generate a course syllabus for [course name], [N] weeks in length, for [audience].
+
+The syllabus should include:
+
+1. **Course title, instructor(s), meeting time and location.**
+2. **Course description** (3-5 sentences): scope, prerequisites if any, where this course fits in the larger curriculum.
+3. **Learning objectives** (4-7): course-level objectives in 'will be able to' language.
+4. **Weekly schedule**: each week with topic, readings, in-class activity, post-class assignment if any. Be specific.
+5. **Assessment plan**: how learners are evaluated (formative and summative components, weighting if graded).
+6. **Required and recommended resources** with full citations.
+7. **Policies**: attendance, makeup work, accommodations, AI use, academic integrity. Address each explicitly.
+8. **Communication norms**: how to contact instructors, expected response times.
+
+For each weekly topic, name **one outcome** the learner should be able to demonstrate after that week.
+
+Match the level of formality your institution expects (CME-accredited course = more formal; residency didactic series = less).
 ```
 
 ## Expected output
 
-*TODO: describe what a good response looks like and what to do with it.*
+A complete syllabus organized by section. Length: 5-8 pages. Should pass review by the relevant curriculum committee.
 
 ## Common failure modes
 
-- *TODO: list specific ways this prompt typically goes wrong.*
+- Weekly topics that aren't actually achievable in one session.
+- AI use policy that's either absent or boilerplate; both are problematic.
+- Assessment plan that doesn't align with the stated objectives.
 
 ## Required human verification
 
-- *TODO: name specifically what the user must verify before using the output.*
+- Verify required resources are in print and accessible.
+- Check institutional policies on AI use and assessment — your statement should match.
+- Run the weekly schedule by anyone who taught the course previously.

@@ -10,28 +10,44 @@ tags: case-based, drilling
 verified_models: TODO
 last_updated: 2026-05-17
 ---
+
 ## What this prompt does
 
-Give the model a set of findings and ask it to walk you through the differential and final diagnosis, then critique your own approach.
+Give the model a set of findings and ask it to walk you through the differential and final diagnosis — then critique your own approach against the model's. The drill is in your interpretation, not in receiving the answer.
 
 ## When to use it
 
-*TODO: Dr. Baba to author.*
+When you've just signed out a case and want to test whether you'd reach the same conclusion working in reverse from the findings alone. Especially useful for cases where the diagnosis was non-obvious or the differential was wide.
 
 ## The prompt
 
 ```
-TODO: Dr. Baba to author the prompt body.
+I'm going to give you a set of findings from a case I just worked. Work the case in reverse: starting from the findings alone, walk through your differential, narrow it systematically, and reach a final diagnosis.
+
+Ground rules:
+
+1. **Do not skip steps.** Even if the answer seems obvious, show your reasoning.
+2. **Be explicit about pretest probability.** Name the demographic and clinical context that's shifting your differential.
+3. **For each step, name the discriminating finding** that moves you from broad → narrower → narrowest.
+4. **End with the single piece of evidence you most wanted that you didn't have**, and what it would have ruled in or out.
+
+After your walkthrough, I'll tell you what I actually concluded and we can compare reasoning paths.
+
+Findings:
+[paste the findings — labs, imaging summary, morphology description, clinical context. De-identified, no PHI.]
 ```
 
 ## Expected output
 
-*TODO: describe what a good response looks like and what to do with it.*
+A step-by-step differential walkthrough ending in a final diagnosis and a named 'missing piece of evidence'. The walkthrough should be longer than the findings — that ratio is the point.
 
 ## Common failure modes
 
-- *TODO: list specific ways this prompt typically goes wrong.*
+- The model jumps to the answer without showing reasoning. Push back: 'walk through the differential explicitly.'
+- The model uses information that wasn't in your findings, then claims it was. Watch for this — push back.
+- The differential is too narrow because the model anchored on a likely answer. Push back: 'broaden the differential and explain what would shift you to each.'
 
 ## Required human verification
 
-- *TODO: name specifically what the user must verify before using the output.*
+- **Never paste identifiable patient information.** Use de-identified findings, published teaching cases, or sufficiently genericized vignettes.
+- The model's final diagnosis is fallible. Treat the exercise as a structured comparison of *reasoning paths*, not as a second opinion on the case.

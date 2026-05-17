@@ -10,28 +10,48 @@ tags: mcq, assessment, blooms
 verified_models: TODO
 last_updated: 2026-05-17
 ---
+
 ## What this prompt does
 
-Generate MCQs at a specified Bloom's level (recall vs application vs analysis) with rationales calibrated to the cognitive task.
+Generate MCQs at a specified Bloom's level (recall vs application vs analysis) with rationales calibrated to the cognitive task. The Bloom's level matters because most resident MCQs default to recall when application is what residents actually need.
 
 ## When to use it
 
-*TODO: Dr. Baba to author.*
+When you're building assessment items and want to test reasoning, not just memorization.
 
 ## The prompt
 
 ```
-TODO: Dr. Baba to author the prompt body.
+Generate [N] multiple-choice questions on [topic] for [PGY level] residents. I want the questions distributed across Bloom's taxonomy levels:
+
+- [X]% at **Application** (use knowledge in a new situation — typical clinical vignette)
+- [Y]% at **Analysis** (distinguish, compare, organize — requires breaking down a complex case)
+- [Z]% at **Evaluation** (justify a decision based on criteria — requires choosing among multiple acceptable approaches)
+
+Avoid Remember/Understand level questions — they don't test what residents actually need.
+
+For each question:
+
+1. Provide the question and 5 answer choices.
+2. Label the Bloom's level.
+3. Explain *why* this question is at that level (what cognitive task is required to answer it).
+4. Provide rationales for all five choices.
+
+The rationales should explain the *reasoning*, not just state which is right.
 ```
 
 ## Expected output
 
-*TODO: describe what a good response looks like and what to do with it.*
+N questions with Bloom's labels, level justifications, and full rationales. The 'why this level' explanation should make explicit what cognitive task the question tests.
 
 ## Common failure modes
 
-- *TODO: list specific ways this prompt typically goes wrong.*
+- The model mis-labels Bloom's level (calls a recall question 'application' because it includes a clinical vignette).
+- All questions end up at the same actual level despite the requested distribution.
+- 'Application' questions test the same fact a 'recall' question would, just dressed up.
 
 ## Required human verification
 
-- *TODO: name specifically what the user must verify before using the output.*
+- Verify the correct answer against an authoritative source.
+- Pressure-test the Bloom's level: would a resident who has only memorized facts be able to answer this question? If yes, it's not actually application or higher.
+- Have a colleague who teaches this topic review the questions before using them in formal assessment.
