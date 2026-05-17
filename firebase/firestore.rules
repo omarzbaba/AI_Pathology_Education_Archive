@@ -31,7 +31,7 @@ service cloud.firestore {
 
     function isAdmin() {
       return request.auth != null
-        && request.auth.uid == 'REPLACE_ADMIN_UID';
+        && request.auth.uid == 'gXIEl0ajRzfXHgUye54WvemBf642';
     }
 
     function isValidAccessLogPayload() {
