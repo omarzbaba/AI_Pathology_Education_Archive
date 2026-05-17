@@ -63,21 +63,38 @@ You'll need a Google account.
 
 This is the step that stops bots from spamming your access log.
 
-1. Left sidebar → **Build → App Check**
-2. Click your web app (`companion-site`) → **Register**
-3. Choose **reCAPTCHA v3** as the provider
-4. Open https://www.google.com/recaptcha/admin/create in a new tab
-5. Label: `ai-pathology-education-companion`
-6. reCAPTCHA type: **v3**
-7. Domains: add `localhost`, your `*.github.io` domain (you'll know it after Phase 6), and any custom domain you plan to use. You can edit this list later — for now add what you know.
-8. Accept terms, click **Submit**
-9. Copy the **Site key** (NOT the secret key — the secret stays on Google's side)
-10. Paste the site key into the Firebase App Check registration dialog
-11. Click **Save**
-12. Back on the App Check page, click the **Firestore** product → **Enforce**
-13. Confirm — this rejects all Firestore requests that don't carry a valid App Check token
+**The two key gotchas in this step** (both verified during the original deployment):
 
-> **Critical:** until you complete Step 12, App Check is in "monitor" mode and won't block bad requests. Don't skip it.
+1. **Site key vs Secret key.** reCAPTCHA v3 generates TWO keys: a public **site key** that goes in your client code (`firebase-config.js`), and a private **secret key** that goes into Firebase App Check so Firebase can verify tokens server-side. Putting the site key in *both* places (a common mistake) will cause every request to fail with "Missing or insufficient permissions" — and the error from the client is the same as a rules rejection, so it's hard to debug.
+
+2. **Start in Monitor mode, not Enforce mode.** App Check enforcement changes can take 15+ minutes to propagate. Enforce-too-early causes a deployment-day outage that's hard to back out of. Run in Monitor mode for the first few days, watch the verified/unverified ratio, then flip to Enforce once you've confirmed real users are passing verification.
+
+### Get the reCAPTCHA keys
+
+1. Open https://www.google.com/recaptcha/admin/create in a new tab
+2. Label: `ai-pathology-education-companion`
+3. reCAPTCHA type: **v3**
+4. Domains: add `localhost`, your `*.github.io` domain (you'll know it after Phase 6), and any custom domain you plan to use. You can edit this list later — for now add what you know.
+5. Accept terms, click **Submit**
+6. The next page shows **two** keys: a **Site key** and a **Secret key**. **Copy both** — you'll need each one in a different place.
+   - The **site key** goes in `assets/js/firebase-config.js` as `appCheckSiteKey` (Step 7 below).
+   - The **secret key** goes in Firebase App Check, in the next sub-step.
+
+### Register App Check with the secret key
+
+7. Firebase console → **Build → App Check** (or Security → App Check, depending on console version)
+8. Click your web app (`companion-site`) → **Register**
+9. Choose **reCAPTCHA** as the provider (NOT reCAPTCHA Enterprise unless you've explicitly set that up — they require different keys)
+10. Paste the **SECRET key** (from Step 6) into the "reCAPTCHA secret key" field. **This is the key field that's easy to get wrong — make sure you're pasting the secret, not the site key.**
+11. Click **Save**
+
+### Start in Monitor mode
+
+12. Back on the App Check **APIs** tab, find **Cloud Firestore**
+13. **Leave it in Monitor mode for now.** Do NOT click Enforce yet.
+14. After your first few real users have signed in (a day or two after launch), come back to this page and check the verified-vs-unverified ratio. If verified is high (>90%), you can safely click Enforce.
+
+> **Why this matters:** if you flip Enforce on a fresh project and the secret key is wrong (or anything else is misconfigured), every form submission fails immediately and there's a 15-minute lag before turning it back off takes effect. Monitor mode lets you observe the same data without breaking the live site.
 
 ---
 
@@ -120,6 +137,15 @@ Open `firebase/firestore.rules`. Find the line:
 ```
 
 Replace `REPLACE_ADMIN_UID` with the User UID from Step 4 (the same one you put in `firebase-config.js`).
+
+### Option A — Paste rules in the Firebase console (faster, no CLI needed)
+
+1. Firebase console → **Firestore Database** → top tabs → **Rules**
+2. Select all the existing text in the editor and delete it
+3. Paste the contents of `firebase/firestore.rules` (with your real admin UID)
+4. Click **Publish** → confirm. Published changes take up to a minute to propagate.
+
+### Option B — Deploy via Firebase CLI
 
 Install the Firebase CLI if you don't have it:
 
