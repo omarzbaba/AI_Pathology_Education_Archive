@@ -4,6 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="light">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none';">
   <meta name="robots" content="noindex,nofollow">
   <title>Library &mdash; AI in Pathology Education</title>
   <link rel="stylesheet" href="assets/css/styles.css">
@@ -108,25 +109,7 @@
     </div>
   </footer>
 
-  <script>
-    // Personalized greeting from localStorage (set by access-gate.js in Phase 3).
-    // If no name is stored, fall back to the neutral "Welcome." set in markup.
-    (function () {
-      try {
-        var raw = localStorage.getItem('companion_access_granted');
-        if (!raw) return;
-        var data = JSON.parse(raw);
-        if (data && data.name) {
-          var first = String(data.name).trim().split(/\s+/)[0];
-          // Defensive: cap length, strip anything that isn't a letter/space/hyphen/apostrophe
-          first = first.slice(0, 40).replace(/[^A-Za-z\-' ]/g, '');
-          if (first) {
-            document.getElementById('greeting').textContent = 'Welcome, ' + first + '.';
-          }
-        }
-      } catch (e) { /* silently ignore */ }
-    })();
-  </script>
+  <script src="assets/js/greeting.js"></script>
 
 </body>
 </html>
