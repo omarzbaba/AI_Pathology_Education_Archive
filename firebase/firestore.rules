@@ -1,0 +1,27 @@
+// Firestore security rules — AI in Pathology Education Companion Library
+//
+// Phase 1 scaffold. The real rules are authored in Phase 3 and enforce:
+//
+//   1. access_log:
+//      - create: allowed for anyone whose request passes App Check,
+//                AND whose payload matches the required document shape
+//                (field presence, length caps, role enum, server timestamp)
+//      - read / list: allowed only when request.auth.uid == ADMIN_UID
+//      - update / delete: denied for everyone, including the admin
+//        (append-only — protects the research evidence)
+//
+//   2. All other collections: deny by default.
+//
+// Deploy with:
+//   firebase deploy --only firestore:rules
+
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Phase 3 will populate this with the real rules.
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}
