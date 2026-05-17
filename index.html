@@ -3,14 +3,150 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>AI in Pathology Education — Companion Library</title>
-  <meta name="description" content="A curated prompt library and worked examples for using AI in pathology education. API Summit 2026.">
+  <meta name="color-scheme" content="light">
+  <meta name="description" content="A curated prompt library and worked examples for using AI across self-education, teaching, and educational operations in pathology. Companion to the API Summit 2026 workshop by Omar Z. Baba, MD.">
+  <title>AI in Pathology Education &mdash; Companion Library</title>
   <link rel="stylesheet" href="assets/css/styles.css">
 </head>
 <body>
-  <!-- Phase 2 will build the landing page: masthead, intro, three-pillar grid, access form. -->
-  <main>
-    <p>Phase 1 scaffold &mdash; landing page built in Phase 2.</p>
+
+  <header class="container">
+    <div class="masthead">
+      <p class="masthead__eyebrow">API Summit 2026 &middot; Workshop Companion</p>
+      <h1 class="masthead__title">AI in Pathology Education</h1>
+      <p class="masthead__subtitle">A practical framework across learning, teaching, and educational operations.</p>
+      <p class="masthead__signature">
+        <strong>Omar Z. Baba, MD</strong> &middot;
+        Henry Ford Health &middot;
+        Department of Pathology &middot;
+        Clinical Pathology &amp; Informatics
+      </p>
+    </div>
+  </header>
+
+  <main class="container" id="main">
+
+    <section aria-labelledby="intro-heading">
+      <h2 id="intro-heading" class="mt-0">A curated companion for the workshop</h2>
+      <p class="lead">
+        This library collects the prompts, worked examples, and operational templates
+        introduced in the workshop &mdash; organized so you can return to them in the
+        weeks and months after the session.
+      </p>
+      <p>
+        Every artifact here is opinionated, attribution-friendly, and built around
+        three pillars: how to <em>learn</em> with AI, how to <em>teach</em> with AI,
+        and how to use AI to produce the documentation that surrounds educational events.
+      </p>
+    </section>
+
+    <section aria-labelledby="pillars-heading">
+      <h2 id="pillars-heading">The three pillars</h2>
+      <div class="pillars">
+        <article class="pillar">
+          <p class="pillar__number">Pillar I</p>
+          <h3 class="pillar__title">Self-Education</h3>
+          <p class="pillar__desc">
+            Using AI to learn pathology &mdash; concept explanation, self-quizzing,
+            algorithm walkthroughs, paper critique, multimodal practice.
+          </p>
+          <span class="pillar__link">Available after access</span>
+        </article>
+        <article class="pillar">
+          <p class="pillar__number">Pillar II</p>
+          <h3 class="pillar__title">Teaching</h3>
+          <p class="pillar__desc">
+            Using AI to teach pathology &mdash; learning objectives, case vignettes,
+            slide outlines, feedback drafts, OSCE stations, journal club design.
+          </p>
+          <span class="pillar__link">Available after access</span>
+        </article>
+        <article class="pillar">
+          <p class="pillar__number">Pillar III</p>
+          <h3 class="pillar__title">Educational Operations</h3>
+          <p class="pillar__desc">
+            Using AI to produce the artifacts around teaching events &mdash;
+            workshops, rotations, courses, conferences, and journal clubs.
+          </p>
+          <span class="pillar__link">Available after access</span>
+        </article>
+      </div>
+    </section>
+
+    <section class="form-section" aria-labelledby="access-heading">
+      <h2 id="access-heading">Sign in to access the library</h2>
+      <p class="form-section__intro">
+        A short check-in before you enter. This helps inform a forthcoming manuscript
+        on structured AI literacy in pathology training and lets the author follow up
+        with new material as the library grows.
+      </p>
+
+      <form id="access-form" novalidate>
+        <div class="form-grid">
+          <div class="field form-grid__full">
+            <label for="name">Full name <span class="required">*</span></label>
+            <input type="text" id="name" name="name" autocomplete="name" required maxlength="120">
+            <p class="field__error" id="name-error" aria-live="polite"></p>
+          </div>
+
+          <div class="field">
+            <label for="email">Email <span class="required">*</span></label>
+            <input type="email" id="email" name="email" autocomplete="email" required maxlength="254">
+            <p class="field__error" id="email-error" aria-live="polite"></p>
+          </div>
+
+          <div class="field">
+            <label for="role">Role <span class="required">*</span></label>
+            <select id="role" name="role" required>
+              <option value="">Select one&hellip;</option>
+              <option value="resident">Resident</option>
+              <option value="fellow">Fellow</option>
+              <option value="faculty">Faculty</option>
+              <option value="program_director">Program Director</option>
+              <option value="other">Other</option>
+            </select>
+            <p class="field__error" id="role-error" aria-live="polite"></p>
+          </div>
+
+          <div class="field form-grid__full">
+            <label for="institution">Institution</label>
+            <input type="text" id="institution" name="institution" autocomplete="organization" maxlength="200">
+            <p class="field__error" id="institution-error" aria-live="polite"></p>
+          </div>
+
+          <div class="form-grid__full">
+            <button type="submit" class="btn" id="access-submit">Enter the library</button>
+          </div>
+        </div>
+
+        <div class="form-status" id="form-status" role="status" aria-live="polite"></div>
+
+        <p class="form-privacy">
+          Your information is logged so the author can study how this material is used
+          and cite that usage in a forthcoming manuscript. It will not be shared,
+          sold, or used for marketing. The log is append-only and only the author
+          can read it. Read the <a href="PRIVACY.md">full privacy notice</a>.
+        </p>
+      </form>
+    </section>
+
   </main>
+
+  <footer class="container">
+    <div class="footer">
+      <p>
+        &copy; 2026 Omar Z. Baba, MD &middot;
+        Licensed under <a href="LICENSE">CC&nbsp;BY&nbsp;4.0</a> &middot;
+        <a href="PRIVACY.md">Privacy</a>
+      </p>
+      <p>
+        Citation: Baba, O. Z. (2026). <em>AI in Pathology Education &mdash; Companion Library</em>. API Summit 2026.
+      </p>
+    </div>
+  </footer>
+
+  <!-- Phase 3 wires the form to Firebase + App Check -->
+  <!-- <script type="module" src="assets/js/access-gate.js"></script> -->
+
 </body>
 </html>

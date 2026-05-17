@@ -3,13 +3,130 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <meta name="robots" content="noindex,nofollow">
   <title>Library &mdash; AI in Pathology Education</title>
   <link rel="stylesheet" href="assets/css/styles.css">
 </head>
 <body>
-  <!-- Phase 2/4 will build the library home: greeting, three pillar cards, persistent nav. -->
-  <main>
-    <p>Phase 1 scaffold &mdash; library home built in Phases 2 and 4.</p>
+
+  <header class="container">
+    <div class="masthead">
+      <p class="masthead__eyebrow">API Summit 2026 &middot; Companion Library</p>
+      <h1 class="masthead__title">The Library</h1>
+      <p class="masthead__subtitle" id="greeting">Welcome.</p>
+      <p class="masthead__signature">
+        <strong>Omar Z. Baba, MD</strong> &middot;
+        Henry Ford Health &middot;
+        Department of Pathology
+      </p>
+    </div>
+
+    <nav class="nav" aria-label="Library">
+      <a href="thank-you.html">Home</a>
+      <a href="library.html#/pillar-1-self-education/index">Self-Education</a>
+      <a href="library.html#/pillar-2-teaching/index">Teaching</a>
+      <a href="library.html#/pillar-3-educational-operations/index">Educational Operations</a>
+      <a href="library.html#/../docs/how-to-use">How to use</a>
+      <a href="library.html#/../docs/guardrails">Guardrails</a>
+      <a href="library.html#/../docs/about">About</a>
+    </nav>
+  </header>
+
+  <main class="container" id="main">
+
+    <section aria-labelledby="overview-heading">
+      <h2 id="overview-heading" class="mt-0">Three pillars, organized by use</h2>
+      <p class="lead">
+        Pick the pillar that matches what you&rsquo;re trying to do right now.
+        Every prompt is structured the same way &mdash; what it does, when to use it,
+        the prompt itself, expected output, common failure modes, and the human
+        verification step that must come after.
+      </p>
+    </section>
+
+    <section aria-labelledby="pillars-heading">
+      <h2 id="pillars-heading" class="sr-only">The three pillars</h2>
+      <div class="pillars">
+        <article class="pillar">
+          <p class="pillar__number">Pillar I</p>
+          <h3 class="pillar__title">Self-Education</h3>
+          <p class="pillar__desc">
+            Concept explanation at level, self-quizzing, MCQ generation, diagnostic
+            algorithm walkthroughs, board prep scaffolding, paper critique, multimodal
+            practice on photomicrographs and SPEP traces.
+          </p>
+          <a class="pillar__link" href="library.html#/pillar-1-self-education/index">Enter Pillar I</a>
+        </article>
+
+        <article class="pillar">
+          <p class="pillar__number">Pillar II</p>
+          <h3 class="pillar__title">Teaching</h3>
+          <p class="pillar__desc">
+            Learning objective generation, case vignettes by PGY level, OSCE stations,
+            slide outlines, speaker notes, audience polls, resident feedback drafts,
+            CCC narrative comments, journal club design.
+          </p>
+          <a class="pillar__link" href="library.html#/pillar-2-teaching/index">Enter Pillar II</a>
+        </article>
+
+        <article class="pillar">
+          <p class="pillar__number">Pillar III</p>
+          <h3 class="pillar__title">Educational Operations</h3>
+          <p class="pillar__desc">
+            Workshops, rotations, courses, conferences, and journal clubs &mdash;
+            announcements, schedules, packets, rubrics, evaluations, and the
+            standalone companion-app-builder prompt.
+          </p>
+          <a class="pillar__link" href="library.html#/pillar-3-educational-operations/index">Enter Pillar III</a>
+        </article>
+      </div>
+    </section>
+
+    <section aria-labelledby="next-heading">
+      <h2 id="next-heading">Start here if it&rsquo;s your first visit</h2>
+      <ul>
+        <li><a href="library.html#/../docs/how-to-use">How to use this library</a> &mdash; the structure of every prompt and the chain-prompts-in-one-session pattern.</li>
+        <li><a href="library.html#/../docs/guardrails">Guardrails</a> &mdash; accuracy, PHI, bias, authorship, educational integrity. Read before sharing AI output as your own work.</li>
+        <li><a href="library.html#/../docs/about">About the library</a> &mdash; the workshop, the framework, what is intentionally out of scope.</li>
+      </ul>
+    </section>
+
   </main>
+
+  <footer class="container">
+    <div class="footer">
+      <p>
+        &copy; 2026 Omar Z. Baba, MD &middot;
+        Licensed under <a href="LICENSE">CC&nbsp;BY&nbsp;4.0</a> &middot;
+        <a href="PRIVACY.md">Privacy</a> &middot;
+        <a href="library.html#/../docs/citation">Citation</a>
+      </p>
+      <p>
+        Citation: Baba, O. Z. (2026). <em>AI in Pathology Education &mdash; Companion Library</em>. API Summit 2026.
+      </p>
+    </div>
+  </footer>
+
+  <script>
+    // Personalized greeting from localStorage (set by access-gate.js in Phase 3).
+    // If no name is stored, fall back to the neutral "Welcome." set in markup.
+    (function () {
+      try {
+        var raw = localStorage.getItem('companion_access_granted');
+        if (!raw) return;
+        var data = JSON.parse(raw);
+        if (data && data.name) {
+          var first = String(data.name).trim().split(/\s+/)[0];
+          // Defensive: cap length, strip anything that isn't a letter/space/hyphen/apostrophe
+          first = first.slice(0, 40).replace(/[^A-Za-z\-' ]/g, '');
+          if (first) {
+            document.getElementById('greeting').textContent = 'Welcome, ' + first + '.';
+          }
+        }
+      } catch (e) { /* silently ignore */ }
+    })();
+  </script>
+
 </body>
 </html>

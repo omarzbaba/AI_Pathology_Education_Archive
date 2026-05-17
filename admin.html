@@ -3,21 +3,71 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
   <meta name="robots" content="noindex,nofollow">
   <title>Admin &mdash; AI in Pathology Education</title>
   <link rel="stylesheet" href="assets/css/styles.css">
 </head>
 <body>
-  <!--
-    Phase 3 will wire this up to Firebase Auth (email/password).
-    The page itself is publicly accessible; Firestore rules deny reads to
-    anyone who is not signed in as the admin UID. The page is the gate UX;
-    the rules are the gate.
-  -->
-  <main>
-    <h1>Admin</h1>
-    <p>Phase 1 scaffold &mdash; admin dashboard built in Phase 3.</p>
+
+  <header class="container">
+    <div class="masthead">
+      <p class="masthead__eyebrow">Internal &middot; Authorized access only</p>
+      <h1 class="masthead__title" style="font-size: 2.5rem;">Admin</h1>
+      <p class="masthead__signature">Access log dashboard</p>
+    </div>
+  </header>
+
+  <main class="container" id="main">
+
+    <!-- Sign-in panel (shown when signed out) -->
+    <section id="signin-panel" class="form-section" aria-labelledby="signin-heading">
+      <h2 id="signin-heading" class="mt-0">Sign in</h2>
+      <p class="form-section__intro">
+        Use your Firebase Auth credentials. Access is restricted to a single
+        authorized admin account; sign-in attempts and read attempts by anyone
+        else will be rejected at the Firestore rule layer.
+      </p>
+
+      <form id="signin-form" novalidate>
+        <div class="form-grid">
+          <div class="field form-grid__full">
+            <label for="admin-email">Email <span class="required">*</span></label>
+            <input type="email" id="admin-email" name="email" autocomplete="username" required maxlength="254">
+          </div>
+          <div class="field form-grid__full">
+            <label for="admin-password">Password <span class="required">*</span></label>
+            <input type="password" id="admin-password" name="password" autocomplete="current-password" required>
+          </div>
+          <div class="form-grid__full">
+            <button type="submit" class="btn">Sign in</button>
+          </div>
+        </div>
+        <div class="form-status" id="signin-status" role="status" aria-live="polite"></div>
+      </form>
+    </section>
+
+    <!-- Dashboard panel (shown when signed in, populated in Phase 3) -->
+    <section id="dashboard-panel" hidden aria-labelledby="dashboard-heading">
+      <h2 id="dashboard-heading" class="mt-0">Access log</h2>
+      <p class="form-section__intro" style="background: var(--color-paper); border: 1px solid var(--color-rule); border-left: 3px solid var(--color-burgundy); padding: var(--space-3) var(--space-4);">
+        <strong>Append-only.</strong> Entries cannot be edited or deleted &mdash;
+        not by you, not by anyone. Export a CSV if you need to annotate the data.
+      </p>
+      <div id="dashboard-content">
+        <p>Phase 3 will render the paginated table, filters, search, CSV export, and sign-out here.</p>
+      </div>
+    </section>
+
   </main>
-  <!-- <script type="module" src="assets/js/admin.js"></script>  -- added in Phase 3 -->
+
+  <footer class="container">
+    <div class="footer">
+      <p>Internal administrative interface. Public site: <a href="thank-you.html">library home</a>.</p>
+    </div>
+  </footer>
+
+  <!-- <script type="module" src="assets/js/admin.js"></script>  -- wired in Phase 3 -->
+
 </body>
 </html>

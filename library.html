@@ -3,16 +3,55 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <meta name="robots" content="noindex,nofollow">
   <title>Library Viewer &mdash; AI in Pathology Education</title>
   <link rel="stylesheet" href="assets/css/styles.css">
 </head>
 <body>
-  <!-- Phase 4 will wire this shell up to load + render /library/**.md via marked.js + DOMPurify. -->
-  <main id="library-content">
-    <p>Phase 1 scaffold &mdash; markdown viewer built in Phase 4.</p>
+
+  <header class="container">
+    <div class="masthead">
+      <p class="masthead__eyebrow">API Summit 2026 &middot; Companion Library</p>
+      <h1 class="masthead__title" style="font-size: 2.5rem;">Library</h1>
+      <p class="masthead__signature">
+        <strong>Omar Z. Baba, MD</strong> &middot; Henry Ford Health
+      </p>
+    </div>
+
+    <nav class="nav" aria-label="Library">
+      <a href="thank-you.html">Home</a>
+      <a href="library.html#/pillar-1-self-education/index">Self-Education</a>
+      <a href="library.html#/pillar-2-teaching/index">Teaching</a>
+      <a href="library.html#/pillar-3-educational-operations/index">Educational Operations</a>
+      <a href="library.html#/../docs/how-to-use">How to use</a>
+      <a href="library.html#/../docs/guardrails">Guardrails</a>
+    </nav>
+  </header>
+
+  <main class="container" id="main">
+    <article id="library-content" class="prose">
+      <p class="lead">Loading&hellip;</p>
+      <p>If this message persists, the requested document could not be found.
+         Pick a section from the navigation above, or return to the
+         <a href="thank-you.html">library home</a>.</p>
+    </article>
   </main>
-  <!-- <script src="assets/vendor/marked.min.js"></script>     -- added in Phase 4 -->
-  <!-- <script src="assets/vendor/dompurify.min.js"></script>  -- added in Phase 4 -->
-  <!-- <script src="assets/js/library-router.js"></script>     -- added in Phase 4 -->
+
+  <footer class="container">
+    <div class="footer">
+      <p>
+        &copy; 2026 Omar Z. Baba, MD &middot;
+        Licensed under <a href="LICENSE">CC&nbsp;BY&nbsp;4.0</a> &middot;
+        <a href="PRIVACY.md">Privacy</a>
+      </p>
+    </div>
+  </footer>
+
+  <!-- Phase 4 wires this shell up: -->
+  <!-- <script src="assets/vendor/marked.min.js"     integrity="sha384-..." crossorigin="anonymous"></script> -->
+  <!-- <script src="assets/vendor/dompurify.min.js"  integrity="sha384-..." crossorigin="anonymous"></script> -->
+  <!-- <script type="module" src="assets/js/library-router.js"></script> -->
+
 </body>
 </html>
