@@ -62,7 +62,7 @@ Useful information to include:
 - Anything you adapted, fixed, or improved
 - Whether you'd consent to being acknowledged in the manuscript (you can decline — the request is genuinely opt-in)
 
-Contact: Omar Z. Baba, MD — Clinical Pathology & Informatics. Reach the author via the GitHub repository for this library, or through the floating Feedback button on any page of the companion site.
+Contact: Omar Z. Baba, MD — Clinical Pathologist & Pathology Informaticist. Reach the author via the GitHub repository for this library, or through the floating Feedback button on any page of the companion site.
 
 ## Companion-site usage tracking
 

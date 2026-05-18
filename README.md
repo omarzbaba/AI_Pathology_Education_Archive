@@ -1,6 +1,6 @@
 # AI in Pathology Education — Companion Library
 
-Companion website for the API Summit 2026 workshop *AI in Pathology Education: A Practical Framework Across Learning, Teaching, and Educational Operations*, by Omar Z. Baba, MD (Clinical Pathology & Informatics).
+Companion website for the API Summit 2026 workshop *AI in Pathology Education: A Practical Framework Across Learning, Teaching, and Educational Operations*, by Omar Z. Baba, MD (Clinical Pathologist & Pathology Informaticist).
 
 A curated prompt library and worked-example collection organized around three pillars:
 

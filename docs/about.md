@@ -23,7 +23,7 @@ These pillars are not mutually exclusive — a single 30-minute work session mig
 
 ## Who I am
 
-I'm a Clinical Pathology and Informatics fellow. I've been thinking and writing about practical AI use in pathology education for the past 18 months, mostly through small-group sessions with residents and a series of departmental in-services.
+I'm a clinical pathologist and pathology informaticist. I've been thinking and writing about practical AI use in pathology education for the past 18 months, mostly through small-group sessions with residents and a series of departmental in-services.
 
 This library is the consolidated, organized version of patterns that emerged from those sessions. It is opinionated. It will not be opinionated in the same way at your institution, and that is fine — the prompts are designed to be adapted.
 

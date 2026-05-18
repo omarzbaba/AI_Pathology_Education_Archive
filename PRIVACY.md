@@ -142,7 +142,7 @@ If you have a complaint about how your data has been handled and you are in the 
 ## Contact
 
 Omar Z. Baba, MD
-Clinical Pathology & Informatics
+Clinical Pathologist & Pathology Informaticist
 
 You can reach the author via the GitHub repository for this library (https://github.com/omarzbaba/AI_Pathology_Education) or through the floating **Feedback** button on any page of the companion site.
 
