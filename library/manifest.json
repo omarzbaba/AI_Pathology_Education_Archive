@@ -351,58 +351,6 @@
           "title": "Source-grounded AI (NotebookLM & Claude Projects)",
           "prompts": [
             {
-              "title": "Choose your tool — NotebookLM vs Claude Projects vs generic chat",
-              "intent": "A decision rubric for which AI tool to use when. Source-grounded AI (NotebookLM, Claude Projects, ChatGPT Custom GPTs) is different from generic chat —…",
-              "difficulty": "quick-win",
-              "time_to_use": "<2min",
-              "visual": "text-only",
-              "audience": "resident",
-              "best_model": "Claude Sonnet 4.6",
-              "tags": "source-grounded, notebooklm, claude-projects, decision-rubric",
-              "slug": "sg-choose-your-tool",
-              "path": "library/pillar-1-self-education/prompts/sg-choose-your-tool.md",
-              "category": "notebook"
-            },
-            {
-              "title": "Source curation principles for AI notebooks",
-              "intent": "Principles for choosing what to upload to your AI notebook. The discipline that distinguishes a useful notebook from a noisy one: every source should earn…",
-              "difficulty": "intermediate",
-              "time_to_use": "2-10min",
-              "visual": "text-only",
-              "audience": "resident",
-              "best_model": "Claude Sonnet 4.6",
-              "tags": "source-grounded, curation, principles",
-              "slug": "sg-source-curation",
-              "path": "library/pillar-1-self-education/prompts/sg-source-curation.md",
-              "category": "notebook"
-            },
-            {
-              "title": "Verify your AI notebook is actually grounded",
-              "intent": "Source-grounded AI tools claim to answer \"only from your uploaded sources.\" In practice, they drift — pulling from the model's general training data when…",
-              "difficulty": "intermediate",
-              "time_to_use": "2-10min",
-              "visual": "text-only",
-              "audience": "resident",
-              "best_model": "Claude Sonnet 4.6",
-              "tags": "source-grounded, verification, grounding-drift",
-              "slug": "sg-grounding-verification",
-              "path": "library/pillar-1-self-education/prompts/sg-grounding-verification.md",
-              "category": "notebook"
-            },
-            {
-              "title": "Privacy and copyright for source-grounded AI",
-              "intent": "Walks through the privacy, copyright, and institutional-policy considerations BEFORE you upload anything to an AI notebook. Source-grounded AI is genuinely…",
-              "difficulty": "intermediate",
-              "time_to_use": "2-10min",
-              "visual": "text-only",
-              "audience": "resident",
-              "best_model": "Claude Sonnet 4.6",
-              "tags": "source-grounded, privacy, copyright, safety",
-              "slug": "sg-privacy-and-copyright",
-              "path": "library/pillar-1-self-education/prompts/sg-privacy-and-copyright.md",
-              "category": "notebook"
-            },
-            {
               "title": "Build a board prep notebook",
               "intent": "Step-by-step setup for a board prep notebook (NotebookLM or Claude Projects) that becomes your study companion for the months leading up to RISE, ABPath, or…",
               "difficulty": "intermediate",

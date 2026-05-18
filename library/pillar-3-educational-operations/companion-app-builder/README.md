@@ -154,7 +154,8 @@ Generate the file structure for the site:
   /content/                        (markdown files for the library)
   /firebase/firestore.rules
   /firebase/SETUP.md               (the console walkthrough I will use)
-  /docs/about.md, /docs/citation.md, /docs/guardrails.md, /docs/how-to-use.md
+  /docs/about.md, /docs/citation.md, /docs/guardrails.md
+  /docs/how-to/index.md, /docs/how-to/use-this-library.md (+ further tutorials)
   /PRIVACY.md
   /README.md
   /LICENSE                         (CC-BY-4.0)

@@ -1,6 +1,6 @@
 ---
-title: How to Use This Library
-last_updated: 2026-05-17
+title: How to use this library
+last_updated: 2026-05-18
 ---
 
 ## The shape of a prompt entry
@@ -36,7 +36,7 @@ A prompt that took 90 seconds to copy and 4 minutes to customize is well-spent t
 
 Most of the prompts in this library are designed to be used in sequence within the same conversation, not as one-shot queries. The model maintains state across turns — it remembers your level, your preferences, the corrections you made earlier. Chaining works because of this state:
 
-- **Pillar I example:** *calibrate → explain → drill → critique my reasoning*. Four prompts, one session, ~15-20 minutes. Far more effective than four cold queries.
+- **Pillar I example:** *calibrate → explain → drill → critique my reasoning*. Four prompts, one session, ~15–20 minutes. Far more effective than four cold queries.
 - **Pillar II example:** *generate vignette → critique vignette → generate matched-pair distractor → generate 3 MCQs*. One session, ~25 minutes. The matched-pair distractor would not work as well without the prior context.
 - **Pillar III example:** *generate orientation packet outline → flesh out section 1 → flesh out section 2 → suggest pitfalls based on what's already in the document*. The "suggest pitfalls" step relies on the model seeing the rest of the packet.
 
@@ -54,7 +54,7 @@ A small number of prompts in this library are explicitly multimodal — you uplo
 
 If you find a prompt that works much better with a particular tweak — a phrasing that fixes a common failure mode, a calibration that produces consistently better output for your subspecialty — the author would like to hear about it. The library is meant to grow.
 
-Contact options are on the [citation page](library.html#/docs/citation). Useful contributions will be credited and added to the prompt file with attribution.
+Use the [Submit a prompt](submit.html) form to send a variant, or use the floating **Feedback** button at the bottom-right of any page. Useful contributions will be credited and added to the prompt file with attribution — see the [Contributors page](library.html#/docs/contributors).
 
 ## Read this before you use anything
 

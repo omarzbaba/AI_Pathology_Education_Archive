@@ -43,20 +43,17 @@ CATEGORY = {
     "critical-value-workflow": "drill",
     "blood-smear-systematic-review": "image",
     "frozen-section-thinking-aloud": "drill",
-    # Source-grounded AI section (Phase A)
-    "sg-choose-your-tool": "notebook",
+    # Source-grounded AI section (Phase A) — setup guides + grounded variants.
+    # Decision-rubric / principles entries moved to /docs/how-to/.
     "sg-board-prep-notebook": "notebook",
     "sg-signout-notebook": "notebook",
     "sg-journal-club-notebook": "notebook",
-    "sg-source-curation": "notebook",
-    "sg-grounding-verification": "notebook",
     "sg-concept-explanation-sourced": "notebook",
     "sg-self-quiz-sourced": "notebook",
     "sg-paper-critique-against-corpus": "notebook",
     "sg-cross-source-comparison": "notebook",
     "sg-mcq-generation-sourced": "notebook",
     "sg-knowledge-gap-discovery": "notebook",
-    "sg-privacy-and-copyright": "notebook",
     # Pillar 2 — Teaching
     "acgme-epa-objectives": "assess",
     "blooms-mcq": "assess",
@@ -140,9 +137,9 @@ PILLAR_DIRS = [
         ("Molecular & CP workflow", "library/pillar-1-self-education/prompts", [
             "molecular-result-interpretation","critical-value-workflow",
         ]),
+        # Source-grounded setup guides + grounded variants of regular prompts.
+        # Decision-rubric / principles entries moved to /docs/how-to/.
         ("Source-grounded AI (NotebookLM & Claude Projects)", "library/pillar-1-self-education/prompts", [
-            "sg-choose-your-tool","sg-source-curation","sg-grounding-verification",
-            "sg-privacy-and-copyright",
             "sg-board-prep-notebook","sg-signout-notebook","sg-journal-club-notebook",
             "sg-concept-explanation-sourced","sg-self-quiz-sourced",
             "sg-mcq-generation-sourced","sg-knowledge-gap-discovery",

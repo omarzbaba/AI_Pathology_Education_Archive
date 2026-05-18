@@ -61,11 +61,11 @@ A few principles run through every prompt in this pillar:
 
 *Use AI grounded in your own source materials — board prep notebooks, sign-out preview corpora, journal club libraries — instead of generic chat. Different setup, different prompts, different failure modes.*
 
-**Decision rubric & principles:**
-- [Choose your tool — NotebookLM vs Claude Projects vs generic chat](library.html#/library/pillar-1-self-education/prompts/sg-choose-your-tool)
-- [Source curation principles for AI notebooks](library.html#/library/pillar-1-self-education/prompts/sg-source-curation)
-- [Verify your AI notebook is actually grounded](library.html#/library/pillar-1-self-education/prompts/sg-grounding-verification)
-- [Privacy and copyright for source-grounded AI](library.html#/library/pillar-1-self-education/prompts/sg-privacy-and-copyright)
+**Read first (now under [How-to](library.html#/docs/how-to/index)):**
+- [Choose your tool — NotebookLM vs Claude Projects vs generic chat](library.html#/docs/how-to/notebooklm-vs-claude-projects)
+- [Source curation principles for AI notebooks](library.html#/docs/how-to/curate-sources)
+- [Verify your AI notebook is actually grounded](library.html#/docs/how-to/verify-grounding)
+- [Privacy and copyright for source-grounded AI](library.html#/docs/how-to/privacy-and-copyright)
 
 **Setup guides for specific use cases:**
 - [Build a board prep notebook](library.html#/library/pillar-1-self-education/prompts/sg-board-prep-notebook)
