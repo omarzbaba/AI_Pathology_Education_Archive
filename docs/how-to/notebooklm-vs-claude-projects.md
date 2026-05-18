@@ -1,6 +1,8 @@
 ---
 title: NotebookLM vs Claude Projects vs generic chat — choose your tool
 last_updated: 2026-05-18
+difficulty: beginner
+category: source-grounded
 ---
 
 A decision rubric for which AI tool to use when. Source-grounded AI (NotebookLM, Claude Projects, ChatGPT Custom GPTs) is different from generic chat — different strengths, different failure modes, different prep work. This guide tells you which one fits your task.

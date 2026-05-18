@@ -1,6 +1,8 @@
 ---
 title: Disclosure and authorship — crediting AI in academic work
 last_updated: 2026-05-18
+difficulty: intermediate
+category: scholarly
 ---
 
 If you use AI to help draft a manuscript, a poster, a teaching slide, a letter of recommendation, an abstract, or a grant — when and how do you disclose it? This guide is the working answer for pathology educators, with current journal policy, conference norms, and practical worked examples.

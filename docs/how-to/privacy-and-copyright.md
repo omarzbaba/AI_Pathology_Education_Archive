@@ -1,6 +1,8 @@
 ---
 title: Privacy and copyright for source-grounded AI
 last_updated: 2026-05-18
+difficulty: intermediate
+category: source-grounded
 ---
 
 A walk-through of the privacy, copyright, and institutional-policy considerations BEFORE you upload anything to an AI notebook. Source-grounded AI is genuinely useful for education, but it sits on top of a complicated web of copyright, vendor terms of service, and institutional data policies — most of which are unsettled, and most of which can bite you in unexpected ways.

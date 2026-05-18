@@ -1,6 +1,8 @@
 ---
 title: Bias in medical AI — watching for it, working around it
 last_updated: 2026-05-18
+difficulty: intermediate
+category: reading
 ---
 
 Every LLM you use was trained on a corpus that does not look like the world. Some populations are over-represented; others barely appear. Some specialties are deeply covered; others are sparse. Some practice patterns dominate; others are invisible. The resulting model is fluent in everything but evenly accurate in nothing.

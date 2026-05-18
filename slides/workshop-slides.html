@@ -1,0 +1,791 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>API Summit 2026 — Companion slides</title>
+<style>
+  :root {
+    --navy:           #14213D;
+    --navy-soft:      #2C3E5C;
+    --burgundy:       #7A1C28;
+    --burgundy-dark:  #5E1520;
+    --white:          #FFFFFF;
+    --paper:          #FAFAF7;
+    --rule:           #E4E2DC;
+    --muted:          #6B6F7A;
+    --success:        #1F5C3B;
+    --pillar-1:       #14213D;
+    --pillar-2:       #7A1C28;
+    --pillar-3:       #2C3E5C;
+    --serif: "Cormorant Garamond", "Iowan Old Style", "Apple Garamond", "Hoefler Text", "Times New Roman", serif;
+    --sans:  "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, system-ui, sans-serif;
+    --mono:  "JetBrains Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  }
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0;
+    padding: 0;
+    background: #2c2c2c;
+    font-family: var(--sans);
+    color: var(--navy);
+    -webkit-font-smoothing: antialiased;
+  }
+  /* Each slide is 16:9 at 1920x1080, scaled down to fit the screen. */
+  .slide {
+    width: 1920px;
+    height: 1080px;
+    margin: 32px auto;
+    background: var(--white);
+    padding: 80px 120px;
+    position: relative;
+    box-shadow: 0 6px 24px rgba(0,0,0,0.4);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    page-break-after: always;
+  }
+  .slide__eyebrow {
+    font-family: var(--sans);
+    font-size: 22px;
+    color: var(--burgundy);
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    font-weight: 500;
+    margin: 0 0 18px 0;
+  }
+  .slide__title {
+    font-family: var(--serif);
+    font-size: 96px;
+    line-height: 1.02;
+    color: var(--navy);
+    font-weight: 600;
+    margin: 0 0 16px 0;
+    letter-spacing: -0.01em;
+  }
+  .slide__subtitle {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 36px;
+    color: var(--navy-soft);
+    margin: 0 0 32px 0;
+    font-weight: 400;
+  }
+  .slide__rule {
+    height: 2px;
+    background: var(--burgundy);
+    width: 120px;
+    margin: 0 0 36px 0;
+  }
+  .slide__footer {
+    position: absolute;
+    left: 120px;
+    right: 120px;
+    bottom: 44px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 18px;
+    color: var(--muted);
+    padding-top: 18px;
+    border-top: 1px solid var(--rule);
+  }
+  .slide__footer strong {
+    color: var(--navy);
+    font-weight: 500;
+  }
+  .slide__page {
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* ---------- Slide 1: digital companion + QR ---------- */
+  .companion {
+    display: grid;
+    grid-template-columns: 1fr 600px;
+    gap: 80px;
+    align-items: start;
+    flex: 1;
+  }
+  .companion__intro {
+    font-family: var(--serif);
+    font-size: 34px;
+    line-height: 1.4;
+    color: var(--navy-soft);
+    margin: 0 0 36px 0;
+    font-style: italic;
+  }
+  .features {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 22px 36px;
+    margin-top: 8px;
+  }
+  .feature {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+  }
+  .feature__bullet {
+    flex: 0 0 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: var(--burgundy);
+    color: var(--white);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    font-size: 17px;
+    margin-top: 2px;
+  }
+  .feature__text {
+    font-size: 22px;
+    line-height: 1.45;
+    color: var(--navy);
+  }
+  .feature__text strong { color: var(--navy); font-weight: 600; }
+  .feature__text .meta { color: var(--muted); font-size: 18px; display: block; margin-top: 2px; }
+
+  .qr-card {
+    background: var(--paper);
+    border: 1px solid var(--rule);
+    border-left: 6px solid var(--burgundy);
+    padding: 48px 40px 40px;
+    text-align: center;
+    border-radius: 4px;
+  }
+  .qr-card img {
+    width: 420px;
+    height: 420px;
+    background: var(--white);
+    padding: 16px;
+    border: 1px solid var(--rule);
+  }
+  .qr-card__label {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 28px;
+    color: var(--navy-soft);
+    margin: 24px 0 8px;
+  }
+  .qr-card__url {
+    font-family: var(--mono);
+    font-size: 20px;
+    color: var(--burgundy);
+    word-break: break-all;
+  }
+  .qr-card__cta {
+    font-family: var(--sans);
+    font-size: 24px;
+    color: var(--navy);
+    font-weight: 500;
+    margin-top: 18px;
+    line-height: 1.3;
+  }
+  .qr-card__cta-sub {
+    font-size: 18px;
+    color: var(--muted);
+    margin-top: 6px;
+    font-weight: 400;
+  }
+
+  /* ---------- Slide 2: how to write a good prompt ---------- */
+  .prompt-frame {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 36px;
+    flex: 1;
+    margin-top: 16px;
+  }
+  .prompt-frame__lede {
+    font-family: var(--serif);
+    font-size: 30px;
+    line-height: 1.4;
+    color: var(--navy-soft);
+    grid-column: 1 / -1;
+    margin: 0 0 12px;
+    font-style: italic;
+    max-width: 1500px;
+  }
+  .component {
+    background: var(--paper);
+    border: 1px solid var(--rule);
+    border-left: 6px solid var(--navy);
+    padding: 26px 30px;
+    border-radius: 4px;
+    position: relative;
+  }
+  .component:nth-child(odd) { border-left-color: var(--navy); }
+  .component:nth-child(even) { border-left-color: var(--burgundy); }
+  .component__number {
+    position: absolute;
+    top: 18px;
+    right: 26px;
+    font-family: var(--serif);
+    font-size: 60px;
+    color: var(--rule);
+    font-weight: 600;
+    line-height: 1;
+  }
+  .component__name {
+    font-family: var(--serif);
+    font-size: 36px;
+    color: var(--navy);
+    margin: 0 0 6px;
+    font-weight: 600;
+  }
+  .component__hint {
+    color: var(--burgundy);
+    font-size: 17px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin: 0 0 12px;
+  }
+  .component__body {
+    font-size: 21px;
+    line-height: 1.45;
+    color: var(--navy);
+    margin: 0;
+  }
+  .component__example {
+    margin-top: 10px;
+    font-family: var(--mono);
+    font-size: 16px;
+    background: var(--white);
+    border: 1px solid var(--rule);
+    padding: 10px 14px;
+    color: var(--navy-soft);
+    border-radius: 3px;
+  }
+  .iteration-note {
+    grid-column: 1 / -1;
+    background: var(--navy);
+    color: var(--white);
+    padding: 24px 32px;
+    border-radius: 4px;
+    font-size: 22px;
+    line-height: 1.45;
+    margin-top: 8px;
+  }
+  .iteration-note strong {
+    color: #FFD8A8;
+    font-weight: 600;
+  }
+
+  /* ---------- Pillar slides (3–5) ---------- */
+  .pillar-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+    flex: 1;
+    margin-top: 16px;
+  }
+  .pillar-grid--three {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .pillar-card {
+    background: var(--paper);
+    border: 1px solid var(--rule);
+    border-top: 6px solid var(--accent, var(--navy));
+    border-radius: 4px;
+    padding: 26px 28px;
+    display: flex;
+    flex-direction: column;
+  }
+  .pillar-card__name {
+    font-family: var(--serif);
+    font-size: 30px;
+    color: var(--navy);
+    margin: 0 0 6px;
+    font-weight: 600;
+    line-height: 1.15;
+  }
+  .pillar-card__count {
+    font-family: var(--mono);
+    font-size: 14px;
+    color: var(--burgundy);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin: 0 0 14px;
+  }
+  .pillar-card ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .pillar-card li {
+    font-size: 19px;
+    line-height: 1.45;
+    color: var(--navy);
+    margin-bottom: 6px;
+    padding-left: 18px;
+    position: relative;
+  }
+  .pillar-card li:before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 12px;
+    width: 8px;
+    height: 8px;
+    background: var(--accent, var(--navy));
+    border-radius: 50%;
+  }
+  /* Per-pillar accent colors */
+  .slide--pillar-1 .pillar-card { --accent: var(--pillar-1); }
+  .slide--pillar-2 .pillar-card { --accent: var(--pillar-2); }
+  .slide--pillar-3 .pillar-card { --accent: var(--pillar-3); }
+
+  .slide--pillar-1 .slide__title { color: var(--pillar-1); }
+  .slide--pillar-2 .slide__title { color: var(--pillar-2); }
+  .slide--pillar-3 .slide__title { color: var(--navy); }
+  .slide--pillar-1 .slide__rule { background: var(--pillar-1); }
+  .slide--pillar-2 .slide__rule { background: var(--pillar-2); }
+  .slide--pillar-3 .slide__rule { background: var(--pillar-3); }
+
+  .pillar-tag {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 28px;
+    color: var(--navy-soft);
+    margin: 6px 0 28px;
+    max-width: 1500px;
+    line-height: 1.4;
+  }
+
+  /* ---------- Print to PDF ---------- */
+  @media print {
+    body { background: white; }
+    .slide {
+      margin: 0;
+      box-shadow: none;
+      page-break-after: always;
+    }
+  }
+
+  /* ---------- On-screen scaling preview ---------- */
+  @media screen and (max-width: 2000px) {
+    body { padding: 16px 0; }
+  }
+</style>
+</head>
+<body>
+
+  <!-- ==================================================================== -->
+  <!-- Slide 1: The Digital Companion + QR -->
+  <!-- ==================================================================== -->
+  <section class="slide">
+    <p class="slide__eyebrow">Your workshop companion</p>
+    <h1 class="slide__title">The Digital Companion</h1>
+    <p class="slide__subtitle">A curated prompt library you can keep using long after the session ends</p>
+    <div class="slide__rule"></div>
+
+    <div class="companion">
+      <div>
+        <p class="companion__intro">
+          Every prompt I'll demo today &mdash; plus 80 more &mdash; lives in this companion site.
+          Scan the QR, sign in once, and return to the library whenever you need it.
+        </p>
+
+        <div class="features">
+          <div class="feature">
+            <div class="feature__bullet">1</div>
+            <div class="feature__text">
+              <strong>88 curated prompts</strong> across three pillars
+              <span class="meta">Each with intent, expected output, failure modes, and human verification step</span>
+            </div>
+          </div>
+          <div class="feature">
+            <div class="feature__bullet">2</div>
+            <div class="feature__text">
+              <strong>How-to tutorials</strong>
+              <span class="meta">Including a comprehensive guide on writing good prompts &mdash; usable as a teaching session</span>
+            </div>
+          </div>
+          <div class="feature">
+            <div class="feature__bullet">3</div>
+            <div class="feature__text">
+              <strong>Worked examples</strong>
+              <span class="meta">Full transcripts of real chains in practice &mdash; not just the prompt, but the whole session</span>
+            </div>
+          </div>
+          <div class="feature">
+            <div class="feature__bullet">4</div>
+            <div class="feature__text">
+              <strong>Source-grounded AI guides</strong>
+              <span class="meta">NotebookLM vs. Claude Projects, privacy, copyright, grounding verification</span>
+            </div>
+          </div>
+          <div class="feature">
+            <div class="feature__bullet">5</div>
+            <div class="feature__text">
+              <strong>Submit your own prompt</strong>
+              <span class="meta">Community contributions reviewed and credited &mdash; library grows with use</span>
+            </div>
+          </div>
+          <div class="feature">
+            <div class="feature__bullet">6</div>
+            <div class="feature__text">
+              <strong>Comments &amp; upvotes</strong>
+              <span class="meta">See what other pathology educators have found valuable; share your own variants</span>
+            </div>
+          </div>
+          <div class="feature">
+            <div class="feature__bullet">7</div>
+            <div class="feature__text">
+              <strong>Floating feedback button</strong>
+              <span class="meta">Spotted a bug or want to suggest something? One click sends it straight to me</span>
+            </div>
+          </div>
+          <div class="feature">
+            <div class="feature__bullet">8</div>
+            <div class="feature__text">
+              <strong>Privacy-first design</strong>
+              <span class="meta">Append-only access log, no tracking pixels, no third-party analytics</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <aside class="qr-card">
+        <img src="../assets/img/companion-qr.png" alt="QR code linking to the companion library">
+        <p class="qr-card__label">Scan to enter</p>
+        <p class="qr-card__url">omarzbaba.github.io/<br>AI_Pathology_Education</p>
+        <p class="qr-card__cta">Sign in once with your name + email<br>
+          <span class="qr-card__cta-sub">Future visits restore automatically &mdash; even on new devices, with just your email.</span>
+        </p>
+      </aside>
+    </div>
+
+    <footer class="slide__footer">
+      <span><strong>Omar Z. Baba, MD</strong> &middot; Henry Ford Health &middot; API Summit 2026</span>
+      <span class="slide__page">1 / 5</span>
+    </footer>
+  </section>
+
+
+  <!-- ==================================================================== -->
+  <!-- Slide 2: How to write a good prompt -->
+  <!-- ==================================================================== -->
+  <section class="slide">
+    <p class="slide__eyebrow">Practical foundations</p>
+    <h1 class="slide__title">What a good prompt looks like</h1>
+    <p class="slide__subtitle">Five components &mdash; skip any one and the model fills the gap with guesses</p>
+    <div class="slide__rule"></div>
+
+    <div class="prompt-frame">
+      <p class="prompt-frame__lede">
+        Most disappointing AI answers come from prompts missing one of these five. Add them
+        all and you usually get a usable answer in one or two tries.
+      </p>
+
+      <div class="component">
+        <span class="component__number">1</span>
+        <p class="component__hint">Who is the model</p>
+        <p class="component__name">Role</p>
+        <p class="component__body">Set the model's voice and frame of reference. Not decoration &mdash; it changes the texture of the output.</p>
+        <div class="component__example">"Act as an experienced hematopathology attending teaching a PGY-2…"</div>
+      </div>
+
+      <div class="component">
+        <span class="component__number">2</span>
+        <p class="component__hint">What it can't infer</p>
+        <p class="component__name">Context</p>
+        <p class="component__body">Give what changes the answer &mdash; institution, learner level, specific scenario. Don't bloat with what's already known.</p>
+        <div class="component__example">"PGY-2 in their first month of blood bank, two days of didactics…"</div>
+      </div>
+
+      <div class="component">
+        <span class="component__number">3</span>
+        <p class="component__hint">What you want</p>
+        <p class="component__name">Task</p>
+        <p class="component__body">A verb plus a clear deliverable. Number multi-part tasks. "Explain MGUS" is a topic; "explain in three layers…" is a task.</p>
+        <div class="component__example">"Explain in three layers: 1-sentence, mechanistic, nuanced."</div>
+      </div>
+
+      <div class="component">
+        <span class="component__number">4</span>
+        <p class="component__hint">Shape of the answer</p>
+        <p class="component__name">Format</p>
+        <p class="component__body">Length, structure, named sections. Highest-leverage addition to a weak prompt &mdash; vague topic + specific format often works.</p>
+        <div class="component__example">"Three paragraphs, layer name at the start of each, 3-5 sentences."</div>
+      </div>
+
+      <div class="component">
+        <span class="component__number">5</span>
+        <p class="component__hint">How it signals uncertainty</p>
+        <p class="component__name">Verification cue</p>
+        <p class="component__body">Most-skipped, most-regretted component. Without it, models produce fluent confidence whether they know or not.</p>
+        <div class="component__example">"Flag any numerical threshold I should verify against current IMWG criteria."</div>
+      </div>
+
+      <div class="iteration-note">
+        <strong>Iterate in three rounds, not one.</strong> Draft &mdash; observe &mdash; refine. The diagnosis step
+        (round 2 to round 3) is where the learning happens. The third version is usually the one worth saving.
+      </div>
+    </div>
+
+    <footer class="slide__footer">
+      <span><strong>Omar Z. Baba, MD</strong> &middot; Henry Ford Health &middot; API Summit 2026</span>
+      <span class="slide__page">2 / 5</span>
+    </footer>
+  </section>
+
+
+  <!-- ==================================================================== -->
+  <!-- Slide 3: Pillar I — Self-Education -->
+  <!-- ==================================================================== -->
+  <section class="slide slide--pillar-1">
+    <p class="slide__eyebrow">Pillar I &middot; 33 prompts</p>
+    <h1 class="slide__title">Self-Education</h1>
+    <p class="pillar-tag">Using AI to learn pathology &mdash; concept work, drilling, paper critique, multimodal practice, source-grounded study.</p>
+    <div class="slide__rule"></div>
+
+    <div class="pillar-grid">
+
+      <div class="pillar-card">
+        <h3 class="pillar-card__name">Concept work</h3>
+        <p class="pillar-card__count">5 prompts</p>
+        <ul>
+          <li>Concept explanation calibrated to your level</li>
+          <li>Compare &amp; contrast adjacent entities</li>
+          <li>Guidelines in plain language</li>
+          <li>LIS / CP informatics review</li>
+          <li>Differential by histologic pattern</li>
+        </ul>
+      </div>
+
+      <div class="pillar-card">
+        <h3 class="pillar-card__name">Self-quizzing &amp; drilling</h3>
+        <p class="pillar-card__count">7 prompts</p>
+        <ul>
+          <li>One-at-a-time self-quiz (board-style)</li>
+          <li>MCQ generation with rationales</li>
+          <li>Anki flashcard generation</li>
+          <li>Board prep schedule</li>
+          <li>Question bank gap analysis</li>
+          <li>Reverse / forward / negative case drills</li>
+          <li>Diagnostic algorithm walkthrough</li>
+        </ul>
+      </div>
+
+      <div class="pillar-card">
+        <h3 class="pillar-card__name">Reading the literature</h3>
+        <p class="pillar-card__count">3 prompts</p>
+        <ul>
+          <li>Paper summarization (calibrated)</li>
+          <li>Paper methods critique</li>
+          <li>Journal club pre-read</li>
+        </ul>
+      </div>
+
+      <div class="pillar-card">
+        <h3 class="pillar-card__name">Multimodal &amp; lab</h3>
+        <p class="pillar-card__count">6 prompts</p>
+        <ul>
+          <li>Photomicrograph self-quiz</li>
+          <li>SPEP / IFE interpretation drill</li>
+          <li>IHC stain interpretation</li>
+          <li>Blood smear systematic review</li>
+          <li>Frozen section "thinking aloud"</li>
+          <li>Molecular result interpretation</li>
+        </ul>
+      </div>
+
+      <div class="pillar-card">
+        <h3 class="pillar-card__name">CP workflow</h3>
+        <p class="pillar-card__count">1 prompt</p>
+        <ul>
+          <li>Critical-value workflow drill</li>
+        </ul>
+      </div>
+
+      <div class="pillar-card">
+        <h3 class="pillar-card__name">Source-grounded AI</h3>
+        <p class="pillar-card__count">9 setup guides + variants</p>
+        <ul>
+          <li>Build a board-prep notebook</li>
+          <li>Build a sign-out preview notebook</li>
+          <li>Build a journal club notebook</li>
+          <li>Source-grounded concept explanation</li>
+          <li>Source-grounded self-quiz / MCQs</li>
+          <li>Knowledge-gap discovery from sources</li>
+          <li>Cross-source comparison drill</li>
+          <li>Paper critique against your corpus</li>
+        </ul>
+      </div>
+
+    </div>
+
+    <footer class="slide__footer">
+      <span><strong>Omar Z. Baba, MD</strong> &middot; Henry Ford Health &middot; API Summit 2026</span>
+      <span class="slide__page">3 / 5</span>
+    </footer>
+  </section>
+
+
+  <!-- ==================================================================== -->
+  <!-- Slide 4: Pillar II — Teaching -->
+  <!-- ==================================================================== -->
+  <section class="slide slide--pillar-2">
+    <p class="slide__eyebrow">Pillar II &middot; 21 prompts</p>
+    <h1 class="slide__title">Teaching</h1>
+    <p class="pillar-tag">Using AI to teach pathology &mdash; objectives, vignettes, lectures, feedback, discussion design, resident-as-teacher.</p>
+    <div class="slide__rule"></div>
+
+    <div class="pillar-grid pillar-grid--three">
+
+      <div class="pillar-card">
+        <h3 class="pillar-card__name">Objectives &amp; assessment</h3>
+        <p class="pillar-card__count">5 prompts</p>
+        <ul>
+          <li>ACGME / EPA-aligned learning objectives</li>
+          <li>Bloom-leveled MCQs</li>
+          <li>OSCE station design</li>
+          <li>Resident feedback note drafting</li>
+          <li>CCC narrative comment drafting</li>
+        </ul>
+      </div>
+
+      <div class="pillar-card">
+        <h3 class="pillar-card__name">Cases &amp; vignettes</h3>
+        <p class="pillar-card__count">2 prompts</p>
+        <ul>
+          <li>PGY-calibrated case vignettes</li>
+          <li>Matched case-pair distractors</li>
+        </ul>
+      </div>
+
+      <div class="pillar-card">
+        <h3 class="pillar-card__name">Lectures &amp; presentations</h3>
+        <p class="pillar-card__count">6 prompts</p>
+        <ul>
+          <li>One-hour slide outline</li>
+          <li>Speaker notes for existing slides</li>
+          <li>Visual metaphor brainstorm</li>
+          <li>Audience polling questions</li>
+          <li>Short teaching video script</li>
+          <li>Microscopy teaching session structure</li>
+        </ul>
+      </div>
+
+      <div class="pillar-card">
+        <h3 class="pillar-card__name">Written feedback &amp; narrative</h3>
+        <p class="pillar-card__count">2 prompts</p>
+        <ul>
+          <li>Letter-of-recommendation starting draft</li>
+          <li>Subspecialty rotation goals letter</li>
+        </ul>
+      </div>
+
+      <div class="pillar-card">
+        <h3 class="pillar-card__name">Discussion-based formats</h3>
+        <p class="pillar-card__count">3 prompts</p>
+        <ul>
+          <li>Journal club discussion questions</li>
+          <li>Tumor board presentation outline</li>
+          <li>Tumor board prep coaching</li>
+        </ul>
+      </div>
+
+      <div class="pillar-card">
+        <h3 class="pillar-card__name">Resident communication</h3>
+        <p class="pillar-card__count">3 prompts</p>
+        <ul>
+          <li>Sign-out teaching turn</li>
+          <li>Resident-as-teacher framework</li>
+          <li>Difficult feedback conversation prep</li>
+        </ul>
+      </div>
+
+    </div>
+
+    <footer class="slide__footer">
+      <span><strong>Omar Z. Baba, MD</strong> &middot; Henry Ford Health &middot; API Summit 2026</span>
+      <span class="slide__page">4 / 5</span>
+    </footer>
+  </section>
+
+
+  <!-- ==================================================================== -->
+  <!-- Slide 5: Pillar III — Educational Operations -->
+  <!-- ==================================================================== -->
+  <section class="slide slide--pillar-3">
+    <p class="slide__eyebrow">Pillar III &middot; 34 prompts</p>
+    <h1 class="slide__title">Educational Operations</h1>
+    <p class="pillar-tag">Using AI to produce the artifacts around teaching events &mdash; workshops, rotations, courses, conferences, journal clubs.</p>
+    <div class="slide__rule"></div>
+
+    <div class="pillar-grid">
+
+      <div class="pillar-card">
+        <h3 class="pillar-card__name">Workshops</h3>
+        <p class="pillar-card__count">10 prompts</p>
+        <ul>
+          <li>Announcement &amp; registration page</li>
+          <li>Pre-workshop survey</li>
+          <li>Facilitator run-of-show</li>
+          <li>Station-by-station guide</li>
+          <li>Badge design spec</li>
+          <li>Access-card layout</li>
+          <li>Certificate of completion</li>
+          <li>Faculty feedback summary</li>
+          <li>Post-workshop thank-you</li>
+          <li>Lab incident debrief</li>
+        </ul>
+      </div>
+
+      <div class="pillar-card">
+        <h3 class="pillar-card__name">Rotations</h3>
+        <p class="pillar-card__count">10 prompts</p>
+        <ul>
+          <li>Orientation one-pager</li>
+          <li>Expectations document</li>
+          <li>Reading list (PGY-calibrated)</li>
+          <li>Daily / call / block schedules</li>
+          <li>Evaluation rubric</li>
+          <li>Mid-rotation feedback template</li>
+          <li>End-of-rotation evaluation</li>
+          <li>Resident-to-resident handoff</li>
+        </ul>
+      </div>
+
+      <div class="pillar-card">
+        <h3 class="pillar-card__name">Courses</h3>
+        <p class="pillar-card__count">7 prompts</p>
+        <ul>
+          <li>Syllabus draft</li>
+          <li>Weekly module packet</li>
+          <li>Assignment grading rubric</li>
+          <li>Feedback collection form</li>
+          <li>Course post-mortem</li>
+          <li>IRB / QI protocol skeleton</li>
+          <li>Promotion portfolio narrative</li>
+        </ul>
+      </div>
+
+      <div class="pillar-card">
+        <h3 class="pillar-card__name">Conferences &amp; journal clubs</h3>
+        <p class="pillar-card__count">7 prompts</p>
+        <ul>
+          <li>Conference schedule planner</li>
+          <li>Grand rounds speaker prep</li>
+          <li>Visiting professor invitation</li>
+          <li>Tumor board case packet</li>
+          <li>Journal club packet</li>
+          <li>Medical education abstract</li>
+          <li>Q&amp;A prep doc</li>
+        </ul>
+      </div>
+
+    </div>
+
+    <footer class="slide__footer">
+      <span><strong>Omar Z. Baba, MD</strong> &middot; Henry Ford Health &middot; API Summit 2026</span>
+      <span class="slide__page">5 / 5</span>
+    </footer>
+  </section>
+
+</body>
+</html>

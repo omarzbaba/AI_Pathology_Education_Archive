@@ -1,6 +1,8 @@
 ---
 title: Your first 30 minutes with an LLM — a beginner's onboarding
 last_updated: 2026-05-18
+difficulty: beginner
+category: start
 ---
 
 This guide is for the pathologist who has heard of ChatGPT, maybe seen a colleague use it, but has not actually typed anything into one of these tools on purpose. The goal is to turn "I should probably try AI someday" into "I've used AI, with intent, and I know what to do next."

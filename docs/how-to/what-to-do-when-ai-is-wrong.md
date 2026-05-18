@@ -1,6 +1,8 @@
 ---
 title: What to do when the AI is wrong — a critical-reading skill
 last_updated: 2026-05-18
+difficulty: intermediate
+category: reading
 ---
 
 The companion to *How to write a good prompt* is *how to read what comes back*. The model will be wrong. Sometimes obviously; more dangerously, often subtly, in ways the response itself does not signal. The discipline of catching these errors and responding to them is the single skill that separates a productive AI user from a hazardous one.

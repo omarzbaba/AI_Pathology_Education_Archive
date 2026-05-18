@@ -66,7 +66,7 @@ exports.onCommentCreated = onDocumentCreated(
       const promptUrl = SITE_URL + "/library.html#/" + c.prompt_path;
       const adminUrl = SITE_URL + "/admin.html";
 
-      await resend.emails.send({
+      const _r = await resend.emails.send({
         from: RESEND_FROM,
         to: ADMIN_EMAIL,
         subject: "[Companion] New comment from " + (c.commenter_name || "unknown"),
@@ -82,7 +82,8 @@ exports.onCommentCreated = onDocumentCreated(
           <p><a href="${escapeHtml(adminUrl)}">Open admin dashboard &rarr;</a></p>
         `
       });
-      logger.info("Comment notification sent for", event.params.commentId);
+      if (_r && _r.error) throw new Error("Resend rejected: " + JSON.stringify(_r.error));
+      logger.info("Comment notification sent for", event.params.commentId, "id:", _r && _r.data && _r.data.id);
     } catch (err) {
       logger.error("Failed to send comment notification:", err);
     }
@@ -101,7 +102,7 @@ exports.onSubmissionCreated = onDocumentCreated(
       const resend = getResend();
       const adminUrl = SITE_URL + "/admin.html";
 
-      await resend.emails.send({
+      const _r = await resend.emails.send({
         from: RESEND_FROM,
         to: ADMIN_EMAIL,
         subject: "[Companion] New prompt submission: " + (s.prompt_title || "untitled"),
@@ -117,7 +118,8 @@ exports.onSubmissionCreated = onDocumentCreated(
           <p><a href="${escapeHtml(adminUrl)}">Open admin dashboard to review &rarr;</a></p>
         `
       });
-      logger.info("Submission notification sent for", event.params.subId);
+      if (_r && _r.error) throw new Error("Resend rejected: " + JSON.stringify(_r.error));
+      logger.info("Submission notification sent for", event.params.subId, "id:", _r && _r.data && _r.data.id);
     } catch (err) {
       logger.error("Failed to send submission notification:", err);
     }
@@ -139,7 +141,7 @@ exports.onFeedbackCreated = onDocumentCreated(
         ? escapeHtml(f.submitter_name || "(no name)") + (f.submitter_email ? " &lt;" + escapeHtml(f.submitter_email) + "&gt;" : "")
         : "<em>Anonymous</em>";
 
-      await resend.emails.send({
+      const _r = await resend.emails.send({
         from: RESEND_FROM,
         to: ADMIN_EMAIL,
         replyTo: f.submitter_email || undefined,
@@ -155,7 +157,8 @@ exports.onFeedbackCreated = onDocumentCreated(
           <p><a href="${escapeHtml(adminUrl)}">Open admin dashboard &rarr;</a></p>
         `
       });
-      logger.info("Feedback notification sent for", event.params.fbId);
+      if (_r && _r.error) throw new Error("Resend rejected: " + JSON.stringify(_r.error));
+      logger.info("Feedback notification sent for", event.params.fbId, "id:", _r && _r.data && _r.data.id);
     } catch (err) {
       logger.error("Failed to send feedback notification:", err);
     }
@@ -195,7 +198,7 @@ exports.onSubmissionStatusChanged = onDocumentUpdated(
 
     try {
       const resend = getResend();
-      await resend.emails.send({
+      const _r = await resend.emails.send({
         from: RESEND_FROM,
         to: after.submitter_email,
         subject: msg.subject + ": " + (after.prompt_title || "your submission"),
@@ -207,7 +210,8 @@ exports.onSubmissionStatusChanged = onDocumentUpdated(
           <p>— The AI in Pathology Education team</p>
         `
       });
-      logger.info("Status notification sent to submitter:", after.submitter_email, "status:", after.status);
+      if (_r && _r.error) throw new Error("Resend rejected: " + JSON.stringify(_r.error));
+      logger.info("Status notification sent to submitter:", after.submitter_email, "status:", after.status, "id:", _r && _r.data && _r.data.id);
     } catch (err) {
       logger.error("Failed to send status notification:", err);
     }

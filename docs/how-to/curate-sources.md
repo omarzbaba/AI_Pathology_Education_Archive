@@ -1,6 +1,8 @@
 ---
 title: Source curation principles for AI notebooks
 last_updated: 2026-05-18
+difficulty: intermediate
+category: source-grounded
 ---
 
 Principles for choosing what to upload to your AI notebook. The discipline that distinguishes a useful notebook from a noisy one: every source should earn its place. **Curation is the work.**

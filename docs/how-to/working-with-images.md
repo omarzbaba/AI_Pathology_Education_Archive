@@ -1,6 +1,8 @@
 ---
 title: Working with images — multimodal AI for pathology
 last_updated: 2026-05-18
+difficulty: intermediate
+category: sessions
 ---
 
 Pathology is a visual specialty. We work in photomicrographs, gross images, gel images, immunofluorescence patterns, electrophoresis traces, flow plots, gating diagrams. The current generation of AI tools can ingest images directly — you upload a JPG or PNG, the model "sees" it and responds in words.

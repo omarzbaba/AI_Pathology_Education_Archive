@@ -1,0 +1,1088 @@
+[
+  {
+    "type": "prompt",
+    "title": "Concept explanation at level",
+    "path": "library/pillar-1-self-education/prompts/concept-explanation-at-level",
+    "snippet": "Get a pathology concept explained in three layers calibrated to your specific gap — not a textbook dump and not a \"for dummies\" version. The output meets…",
+    "pillar": "pillar-1-self-education",
+    "section": "Concept work",
+    "tags": "concepts, scaffolding",
+    "difficulty": "intermediate"
+  },
+  {
+    "type": "prompt",
+    "title": "Compare and contrast",
+    "path": "library/pillar-1-self-education/prompts/compare-contrast",
+    "snippet": "Produces a focused side-by-side comparison of two entities you confuse, organized around the *discriminating* features that actually separate them — not a…",
+    "pillar": "pillar-1-self-education",
+    "section": "Concept work",
+    "tags": "differential, entity-comparison",
+    "difficulty": "intermediate"
+  },
+  {
+    "type": "prompt",
+    "title": "Guideline plain-language translation",
+    "path": "library/pillar-1-self-education/prompts/guideline-plain-language",
+    "snippet": "Translates published guideline recommendations into plain language at a target reading level while **preserving every qualifier, conditional, and…",
+    "pillar": "pillar-1-self-education",
+    "section": "Concept work",
+    "tags": "guidelines, plain-language",
+    "difficulty": "quick-win"
+  },
+  {
+    "type": "prompt",
+    "title": "LIS / informatics concept review",
+    "path": "library/pillar-1-self-education/prompts/lis-informatics-review",
+    "snippet": "Bridges the vocabulary gap between clinical pathologists and informatics. You name a concept (HL7 segments, FHIR resources, middleware autoverification,…",
+    "pillar": "pillar-1-self-education",
+    "section": "Concept work",
+    "tags": "informatics, lis, standards",
+    "difficulty": "intermediate"
+  },
+  {
+    "type": "prompt",
+    "title": "Self-quiz one at a time",
+    "path": "library/pillar-1-self-education/prompts/self-quiz-one-at-a-time",
+    "snippet": "Drills you with one question at a time, with the model adapting the next question based on what you got wrong. The *interaction structure* matters as much…",
+    "pillar": "pillar-1-self-education",
+    "section": "Self-quizzing",
+    "tags": "self-assessment, drilling, interactive",
+    "difficulty": "quick-win"
+  },
+  {
+    "type": "prompt",
+    "title": "MCQ generation with rationales",
+    "path": "library/pillar-1-self-education/prompts/mcq-generation-with-rationales",
+    "snippet": "Generates board-style MCQs with detailed rationales for **every** answer choice — not just the correct one. The rationales for incorrect choices are the…",
+    "pillar": "pillar-1-self-education",
+    "section": "Self-quizzing",
+    "tags": "mcq, board-prep, question-writing",
+    "difficulty": "intermediate"
+  },
+  {
+    "type": "prompt",
+    "title": "Anki flashcard generation",
+    "path": "library/pillar-1-self-education/prompts/anki-flashcards",
+    "snippet": "Converts a topic, paper, set of notes, or lecture into Anki-import-ready flashcards in tab-separated format. The prompt enforces *atomic* cards (one fact…",
+    "pillar": "pillar-1-self-education",
+    "section": "Self-quizzing",
+    "tags": "spaced-repetition, anki",
+    "difficulty": "quick-win"
+  },
+  {
+    "type": "prompt",
+    "title": "Board prep schedule",
+    "path": "library/pillar-1-self-education/prompts/board-prep-schedule",
+    "snippet": "Generates a personalized board prep schedule that adapts to your actual constraints (weeks remaining, daily hours available, strongest/weakest…",
+    "pillar": "pillar-1-self-education",
+    "section": "Self-quizzing",
+    "tags": "planning, board-prep",
+    "difficulty": "quick-win"
+  },
+  {
+    "type": "prompt",
+    "title": "Question bank gap analysis",
+    "path": "library/pillar-1-self-education/prompts/question-bank-gap-analysis",
+    "snippet": "Takes a list of qbank questions you've missed and identifies the underlying *concept gaps* — not the surface-level facts you didn't know, but the recurring…",
+    "pillar": "pillar-1-self-education",
+    "section": "Self-quizzing",
+    "tags": "board-prep, gap-analysis, metacognition",
+    "difficulty": "intermediate"
+  },
+  {
+    "type": "prompt",
+    "title": "Diagnostic algorithm walkthrough",
+    "path": "library/pillar-1-self-education/prompts/diagnostic-algorithm-walkthrough",
+    "snippet": "Walks through a published diagnostic algorithm step by step — not just naming what happens at each decision point but explaining *why* the question is being…",
+    "pillar": "pillar-1-self-education",
+    "section": "Case-based drilling",
+    "tags": "algorithm, diagnostic-workup, guidelines",
+    "difficulty": "intermediate"
+  },
+  {
+    "type": "prompt",
+    "title": "Reverse case drill — findings to diagnosis",
+    "path": "library/pillar-1-self-education/prompts/reverse-case-drill",
+    "snippet": "You provide a set of findings from a case (anonymized, no PHI). The model works the case in reverse — from findings alone, walking through the differential,…",
+    "pillar": "pillar-1-self-education",
+    "section": "Case-based drilling",
+    "tags": "case-based, drilling, reasoning",
+    "difficulty": "advanced"
+  },
+  {
+    "type": "prompt",
+    "title": "Forward case drill — diagnosis to expected findings",
+    "path": "library/pillar-1-self-education/prompts/forward-case-drill",
+    "snippet": "Reverses the usual study direction: instead of given-findings-name-diagnosis, you name a diagnosis and the model generates the full constellation of…",
+    "pillar": "pillar-1-self-education",
+    "section": "Case-based drilling",
+    "tags": "case-based, drilling, expected-findings",
+    "difficulty": "intermediate"
+  },
+  {
+    "type": "prompt",
+    "title": "Negative drill — what would change the diagnosis",
+    "path": "library/pillar-1-self-education/prompts/negative-drill",
+    "snippet": "Trains the habit of *disconfirmation*: take a working diagnosis you're confident in and ask the model to enumerate the findings or test results that would…",
+    "pillar": "pillar-1-self-education",
+    "section": "Case-based drilling",
+    "tags": "disconfirmation, counterfactual-reasoning",
+    "difficulty": "advanced"
+  },
+  {
+    "type": "prompt",
+    "title": "Differential by histologic pattern",
+    "path": "library/pillar-1-self-education/prompts/differential-by-histologic-pattern",
+    "snippet": "You describe a histologic pattern (small round blue cells in a child, spindle cell tumor of the dermis, granulomatous inflammation in lung), and the model…",
+    "pillar": "pillar-1-self-education",
+    "section": "Case-based drilling",
+    "tags": "differential, morphology, pattern-recognition",
+    "difficulty": "intermediate"
+  },
+  {
+    "type": "prompt",
+    "title": "Frozen section thinking-out-loud drill",
+    "path": "library/pillar-1-self-education/prompts/frozen-section-thinking-aloud",
+    "snippet": "Simulates frozen section decision-making under time pressure, including the meta-cognitive challenge: what to say to the surgeon when you're uncertain, when…",
+    "pillar": "pillar-1-self-education",
+    "section": "Case-based drilling",
+    "tags": "frozen-section, time-pressure, decision-making",
+    "difficulty": "advanced"
+  },
+  {
+    "type": "prompt",
+    "title": "Paper summarization",
+    "path": "library/pillar-1-self-education/prompts/paper-summarization",
+    "snippet": "Generates a structured paper summary covering question / design / headline finding / most important limitation / would-this-change-practice / attending Q&A…",
+    "pillar": "pillar-1-self-education",
+    "section": "Reading the literature",
+    "tags": "literature, summarization, triage",
+    "difficulty": "quick-win"
+  },
+  {
+    "type": "prompt",
+    "title": "Paper methods critique",
+    "path": "library/pillar-1-self-education/prompts/paper-methods-critique",
+    "snippet": "Generates a structured methodology critique using the appropriate reporting guideline as the framework (CONSORT for RCTs, STROBE for observational, STARD…",
+    "pillar": "pillar-1-self-education",
+    "section": "Reading the literature",
+    "tags": "literature, critical-appraisal, methods",
+    "difficulty": "advanced"
+  },
+  {
+    "type": "prompt",
+    "title": "Journal club pre-read prep",
+    "path": "library/pillar-1-self-education/prompts/journal-club-preread",
+    "snippet": "Generates a one-page pre-read for a journal club paper that attendees can actually use to arrive prepared. Includes background context, study summary with…",
+    "pillar": "pillar-1-self-education",
+    "section": "Reading the literature",
+    "tags": "journal-club, preparation, literature",
+    "difficulty": "quick-win"
+  },
+  {
+    "type": "prompt",
+    "title": "Photomicrograph description practice",
+    "path": "library/pillar-1-self-education/prompts/multimodal-photomicrograph",
+    "snippet": "Builds your morphologic description discipline using a published teaching image. You upload an image, the model describes what it sees and offers a…",
+    "pillar": "pillar-1-self-education",
+    "section": "Multimodal & lab",
+    "tags": "multimodal, morphology, image-analysis, safety-critical",
+    "difficulty": "advanced"
+  },
+  {
+    "type": "prompt",
+    "title": "SPEP / IFE trace interpretation walkthrough",
+    "path": "library/pillar-1-self-education/prompts/multimodal-spep-ife",
+    "snippet": "Walks through SPEP or IFE interpretation as a guided drill — you commit at each step before the model reveals what it sees. Builds the regional reading…",
+    "pillar": "pillar-1-self-education",
+    "section": "Multimodal & lab",
+    "tags": "multimodal, spep, ife, paraprotein",
+    "difficulty": "advanced"
+  },
+  {
+    "type": "prompt",
+    "title": "IHC stain interpretation walkthrough",
+    "path": "library/pillar-1-self-education/prompts/ihc-stain-interpretation",
+    "snippet": "Walks through interpretation of an IHC stain image or panel result, building the discipline of *describe the staining pattern → interpret the pattern →…",
+    "pillar": "pillar-1-self-education",
+    "section": "Multimodal & lab",
+    "tags": "ihc, immunohistochemistry, stain-interpretation",
+    "difficulty": "advanced"
+  },
+  {
+    "type": "prompt",
+    "title": "Blood smear systematic review walkthrough",
+    "path": "library/pillar-1-self-education/prompts/blood-smear-systematic-review",
+    "snippet": "Builds the habit of reading a peripheral blood smear systematically — RBCs, WBCs, platelets, in that order, with specific observations at each magnification…",
+    "pillar": "pillar-1-self-education",
+    "section": "Multimodal & lab",
+    "tags": "blood-smear, hematology, systematic-review, multimodal",
+    "difficulty": "intermediate"
+  },
+  {
+    "type": "prompt",
+    "title": "Molecular result interpretation drill",
+    "path": "library/pillar-1-self-education/prompts/molecular-result-interpretation",
+    "snippet": "Walks through interpretation of a molecular result (single variant, fusion, copy number alteration, MSI/TMB result, or NGS panel) by drilling the four-step…",
+    "pillar": "pillar-1-self-education",
+    "section": "Molecular & CP workflow",
+    "tags": "molecular, ngs, variant-interpretation, classification",
+    "difficulty": "advanced"
+  },
+  {
+    "type": "prompt",
+    "title": "Critical value workflow drill",
+    "path": "library/pillar-1-self-education/prompts/critical-value-workflow",
+    "snippet": "Drill the complete critical value workflow for a given result: confirm the value is real, identify and notify the right provider, document the call, follow…",
+    "pillar": "pillar-1-self-education",
+    "section": "Molecular & CP workflow",
+    "tags": "critical-values, lab-workflow, cp, notification",
+    "difficulty": "intermediate"
+  },
+  {
+    "type": "prompt",
+    "title": "Build a board prep notebook",
+    "path": "library/pillar-1-self-education/prompts/sg-board-prep-notebook",
+    "snippet": "Step-by-step setup for a board prep notebook (NotebookLM or Claude Projects) that becomes your study companion for the months leading up to RISE, ABPath, or…",
+    "pillar": "pillar-1-self-education",
+    "section": "Source-grounded AI (NotebookLM & Claude Projects)",
+    "tags": "source-grounded, board-prep, notebooklm, claude-projects",
+    "difficulty": "intermediate"
+  },
+  {
+    "type": "prompt",
+    "title": "Build a sign-out preview notebook",
+    "path": "library/pillar-1-self-education/prompts/sg-signout-notebook",
+    "snippet": "Sets up a subspecialty-specific notebook for the rotation you're on right now. Becomes your \"preview before sign-out\" tool — you load yesterday's cases…",
+    "pillar": "pillar-1-self-education",
+    "section": "Source-grounded AI (NotebookLM & Claude Projects)",
+    "tags": "source-grounded, sign-out, rotation, notebooklm, claude-projects",
+    "difficulty": "intermediate"
+  },
+  {
+    "type": "prompt",
+    "title": "Build a journal club notebook",
+    "path": "library/pillar-1-self-education/prompts/sg-journal-club-notebook",
+    "snippet": "Sets up a journal-club-specific notebook containing the paper you're presenting plus 5-10 related papers, so you can discuss your paper in deep context —…",
+    "pillar": "pillar-1-self-education",
+    "section": "Source-grounded AI (NotebookLM & Claude Projects)",
+    "tags": "source-grounded, journal-club, notebooklm, claude-projects, literature",
+    "difficulty": "intermediate"
+  },
+  {
+    "type": "prompt",
+    "title": "Source-grounded concept explanation",
+    "path": "library/pillar-1-self-education/prompts/sg-concept-explanation-sourced",
+    "snippet": "The source-grounded version of [Concept explanation at level](library.html#/library/pillar-1-self-education/prompts/concept-explanation-at-level). Anchors…",
+    "pillar": "pillar-1-self-education",
+    "section": "Source-grounded AI (NotebookLM & Claude Projects)",
+    "tags": "source-grounded, concept, citation-required",
+    "difficulty": "intermediate"
+  },
+  {
+    "type": "prompt",
+    "title": "Source-grounded self-quiz from notebook material",
+    "path": "library/pillar-1-self-education/prompts/sg-self-quiz-sourced",
+    "snippet": "The source-grounded version of [Self-quiz one at a time](library.html#/library/pillar-1-self-education/prompts/self-quiz-one-at-a-time). Drills you with…",
+    "pillar": "pillar-1-self-education",
+    "section": "Source-grounded AI (NotebookLM & Claude Projects)",
+    "tags": "source-grounded, self-quiz, drilling",
+    "difficulty": "quick-win"
+  },
+  {
+    "type": "prompt",
+    "title": "Source-grounded MCQ generation",
+    "path": "library/pillar-1-self-education/prompts/sg-mcq-generation-sourced",
+    "snippet": "The source-grounded version of [MCQ generation with rationales](library.html#/library/pillar-1-self-education/prompts/mcq-generation-with-rationales).…",
+    "pillar": "pillar-1-self-education",
+    "section": "Source-grounded AI (NotebookLM & Claude Projects)",
+    "tags": "source-grounded, mcq, board-prep",
+    "difficulty": "intermediate"
+  },
+  {
+    "type": "prompt",
+    "title": "Knowledge gap discovery from uploaded sources",
+    "path": "library/pillar-1-self-education/prompts/sg-knowledge-gap-discovery",
+    "snippet": "Asks the notebook to surface YOUR knowledge gaps relative to YOUR uploaded study material — through an adaptive quiz that progressively narrows on weak…",
+    "pillar": "pillar-1-self-education",
+    "section": "Source-grounded AI (NotebookLM & Claude Projects)",
+    "tags": "source-grounded, gap-discovery, study-planning",
+    "difficulty": "intermediate"
+  },
+  {
+    "type": "prompt",
+    "title": "Source-grounded paper critique against your corpus",
+    "path": "library/pillar-1-self-education/prompts/sg-paper-critique-against-corpus",
+    "snippet": "Critiques a paper against the broader literature in your notebook — not against the model's general training. Surfaces where this paper agrees with,…",
+    "pillar": "pillar-1-self-education",
+    "section": "Source-grounded AI (NotebookLM & Claude Projects)",
+    "tags": "source-grounded, paper-critique, cross-source-comparison",
+    "difficulty": "advanced"
+  },
+  {
+    "type": "prompt",
+    "title": "Cross-source comparison drill",
+    "path": "library/pillar-1-self-education/prompts/sg-cross-source-comparison",
+    "snippet": "Asks the notebook to compare how multiple uploaded sources address the same topic — surfacing discrepancies, definitional differences, and version drift…",
+    "pillar": "pillar-1-self-education",
+    "section": "Source-grounded AI (NotebookLM & Claude Projects)",
+    "tags": "source-grounded, comparison, discrepancy-detection",
+    "difficulty": "intermediate"
+  },
+  {
+    "type": "prompt",
+    "title": "ACGME / EPA learning objective generation",
+    "path": "library/pillar-2-teaching/prompts/acgme-epa-objectives",
+    "snippet": "Generates learning objectives in the format your CCC and program leadership expect: measurable verbs, conditions, criteria, and an explicit map to a…",
+    "pillar": "pillar-2-teaching",
+    "section": "Learning objectives & assessment",
+    "tags": "learning-objectives, acgme, epa, assessment",
+    "difficulty": "intermediate"
+  },
+  {
+    "type": "prompt",
+    "title": "Bloom's taxonomy MCQ generation",
+    "path": "library/pillar-2-teaching/prompts/blooms-mcq",
+    "snippet": "Generates MCQs at specified Bloom's taxonomy levels — Application, Analysis, Evaluation — with rationales calibrated to the cognitive task each question…",
+    "pillar": "pillar-2-teaching",
+    "section": "Learning objectives & assessment",
+    "tags": "mcq, assessment, blooms, cognitive-level",
+    "difficulty": "intermediate"
+  },
+  {
+    "type": "prompt",
+    "title": "Case vignette at PGY level",
+    "path": "library/pillar-2-teaching/prompts/case-vignette-pgy",
+    "snippet": "Generates a case vignette calibrated to a specific PGY level, with the right complexity, the right amount of clinical context, and demographics that reflect…",
+    "pillar": "pillar-2-teaching",
+    "section": "Cases & vignettes",
+    "tags": "vignette, case-based, level-calibration",
+    "difficulty": "intermediate"
+  },
+  {
+    "type": "prompt",
+    "title": "Matched case pair — reactive vs neoplastic",
+    "path": "library/pillar-2-teaching/prompts/matched-case-pair",
+    "snippet": "Generates two case vignettes that share superficial features but diverge on a specific discriminating feature — the one you want to teach. The pair…",
+    "pillar": "pillar-2-teaching",
+    "section": "Cases & vignettes",
+    "tags": "vignette, differential, paired-cases",
+    "difficulty": "advanced"
+  },
+  {
+    "type": "prompt",
+    "title": "OSCE station drafting",
+    "path": "library/pillar-2-teaching/prompts/osce-station",
+    "snippet": "Drafts a complete OSCE station: examinee instructions, simulated-other-party script that handles real conversational variation, expected examinee actions…",
+    "pillar": "pillar-2-teaching",
+    "section": "Cases & vignettes",
+    "tags": "osce, assessment, simulation",
+    "difficulty": "advanced"
+  },
+  {
+    "type": "prompt",
+    "title": "Slide outline for a 1-hour lecture",
+    "path": "library/pillar-2-teaching/prompts/slide-outline-1hr",
+    "snippet": "Generates a slide outline for a 1-hour lecture: 35-45 slides, beat structure (hook → roadmap → 3-4 content beats → synthesis → Q&A), per-slide visuals,…",
+    "pillar": "pillar-2-teaching",
+    "section": "Lectures & presentations",
+    "tags": "lecture, slides, timing",
+    "difficulty": "intermediate"
+  },
+  {
+    "type": "prompt",
+    "title": "Speaker notes for existing slides",
+    "path": "library/pillar-2-teaching/prompts/speaker-notes",
+    "snippet": "Generates speaker notes for your existing slide deck: paste your slide titles + bullets, get back per-slide notes that expand bullets into spoken prose,…",
+    "pillar": "pillar-2-teaching",
+    "section": "Lectures & presentations",
+    "tags": "lecture, speaker-notes, spoken-voice",
+    "difficulty": "quick-win"
+  },
+  {
+    "type": "prompt",
+    "title": "Visual metaphor brainstorming",
+    "path": "library/pillar-2-teaching/prompts/visual-metaphor",
+    "snippet": "Generates 5-7 candidate visual metaphors for an abstract concept, with explicit precision-vs-accessibility tradeoffs scored for each. The point isn't to…",
+    "pillar": "pillar-2-teaching",
+    "section": "Lectures & presentations",
+    "tags": "teaching, metaphor, abstract-concepts",
+    "difficulty": "quick-win"
+  },
+  {
+    "type": "prompt",
+    "title": "Audience poll question generation",
+    "path": "library/pillar-2-teaching/prompts/audience-polls",
+    "snippet": "Generates audience poll questions for a live talk — designed for engagement and misconception-surfacing, not assessment. Each poll has a \"wrong\" answer that…",
+    "pillar": "pillar-2-teaching",
+    "section": "Lectures & presentations",
+    "tags": "polls, audience-engagement, live-teaching",
+    "difficulty": "quick-win"
+  },
+  {
+    "type": "prompt",
+    "title": "Video script and storyboard",
+    "path": "library/pillar-2-teaching/prompts/video-script",
+    "snippet": "Drafts a 2-column video script (narration / visuals) for a short educational explainer, with timed beats, specific visual cues, opening hook, and a single…",
+    "pillar": "pillar-2-teaching",
+    "section": "Lectures & presentations",
+    "tags": "video, scripting, storyboard",
+    "difficulty": "advanced"
+  },
+  {
+    "type": "prompt",
+    "title": "Microscopy teaching session design",
+    "path": "library/pillar-2-teaching/prompts/microscopy-teaching-session",
+    "snippet": "Designs a microscopy-anchored teaching session built around 6-10 images rather than slides of text. Generates per-image talking points, discussion…",
+    "pillar": "pillar-2-teaching",
+    "section": "Lectures & presentations",
+    "tags": "teaching, microscopy, image-based, session-design",
+    "difficulty": "intermediate"
+  },
+  {
+    "type": "prompt",
+    "title": "Resident feedback note drafting",
+    "path": "library/pillar-2-teaching/prompts/resident-feedback-note",
+    "snippet": "Converts your bullet observations from a rotation into a polished feedback note that residents will actually read and remember. Strict discipline: every…",
+    "pillar": "pillar-2-teaching",
+    "section": "Written feedback & narrative",
+    "tags": "feedback, narrative, evidence-based",
+    "difficulty": "intermediate"
+  },
+  {
+    "type": "prompt",
+    "title": "CCC narrative comment drafting",
+    "path": "library/pillar-2-teaching/prompts/ccc-narrative-comment",
+    "snippet": "Converts your bullet observations into a CCC narrative comment that defensibly maps evidence to milestone level. Strict discipline about not inflating…",
+    "pillar": "pillar-2-teaching",
+    "section": "Written feedback & narrative",
+    "tags": "ccc, narrative, milestone-evidence, high-stakes",
+    "difficulty": "intermediate"
+  },
+  {
+    "type": "prompt",
+    "title": "Letter of recommendation starting draft",
+    "path": "library/pillar-2-teaching/prompts/lor-starting-draft",
+    "snippet": "Produces a structured *scaffold* for a letter of recommendation — never a finished letter. The model holds the bones (paragraph structure, transition logic,…",
+    "pillar": "pillar-2-teaching",
+    "section": "Written feedback & narrative",
+    "tags": "lor, narrative, high-stakes",
+    "difficulty": "advanced"
+  },
+  {
+    "type": "prompt",
+    "title": "Difficult feedback conversation prep",
+    "path": "library/pillar-2-teaching/prompts/difficult-feedback-conversation-prep",
+    "snippet": "Preps you for a feedback conversation that's harder than usual — a struggling resident, a professionalism concern, performance below expectations, or a…",
+    "pillar": "pillar-2-teaching",
+    "section": "Written feedback & narrative",
+    "tags": "feedback, hard-conversation, professionalism",
+    "difficulty": "advanced"
+  },
+  {
+    "type": "prompt",
+    "title": "Journal club discussion questions",
+    "path": "library/pillar-2-teaching/prompts/journal-club-discussion-q",
+    "snippet": "Generates 5 discussion questions for journal club, ordered from concrete (methods, numbers) to abstract (implications, practice-change) and ending with one…",
+    "pillar": "pillar-2-teaching",
+    "section": "Discussion-based formats",
+    "tags": "journal-club, discussion, escalating-questions",
+    "difficulty": "quick-win"
+  },
+  {
+    "type": "prompt",
+    "title": "Tumor board case presentation template",
+    "path": "library/pillar-2-teaching/prompts/tumor-board-presentation",
+    "snippet": "Generates a tumor board case presentation outline that walks through history → imaging → pathology in the order the audience needs it, ends with an explicit…",
+    "pillar": "pillar-2-teaching",
+    "section": "Discussion-based formats",
+    "tags": "tumor-board, presentation, structured-format",
+    "difficulty": "intermediate"
+  },
+  {
+    "type": "prompt",
+    "title": "Resident-as-teacher scaffolding",
+    "path": "library/pillar-2-teaching/prompts/resident-as-teacher",
+    "snippet": "Scaffolds a teaching session for a resident who has been asked to teach — typically for the first time. Forces the resident to think about teaching as a…",
+    "pillar": "pillar-2-teaching",
+    "section": "Discussion-based formats",
+    "tags": "resident-as-teacher, scaffolding, teaching-skills",
+    "difficulty": "intermediate"
+  },
+  {
+    "type": "prompt",
+    "title": "Sign-out teaching turn",
+    "path": "library/pillar-2-teaching/prompts/sign-out-teaching-turn",
+    "snippet": "Converts a sign-out moment — a case that just came up, a finding that's worth pausing on, a question a resident asked — into a structured 3-5 minute…",
+    "pillar": "pillar-2-teaching",
+    "section": "Discussion-based formats",
+    "tags": "teaching, sign-out, capture-the-moment",
+    "difficulty": "quick-win"
+  },
+  {
+    "type": "prompt",
+    "title": "Tumor board prep coaching",
+    "path": "library/pillar-2-teaching/prompts/tumor-board-prep-coaching",
+    "snippet": "Coaches a resident who will present at tumor board. The model interviews them on the case, identifies where their presentation is weakest, and gives them…",
+    "pillar": "pillar-2-teaching",
+    "section": "Discussion-based formats",
+    "tags": "tumor-board, coaching, presentation-skills",
+    "difficulty": "intermediate"
+  },
+  {
+    "type": "prompt",
+    "title": "Sub-specialty rotation goals letter",
+    "path": "library/pillar-2-teaching/prompts/subspecialty-rotation-goals-letter",
+    "snippet": "Drafts the \"here's what I'd like to get out of this rotation\" letter or email that a resident sends to their incoming rotation director a week or two before…",
+    "pillar": "pillar-2-teaching",
+    "section": "Resident communication",
+    "tags": "rotation, goal-setting, communication",
+    "difficulty": "quick-win"
+  },
+  {
+    "type": "prompt",
+    "title": "Announcement and registration copy",
+    "path": "library/pillar-3-educational-operations/prompts/workshops/announcement-registration",
+    "snippet": "Drafts a workshop announcement that drives registration without overpromising — a 100-word promotional blurb, a full registration page, and a registration…",
+    "pillar": "pillar-3-educational-operations",
+    "section": "Workshops",
+    "tags": "marketing, copy, registration",
+    "difficulty": "quick-win"
+  },
+  {
+    "type": "prompt",
+    "title": "Pre-workshop survey design",
+    "path": "library/pillar-3-educational-operations/prompts/workshops/pre-workshop-survey",
+    "snippet": "Designs a pre-workshop survey that captures the data you actually need to calibrate the workshop, without burning attendee goodwill. Hard cap: under 3…",
+    "pillar": "pillar-3-educational-operations",
+    "section": "Workshops",
+    "tags": "survey, intake, attendee-calibration",
+    "difficulty": "quick-win"
+  },
+  {
+    "type": "prompt",
+    "title": "Day-of facilitator run-of-show",
+    "path": "library/pillar-3-educational-operations/prompts/workshops/facilitator-runofshow",
+    "snippet": "Generates the minute-by-minute facilitator run-of-show — the document the lead facilitator holds in their hand all day. Every block has a time range, owner,…",
+    "pillar": "pillar-3-educational-operations",
+    "section": "Workshops",
+    "tags": "operations, run-of-show, contingencies",
+    "difficulty": "intermediate"
+  },
+  {
+    "type": "prompt",
+    "title": "Station-by-station facilitator guide",
+    "path": "library/pillar-3-educational-operations/prompts/workshops/station-by-station-guide",
+    "snippet": "Generates per-station facilitator guides for a rotating-station workshop. Each station gets its own consistent-format guide: objectives, materials, setup,…",
+    "pillar": "pillar-3-educational-operations",
+    "section": "Workshops",
+    "tags": "station-guide, parallel-documents,rotating-stations",
+    "difficulty": "intermediate"
+  },
+  {
+    "type": "prompt",
+    "title": "Badge design specifications",
+    "path": "library/pillar-3-educational-operations/prompts/workshops/badge-design-spec",
+    "snippet": "Drafts a printable badge spec: dimensions, fields, font sizes (meeting WCAG accessibility minimums for name visibility), color palette, lanyard/holder type,…",
+    "pillar": "pillar-3-educational-operations",
+    "section": "Workshops",
+    "tags": "design, badges, accessibility",
+    "difficulty": "quick-win"
+  },
+  {
+    "type": "prompt",
+    "title": "Access card layout",
+    "path": "library/pillar-3-educational-operations/prompts/workshops/access-card-layout",
+    "snippet": "Specifies a printable access card (business card or keycard size) with a QR code linking to the companion site, attendee name, usage instructions, and…",
+    "pillar": "pillar-3-educational-operations",
+    "section": "Workshops",
+    "tags": "design, access-card, qr-code",
+    "difficulty": "quick-win"
+  },
+  {
+    "type": "prompt",
+    "title": "Certificate of completion template",
+    "path": "library/pillar-3-educational-operations/prompts/workshops/certificate-of-completion",
+    "snippet": "Drafts a certificate of completion template with attestation language, signature blocks, optional authentication elements (certificate number, QR code), and…",
+    "pillar": "pillar-3-educational-operations",
+    "section": "Workshops",
+    "tags": "design, certificates, accreditation",
+    "difficulty": "quick-win"
+  },
+  {
+    "type": "prompt",
+    "title": "Post-workshop thank-you email",
+    "path": "library/pillar-3-educational-operations/prompts/workshops/post-workshop-thank-you",
+    "snippet": "Drafts a post-workshop thank-you email under 200 words with links to materials, a feedback request, and a specific reference to a moment from the workshop.…",
+    "pillar": "pillar-3-educational-operations",
+    "section": "Workshops",
+    "tags": "comms, thank-you, follow-up",
+    "difficulty": "quick-win"
+  },
+  {
+    "type": "prompt",
+    "title": "Faculty feedback summary email",
+    "path": "library/pillar-3-educational-operations/prompts/workshops/faculty-feedback-summary",
+    "snippet": "Converts raw attendee feedback into a faculty debrief email organized by theme, ordered by frequency, with honest separation of signal vs noise and ranked…",
+    "pillar": "pillar-3-educational-operations",
+    "section": "Workshops",
+    "tags": "feedback, debrief, themes",
+    "difficulty": "intermediate"
+  },
+  {
+    "type": "prompt",
+    "title": "Lab incident debrief template",
+    "path": "library/pillar-3-educational-operations/prompts/workshops/lab-incident-debrief",
+    "snippet": "Generates a structured debrief template for when something has gone wrong in the lab — specimen lost, critical value missed, mis-identification,…",
+    "pillar": "pillar-3-educational-operations",
+    "section": "Workshops",
+    "tags": "incident, debrief, just-culture, quality",
+    "difficulty": "advanced"
+  },
+  {
+    "type": "prompt",
+    "title": "Rotation orientation one-pager",
+    "path": "library/pillar-3-educational-operations/prompts/rotations/orientation-onepager",
+    "snippet": "Generates a one-page rotation orientation that removes day-1 confusion. Ruthlessly prioritized — the one-page constraint is the value, forcing cuts to…",
+    "pillar": "pillar-3-educational-operations",
+    "section": "Rotations",
+    "tags": "orientation, onepager, day-one",
+    "difficulty": "quick-win"
+  },
+  {
+    "type": "prompt",
+    "title": "Rotation expectations document",
+    "path": "library/pillar-3-educational-operations/prompts/rotations/expectations-doc",
+    "snippet": "Generates a rotation expectations document mapping objectives to milestones, specifying daily/weekly responsibilities, defining the supervision model, and…",
+    "pillar": "pillar-3-educational-operations",
+    "section": "Rotations",
+    "tags": "expectations, syllabus, milestones",
+    "difficulty": "intermediate"
+  },
+  {
+    "type": "prompt",
+    "title": "Rotation reading list with rationale",
+    "path": "library/pillar-3-educational-operations/prompts/rotations/reading-list",
+    "snippet": "Generates a curated rotation reading list (8-15 items) with a one-sentence rationale per item, prioritized as Required / Strongly Recommended / Optional…",
+    "pillar": "pillar-3-educational-operations",
+    "section": "Rotations",
+    "tags": "reading-list, curation, references",
+    "difficulty": "intermediate"
+  },
+  {
+    "type": "prompt",
+    "title": "Daily schedule template",
+    "path": "library/pillar-3-educational-operations/prompts/rotations/daily-schedule",
+    "snippet": "Generates a typical-day schedule template for a rotation with required blocks (sign-out, didactics, case review, protected reading) and explicit…",
+    "pillar": "pillar-3-educational-operations",
+    "section": "Rotations",
+    "tags": "schedule, daily-template, protected-time",
+    "difficulty": "quick-win"
+  },
+  {
+    "type": "prompt",
+    "title": "Rotation evaluation rubric",
+    "path": "library/pillar-3-educational-operations/prompts/rotations/evaluation-rubric",
+    "snippet": "Generates a milestone-aligned evaluation rubric with behaviorally-anchored level descriptors. The key discipline: anchors describe OBSERVABLE BEHAVIORS, not…",
+    "pillar": "pillar-3-educational-operations",
+    "section": "Rotations",
+    "tags": "evaluation, rubric, milestone-alignment",
+    "difficulty": "advanced"
+  },
+  {
+    "type": "prompt",
+    "title": "Mid-rotation feedback template",
+    "path": "library/pillar-3-educational-operations/prompts/rotations/mid-rotation-feedback",
+    "snippet": "Generates a mid-rotation feedback template that surfaces course-correction opportunities before the end-of-rotation evaluation locks in. Structures a 10-15…",
+    "pillar": "pillar-3-educational-operations",
+    "section": "Rotations",
+    "tags": "feedback, mid-rotation, course-correction",
+    "difficulty": "quick-win"
+  },
+  {
+    "type": "prompt",
+    "title": "End-of-rotation evaluation",
+    "path": "library/pillar-3-educational-operations/prompts/rotations/end-of-rotation-evaluation",
+    "snippet": "Generates an end-of-rotation evaluation form aligned to milestones, with numeric ratings, narrative comments per dimension, an overall narrative, a specific…",
+    "pillar": "pillar-3-educational-operations",
+    "section": "Rotations",
+    "tags": "evaluation, end-of-rotation, milestone-aligned",
+    "difficulty": "intermediate"
+  },
+  {
+    "type": "prompt",
+    "title": "Resident-to-resident handoff document",
+    "path": "library/pillar-3-educational-operations/prompts/rotations/resident-to-resident-handoff",
+    "snippet": "Generates a peer-to-peer handoff template that captures the outgoing resident's tacit knowledge for the incoming resident — practical tips, attending…",
+    "pillar": "pillar-3-educational-operations",
+    "section": "Rotations",
+    "tags": "handoff, peer, tacit-knowledge",
+    "difficulty": "quick-win"
+  },
+  {
+    "type": "prompt",
+    "title": "Call schedule generator with constraints",
+    "path": "library/pillar-3-educational-operations/prompts/rotations/call-schedule-generator",
+    "snippet": "Generates a fair call schedule respecting constraints (vacations, time-off requests, ACGME work-hour rules, fairness across residents, weekend equity). This…",
+    "pillar": "pillar-3-educational-operations",
+    "section": "Rotations",
+    "tags": "call-schedule, planning, constraints",
+    "difficulty": "intermediate"
+  },
+  {
+    "type": "prompt",
+    "title": "Rotation block scheduling across an academic year",
+    "path": "library/pillar-3-educational-operations/prompts/rotations/rotation-block-scheduling",
+    "snippet": "Generates a year-long rotation block schedule respecting required experiences, board prep timing, elective preferences, and constraints (vacation,…",
+    "pillar": "pillar-3-educational-operations",
+    "section": "Rotations",
+    "tags": "rotation-schedule, annual-planning, constraints",
+    "difficulty": "advanced"
+  },
+  {
+    "type": "prompt",
+    "title": "Course syllabus",
+    "path": "library/pillar-3-educational-operations/prompts/courses/syllabus",
+    "snippet": "Generates a complete course syllabus with weekly schedule, objectives, assessment plan, resources, policies (including an EXPLICIT AI use policy — not…",
+    "pillar": "pillar-3-educational-operations",
+    "section": "Courses",
+    "tags": "syllabus, course, policies",
+    "difficulty": "intermediate"
+  },
+  {
+    "type": "prompt",
+    "title": "Weekly module learning packet",
+    "path": "library/pillar-3-educational-operations/prompts/courses/weekly-module-packet",
+    "snippet": "Generates a weekly module learning packet that serves TWO audiences: a learner-facing version (concise, 1-2 pages, focused on what to do) and an…",
+    "pillar": "pillar-3-educational-operations",
+    "section": "Courses",
+    "tags": "module, packet, two-audience",
+    "difficulty": "intermediate"
+  },
+  {
+    "type": "prompt",
+    "title": "Assignment grading rubric",
+    "path": "library/pillar-3-educational-operations/prompts/courses/assignment-grading-rubric",
+    "snippet": "",
+    "pillar": "pillar-3-educational-operations",
+    "section": "Courses",
+    "tags": "rubric, grading, assessment",
+    "difficulty": "intermediate"
+  },
+  {
+    "type": "prompt",
+    "title": "Course feedback collection form",
+    "path": "library/pillar-3-educational-operations/prompts/courses/feedback-collection-form",
+    "snippet": "Generates a course feedback form designed to actually be completed (under 5 minutes, bias toward structured items) and to actually inform decisions (every…",
+    "pillar": "pillar-3-educational-operations",
+    "section": "Courses",
+    "tags": "feedback, survey, completion-rate",
+    "difficulty": "quick-win"
+  },
+  {
+    "type": "prompt",
+    "title": "Course post-mortem document",
+    "path": "library/pillar-3-educational-operations/prompts/courses/course-postmortem",
+    "snippet": "Generates a course post-mortem template that structures a 45-60 minute meeting AND produces a documented artifact for the curriculum file. The discipline:…",
+    "pillar": "pillar-3-educational-operations",
+    "section": "Courses",
+    "tags": "postmortem, retrospective, action-items",
+    "difficulty": "intermediate"
+  },
+  {
+    "type": "prompt",
+    "title": "IRB protocol for QI or educational research",
+    "path": "library/pillar-3-educational-operations/prompts/courses/irb-qi-protocol",
+    "snippet": "Drafts a starting IRB protocol for an educational intervention or quality improvement study — the type most pathology educators do. Walks through whether…",
+    "pillar": "pillar-3-educational-operations",
+    "section": "Courses",
+    "tags": "irb, qi, educational-research, regulatory",
+    "difficulty": "advanced"
+  },
+  {
+    "type": "prompt",
+    "title": "Promotion / portfolio teaching narrative",
+    "path": "library/pillar-3-educational-operations/prompts/courses/promotion-portfolio-narrative",
+    "snippet": "Drafts the \"teaching and education\" narrative section of a faculty promotion portfolio. This is the high-stakes annual writing that committee members read…",
+    "pillar": "pillar-3-educational-operations",
+    "section": "Courses",
+    "tags": "promotion, portfolio, teaching-narrative, high-stakes",
+    "difficulty": "advanced"
+  },
+  {
+    "type": "prompt",
+    "title": "Journal club packet generation",
+    "path": "library/pillar-3-educational-operations/prompts/conferences-and-journal-clubs/journal-club-packet",
+    "snippet": "",
+    "pillar": "pillar-3-educational-operations",
+    "section": "Conferences & journal clubs",
+    "tags": "journal-club, packet, paper-engagement",
+    "difficulty": "intermediate"
+  },
+  {
+    "type": "prompt",
+    "title": "Tumor board case packet",
+    "path": "library/pillar-3-educational-operations/prompts/conferences-and-journal-clubs/tumor-board-case-packet",
+    "snippet": "Generates a tumor board case packet template supporting N cases per session. Every case is structured identically. Strict PHI protection: no name, no MRN,…",
+    "pillar": "pillar-3-educational-operations",
+    "section": "Conferences & journal clubs",
+    "tags": "tumor-board, case-packet, phi-protection",
+    "difficulty": "intermediate"
+  },
+  {
+    "type": "prompt",
+    "title": "Grand rounds speaker prep",
+    "path": "library/pillar-3-educational-operations/prompts/conferences-and-journal-clubs/grand-rounds-speaker-prep",
+    "snippet": "",
+    "pillar": "pillar-3-educational-operations",
+    "section": "Conferences & journal clubs",
+    "tags": "grand-rounds, speaker-prep, audience-reading",
+    "difficulty": "intermediate"
+  },
+  {
+    "type": "prompt",
+    "title": "Conference schedule and topic rotation",
+    "path": "library/pillar-3-educational-operations/prompts/conferences-and-journal-clubs/conference-schedule",
+    "snippet": "Generates a quarterly or annual conference schedule with topic rotation across subspecialties, balanced presenter loads, required-topic coverage, and buffer…",
+    "pillar": "pillar-3-educational-operations",
+    "section": "Conferences & journal clubs",
+    "tags": "schedule, topic-rotation, presenter-balance",
+    "difficulty": "quick-win"
+  },
+  {
+    "type": "prompt",
+    "title": "Q&A preparation document",
+    "path": "library/pillar-3-educational-operations/prompts/conferences-and-journal-clubs/qa-prep-doc",
+    "snippet": "",
+    "pillar": "pillar-3-educational-operations",
+    "section": "Conferences & journal clubs",
+    "tags": "qa-prep, presentation, anticipation",
+    "difficulty": "intermediate"
+  },
+  {
+    "type": "prompt",
+    "title": "Visiting professor invitation letter",
+    "path": "library/pillar-3-educational-operations/prompts/conferences-and-journal-clubs/visiting-professor-invitation",
+    "snippet": "Drafts the formal invitation letter to a visiting professor for a grand rounds talk or visiting professorship. Substantive enough that the invitee takes it…",
+    "pillar": "pillar-3-educational-operations",
+    "section": "Conferences & journal clubs",
+    "tags": "visiting-professor, invitation, hospitality",
+    "difficulty": "quick-win"
+  },
+  {
+    "type": "prompt",
+    "title": "Conference abstract for medical education research",
+    "path": "library/pillar-3-educational-operations/prompts/conferences-and-journal-clubs/medical-education-abstract",
+    "snippet": "Drafts a conference abstract for medical education research (AAMC, AMEE, society educational sections). Medical education abstracts follow different…",
+    "pillar": "pillar-3-educational-operations",
+    "section": "Conferences & journal clubs",
+    "tags": "abstract, medical-education-research, scholarship",
+    "difficulty": "intermediate"
+  },
+  {
+    "type": "example",
+    "title": "Worked example — Self-quizzing through SPEP interpretation",
+    "path": "library/pillar-1-self-education/examples/spep-self-quiz",
+    "snippet": "A 22-minute self-quizzing session through SPEP and follow-up IFE interpretation. The user is a PGY-2 in their first week of clinical chemistry. The goal is not to get the diagnosis — it is to drill the interpretive reflex: see a pattern → generate a differential → narrow systematically → critique…",
+    "pillar": "pillar-1-self-education",
+    "tags": "spep, ife, self-quiz, paraprotein, worked-example, multimodal"
+  },
+  {
+    "type": "example",
+    "title": "Worked example — Designing a PGY-2 transfusion reaction teaching session",
+    "path": "library/pillar-2-teaching/examples/pgy2-transfusion-reaction",
+    "snippet": "A 35-minute design session where a CP faculty member built a 50-minute small-group teaching session on transfusion reactions for PGY-2 residents in their first month of blood bank. The session uses one ambiguous case vignette and three matched MCQs.",
+    "pillar": "pillar-2-teaching",
+    "tags": "transfusion, vignette, mcq, teaching-session, worked-example"
+  },
+  {
+    "type": "example",
+    "title": "Worked example — Coagulation rotation orientation packet",
+    "path": "library/pillar-3-educational-operations/examples/coag-rotation-orientation",
+    "snippet": "A program director used AI to draft a coagulation rotation orientation packet for a 4-week PGY-3 rotation. Total work: ~25 minutes — 8 minutes to write the input prompt, 2 minutes for the model to generate the draft, 15 minutes of editing.",
+    "pillar": "pillar-3-educational-operations",
+    "tags": "rotation, orientation, coagulation, packet, worked-example"
+  },
+  {
+    "type": "tutorial",
+    "title": "Adapting prompts to your subspecialty — making the library yours",
+    "path": "docs/how-to/adapt-prompts-to-subspecialty",
+    "snippet": "The library is opinionated. It was built by a heme-path / CP-leaning clinical pathologist and the prompts default to that orientation: SPEP traces, blood smears, transfusion workflows, board-prep aimed at the CP boards. A dermpath, peds path, neuropath, forensic, or cytopath user will read those…",
+    "difficulty": "intermediate",
+    "category": "practice"
+  },
+  {
+    "type": "tutorial",
+    "title": "Bias in medical AI — watching for it, working around it",
+    "path": "docs/how-to/bias-in-medical-ai",
+    "snippet": "Every LLM you use was trained on a corpus that does not look like the world. Some populations are over-represented; others barely appear. Some specialties are deeply covered; others are sparse. Some practice patterns dominate; others are invisible. The resulting model is fluent in everything but…",
+    "difficulty": "intermediate",
+    "category": "reading"
+  },
+  {
+    "type": "tutorial",
+    "title": "Chaining prompts in one session — the conversation discipline",
+    "path": "docs/how-to/chaining-prompts",
+    "snippet": "Almost all the prompts in this library are designed to be used in sequence within a single conversation, not as one-shot queries. This is the single biggest mental shift that separates a casual ChatGPT user from someone who gets real value out of LLMs for serious work.",
+    "difficulty": "intermediate",
+    "category": "sessions"
+  },
+  {
+    "type": "tutorial",
+    "title": "Common mistakes and antipatterns — what not to do",
+    "path": "docs/how-to/common-mistakes",
+    "snippet": "Every other tutorial in this section tells you what to do. This one tells you what not to do. It's the companion piece — the catalog of failure modes that take pathologists from \"AI seems useful\" to \"AI got me into trouble\" or \"AI hasn't really changed my work.\"",
+    "difficulty": "intermediate",
+    "category": "practice"
+  },
+  {
+    "type": "tutorial",
+    "title": "Source curation principles for AI notebooks",
+    "path": "docs/how-to/curate-sources",
+    "snippet": "Principles for choosing what to upload to your AI notebook. The discipline that distinguishes a useful notebook from a noisy one: every source should earn its place. Curation is the work.",
+    "difficulty": "intermediate",
+    "category": "source-grounded"
+  },
+  {
+    "type": "tutorial",
+    "title": "Disclosure and authorship — crediting AI in academic work",
+    "path": "docs/how-to/disclosure-and-authorship",
+    "snippet": "If you use AI to help draft a manuscript, a poster, a teaching slide, a letter of recommendation, an abstract, or a grant — when and how do you disclose it? This guide is the working answer for pathology educators, with current journal policy, conference norms, and practical worked examples.",
+    "difficulty": "intermediate",
+    "category": "scholarly"
+  },
+  {
+    "type": "tutorial",
+    "title": "Your first 30 minutes with an LLM — a beginner's onboarding",
+    "path": "docs/how-to/first-30-minutes",
+    "snippet": "This guide is for the pathologist who has heard of ChatGPT, maybe seen a colleague use it, but has not actually typed anything into one of these tools on purpose. The goal is to turn \"I should probably try AI someday\" into \"I've used AI, with intent, and I know what to do next.\"",
+    "difficulty": "beginner",
+    "category": "start"
+  },
+  {
+    "type": "tutorial",
+    "title": "How to write a good prompt — a teaching tutorial",
+    "path": "docs/how-to/how-to-write-a-good-prompt",
+    "snippet": "This tutorial is the one piece of writing in the library you can hand to a learner who has never thought carefully about prompting. Read it once for yourself, then use it as the basis for a one-hour teaching session — there's a session outline at the end.",
+    "difficulty": "beginner",
+    "category": "start"
+  },
+  {
+    "type": "how-to-landing",
+    "title": "How-to",
+    "path": "docs/how-to/index",
+    "snippet": "This section collects the tutorials, decision guides, and orientation material that sit alongside the prompt library. Prompts in the three pillars are do this templates; the entries here are how to think about it essays.",
+    "difficulty": "",
+    "category": ""
+  },
+  {
+    "type": "tutorial",
+    "title": "The LLM landscape — which model to use when, with pathology examples",
+    "path": "docs/how-to/llm-comparison",
+    "snippet": "A working pathologist does not need to know the architecture of a transformer or the gradient-descent optimizer that trained it. What they need is a decision framework for \"given a specific teaching, learning, or operational task, which AI tool should I open?\" — because the answer changes by task,…",
+    "difficulty": "advanced",
+    "category": "tools"
+  },
+  {
+    "type": "tutorial",
+    "title": "NotebookLM vs Claude Projects vs generic chat — choose your tool",
+    "path": "docs/how-to/notebooklm-vs-claude-projects",
+    "snippet": "A decision rubric for which AI tool to use when. Source-grounded AI (NotebookLM, Claude Projects, ChatGPT Custom GPTs) is different from generic chat — different strengths, different failure modes, different prep work. This guide tells you which one fits your task.",
+    "difficulty": "beginner",
+    "category": "source-grounded"
+  },
+  {
+    "type": "tutorial",
+    "title": "Building your personal AI workflow — making it a routine, not an experiment",
+    "path": "docs/how-to/personal-ai-workflow",
+    "snippet": "You have the skills. You can write a good prompt, read the response critically, work in sessions, switch models when needed. So why does AI still feel like an experiment that happens occasionally, rather than a working part of your week?",
+    "difficulty": "intermediate",
+    "category": "practice"
+  },
+  {
+    "type": "tutorial",
+    "title": "Privacy and copyright for source-grounded AI",
+    "path": "docs/how-to/privacy-and-copyright",
+    "snippet": "A walk-through of the privacy, copyright, and institutional-policy considerations BEFORE you upload anything to an AI notebook. Source-grounded AI is genuinely useful for education, but it sits on top of a complicated web of copyright, vendor terms of service, and institutional data policies —…",
+    "difficulty": "intermediate",
+    "category": "source-grounded"
+  },
+  {
+    "type": "tutorial",
+    "title": "How to teach a resident to use AI well — a faculty / PD guide",
+    "path": "docs/how-to/teach-residents-to-use-ai",
+    "snippet": "Every other tutorial in this section assumes the reader is the AI user. This one is different: it's for the program director, the faculty mentor, the rotation director, the senior who is responsible for the next generation's AI literacy — whether they want to be or not.",
+    "difficulty": "intermediate",
+    "category": "educator"
+  },
+  {
+    "type": "tutorial",
+    "title": "Tokens, context windows, and APIs — how the plumbing works",
+    "path": "docs/how-to/tokens-and-apis",
+    "snippet": "You don't need to understand the math of how a language model is trained. But you do need to understand the unit it charges by, the limit it operates within, and the difference between the chat window and the API — because all three change which prompts you can run, what they cost, and where they…",
+    "difficulty": "advanced",
+    "category": "tools"
+  },
+  {
+    "type": "tutorial",
+    "title": "How to use this library",
+    "path": "docs/how-to/use-this-library",
+    "snippet": "Every prompt in this library is a Markdown file with the same seven-section structure. Knowing the structure lets you skim a prompt in 30 seconds and decide whether it's relevant.",
+    "difficulty": "beginner",
+    "category": "start"
+  },
+  {
+    "type": "tutorial",
+    "title": "Verify your AI notebook is actually grounded — a 5-test protocol",
+    "path": "docs/how-to/verify-grounding",
+    "snippet": "Source-grounded AI tools claim to answer \"only from your uploaded sources.\" In practice, they drift — pulling from the model's general training data when retrieval is weak, paraphrasing in ways that change meaning, citing sources that don't actually contain the claim. This guide gives you a 5-test…",
+    "difficulty": "advanced",
+    "category": "source-grounded"
+  },
+  {
+    "type": "tutorial",
+    "title": "What to do when the AI is wrong — a critical-reading skill",
+    "path": "docs/how-to/what-to-do-when-ai-is-wrong",
+    "snippet": "The companion to How to write a good prompt is how to read what comes back. The model will be wrong. Sometimes obviously; more dangerously, often subtly, in ways the response itself does not signal. The discipline of catching these errors and responding to them is the single skill that separates a…",
+    "difficulty": "intermediate",
+    "category": "reading"
+  },
+  {
+    "type": "tutorial",
+    "title": "Working with images — multimodal AI for pathology",
+    "path": "docs/how-to/working-with-images",
+    "snippet": "Pathology is a visual specialty. We work in photomicrographs, gross images, gel images, immunofluorescence patterns, electrophoresis traces, flow plots, gating diagrams. The current generation of AI tools can ingest images directly — you upload a JPG or PNG, the model \"sees\" it and responds in…",
+    "difficulty": "intermediate",
+    "category": "sessions"
+  },
+  {
+    "type": "doc",
+    "title": "About the Library",
+    "path": "docs/about",
+    "snippet": "The AI in Pathology Education Companion Library is the supporting material for a 50-minute workshop delivered at the API Summit 2026 by Omar Z. Baba, MD: AI in Pathology Education — A Practical Framework Across Learning, Teaching, and Educational Operations."
+  },
+  {
+    "type": "doc",
+    "title": "Citation",
+    "path": "docs/citation",
+    "snippet": "If you use this library to inform your own teaching, residency program design, or scholarly work, please cite it. Suggested format below; adapt to your venue's required style."
+  },
+  {
+    "type": "doc",
+    "title": "Contributors",
+    "path": "docs/contributors",
+    "snippet": "The AI in Pathology Education Companion Library accepts community contributions of prompts. Every accepted contribution is credited to the contributor here."
+  },
+  {
+    "type": "doc",
+    "title": "Guardrails",
+    "path": "docs/guardrails",
+    "snippet": "The library has five hard guardrails. They are not stylistic recommendations or hedges against unlikely risks. They are observed failure modes from real use of AI in pathology education contexts. Crossing them produces concrete harms — to learners, to patients, to your professional standing, to…"
+  },
+  {
+    "type": "doc",
+    "title": "Terms of Use",
+    "path": "docs/terms",
+    "snippet": "These terms govern your use of the AI in Pathology Education Companion Library, including the prompt library, the submit-a-prompt form, comments, and votes."
+  }
+]

@@ -1,6 +1,8 @@
 ---
 title: Verify your AI notebook is actually grounded — a 5-test protocol
 last_updated: 2026-05-18
+difficulty: advanced
+category: source-grounded
 ---
 
 Source-grounded AI tools claim to answer "only from your uploaded sources." In practice, they drift — pulling from the model's general training data when retrieval is weak, paraphrasing in ways that change meaning, citing sources that don't actually contain the claim. This guide gives you a 5-test protocol to verify grounding before trusting your notebook for high-stakes use.

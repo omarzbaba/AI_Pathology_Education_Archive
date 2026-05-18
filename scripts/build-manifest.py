@@ -250,6 +250,108 @@ def build():
     n_prompts = sum(len(s["prompts"]) for p in manifest["pillars"] for s in p["sections"])
     print(f"Built manifest with {n_prompts} prompts across {len(manifest['pillars'])} pillars.")
 
+    # Build the search index (separate file, loaded only when search opens)
+    build_search_index(manifest)
+
+
+# ---------------------------------------------------------------------------
+# Search index
+# ---------------------------------------------------------------------------
+
+def parse_frontmatter_and_body(path):
+    """Generic markdown parser: returns (frontmatter_dict, body_text)."""
+    text = Path(path).read_text()
+    fm = {}
+    body = text
+    m = re.search(r"^---\n(.*?)\n---\n(.*)$", text, re.S)
+    if m:
+        for line in m.group(1).split("\n"):
+            kv = line.split(":", 1)
+            if len(kv) == 2:
+                fm[kv[0].strip()] = kv[1].strip()
+        body = m.group(2)
+    return fm, body
+
+
+def first_paragraph(body, max_chars=300):
+    """First non-heading paragraph of a markdown body, truncated."""
+    for chunk in body.split("\n\n"):
+        chunk = chunk.strip()
+        if not chunk or chunk.startswith("#"):
+            continue
+        # Strip simple markdown formatting for snippet
+        snippet = re.sub(r"[*_`#>\[\]]", "", chunk)
+        snippet = re.sub(r"\s+", " ", snippet).strip()
+        if len(snippet) > max_chars:
+            snippet = snippet[:max_chars-1].rsplit(" ", 1)[0] + "…"
+        return snippet
+    return ""
+
+
+def build_search_index(manifest):
+    """Generate library/search-index.json — a flat list of searchable entries
+    covering prompts, tutorials, examples, and top-level docs. Loaded by the
+    search UI on demand."""
+    entries = []
+
+    # Prompts (from the manifest we just built)
+    for pillar in manifest["pillars"]:
+        for section in pillar["sections"]:
+            for p in section["prompts"]:
+                entries.append({
+                    "type": "prompt",
+                    "title": p.get("title", ""),
+                    "path": p.get("path", "").replace(".md", ""),
+                    "snippet": p.get("intent", ""),
+                    "pillar": pillar["slug"],
+                    "section": section["title"],
+                    "tags": p.get("tags", ""),
+                    "difficulty": p.get("difficulty", ""),
+                })
+
+    # Worked examples
+    for pillar in manifest["pillars"]:
+        pillar_dir = f"library/{pillar['slug']}/examples"
+        if Path(pillar_dir).exists():
+            for ex_path in sorted(Path(pillar_dir).glob("*.md")):
+                fm, body = parse_frontmatter_and_body(ex_path)
+                entries.append({
+                    "type": "example",
+                    "title": fm.get("title", ex_path.stem),
+                    "path": str(ex_path).replace(".md", ""),
+                    "snippet": first_paragraph(body),
+                    "pillar": pillar["slug"],
+                    "tags": fm.get("tags", ""),
+                })
+
+    # How-to tutorials
+    for tut_path in sorted(Path("docs/how-to").glob("*.md")):
+        fm, body = parse_frontmatter_and_body(tut_path)
+        slug = tut_path.stem
+        is_index = (slug == "index")
+        entries.append({
+            "type": "how-to-landing" if is_index else "tutorial",
+            "title": fm.get("title", slug),
+            "path": str(tut_path).replace(".md", ""),
+            "snippet": first_paragraph(body),
+            "difficulty": fm.get("difficulty", ""),
+            "category": fm.get("category", ""),
+        })
+
+    # Top-level docs (about, citation, guardrails, terms, contributors)
+    for doc_path in sorted(Path("docs").glob("*.md")):
+        fm, body = parse_frontmatter_and_body(doc_path)
+        entries.append({
+            "type": "doc",
+            "title": fm.get("title", doc_path.stem),
+            "path": str(doc_path).replace(".md", ""),
+            "snippet": first_paragraph(body),
+        })
+
+    out = Path("library/search-index.json")
+    out.write_text(json.dumps(entries, indent=2, ensure_ascii=False))
+    print(f"Built search index with {len(entries)} entries → library/search-index.json")
+
 
 if __name__ == "__main__":
     build()

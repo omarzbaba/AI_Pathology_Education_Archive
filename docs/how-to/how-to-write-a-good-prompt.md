@@ -1,6 +1,8 @@
 ---
 title: How to write a good prompt — a teaching tutorial
 last_updated: 2026-05-18
+difficulty: beginner
+category: start
 ---
 
 This tutorial is the one piece of writing in the library you can hand to a learner who has never thought carefully about prompting. Read it once for yourself, then use it as the basis for a one-hour teaching session — there's a session outline at the end.

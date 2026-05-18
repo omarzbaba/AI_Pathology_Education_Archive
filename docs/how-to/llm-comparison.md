@@ -1,6 +1,8 @@
 ---
 title: The LLM landscape — which model to use when, with pathology examples
 last_updated: 2026-05-18
+difficulty: advanced
+category: tools
 ---
 
 A working pathologist does not need to know the architecture of a transformer or the gradient-descent optimizer that trained it. What they need is a decision framework for "given a specific teaching, learning, or operational task, which AI tool should I open?" — because the answer changes by task, by model, and by the month.

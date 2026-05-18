@@ -1,6 +1,8 @@
 ---
 title: Adapting prompts to your subspecialty — making the library yours
 last_updated: 2026-05-18
+difficulty: intermediate
+category: practice
 ---
 
 The library is opinionated. It was built by a heme-path / CP-leaning clinical pathologist and the prompts default to that orientation: SPEP traces, blood smears, transfusion workflows, board-prep aimed at the CP boards. A dermpath, peds path, neuropath, forensic, or cytopath user will read those prompts and reasonably ask: *do I just use them as-is, or do I need to adapt them?*

@@ -1,6 +1,8 @@
 ---
 title: Common mistakes and antipatterns — what not to do
 last_updated: 2026-05-18
+difficulty: intermediate
+category: practice
 ---
 
 Every other tutorial in this section tells you what to do. This one tells you what not to do. It's the companion piece — the catalog of failure modes that take pathologists from "AI seems useful" to "AI got me into trouble" or "AI hasn't really changed my work."

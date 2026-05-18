@@ -1,6 +1,8 @@
 ---
 title: Tokens, context windows, and APIs — how the plumbing works
 last_updated: 2026-05-18
+difficulty: advanced
+category: tools
 ---
 
 You don't need to understand the math of how a language model is trained. But you do need to understand the unit it charges by, the limit it operates within, and the difference between the chat window and the API — because all three change which prompts you can run, what they cost, and where they break.

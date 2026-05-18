@@ -1,6 +1,8 @@
 ---
 title: How to use this library
 last_updated: 2026-05-18
+difficulty: beginner
+category: start
 ---
 
 ## The shape of a prompt entry

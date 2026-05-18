@@ -1,7 +1,8 @@
 ---
 title: Chaining prompts in one session — the conversation discipline
-last_invitation: 2026-05-18
 last_updated: 2026-05-18
+difficulty: intermediate
+category: sessions
 ---
 
 Almost all the prompts in this library are designed to be used in sequence within a single conversation, not as one-shot queries. This is the single biggest mental shift that separates a casual ChatGPT user from someone who gets real value out of LLMs for serious work.
