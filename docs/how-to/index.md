@@ -17,6 +17,20 @@ A teaching-grade tutorial on prompt writing — the five components every prompt
 
 ---
 
+## Understanding the tools
+
+The two essays below are the literacy layer — what the technology actually is, who makes which model, and the vocabulary you'll see in any technical conversation about AI in medicine. Read these before you start spending real money or building tools.
+
+### [The LLM landscape — which model to use when](library.html#/docs/how-to/llm-comparison)
+
+A working-pathologist's decision framework for which AI model to open for which task. Covers the four major providers (Anthropic, OpenAI, Google, Meta), the tier system (flagship / medium / small / reasoning models), pathology-specific picks for every use case across the three pillars, cost realities, privacy considerations, and how to stay current as the landscape shifts.
+
+### [Tokens, context windows, and APIs — how the plumbing works](library.html#/docs/how-to/tokens-and-apis)
+
+The technical literacy layer. What a token is, why pricing is structured the way it is, the difference between the web UI and the API, common parameters worth understanding (temperature, system message, streaming), prompt caching, embeddings, open-weight models, and a glossary card for the vocabulary. Intended for the clinician who has used ChatGPT in the browser and is starting to wonder whether they should build something.
+
+---
+
 ## Source-grounded AI (NotebookLM, Claude Projects, Custom GPTs)
 
 Source-grounded tools — where you upload your own materials and the AI answers from them — are a different shape of tool than generic chat. Different prep, different strengths, different failure modes. These four entries cover what you need to know before you set one up.
