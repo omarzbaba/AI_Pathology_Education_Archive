@@ -67,26 +67,26 @@
           "prompts": [
             {
               "title": "Self-quiz one at a time",
-              "intent": "Drill yourself with one question at a time, with the model adapting follow-up questions based on what you got wrong. The interaction structure matters as…",
+              "intent": "Drills you with one question at a time, with the model adapting the next question based on what you got wrong. The *interaction structure* matters as much…",
               "difficulty": "quick-win",
               "time_to_use": "2-10min",
               "visual": "text-only",
               "audience": "resident",
               "best_model": "Claude Sonnet 4.6",
-              "tags": "self-assessment, drilling",
+              "tags": "self-assessment, drilling, interactive",
               "slug": "self-quiz-one-at-a-time",
               "path": "library/pillar-1-self-education/prompts/self-quiz-one-at-a-time.md",
               "category": "drill"
             },
             {
               "title": "MCQ generation with rationales",
-              "intent": "Generate board-style multiple-choice questions with detailed rationales for all answer choices — both correct and incorrect. The rationales for the…",
+              "intent": "Generates board-style MCQs with detailed rationales for **every** answer choice — not just the correct one. The rationales for incorrect choices are the…",
               "difficulty": "intermediate",
               "time_to_use": "2-10min",
               "visual": "text-only",
               "audience": "resident",
               "best_model": "Claude Opus 4.7",
-              "tags": "mcq, board-prep",
+              "tags": "mcq, board-prep, question-writing",
               "slug": "mcq-generation-with-rationales",
               "path": "library/pillar-1-self-education/prompts/mcq-generation-with-rationales.md",
               "category": "drill"
@@ -150,13 +150,13 @@
             },
             {
               "title": "Reverse case drill — findings to diagnosis",
-              "intent": "Give the model a set of findings and ask it to walk you through the differential and final diagnosis — then critique your own approach against the model's.…",
+              "intent": "You provide a set of findings from a case (anonymized, no PHI). The model works the case in reverse — from findings alone, walking through the differential,…",
               "difficulty": "advanced",
               "time_to_use": "2-10min",
               "visual": "text-only",
               "audience": "resident",
               "best_model": "Claude Opus 4.7",
-              "tags": "case-based, drilling",
+              "tags": "case-based, drilling, reasoning",
               "slug": "reverse-case-drill",
               "path": "library/pillar-1-self-education/prompts/reverse-case-drill.md",
               "category": "drill"
@@ -186,6 +186,32 @@
               "slug": "negative-drill",
               "path": "library/pillar-1-self-education/prompts/negative-drill.md",
               "category": "drill"
+            },
+            {
+              "title": "Differential by histologic pattern",
+              "intent": "You describe a histologic pattern (small round blue cells in a child, spindle cell tumor of the dermis, granulomatous inflammation in lung), and the model…",
+              "difficulty": "intermediate",
+              "time_to_use": "2-10min",
+              "visual": "text-only",
+              "audience": "resident",
+              "best_model": "Claude Opus 4.7",
+              "tags": "differential, morphology, pattern-recognition",
+              "slug": "differential-by-histologic-pattern",
+              "path": "library/pillar-1-self-education/prompts/differential-by-histologic-pattern.md",
+              "category": "drill"
+            },
+            {
+              "title": "Frozen section thinking-out-loud drill",
+              "intent": "Simulates frozen section decision-making under time pressure, including the meta-cognitive challenge: what to say to the surgeon when you're uncertain, when…",
+              "difficulty": "advanced",
+              "time_to_use": "2-10min",
+              "visual": "text-only",
+              "audience": "resident",
+              "best_model": "Claude Opus 4.7",
+              "tags": "frozen-section, time-pressure, decision-making",
+              "slug": "frozen-section-thinking-aloud",
+              "path": "library/pillar-1-self-education/prompts/frozen-section-thinking-aloud.md",
+              "category": "drill"
             }
           ]
         },
@@ -194,26 +220,26 @@
           "prompts": [
             {
               "title": "Paper summarization",
-              "intent": "Generate a structured summary of a paper covering question, design, findings, limitations, and what would change practice. The structure matters because it…",
+              "intent": "Generates a structured paper summary covering question / design / headline finding / most important limitation / would-this-change-practice / attending Q&A…",
               "difficulty": "quick-win",
               "time_to_use": "<2min",
               "visual": "text-only",
               "audience": "resident",
               "best_model": "Gemini 2.5 Pro",
-              "tags": "literature, summarization",
+              "tags": "literature, summarization, triage",
               "slug": "paper-summarization",
               "path": "library/pillar-1-self-education/prompts/paper-summarization.md",
               "category": "read"
             },
             {
               "title": "Paper methods critique",
-              "intent": "Critique a paper's methods section against standard reporting guidelines for the study type (CONSORT for trials, STROBE for observational, PRISMA for…",
+              "intent": "Generates a structured methodology critique using the appropriate reporting guideline as the framework (CONSORT for RCTs, STROBE for observational, STARD…",
               "difficulty": "advanced",
               "time_to_use": "2-10min",
               "visual": "text-only",
               "audience": "resident",
               "best_model": "Claude Opus 4.7",
-              "tags": "literature, critical-appraisal",
+              "tags": "literature, critical-appraisal, methods",
               "slug": "paper-methods-critique",
               "path": "library/pillar-1-self-education/prompts/paper-methods-critique.md",
               "category": "read"
@@ -234,7 +260,7 @@
           ]
         },
         {
-          "title": "Multimodal",
+          "title": "Multimodal & lab",
           "prompts": [
             {
               "title": "Photomicrograph description practice",
@@ -261,6 +287,63 @@
               "slug": "multimodal-spep-ife",
               "path": "library/pillar-1-self-education/prompts/multimodal-spep-ife.md",
               "category": "image"
+            },
+            {
+              "title": "IHC stain interpretation walkthrough",
+              "intent": "Walks through interpretation of an IHC stain image or panel result, building the discipline of *describe the staining pattern → interpret the pattern →…",
+              "difficulty": "advanced",
+              "time_to_use": "2-10min",
+              "visual": "multimodal",
+              "audience": "resident",
+              "best_model": "Claude Sonnet 4.6",
+              "tags": "ihc, immunohistochemistry, stain-interpretation",
+              "slug": "ihc-stain-interpretation",
+              "path": "library/pillar-1-self-education/prompts/ihc-stain-interpretation.md",
+              "category": "image"
+            },
+            {
+              "title": "Blood smear systematic review walkthrough",
+              "intent": "Builds the habit of reading a peripheral blood smear systematically — RBCs, WBCs, platelets, in that order, with specific observations at each magnification…",
+              "difficulty": "intermediate",
+              "time_to_use": "2-10min",
+              "visual": "multimodal",
+              "audience": "resident",
+              "best_model": "Claude Sonnet 4.6",
+              "tags": "blood-smear, hematology, systematic-review, multimodal",
+              "slug": "blood-smear-systematic-review",
+              "path": "library/pillar-1-self-education/prompts/blood-smear-systematic-review.md",
+              "category": "image"
+            }
+          ]
+        },
+        {
+          "title": "Molecular & CP workflow",
+          "prompts": [
+            {
+              "title": "Molecular result interpretation drill",
+              "intent": "Walks through interpretation of a molecular result (single variant, fusion, copy number alteration, MSI/TMB result, or NGS panel) by drilling the four-step…",
+              "difficulty": "advanced",
+              "time_to_use": "2-10min",
+              "visual": "text-only",
+              "audience": "resident",
+              "best_model": "Claude Opus 4.7",
+              "tags": "molecular, ngs, variant-interpretation, classification",
+              "slug": "molecular-result-interpretation",
+              "path": "library/pillar-1-self-education/prompts/molecular-result-interpretation.md",
+              "category": "drill"
+            },
+            {
+              "title": "Critical value workflow drill",
+              "intent": "Drill the complete critical value workflow for a given result: confirm the value is real, identify and notify the right provider, document the call, follow…",
+              "difficulty": "intermediate",
+              "time_to_use": "2-10min",
+              "visual": "text-only",
+              "audience": "resident",
+              "best_model": "Claude Sonnet 4.6",
+              "tags": "critical-values, lab-workflow, cp, notification",
+              "slug": "critical-value-workflow",
+              "path": "library/pillar-1-self-education/prompts/critical-value-workflow.md",
+              "category": "drill"
             }
           ]
         }

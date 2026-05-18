@@ -36,6 +36,13 @@ CATEGORY = {
     "journal-club-preread": "read",
     "multimodal-photomicrograph": "image",
     "multimodal-spep-ife": "image",
+    # New Pillar 1 prompts (batch 1)
+    "ihc-stain-interpretation": "image",
+    "molecular-result-interpretation": "drill",
+    "differential-by-histologic-pattern": "drill",
+    "critical-value-workflow": "drill",
+    "blood-smear-systematic-review": "image",
+    "frozen-section-thinking-aloud": "drill",
     # Pillar 2 — Teaching
     "acgme-epa-objectives": "assess",
     "blooms-mcq": "assess",
@@ -93,12 +100,17 @@ PILLAR_DIRS = [
         ]),
         ("Case-based drilling", "library/pillar-1-self-education/prompts", [
             "diagnostic-algorithm-walkthrough","reverse-case-drill","forward-case-drill","negative-drill",
+            "differential-by-histologic-pattern","frozen-section-thinking-aloud",
         ]),
         ("Reading the literature", "library/pillar-1-self-education/prompts", [
             "paper-summarization","paper-methods-critique","journal-club-preread",
         ]),
-        ("Multimodal", "library/pillar-1-self-education/prompts", [
+        ("Multimodal & lab", "library/pillar-1-self-education/prompts", [
             "multimodal-photomicrograph","multimodal-spep-ife",
+            "ihc-stain-interpretation","blood-smear-systematic-review",
+        ]),
+        ("Molecular & CP workflow", "library/pillar-1-self-education/prompts", [
+            "molecular-result-interpretation","critical-value-workflow",
         ]),
     ]),
     ("pillar-2-teaching", "Teaching", "Using AI to teach pathology to others", [

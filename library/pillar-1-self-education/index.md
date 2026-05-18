@@ -36,6 +36,8 @@ A few principles run through every prompt in this pillar:
 - [Reverse case drill (findings → Dx)](library.html#/library/pillar-1-self-education/prompts/reverse-case-drill)
 - [Forward case drill (Dx → expected findings)](library.html#/library/pillar-1-self-education/prompts/forward-case-drill)
 - [Negative drill (what would change the Dx)](library.html#/library/pillar-1-self-education/prompts/negative-drill)
+- [Differential by histologic pattern](library.html#/library/pillar-1-self-education/prompts/differential-by-histologic-pattern)
+- [Frozen section thinking-out-loud drill](library.html#/library/pillar-1-self-education/prompts/frozen-section-thinking-aloud)
 
 ### Reading the literature
 
@@ -43,10 +45,17 @@ A few principles run through every prompt in this pillar:
 - [Paper methods critique](library.html#/library/pillar-1-self-education/prompts/paper-methods-critique)
 - [Journal club pre-read prep](library.html#/library/pillar-1-self-education/prompts/journal-club-preread)
 
-### Multimodal
+### Multimodal & lab
 
 - [Photomicrograph description practice](library.html#/library/pillar-1-self-education/prompts/multimodal-photomicrograph)
 - [SPEP / IFE trace interpretation walkthrough](library.html#/library/pillar-1-self-education/prompts/multimodal-spep-ife)
+- [IHC stain interpretation walkthrough](library.html#/library/pillar-1-self-education/prompts/ihc-stain-interpretation)
+- [Blood smear systematic review walkthrough](library.html#/library/pillar-1-self-education/prompts/blood-smear-systematic-review)
+
+### Molecular & CP workflow
+
+- [Molecular result interpretation drill](library.html#/library/pillar-1-self-education/prompts/molecular-result-interpretation)
+- [Critical value workflow drill](library.html#/library/pillar-1-self-education/prompts/critical-value-workflow)
 
 ### Worked examples
 
