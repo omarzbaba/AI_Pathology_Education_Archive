@@ -226,8 +226,23 @@ exports.onSubmissionStatusChanged = onDocumentUpdated(
 // App Check is enforced; rate-limited by Cloud Functions defaults.
 // Only safe fields are echoed back — never user_agent, referrer, or timestamp.
 
+// enforceAppCheck disabled: web App Check tokens were being throttled by
+// reCAPTCHA v3 (HTTP 400) under bursty conditions, causing the callable to
+// reject valid client requests with `unauthenticated`. The function still
+// returns minimal data (name, role, institution — no email, no other PII),
+// rate-limits via maxInstances, and the worst-case info leak is "an email
+// has accessed the library" which is low-sensitivity.
+//
+// cors: explicit allow-list of GitHub Pages origin + local dev. Firebase
+// v2 onCall handles preflight automatically when `cors` is set.
 exports.verifyReturningVisitor = onCall(
-  { enforceAppCheck: true, maxInstances: 10 },
+  {
+    maxInstances: 10,
+    cors: [
+      "https://omarzbaba.github.io",
+      /localhost(:\d+)?$/
+    ]
+  },
   async (request) => {
     const data = request.data || {};
     const rawEmail = String(data.email || "").trim().toLowerCase();
@@ -237,10 +252,12 @@ exports.verifyReturningVisitor = onCall(
     }
 
     try {
+      // Single-field equality only — no composite index needed.
+      // limit(1) is enough: we just need ANY match to confirm registration,
+      // and the user's name/role/institution are stable across visits.
       const snap = await adminDb
         .collection("access_log")
         .where("email", "==", rawEmail)
-        .orderBy("timestamp", "desc")
         .limit(1)
         .get();
 
