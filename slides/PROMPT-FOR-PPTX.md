@@ -34,7 +34,7 @@ into the main deck myself). Slide size: 16:9 widescreen.
   - Generous left margin (~120px on a 1920×1080 frame)
   - 2-px burgundy horizontal rule (120px wide) under the subtitle
   - Card stacks with 1px hairline borders + 6px left-or-top accent stripe
-  - Footer at the bottom of every slide: `Omar Z. Baba, MD · Henry Ford Health · API Summit 2026` (left) and page number `N / 5` (right), 1px top border
+  - Footer at the bottom of every slide: `Omar Z. Baba, MD · API Summit 2026` (left) and page number `N / 5` (right), 1px top border
 
 ---
 
@@ -192,7 +192,7 @@ Cards alternate left-border color: cards 1, 3, 5 get a 6px navy left border; car
 
 Bottom strip, 1px top border:
 
-- **Left:** `Omar Z. Baba, MD · Henry Ford Health · API Summit 2026` (Omar's name in semibold, rest in regular muted grey)
+- **Left:** `Omar Z. Baba, MD · API Summit 2026` (name in semibold, rest in regular muted grey)
 - **Right:** page number, e.g. `1 / 5` (tabular-nums)
 
 ---

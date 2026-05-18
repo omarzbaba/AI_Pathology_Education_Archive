@@ -9,15 +9,15 @@ If you use this library to inform your own teaching, residency program design, o
 
 ### APA 7
 
-> Baba, O. Z. (2026). *AI in pathology education — Companion library: A practical framework across learning, teaching, and educational operations* [Educational resource]. Henry Ford Health, Department of Pathology. https://github.com/omarzbaba/AI_Pathology_Education
+> Baba, O. Z. (2026). *AI in pathology education — Companion library: A practical framework across learning, teaching, and educational operations* [Educational resource]. https://github.com/omarzbaba/AI_Pathology_Education
 
 ### AMA
 
-> Baba OZ. *AI in Pathology Education — Companion Library: A Practical Framework Across Learning, Teaching, and Educational Operations*. Henry Ford Health, Department of Pathology; 2026. Accessed [date]. https://github.com/omarzbaba/AI_Pathology_Education
+> Baba OZ. *AI in Pathology Education — Companion Library: A Practical Framework Across Learning, Teaching, and Educational Operations*. 2026. Accessed [date]. https://github.com/omarzbaba/AI_Pathology_Education
 
 ### Vancouver
 
-> Baba OZ. AI in pathology education — companion library: a practical framework across learning, teaching, and educational operations [Internet]. Detroit (MI): Henry Ford Health, Department of Pathology; 2026 [cited YYYY MMM DD]. Available from: https://github.com/omarzbaba/AI_Pathology_Education
+> Baba OZ. AI in pathology education — companion library: a practical framework across learning, teaching, and educational operations [Internet]. 2026 [cited YYYY MMM DD]. Available from: https://github.com/omarzbaba/AI_Pathology_Education
 
 ### Plain text (for slide decks, posters)
 
@@ -62,7 +62,7 @@ Useful information to include:
 - Anything you adapted, fixed, or improved
 - Whether you'd consent to being acknowledged in the manuscript (you can decline — the request is genuinely opt-in)
 
-Contact: Omar Z. Baba, MD — Henry Ford Health, Department of Pathology, Clinical Pathology & Informatics. Reach the author through Henry Ford Health's pathology department directory or via the GitHub repository for this library.
+Contact: Omar Z. Baba, MD — Clinical Pathology & Informatics. Reach the author via the GitHub repository for this library, or through the floating Feedback button on any page of the companion site.
 
 ## Companion-site usage tracking
 

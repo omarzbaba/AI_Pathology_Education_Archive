@@ -1,6 +1,6 @@
 # AI in Pathology Education — Companion Library
 
-Companion website for the API Summit 2026 workshop *AI in Pathology Education: A Practical Framework Across Learning, Teaching, and Educational Operations*, by Omar Z. Baba, MD (Henry Ford Health, Department of Pathology, Clinical Pathology & Informatics).
+Companion website for the API Summit 2026 workshop *AI in Pathology Education: A Practical Framework Across Learning, Teaching, and Educational Operations*, by Omar Z. Baba, MD (Clinical Pathology & Informatics).
 
 A curated prompt library and worked-example collection organized around three pillars:
 
@@ -201,7 +201,7 @@ If ownership transfers:
 2. Transfer ownership of the Firebase project (Firebase console → Project Settings → Users and permissions → transfer)
 3. Add the new owner as an admin user (see "Add a new admin" above)
 4. Update `LICENSE` and citation files with the new contact
-5. Update the Henry Ford Health institutional affiliation if the new owner is elsewhere
+5. Update any institutional affiliation in the masthead, citation, and about pages if it changed
 6. Push the changes
 
 ---

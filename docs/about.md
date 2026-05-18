@@ -23,15 +23,15 @@ These pillars are not mutually exclusive — a single 30-minute work session mig
 
 ## Who I am
 
-I'm a Clinical Pathology and Informatics fellow at Henry Ford Health, Detroit. I trained in CP at Henry Ford and stayed for an informatics-focused fellowship. I've been thinking and writing about practical AI use in pathology education for the past 18 months, mostly through small-group sessions with our residents and a series of departmental in-services.
+I'm a Clinical Pathology and Informatics fellow. I've been thinking and writing about practical AI use in pathology education for the past 18 months, mostly through small-group sessions with residents and a series of departmental in-services.
 
 This library is the consolidated, organized version of patterns that emerged from those sessions. It is opinionated. It will not be opinionated in the same way at your institution, and that is fine — the prompts are designed to be adapted.
 
 ## Acknowledgments
 
-The framework, the prompt structure, and the worked examples benefited from feedback from CP and AP residents at Henry Ford Health, faculty in the Department of Pathology, and several pathology educators outside the institution who pilot-tested early drafts of these materials. Specific acknowledgments will be added before the workshop date.
+The framework, the prompt structure, and the worked examples benefited from feedback from CP and AP residents, pathology faculty, and several pathology educators who pilot-tested early drafts of these materials. Specific acknowledgments will be added before the workshop date.
 
-The companion-app-builder prompt in Pillar III was derived from the infrastructure that supports this library and the First Annual Henry Ford × MSU Neuropathology Workshop companion app.
+The companion-app-builder prompt in Pillar III was derived from the infrastructure that supports this library and an earlier neuropathology workshop companion app.
 
 ## What this library does NOT cover
 

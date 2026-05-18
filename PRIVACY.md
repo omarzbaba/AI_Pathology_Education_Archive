@@ -142,11 +142,9 @@ If you have a complaint about how your data has been handled and you are in the 
 ## Contact
 
 Omar Z. Baba, MD
-Henry Ford Health
-Department of Pathology — Clinical Pathology & Informatics
-Detroit, Michigan, USA
+Clinical Pathology & Informatics
 
-You can reach the author through the Henry Ford Health pathology department directory or via the GitHub repository for this library: https://github.com/omarzbaba/AI_Pathology_Education
+You can reach the author via the GitHub repository for this library (https://github.com/omarzbaba/AI_Pathology_Education) or through the floating **Feedback** button on any page of the companion site.
 
 ## Updates to this notice
 
