@@ -3,10 +3,10 @@ title: Rotation evaluation rubric
 pillar: educational-operations
 event_type: rotation
 audience: program-director
-difficulty: intermediate
+difficulty: advanced
 time_to_use: >10min
 visual: text-only
-tags: evaluation, rubric
+tags: evaluation, rubric, milestone-alignment
 verified_models: TODO
 best_model: Claude Opus 4.7
 last_updated: 2026-05-17
@@ -14,52 +14,87 @@ last_updated: 2026-05-17
 
 ## What this prompt does
 
-Generate a rotation evaluation rubric with milestone-aligned dimensions and behavioral anchors for each level.
+Generates a milestone-aligned evaluation rubric with behaviorally-anchored level descriptors. The key discipline: anchors describe OBSERVABLE BEHAVIORS, not personality traits, and they GENUINELY DISCRIMINATE between levels (not just sound positive at every level).
 
 ## When to use it
 
-When the existing evaluation form is generic or when you're piloting milestone-anchored evaluations. Should be reviewed by the CCC before use.
+When piloting milestone-anchored evaluations or replacing a generic form. Should be reviewed by your CCC before deployment.
 
 ## The prompt
 
 ```
-Generate an end-of-rotation evaluation rubric for [rotation name], [PGY level] residents.
+You are generating a rotation evaluation rubric. Anchors must be observable behaviors and must genuinely discriminate between levels. "Demonstrates competence" at every level is the failure mode.
 
-The rubric should:
+## What I'm building
 
-1. Have **5-7 dimensions** mapped to milestone sub-competencies that this rotation is positioned to assess.
-2. For each dimension, **5 levels** with behavioral anchors (e.g., level 3 = 'Independently formulates a workup plan for routine cases and seeks supervision appropriately for complex ones').
-3. Include both **knowledge/technical dimensions** and **professional/interpersonal dimensions**.
-4. Have a **narrative comment field** for each dimension with prompting questions to help raters write meaningful narratives.
+- **Rotation:** [name + duration]
+- **PGY level:** [target level]
+- **Milestone document version:** [your program's current version]
+- **Number of dimensions:** [usually 5-7]
+- **Rater time budget:** [target — usually 15 min]
 
-Avoid:
-- Anchors that describe attitudes ('shows enthusiasm') rather than behaviors.
-- Anchors that are mostly about effort ('tries hard') rather than performance.
-- A 'meets expectations' middle that nobody can disagree with.
+## What to produce
 
-End with:
-- Estimated time for an attending to complete the rubric (target: 15 minutes).
-- The minimum number of observations required to assign each dimension fairly.
+### 5-7 dimensions
 
-**Important — refinement:** Behavioral anchors must describe observable behaviors, not personality traits. 'Shows enthusiasm' is not a behavior; 'arrives prepared to sign-out with a written preview of complex cases' is.
+Each mapped to a milestone sub-competency this rotation is positioned to assess. Mix of knowledge/technical and professional/interpersonal.
+
+### Per-dimension structure
+
+For each dimension:
+- Name
+- Milestone sub-competency mapping
+- **5 levels with behavioral anchors:**
+
+Each anchor must describe an OBSERVABLE BEHAVIOR. Examples:
+- BAD: "Demonstrates competence in interpreting routine cases"
+- GOOD: "Independently formulates a workup plan for routine cases and seeks supervision appropriately for complex ones; escalation decisions match attending expectations >80% of the time"
+
+- **Narrative comment prompt** to help raters write specific feedback ("Cite one specific case or moment where you observed this dimension")
+
+### Quality controls
+
+- Each dimension independently rateable (no overlap)
+- 5 levels genuinely differentiate
+- Behavioral anchors, not personality traits
+- "Unable to assess" option for each dimension
+
+### Time and observation requirements
+
+- Estimated rater time
+- Minimum observations needed to assign each dimension fairly
+
+## Hard rules
+
+- **Observable behaviors only.** "Shows enthusiasm" is not an anchor.
+- **Genuine differentiation.** If levels 3, 4, 5 all sound positive in different ways without distinction, the anchors are too soft.
+- **Independent dimensions.** "Writing quality" and "organization" overlap; merge or rewrite.
+- **"Unable to assess" option non-negotiable.** Otherwise raters default to 3/5 for things they didn't observe.
+
+## What I will NOT accept
+
+- Personality-trait anchors
+- Anchors that all sound positive
+- Overlapping dimensions
+- Missing "unable to assess" option
 ```
 
 ## Expected output
 
-A rubric with 5-7 dimensions, 5 leveled behavioral anchors per dimension, narrative prompts, plus time and observation guidance.
+5-7 dimensions, each with 5-level behaviorally-anchored descriptors, narrative prompts, quality controls.
 
 ## Common failure modes
 
-- Anchors that all sound positive (no real differentiation between levels 3-5).
-- Dimensions overlap and rate the same behavior twice.
-- Behavioral anchors aren't actually behaviors.
+- **Anchors that all sound positive.** Push back: "Differentiate."
+- **Personality traits.** Push back.
+- **Overlapping dimensions.** Push to merge or rewrite.
 
 ## Required human verification
 
-- Run the rubric by your CCC chair before use.
-- Pilot with two raters scoring the same resident independently. If inter-rater reliability is low, the anchors need refinement.
-- Verify milestone mapping against your program's current document.
+- Run by CCC chair before use.
+- Pilot with two raters scoring the same resident — check inter-rater agreement.
+- Verify milestone mapping is current.
 
 ## Best model and why
 
-**Claude Opus 4.7** — Behavioral anchors that genuinely discriminate between levels are hard. Opus produces more differentiated anchors; Sonnet tends toward all-positive language.
+**Claude Opus 4.7** — behavioral anchors that genuinely discriminate require care. Sonnet anchors tend toward all-positive.

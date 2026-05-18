@@ -6,60 +6,74 @@ audience: faculty
 difficulty: intermediate
 time_to_use: 2-10min
 visual: text-only
-tags: rubric, grading
+tags: rubric, grading, assessment
 verified_models: TODO
 best_model: Claude Opus 4.7
 last_updated: 2026-05-17
 ---
 
-## What this prompt does
-
-Generate a rubric for a specific assignment with dimensions, level descriptors, and a scoring guide.
-
-## When to use it
-
-When you're assigning anything more substantive than a quiz and want consistent grading.
-
 ## The prompt
 
 ```
-Generate a grading rubric for the following assignment:
+You are generating a grading rubric. Dimensions must be independently assessable. If two dimensions could be confused, merge or rewrite.
 
-- **Assignment**: [name and brief description]
-- **Course**: [course name and audience]
-- **Length / format expected**: [pages, slides, video minutes, etc.]
-- **Learning objectives this assignment assesses**: [from the syllabus]
-- **Point total**: [if graded numerically]
+## What I'm providing
 
-The rubric should have:
+- **Assignment:** [name + brief description]
+- **Course:** [name + audience]
+- **Expected length/format:** [pages/slides/video min]
+- **Learning objectives assessed:** [from syllabus]
+- **Point total:** [if graded numerically]
 
-1. **4-6 dimensions** that together capture what 'good' looks like for this assignment. Each dimension should be **independently assessable** (don't combine content quality and writing into one row).
-2. **4 levels** per dimension: Exemplary, Proficient, Developing, Needs Substantial Work. Each level with a behavioral or product descriptor (what would I observe in the artifact?).
-3. **Point values** per dimension (if numeric grading) — weight dimensions according to how much they matter for the objectives.
-4. **Feedback prompts** for each dimension to help graders write specific narrative feedback ('Cite one moment where the student demonstrated X').
+## What to produce
 
-End with:
-- **Common pitfalls** for this assignment type (what students typically get wrong) and how the rubric captures them.
-- **Estimated grading time** per submission.
+### 4-6 dimensions
 
-**Important — refinement:** Each dimension must be independently assessable. If two dimensions could be confused or rated together (e.g., 'writing quality' and 'organization'), merge them or rewrite to make the distinction sharper.
+Each capturing what "good" looks like. Independently assessable (don't combine content quality and writing).
+
+### 4 levels per dimension
+
+Exemplary / Proficient / Developing / Needs Substantial Work — each with a behavioral or product descriptor (what would I observe in the artifact?).
+
+### Point weighting
+
+Per dimension, weighted by impact on objectives.
+
+### Feedback prompts
+
+Per dimension, prompts to help graders write specific narrative feedback ("Cite one moment where the student demonstrated X").
+
+### Common pitfalls
+
+Type-specific failure modes the rubric captures.
+
+### Estimated grading time
+
+Per submission, in minutes.
+
+## Hard rules
+
+- **Independently assessable dimensions.**
+- **4 levels that genuinely differentiate** — not all positive.
+- **Weighting reflects actual importance.**
+- **Pitfalls specific to assignment type.**
+
+## What I will NOT accept
+
+- Overlapping dimensions
+- All-positive level descriptors
+- Generic feedback prompts
 ```
 
 ## Expected output
 
-A rubric with 4-6 well-defined dimensions, 4 levels each, feedback prompts, pitfalls, and time estimate.
-
-## Common failure modes
-
-- Level descriptors all sound positive — no real differentiation.
-- Dimensions overlap and double-count.
-- Numeric weighting doesn't reflect what actually matters.
+4-6 dimensions × 4 levels with prompts, pitfalls, time estimate.
 
 ## Required human verification
 
-- Grade one sample submission with the rubric, then have a colleague grade the same one independently. Check for inter-rater agreement; refine where you disagree.
-- Verify the rubric assesses the stated learning objectives.
+- Grade one sample submission with the rubric, then have a colleague grade independently. Refine where you disagree.
+- Verify rubric assesses stated objectives.
 
 ## Best model and why
 
-**Claude Opus 4.7** — Independently-assessable dimensions and behavioral level descriptors require care. Opus produces sharper distinctions; Sonnet rubrics tend to have overlapping dimensions.
+**Claude Opus 4.7** — sharp distinctions between levels reward depth.

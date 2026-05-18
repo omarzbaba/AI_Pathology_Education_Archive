@@ -6,7 +6,7 @@ audience: faculty
 difficulty: intermediate
 time_to_use: 2-10min
 visual: text-only
-tags: feedback, narrative
+tags: feedback, narrative, evidence-based
 verified_models: TODO
 best_model: Claude Opus 4.7
 last_updated: 2026-05-17
@@ -14,51 +14,73 @@ last_updated: 2026-05-17
 
 ## What this prompt does
 
-Convert bullet-point observations from a rotation into a polished feedback note, preserving specificity while improving readability.
+Converts your bullet observations from a rotation into a polished feedback note that residents will actually read and remember. Strict discipline: every claim in the note must trace to an observation you provided. No extrapolation, no padding, no manufactured praise.
 
 ## When to use it
 
-When you've taken notes during a rotation and need to convert them into a feedback document the resident will actually read and remember.
+End of rotation, when you've taken notes during the block and want to convert them into a readable feedback document. Best within a week of the rotation end while details are fresh.
+
+**Not for:** CCC narratives (use [CCC narrative comment drafting](library.html#/library/pillar-2-teaching/prompts/ccc-narrative-comment) — different audience), high-stakes professionalism conversations (use [Difficult feedback conversation prep](library.html#/library/pillar-2-teaching/prompts/difficult-feedback-conversation-prep)), or feedback you don't actually have observations for.
 
 ## The prompt
 
 ```
-Convert these rotation observations into a feedback note for [resident name initial], a [PGY level] who just finished their [N]-week rotation on [service].
+You are drafting a feedback note for a resident. Every claim in the note must trace to an observation I gave you. Do not extrapolate, manufacture praise, or pad to reach a length.
 
-Observations (mix of strengths, areas for growth, specific instances):
-[paste your bullet notes — specific incidents, recurring patterns, comparative observations]
+## What I'm providing
 
-Format:
+- **Resident initial and PGY:** [e.g., "Resident DA, PGY-2"]
+- **Rotation and duration:** [e.g., "blood bank, 4 weeks"]
+- **Service context:** [the rotation environment, my role, frequency of interaction]
+- **My observations (bullets):**
+  [paste — mix of strengths, growth areas, specific incidents]
+- **My intended outcome for this feedback:** [what I want the resident to do differently or keep doing]
 
-1. **Opening orientation** (1-2 sentences): the rotation, the level of trust the resident operates at, the overall arc.
-2. **Strengths section:** 2-4 specific strengths, each tied to a behavior or incident I noted. Avoid generic praise.
-3. **Growth section:** 2-3 specific growth areas, each tied to a behavior or incident. Use language that's actionable — what would 'better' look like?
-4. **One specific behavioral commitment** for the next rotation, framed as a question the resident should ask themselves at each sign-out.
-5. **Closing** (1 sentence): a forward-looking statement, not a hollow compliment.
+## Note structure (5 sections, ~250-350 words total)
 
-Tone: warm but honest. Specific over generic. Behavioral over personality-based.
+1. **Opening orientation (1-2 sentences)** — the rotation, level of trust the resident operates at, the overall arc
+2. **Strengths section (2-4 specific strengths)** — each tied to a behavior or incident I noted. Avoid generic praise like "great communicator."
+3. **Growth section (2-3 specific growth areas)** — each tied to a behavior or incident. Use actionable language — what would "better" look like specifically?
+4. **One behavioral commitment** — framed as a question the resident should ask themselves at each sign-out (e.g., "Before I commit to this interpretation, what would I want to see that I haven't?")
+5. **Closing (1 sentence)** — forward-looking, not a hollow compliment
 
-Do NOT add observations that aren't in my notes. If something is missing, leave it out rather than padding.
+## Tone
 
-**Important — refinement:** Every claim in the note must be traceable to an observation I gave you. Do not extrapolate to praise the resident didn't earn or growth areas I didn't flag. If you find yourself padding to reach the target length, leave it short.
+- Warm but honest
+- Specific over generic
+- Behavioral over personality-based
+- Direct without being harsh
+
+## Hard rules
+
+- **Every claim must trace to an observation I provided.** If you find yourself padding to reach the target length, leave it short.
+- **Do NOT add praise or critique I didn't write.** Watch for this — it dilutes credibility.
+- **Growth areas framed as behaviors, not personality traits.** "Be more confident" is bad; "When you commit to an interpretation at sign-out, lead with the diagnosis rather than the differential" is good.
+- **The behavioral commitment is non-optional.** Without it, the feedback is reflective, not actionable.
+
+## What I will NOT accept
+
+- Claims I can't trace to my observations
+- Generic praise or growth areas
+- Personality-trait framing
+- A hollow closing ("great work, keep it up!")
 ```
 
 ## Expected output
 
-A feedback note in five sections that reads like a real attending wrote it — specific, behavioral, actionable. The 'behavioral commitment' question is the most valuable line.
+A 5-section feedback note (~250-350 words) tightly grounded in your observations.
 
 ## Common failure modes
 
-- The model adds praise or critique you didn't write. Watch for this — it dilutes credibility.
-- Growth areas are framed as personality traits ('be more confident') rather than behaviors.
-- The closing is hollow ('great work, keep it up!').
+- **Manufactured observations.** Push back: "I didn't write that. Where did you get it?"
+- **Personality-trait framing.** Push back: "What's the behavior?"
+- **Hollow closing.** Push back.
 
 ## Required human verification
 
-- Re-read against your original observations. Anything in the note that's not in your notes is the model speaking, not you. Delete or rewrite.
+- Re-read against your original observations. Anything in the note that's not in your bullets is the model speaking, not you. Delete or rewrite.
 - Sanity-check the tone with how you'd actually talk to this resident.
-- Run formal feedback notes through your institution's required template format if one exists.
 
 ## Best model and why
 
-**Claude Opus 4.7** — Voice and nuance matter here. Opus produces feedback that reads more like a thoughtful attending and less like a template, and is more disciplined about not adding observations you didn't provide.
+**Claude Opus 4.7** — voice and nuance matter here. Opus produces feedback that reads more like a thoughtful attending; Sonnet tends toward template phrasing.

@@ -6,7 +6,7 @@ audience: faculty
 difficulty: advanced
 time_to_use: 2-10min
 visual: text-only
-tags: vignette, differential
+tags: vignette, differential, paired-cases
 verified_models: TODO
 best_model: Claude Opus 4.7
 last_updated: 2026-05-17
@@ -14,52 +14,80 @@ last_updated: 2026-05-17
 
 ## What this prompt does
 
-Generate two cases that share a superficial presentation but resolve to different diagnoses, designed to highlight a specific discriminating feature. The pair structure forces residents to notice the discriminator.
+Generates two case vignettes that share superficial features but diverge on a specific discriminating feature — the one you want to teach. The pair structure forces residents to NOTICE the discriminator rather than pattern-match to a likely diagnosis. The hardest discipline this enforces: the cases must be parallel in every dimension EXCEPT the intended discriminator.
 
 ## When to use it
 
-When teaching a differential where two entities are commonly confused, especially when the discrimination is taught in a textbook but rarely drilled.
+When teaching a differential where two entities are commonly confused, especially when the discrimination is taught in a textbook but rarely drilled in cases. Pairs well with sign-out teaching or journal club discussion.
+
+**Not for:** generic case generation (use [Case vignette at PGY level](library.html#/library/pillar-2-teaching/prompts/case-vignette-pgy)), broader pattern discrimination (use [Differential by histologic pattern](library.html#/library/pillar-1-self-education/prompts/differential-by-histologic-pattern)), or pairs where you don't yet know what the discriminating feature should be.
 
 ## The prompt
 
 ```
-Generate a matched case pair for teaching the discrimination between [entity A] and [entity B] at [PGY level].
+You are generating a matched case pair for teaching a specific discrimination. The pair must be parallel in every dimension EXCEPT the intended discriminator.
 
-The pair should:
+## What I'm requesting
 
-1. **Share superficial features** that put both entities in the differential (similar demographics, similar chief complaint, similar initial workup results).
-2. **Diverge on the discriminating feature(s)** I want to teach — name those features explicitly.
-3. **Be roughly equal in length and information density**, so the difficulty isn't in deciphering one but in noticing the discriminator.
+- **Entity A and Entity B to discriminate:** [be specific — e.g., "reactive follicular hyperplasia (Entity A) vs grade 1-2 follicular lymphoma (Entity B)"]
+- **The discriminating feature(s) I want to teach:** [name the specific feature — e.g., "bcl-2 positivity in follicles, absent in reactive and present in FL"]
+- **Audience level:** [PGY level + rotation context]
+- **Cognitive trap to avoid:** [optional — e.g., "residents tend to anchor on architecture and miss the IHC"]
 
-For each case, provide:
+## What to produce
 
-- The vignette (4-6 sentences).
-- The intended diagnosis.
-- The discriminating feature(s) that should resolve it.
+### Case A
 
-After both cases:
+- **Vignette (4-6 sentences):** clinical context, presentation, initial findings
+- **Histology description:** what's on the slide at low → high power
+- **Workup results:** IHC, molecular as relevant
+- **The discriminating feature as it appears in THIS case** (positive or negative)
+- **Intended diagnosis:** stated explicitly
 
-- A side-by-side comparison showing which features they share and which differ.
-- The 'aha' question to use in teaching: when residents see both side by side, what question crystallizes the discrimination?
+### Case B
 
-**Important — refinement:** Before writing, confirm with me what specific discriminating feature should resolve the pair. Do not assume — ask one clarifying question if it's not obvious from my framing.
+Same structure. **Parallel to Case A in every dimension** (similar age range, similar location, similar presenting complaint, similar initial workup architecture) EXCEPT for the discriminating feature.
+
+### Side-by-side comparison table
+
+| Feature | Case A | Case B |
+|---|---|---|
+
+Include the features that are SAME (so residents notice that the difference is NOT in those features) and the discriminating feature(s).
+
+### The 'aha' question
+
+When residents see both side by side, what specific question crystallizes the discrimination? Phrase the exact question — not "ask them to compare," the question itself.
+
+## Hard rules
+
+- **Parallelism is the entire point.** If the cases differ in age, sex, location, presenting complaint, etc., the discrimination becomes confounded.
+- **The discriminating feature must be the SAME feature in both cases** — present in one, absent in the other (or different in a specific way). Not "Case A has X, Case B has Y."
+- **The 'aha' question is non-negotiable.** Without it, the pair is just two cases.
+- **No PHI.** Both vignettes are fictional or sufficiently genericized.
+
+## What I will NOT accept
+
+- Pairs that differ in confounding features
+- Discriminators that depend on tests I can't get in real practice
+- 'Aha' questions that are leading rather than illuminating
+- Vignettes of very different lengths or detail levels (signals the difference)
 ```
 
 ## Expected output
 
-Two paired vignettes + intended diagnoses + named discriminators + side-by-side comparison + 'aha' question.
+Two parallel cases + side-by-side table + 'aha' question. Length ~500-700 words.
 
 ## Common failure modes
 
-- The two cases differ on a feature other than the intended discriminator (confounded teaching).
-- One case is obviously harder than the other and residents notice the structural difference rather than the clinical one.
-- The 'aha question' is leading rather than illuminating.
+- **Confounded cases.** Push back: "Cases differ in [feature]. Make them parallel."
+- **'Aha' question is leading.** Push back: "Make it open-ended."
 
 ## Required human verification
 
-- Verify the discriminating feature is actually the discriminator in current practice (not an outdated criterion).
-- Pressure-test with a resident who hasn't been taught the discrimination — do they notice it, or does the pair just feel like 'two cases'?
+- Verify the discriminator is what current practice actually uses (not an outdated criterion).
+- Pressure-test with a resident who hasn't been taught the discrimination — do they notice it, or does the pair feel like "two cases"?
 
 ## Best model and why
 
-**Claude Opus 4.7** — Parallel construction with a single deliberate difference is harder than it looks. Opus is more disciplined about NOT varying confounding features.
+**Claude Opus 4.7** — parallel construction with a single deliberate difference is harder than it looks. Opus is more disciplined about NOT varying confounding features.

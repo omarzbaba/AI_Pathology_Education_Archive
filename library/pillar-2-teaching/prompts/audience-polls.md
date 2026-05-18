@@ -6,7 +6,7 @@ audience: faculty
 difficulty: quick-win
 time_to_use: <2min
 visual: text-only
-tags: lecture, polls
+tags: polls, audience-engagement, live-teaching
 verified_models: TODO
 best_model: Claude Sonnet 4.6
 last_updated: 2026-05-17
@@ -14,49 +14,69 @@ last_updated: 2026-05-17
 
 ## What this prompt does
 
-Generate audience poll questions at specific moments in a lecture to drive engagement and surface misconceptions. Different from MCQs — polls are designed for live response and discussion, not assessment.
+Generates audience poll questions for a live talk — designed for engagement and misconception-surfacing, not assessment. Each poll has a "wrong" answer that most of the audience will pick (by design — that's where the teaching beat is), with notes on what to say at each likely audience distribution.
+
+The discipline this enforces: a poll where everyone gets it right immediately is a failed poll.
 
 ## When to use it
 
-When you're delivering a 30-60 minute talk and want to break up the lecture rhythm with 2-3 polling moments. Poll questions need different design than test questions.
+When you're delivering a 30-60 minute talk and want 2-3 polling moments to break the lecture rhythm and surface misconceptions. Pairs well with the slide outline prompt.
+
+**Not for:** assessment questions (use MCQ generator), polls in workshops (different format and audience dynamics), or audiences who won't engage with polls (read the room first).
 
 ## The prompt
 
 ```
-Generate [N] audience poll questions for a [duration]-minute lecture on [topic] for [audience].
+You are generating audience poll questions for a live talk. These are teaching moments, not assessments. A poll where everyone gets it right immediately is a failed poll — the wrong answer must be plausibly attractive.
 
-Each poll should:
+## What I'm building
 
-1. Be answerable in 30-60 seconds — short stem, ideally 3 answer choices (not 5).
-2. **Have a 'wrong' answer that most of the audience will pick**, by design. The polling moment is teaching, not assessment — the value is in the wrong answer being common and the explanation being illuminating.
-3. **Map to a specific point in the lecture** where it serves as a transition or a moment of misconception-surfacing.
-4. Include a 1-2 sentence note for me on how to use the result: what to say when the audience splits 60/30/10, what to say when they all get it right.
+- **Talk topic and duration:** [e.g., "approach to monoclonal gammopathy, 45 min"]
+- **Audience:** [PGY level / faculty / mixed — calibrates difficulty]
+- **Number of polls:** [usually 2-3]
+- **Where in the talk you want them:** [optional — e.g., "after the diagnosis section, before treatment"]
 
-For each poll, provide:
+## For each poll, produce
 
-- The question and answer choices.
-- The intended placement in the lecture.
-- The likely audience distribution.
-- The teaching beat that follows.
+1. **The question** — short stem, ideally 3 answer choices (not 5). Should be answerable in 30-60 seconds.
+2. **Answer choices** with the correct answer marked
+3. **The "intended wrong answer"** — the answer most of the audience will pick. This is the teaching opportunity.
+4. **Why residents pick the wrong answer** — the specific misconception or cognitive shortcut.
+5. **Predicted audience distribution** (e.g., "30% correct, 50% intended wrong, 20% other")
+6. **Suggested placement in the talk** — where it serves as a transition or misconception-surfacing moment
+7. **What to say at each likely result:**
+   - "If 60% pick the intended wrong answer..." → your teaching response
+   - "If they all get it right..." → your pivot (still useful, just shorter)
+   - "If they split..." → your acknowledgment
 
-**Important — refinement:** Avoid polls where the correct answer is obvious to anyone awake. The polling moment fails — and engagement craters — if everyone gets it right immediately. The 'wrong' answer must be plausibly attractive.
+## Hard rules
+
+- **Each poll must have a "wrong" answer that's plausibly attractive.** No obvious throwaways.
+- **The teaching response — what to say after the poll — is non-negotiable.** Without it, the poll lands flat.
+- **Don't over-poll.** 2-3 polls in a 45-min talk is right; more becomes a quiz show.
+- **Specific placement.** "Use this poll somewhere in the talk" is not specific.
+
+## What I will NOT accept
+
+- Polls with obvious right answers
+- "Suggested wrong" that no one would actually pick
+- No teaching response for the most likely audience distribution
 ```
 
 ## Expected output
 
-N polls with placement, expected distribution, and follow-up teaching beats. The polls should feel like *teaching moments*, not pop quizzes.
+N polls with all 7 elements. Total ~500-800 words for 3 polls.
 
 ## Common failure modes
 
-- Polls are designed as assessment, with one obvious right answer — kills engagement.
-- The 'common wrong answer' is not actually common — model misjudges audience.
-- No suggestion for what to do with the result, so the poll lands flat.
+- **Obvious right answer.** Push back: "Make the wrong answer more attractive."
+- **Generic teaching responses.** Push back for specific.
 
 ## Required human verification
 
-- Run the poll past a colleague at the target audience level. If they get the 'intended wrong answer' right cold, the poll won't work as designed.
+- Pre-test the poll with a colleague at the target audience level — if they get the intended-wrong answer right cold, the poll won't work.
 - Verify the correct answer.
 
 ## Best model and why
 
-**Claude Sonnet 4.6** — Sonnet produces poll questions with reasonable predicted distributions. The 'plausibly wrong' answer is the discipline test — verify each poll passes that bar regardless of model.
+**Claude Sonnet 4.6** — poll generation with predicted distributions is well within Sonnet's range. The discipline (plausibly-wrong answer) matters more than model depth.

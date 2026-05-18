@@ -6,7 +6,7 @@ audience: faculty
 difficulty: quick-win
 time_to_use: 2-10min
 visual: text-only
-tags: lecture, speaker-notes
+tags: lecture, speaker-notes, spoken-voice
 verified_models: TODO
 best_model: Claude Sonnet 4.6
 last_updated: 2026-05-17
@@ -14,49 +14,76 @@ last_updated: 2026-05-17
 
 ## What this prompt does
 
-Generate speaker notes for an existing slide deck by pasting slide titles and bullet points, with the model filling in the connective tissue between bullets.
+Generates speaker notes for your existing slide deck: paste your slide titles + bullets, get back per-slide notes that expand bullets into spoken prose, include the specific example to use, mark interaction beats, and bridge to the next slide. Notes are in SPOKEN voice — short sentences, no jargon you wouldn't actually say.
 
 ## When to use it
 
-When you've made slides but haven't rehearsed yet, and need a script to anchor your first pass through the deck. Best for talks you'll give multiple times — the notes get refined each iteration.
+When you've built slides but haven't yet rehearsed, or when you'll be delivering the same talk multiple times and want a script to anchor your first pass. The notes get refined each iteration.
+
+**Not for:** writing the slides themselves (use the slide outline prompt), generating substantive new content (the model fills in connective tissue — your bullets supply the substance), or any context where written-voice formality is expected (different format).
 
 ## The prompt
 
 ```
-Generate speaker notes for the following slide deck. The talk is [N] minutes total for [audience].
+You are generating speaker notes for an existing slide deck. Notes must be in SPOKEN voice. Aloud-test as you write — if a sentence reads like written prose, rewrite for the ear.
 
-For each slide, write speaker notes that:
+## What I'm providing
 
-1. Open with a transition sentence connecting from the previous slide.
-2. Explain each bullet in 2-3 spoken sentences (more than the slide says, less than a paragraph).
-3. Include the one specific example, anecdote, or analogy I should use here. Be concrete — 'the Bethesda case from last week' not 'a recent case'.
-4. End with a bridge sentence to the next slide.
+- **Talk title and duration:** [e.g., "Approach to monoclonal gammopathy, 45 min + 15 min Q&A"]
+- **Audience:** [PGY level / faculty / mixed]
+- **Slide content:** [paste slide titles + bullet content, one slide per block]
+- **My specific examples / anecdotes / cases:** [paste the ones I want to use]
+- **My delivery style:** [conversational / formal / Socratic — pick]
 
-If a slide is a visual or a diagram with minimal text, the speaker notes should be longer — that's where I'm explaining what the audience sees.
+## For each slide, produce
 
-Mark moments to pause for questions or audience interaction.
+1. **Transition sentence from the previous slide** (1 sentence — the bridge that makes the lecture feel continuous)
+2. **Expansion of each bullet into 2-3 spoken sentences** (more than the slide says, less than a paragraph)
+3. **The specific example, anecdote, or analogy I should use here** — drawn from what I gave you. If I didn't provide one for a slide that needs it, mark `[INSERT EXAMPLE]`.
+4. **Bridge sentence to the next slide** (1 sentence)
+5. **Interaction marker** if this slide has a poll, audience question, or case to think about — bracketed `[PAUSE FOR POLL]` or similar
 
-Slides:
-[paste slide titles + bullet content, one slide per block]
+## For visual/diagram slides with minimal text
 
-**Important — refinement:** Notes should be in spoken voice. If a sentence reads like written prose ('It is important to recognize that...'), rewrite it for the ear ('Here's what to notice...'). Aloud-test as you write.
+Speaker notes should be LONGER, not shorter. The visual is your prompt; the notes are where you explain what the audience sees. Walk through the visual systematically: "On the left, you'll see... in the middle... on the right..."
+
+## Tone and voice
+
+- **Short sentences.** Speakers can hold ~15 words at a time, not 40.
+- **Conversational vocabulary.** If a word feels like reading-vocab, replace it.
+- **First person plural** where appropriate ("we know", "we've seen") rather than passive voice.
+- **One thought per sentence.** Embedded clauses lose listeners.
+
+## Hard rules
+
+- **Notes are spoken voice, not written voice.** If a sentence reads like a journal article, rewrite for the ear.
+- **Do not invent clinical content** I didn't provide on the slides. Connective tissue only.
+- **Mark `[INSERT EXAMPLE]`** rather than making up an anecdote.
+- **Transition sentences are non-optional.** They make the lecture feel continuous.
+
+## What I will NOT accept
+
+- Notes that sound like written prose ("It is important to recognize that...")
+- Generic examples ("a recent case")
+- Slide notes that fabricate content not on the slide
+- Missing transitions
 ```
 
 ## Expected output
 
-Per-slide speaker notes with transitions, expansions, specific examples, and bridges. The notes should be in spoken voice, not written voice — short sentences, no jargon you wouldn't actually say.
+Per-slide notes with transitions, expansions, specific examples, bridges, and interaction markers. Length scales with number of slides.
 
 ## Common failure modes
 
-- The notes are written voice ('It is important to recognize that...') rather than spoken voice.
-- The 'specific example' is generic ('think of a recent case').
-- Transition sentences are formulaic ('Moving on to slide X').
+- **Written voice slipping in.** Push back: "Read aloud. Does it sound like you?"
+- **Fabricated examples** when you didn't supply one. Push back: "Mark [INSERT EXAMPLE]; don't invent."
+- **Generic clinical content added** beyond what's on the slide. Push back.
 
 ## Required human verification
 
-- Verify any clinical content the model adds beyond what was on the slide. The model fills in gaps and sometimes fills them with confident-wrong content.
+- Verify any clinical content the model added beyond what was on the slide. The model fills gaps and sometimes fills them wrong.
 - Rehearse the notes aloud. Spoken language reveals problems written language hides.
 
 ## Best model and why
 
-**Claude Sonnet 4.6** — Expanding bullets into spoken-voice notes is a workhorse task. Sonnet's voice is more natural for spoken delivery than GPT-4o (which tends toward written register).
+**Claude Sonnet 4.6** — expanding bullets into natural spoken voice is a workhorse task. Sonnet's voice is more natural for spoken delivery than GPT-4o (tends toward written register).

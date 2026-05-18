@@ -24,6 +24,7 @@ A note on the **Companion App Builder** at the bottom of this page: it is a stan
 - [Certificate of completion template](library.html#/library/pillar-3-educational-operations/prompts/workshops/certificate-of-completion)
 - [Post-workshop thank-you email](library.html#/library/pillar-3-educational-operations/prompts/workshops/post-workshop-thank-you)
 - [Faculty feedback summary email](library.html#/library/pillar-3-educational-operations/prompts/workshops/faculty-feedback-summary)
+- [Lab incident debrief template](library.html#/library/pillar-3-educational-operations/prompts/workshops/lab-incident-debrief)
 
 ### Rotations
 
@@ -35,6 +36,8 @@ A note on the **Companion App Builder** at the bottom of this page: it is a stan
 - [Mid-rotation feedback template](library.html#/library/pillar-3-educational-operations/prompts/rotations/mid-rotation-feedback)
 - [End-of-rotation evaluation](library.html#/library/pillar-3-educational-operations/prompts/rotations/end-of-rotation-evaluation)
 - [Resident-to-resident handoff document](library.html#/library/pillar-3-educational-operations/prompts/rotations/resident-to-resident-handoff)
+- [Call schedule generator with constraints](library.html#/library/pillar-3-educational-operations/prompts/rotations/call-schedule-generator)
+- [Rotation block scheduling across an academic year](library.html#/library/pillar-3-educational-operations/prompts/rotations/rotation-block-scheduling)
 
 ### Courses
 
@@ -43,6 +46,8 @@ A note on the **Companion App Builder** at the bottom of this page: it is a stan
 - [Assignment grading rubric](library.html#/library/pillar-3-educational-operations/prompts/courses/assignment-grading-rubric)
 - [Course feedback collection form](library.html#/library/pillar-3-educational-operations/prompts/courses/feedback-collection-form)
 - [Course post-mortem document](library.html#/library/pillar-3-educational-operations/prompts/courses/course-postmortem)
+- [IRB protocol for QI or educational research](library.html#/library/pillar-3-educational-operations/prompts/courses/irb-qi-protocol)
+- [Promotion / portfolio teaching narrative](library.html#/library/pillar-3-educational-operations/prompts/courses/promotion-portfolio-narrative)
 
 ### Conferences and journal clubs
 
@@ -51,6 +56,8 @@ A note on the **Companion App Builder** at the bottom of this page: it is a stan
 - [Grand rounds speaker prep](library.html#/library/pillar-3-educational-operations/prompts/conferences-and-journal-clubs/grand-rounds-speaker-prep)
 - [Conference schedule and topic rotation](library.html#/library/pillar-3-educational-operations/prompts/conferences-and-journal-clubs/conference-schedule)
 - [Q&A preparation document](library.html#/library/pillar-3-educational-operations/prompts/conferences-and-journal-clubs/qa-prep-doc)
+- [Visiting professor invitation letter](library.html#/library/pillar-3-educational-operations/prompts/conferences-and-journal-clubs/visiting-professor-invitation)
+- [Conference abstract for medical education research](library.html#/library/pillar-3-educational-operations/prompts/conferences-and-journal-clubs/medical-education-abstract)
 
 ### Companion App Builder (standalone)
 

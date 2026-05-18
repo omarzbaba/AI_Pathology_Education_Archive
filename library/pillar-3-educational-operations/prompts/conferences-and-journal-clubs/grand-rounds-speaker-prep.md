@@ -6,55 +6,55 @@ audience: faculty
 difficulty: intermediate
 time_to_use: >10min
 visual: text-only
-tags: grand-rounds, speaker-prep
+tags: grand-rounds, speaker-prep, audience-reading
 verified_models: TODO
 best_model: Claude Opus 4.7
 last_updated: 2026-05-17
 ---
 
-## What this prompt does
-
-Generate a grand rounds speaker prep document with audience profile, expected questions, recommended visuals, and timing breakdown.
-
-## When to use it
-
-2-3 weeks before grand rounds, when you've accepted the invitation and need to start preparing. Skips the 'where do I even start' phase.
-
 ## The prompt
 
 ```
-I'm giving grand rounds on [topic] at [institution] on [date]. The talk is [duration] minutes plus Q&A. The audience is [mix — usually attendings, fellows, residents, sometimes med students or outside guests].
+You are helping me prep for grand rounds. Read the host institution's culture if I describe it; ask if you don't know it.
 
-Help me prepare. Generate:
+## What I'm preparing
 
-1. **Audience profile**: who's likely in the room, what they know about the topic coming in, what they want to walk away with.
-2. **Talk structure** (high-level): opening hook (which approach — a case? a statistic? a contrarian framing?), 3-4 content beats, synthesis. Estimated timing for each.
-3. **Recommended visuals**: 2-3 specific visuals that will land in this audience (a graph, a side-by-side comparison, a clinical photo) — describe what each would show.
-4. **5 questions** I should be ready for:
-   - 2 from a content expert (the attending in the audience who knows the topic best).
-   - 2 from a generalist (the medical director or chief who wants the high-level take).
-   - 1 from a trainee (the resident who wants the practical takeaway).
-5. **What to NOT do**: 2-3 framings, opening lines, or rhetorical moves that will misfire with this audience at this institution.
-6. **A 'walking away' line**: the one sentence the audience should remember 24 hours later.
+- **Topic:** [be specific]
+- **Institution:** [name + general culture if I know it]
+- **Date:** [when]
+- **Duration:** [talk + Q&A]
+- **Audience composition:** [mix]
 
-**Important — refinement:** If you don't know the host institution's culture, ASK me what would be a misfire (e.g., references to specific local politics, recent institutional events, in-jokes) before drafting 'what not to do'. Do not guess about a culture you don't know.
+## What to produce
+
+1. **Audience profile** — who's likely there, what they know, what they want
+2. **Talk structure** — opening hook approach + 3-4 content beats + synthesis (with timing)
+3. **Recommended visuals** — 2-3 specific visuals that will land
+4. **5 Q&A questions to prep for**:
+   - 2 from a content expert
+   - 2 from a generalist
+   - 1 from a trainee
+5. **What NOT to do** — 2-3 framings that will misfire at this institution. ASK ME about institutional culture before drafting this if you don't know.
+6. **The "walking away" line** — one sentence the audience will remember 24 hours later
+
+## Hard rules
+
+- Ask about institutional culture before guessing
+- Specific visuals, not generic
+- Walking-away line testable in 24 hours
+
+## What I will NOT accept
+
+- Generic audience profile
+- "What not to do" guessed at without knowing the institution
+- Walking-away line that's too long or vague
 ```
-
-## Expected output
-
-A prep document I can use to structure my preparation, not a script. Includes audience-specific Q&A prep.
-
-## Common failure modes
-
-- 'Audience profile' is generic.
-- 'What not to do' is empty or platitudinous.
-- The walking-away line is too long or too vague.
 
 ## Required human verification
 
-- Run the audience profile by a colleague at the host institution if you can — they'll know specifics you don't.
-- The walking-away line should be testable: would the audience be able to repeat it tomorrow?
+- Validate audience profile with someone at the host institution.
+- Walking-away line should be repeatable from memory tomorrow.
 
 ## Best model and why
 
-**Claude Opus 4.7** — Reading the host institution's culture and anticipating sophisticated questions from content experts requires depth. Opus is the right tier.
+**Claude Opus 4.7** — audience reading and anticipating sophisticated questions requires depth.

@@ -403,13 +403,13 @@
             },
             {
               "title": "Matched case pair — reactive vs neoplastic",
-              "intent": "Generate two cases that share a superficial presentation but resolve to different diagnoses, designed to highlight a specific discriminating feature. The…",
+              "intent": "Generates two case vignettes that share superficial features but diverge on a specific discriminating feature — the one you want to teach. The pair…",
               "difficulty": "advanced",
               "time_to_use": "2-10min",
               "visual": "text-only",
               "audience": "faculty",
               "best_model": "Claude Opus 4.7",
-              "tags": "vignette, differential",
+              "tags": "vignette, differential, paired-cases",
               "slug": "matched-case-pair",
               "path": "library/pillar-2-teaching/prompts/matched-case-pair.md",
               "category": "teach"
@@ -434,65 +434,65 @@
           "prompts": [
             {
               "title": "Slide outline for a 1-hour lecture",
-              "intent": "Generate a slide outline for a 1-hour lecture, including timing, beat structure, and recommended visuals for each slide.",
+              "intent": "Generates a slide outline for a 1-hour lecture: 35-45 slides, beat structure (hook → roadmap → 3-4 content beats → synthesis → Q&A), per-slide visuals,…",
               "difficulty": "intermediate",
               "time_to_use": ">10min",
               "visual": "text-only",
               "audience": "faculty",
               "best_model": "Claude Sonnet 4.6",
-              "tags": "lecture, slides",
+              "tags": "lecture, slides, timing",
               "slug": "slide-outline-1hr",
               "path": "library/pillar-2-teaching/prompts/slide-outline-1hr.md",
               "category": "teach"
             },
             {
               "title": "Speaker notes for existing slides",
-              "intent": "Generate speaker notes for an existing slide deck by pasting slide titles and bullet points, with the model filling in the connective tissue between bullets.",
+              "intent": "Generates speaker notes for your existing slide deck: paste your slide titles + bullets, get back per-slide notes that expand bullets into spoken prose,…",
               "difficulty": "quick-win",
               "time_to_use": "2-10min",
               "visual": "text-only",
               "audience": "faculty",
               "best_model": "Claude Sonnet 4.6",
-              "tags": "lecture, speaker-notes",
+              "tags": "lecture, speaker-notes, spoken-voice",
               "slug": "speaker-notes",
               "path": "library/pillar-2-teaching/prompts/speaker-notes.md",
               "category": "teach"
             },
             {
               "title": "Visual metaphor brainstorming",
-              "intent": "Generate visual metaphors for an abstract concept, ranked by precision vs accessibility. The point is not to pick the metaphor for you but to surface…",
+              "intent": "Generates 5-7 candidate visual metaphors for an abstract concept, with explicit precision-vs-accessibility tradeoffs scored for each. The point isn't to…",
               "difficulty": "quick-win",
               "time_to_use": "<2min",
               "visual": "text-only",
               "audience": "faculty",
               "best_model": "Claude Opus 4.7",
-              "tags": "lecture, metaphor",
+              "tags": "teaching, metaphor, abstract-concepts",
               "slug": "visual-metaphor",
               "path": "library/pillar-2-teaching/prompts/visual-metaphor.md",
               "category": "teach"
             },
             {
               "title": "Audience poll question generation",
-              "intent": "Generate audience poll questions at specific moments in a lecture to drive engagement and surface misconceptions. Different from MCQs — polls are designed…",
+              "intent": "Generates audience poll questions for a live talk — designed for engagement and misconception-surfacing, not assessment. Each poll has a \"wrong\" answer that…",
               "difficulty": "quick-win",
               "time_to_use": "<2min",
               "visual": "text-only",
               "audience": "faculty",
               "best_model": "Claude Sonnet 4.6",
-              "tags": "lecture, polls",
+              "tags": "polls, audience-engagement, live-teaching",
               "slug": "audience-polls",
               "path": "library/pillar-2-teaching/prompts/audience-polls.md",
               "category": "teach"
             },
             {
               "title": "Video script and storyboard",
-              "intent": "Draft a video script and storyboard for a short educational explainer, with shot suggestions and on-screen text cues.",
+              "intent": "Drafts a 2-column video script (narration / visuals) for a short educational explainer, with timed beats, specific visual cues, opening hook, and a single…",
               "difficulty": "advanced",
               "time_to_use": ">10min",
               "visual": "text-only",
               "audience": "faculty",
               "best_model": "Claude Sonnet 4.6",
-              "tags": "video, scripting",
+              "tags": "video, scripting, storyboard",
               "slug": "video-script",
               "path": "library/pillar-2-teaching/prompts/video-script.md",
               "category": "teach"
@@ -517,13 +517,13 @@
           "prompts": [
             {
               "title": "Resident feedback note drafting",
-              "intent": "Convert bullet-point observations from a rotation into a polished feedback note, preserving specificity while improving readability.",
+              "intent": "Converts your bullet observations from a rotation into a polished feedback note that residents will actually read and remember. Strict discipline: every…",
               "difficulty": "intermediate",
               "time_to_use": "2-10min",
               "visual": "text-only",
               "audience": "faculty",
               "best_model": "Claude Opus 4.7",
-              "tags": "feedback, narrative",
+              "tags": "feedback, narrative, evidence-based",
               "slug": "resident-feedback-note",
               "path": "library/pillar-2-teaching/prompts/resident-feedback-note.md",
               "category": "write"
@@ -574,39 +574,39 @@
           "prompts": [
             {
               "title": "Journal club discussion questions",
-              "intent": "Generate 5 discussion questions for a journal club paper, ranging from methods critique to clinical implications.",
+              "intent": "Generates 5 discussion questions for journal club, ordered from concrete (methods, numbers) to abstract (implications, practice-change) and ending with one…",
               "difficulty": "quick-win",
               "time_to_use": "<2min",
               "visual": "text-only",
               "audience": "faculty",
               "best_model": "Claude Sonnet 4.6",
-              "tags": "journal-club, discussion",
+              "tags": "journal-club, discussion, escalating-questions",
               "slug": "journal-club-discussion-q",
               "path": "library/pillar-2-teaching/prompts/journal-club-discussion-q.md",
               "category": "discuss"
             },
             {
               "title": "Tumor board case presentation template",
-              "intent": "Generate a tumor board case presentation outline given clinical history, imaging, and pathology findings. Tumor board presentations have a specific…",
+              "intent": "Generates a tumor board case presentation outline that walks through history → imaging → pathology in the order the audience needs it, ends with an explicit…",
               "difficulty": "intermediate",
               "time_to_use": "2-10min",
               "visual": "text-only",
               "audience": "faculty",
               "best_model": "Claude Sonnet 4.6",
-              "tags": "tumor-board, presentation",
+              "tags": "tumor-board, presentation, structured-format",
               "slug": "tumor-board-presentation",
               "path": "library/pillar-2-teaching/prompts/tumor-board-presentation.md",
               "category": "discuss"
             },
             {
               "title": "Resident-as-teacher scaffolding",
-              "intent": "Scaffold a resident-as-teacher session: how would you teach this topic to a junior resident, what are the common misconceptions, what is the one slide you…",
+              "intent": "Scaffolds a teaching session for a resident who has been asked to teach — typically for the first time. Forces the resident to think about teaching as a…",
               "difficulty": "intermediate",
               "time_to_use": "2-10min",
               "visual": "text-only",
-              "audience": "faculty",
+              "audience": "resident",
               "best_model": "Claude Sonnet 4.6",
-              "tags": "rat, teaching-skills",
+              "tags": "resident-as-teacher, scaffolding, teaching-skills",
               "slug": "resident-as-teacher",
               "path": "library/pillar-2-teaching/prompts/resident-as-teacher.md",
               "category": "teach"
@@ -773,15 +773,28 @@
             },
             {
               "title": "Faculty feedback summary email",
-              "intent": "Convert raw feedback comments into a summary email to faculty, themed by issue and ordered by frequency, with suggested actions.",
+              "intent": "Converts raw attendee feedback into a faculty debrief email organized by theme, ordered by frequency, with honest separation of signal vs noise and ranked…",
               "difficulty": "intermediate",
               "time_to_use": "2-10min",
               "visual": "text-only",
               "audience": "faculty",
               "best_model": "Claude Opus 4.7",
-              "tags": "comms, debrief",
+              "tags": "feedback, debrief, themes",
               "slug": "faculty-feedback-summary",
               "path": "library/pillar-3-educational-operations/prompts/workshops/faculty-feedback-summary.md",
+              "category": "debrief"
+            },
+            {
+              "title": "Lab incident debrief template",
+              "intent": "Generates a structured debrief template for when something has gone wrong in the lab — specimen lost, critical value missed, mis-identification,…",
+              "difficulty": "advanced",
+              "time_to_use": ">10min",
+              "visual": "text-only",
+              "audience": "faculty",
+              "best_model": "Claude Opus 4.7",
+              "tags": "incident, debrief, just-culture, quality",
+              "slug": "lab-incident-debrief",
+              "path": "library/pillar-3-educational-operations/prompts/workshops/lab-incident-debrief.md",
               "category": "debrief"
             }
           ]
@@ -804,13 +817,13 @@
             },
             {
               "title": "Rotation expectations document",
-              "intent": "Generate a rotation expectations document with milestone-aligned objectives, daily and weekly responsibilities, and the supervision model.",
+              "intent": "Generates a rotation expectations document mapping objectives to milestones, specifying daily/weekly responsibilities, defining the supervision model, and…",
               "difficulty": "intermediate",
-              "time_to_use": "2-10min",
+              "time_to_use": ">10min",
               "visual": "text-only",
               "audience": "program-director",
               "best_model": "Claude Sonnet 4.6",
-              "tags": "expectations, syllabus",
+              "tags": "expectations, syllabus, milestones",
               "slug": "expectations-doc",
               "path": "library/pillar-3-educational-operations/prompts/rotations/expectations-doc.md",
               "category": "template"
@@ -843,13 +856,13 @@
             },
             {
               "title": "Rotation evaluation rubric",
-              "intent": "Generate a rotation evaluation rubric with milestone-aligned dimensions and behavioral anchors for each level.",
-              "difficulty": "intermediate",
+              "intent": "Generates a milestone-aligned evaluation rubric with behaviorally-anchored level descriptors. The key discipline: anchors describe OBSERVABLE BEHAVIORS, not…",
+              "difficulty": "advanced",
               "time_to_use": ">10min",
               "visual": "text-only",
               "audience": "program-director",
               "best_model": "Claude Opus 4.7",
-              "tags": "evaluation, rubric",
+              "tags": "evaluation, rubric, milestone-alignment",
               "slug": "evaluation-rubric",
               "path": "library/pillar-3-educational-operations/prompts/rotations/evaluation-rubric.md",
               "category": "assess"
@@ -892,6 +905,32 @@
               "slug": "resident-to-resident-handoff",
               "path": "library/pillar-3-educational-operations/prompts/rotations/resident-to-resident-handoff.md",
               "category": "debrief"
+            },
+            {
+              "title": "Call schedule generator with constraints",
+              "intent": "Generates a fair call schedule respecting constraints (vacations, time-off requests, ACGME work-hour rules, fairness across residents, weekend equity). This…",
+              "difficulty": "intermediate",
+              "time_to_use": ">10min",
+              "visual": "text-only",
+              "audience": "program-director",
+              "best_model": "Claude Opus 4.7",
+              "tags": "call-schedule, planning, constraints",
+              "slug": "call-schedule-generator",
+              "path": "library/pillar-3-educational-operations/prompts/rotations/call-schedule-generator.md",
+              "category": "plan"
+            },
+            {
+              "title": "Rotation block scheduling across an academic year",
+              "intent": "Generates a year-long rotation block schedule respecting required experiences, board prep timing, elective preferences, and constraints (vacation,…",
+              "difficulty": "advanced",
+              "time_to_use": ">10min",
+              "visual": "text-only",
+              "audience": "program-director",
+              "best_model": "Claude Opus 4.7",
+              "tags": "rotation-schedule, annual-planning, constraints",
+              "slug": "rotation-block-scheduling",
+              "path": "library/pillar-3-educational-operations/prompts/rotations/rotation-block-scheduling.md",
+              "category": "plan"
             }
           ]
         },
@@ -900,13 +939,13 @@
           "prompts": [
             {
               "title": "Course syllabus",
-              "intent": "Generate a course syllabus with weekly topics, learning objectives, assessment plan, and policy language.",
+              "intent": "Generates a complete course syllabus with weekly schedule, objectives, assessment plan, resources, policies (including an EXPLICIT AI use policy — not…",
               "difficulty": "intermediate",
               "time_to_use": ">10min",
               "visual": "text-only",
               "audience": "faculty",
               "best_model": "Claude Sonnet 4.6",
-              "tags": "syllabus, course",
+              "tags": "syllabus, course, policies",
               "slug": "syllabus",
               "path": "library/pillar-3-educational-operations/prompts/courses/syllabus.md",
               "category": "template"
@@ -926,13 +965,13 @@
             },
             {
               "title": "Assignment grading rubric",
-              "intent": "Generate a rubric for a specific assignment with dimensions, level descriptors, and a scoring guide.",
+              "intent": "",
               "difficulty": "intermediate",
               "time_to_use": "2-10min",
               "visual": "text-only",
               "audience": "faculty",
               "best_model": "Claude Opus 4.7",
-              "tags": "rubric, grading",
+              "tags": "rubric, grading, assessment",
               "slug": "assignment-grading-rubric",
               "path": "library/pillar-3-educational-operations/prompts/courses/assignment-grading-rubric.md",
               "category": "assess"
@@ -962,6 +1001,32 @@
               "slug": "course-postmortem",
               "path": "library/pillar-3-educational-operations/prompts/courses/course-postmortem.md",
               "category": "debrief"
+            },
+            {
+              "title": "IRB protocol for QI or educational research",
+              "intent": "Drafts a starting IRB protocol for an educational intervention or quality improvement study — the type most pathology educators do. Walks through whether…",
+              "difficulty": "advanced",
+              "time_to_use": ">10min",
+              "visual": "text-only",
+              "audience": "faculty",
+              "best_model": "Claude Opus 4.7",
+              "tags": "irb, qi, educational-research, regulatory",
+              "slug": "irb-qi-protocol",
+              "path": "library/pillar-3-educational-operations/prompts/courses/irb-qi-protocol.md",
+              "category": "template"
+            },
+            {
+              "title": "Promotion / portfolio teaching narrative",
+              "intent": "Drafts the \"teaching and education\" narrative section of a faculty promotion portfolio. This is the high-stakes annual writing that committee members read…",
+              "difficulty": "advanced",
+              "time_to_use": ">10min",
+              "visual": "text-only",
+              "audience": "faculty",
+              "best_model": "Claude Opus 4.7",
+              "tags": "promotion, portfolio, teaching-narrative, high-stakes",
+              "slug": "promotion-portfolio-narrative",
+              "path": "library/pillar-3-educational-operations/prompts/courses/promotion-portfolio-narrative.md",
+              "category": "write"
             }
           ]
         },
@@ -970,13 +1035,13 @@
           "prompts": [
             {
               "title": "Journal club packet generation",
-              "intent": "Generate a journal club packet with paper summary, background context, key results, methodologic critique, and discussion questions.",
+              "intent": "",
               "difficulty": "intermediate",
               "time_to_use": "2-10min",
               "visual": "text-only",
               "audience": "faculty",
               "best_model": "Claude Opus 4.7 with paper attached",
-              "tags": "journal-club, packet",
+              "tags": "journal-club, packet, paper-engagement",
               "slug": "journal-club-packet",
               "path": "library/pillar-3-educational-operations/prompts/conferences-and-journal-clubs/journal-club-packet.md",
               "category": "discuss"
@@ -996,13 +1061,13 @@
             },
             {
               "title": "Grand rounds speaker prep",
-              "intent": "Generate a grand rounds speaker prep document with audience profile, expected questions, recommended visuals, and timing breakdown.",
+              "intent": "",
               "difficulty": "intermediate",
               "time_to_use": ">10min",
               "visual": "text-only",
               "audience": "faculty",
               "best_model": "Claude Opus 4.7",
-              "tags": "grand-rounds, speaker-prep",
+              "tags": "grand-rounds, speaker-prep, audience-reading",
               "slug": "grand-rounds-speaker-prep",
               "path": "library/pillar-3-educational-operations/prompts/conferences-and-journal-clubs/grand-rounds-speaker-prep.md",
               "category": "discuss"
@@ -1022,16 +1087,42 @@
             },
             {
               "title": "Q&A preparation document",
-              "intent": "Generate a Q&A preparation document anticipating audience questions and providing concise, evidence-backed responses.",
+              "intent": "",
               "difficulty": "intermediate",
               "time_to_use": "2-10min",
               "visual": "text-only",
               "audience": "faculty",
               "best_model": "Claude Opus 4.7",
-              "tags": "qa, prep",
+              "tags": "qa-prep, presentation, anticipation",
               "slug": "qa-prep-doc",
               "path": "library/pillar-3-educational-operations/prompts/conferences-and-journal-clubs/qa-prep-doc.md",
               "category": "discuss"
+            },
+            {
+              "title": "Visiting professor invitation letter",
+              "intent": "Drafts the formal invitation letter to a visiting professor for a grand rounds talk or visiting professorship. Substantive enough that the invitee takes it…",
+              "difficulty": "quick-win",
+              "time_to_use": "2-10min",
+              "visual": "text-only",
+              "audience": "faculty",
+              "best_model": "Claude Sonnet 4.6",
+              "tags": "visiting-professor, invitation, hospitality",
+              "slug": "visiting-professor-invitation",
+              "path": "library/pillar-3-educational-operations/prompts/conferences-and-journal-clubs/visiting-professor-invitation.md",
+              "category": "comms"
+            },
+            {
+              "title": "Conference abstract for medical education research",
+              "intent": "Drafts a conference abstract for medical education research (AAMC, AMEE, society educational sections). Medical education abstracts follow different…",
+              "difficulty": "intermediate",
+              "time_to_use": ">10min",
+              "visual": "text-only",
+              "audience": "faculty",
+              "best_model": "Claude Sonnet 4.6",
+              "tags": "abstract, medical-education-research, scholarship",
+              "slug": "medical-education-abstract",
+              "path": "library/pillar-3-educational-operations/prompts/conferences-and-journal-clubs/medical-education-abstract.md",
+              "category": "write"
             }
           ]
         }

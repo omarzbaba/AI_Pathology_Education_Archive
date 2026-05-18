@@ -66,6 +66,14 @@ CATEGORY = {
     "tumor-board-prep-coaching": "discuss",
     "subspecialty-rotation-goals-letter": "comms",
     "difficult-feedback-conversation-prep": "write",
+    # New Pillar 3 prompts (batch 3)
+    "call-schedule-generator": "plan",
+    "lab-incident-debrief": "debrief",
+    "visiting-professor-invitation": "comms",
+    "irb-qi-protocol": "template",
+    "promotion-portfolio-narrative": "write",
+    "medical-education-abstract": "write",
+    "rotation-block-scheduling": "plan",
     # Pillar 3 — Operations
     "announcement-registration": "comms",
     "pre-workshop-survey": "comms",
@@ -146,16 +154,20 @@ PILLAR_DIRS = [
         ("Workshops", "library/pillar-3-educational-operations/prompts/workshops", [
             "announcement-registration","pre-workshop-survey","facilitator-runofshow","station-by-station-guide",
             "badge-design-spec","access-card-layout","certificate-of-completion","post-workshop-thank-you","faculty-feedback-summary",
+            "lab-incident-debrief",
         ]),
         ("Rotations", "library/pillar-3-educational-operations/prompts/rotations", [
             "orientation-onepager","expectations-doc","reading-list","daily-schedule",
             "evaluation-rubric","mid-rotation-feedback","end-of-rotation-evaluation","resident-to-resident-handoff",
+            "call-schedule-generator","rotation-block-scheduling",
         ]),
         ("Courses", "library/pillar-3-educational-operations/prompts/courses", [
             "syllabus","weekly-module-packet","assignment-grading-rubric","feedback-collection-form","course-postmortem",
+            "irb-qi-protocol","promotion-portfolio-narrative",
         ]),
         ("Conferences & journal clubs", "library/pillar-3-educational-operations/prompts/conferences-and-journal-clubs", [
             "journal-club-packet","tumor-board-case-packet","grand-rounds-speaker-prep","conference-schedule","qa-prep-doc",
+            "visiting-professor-invitation","medical-education-abstract",
         ]),
     ]),
 ]

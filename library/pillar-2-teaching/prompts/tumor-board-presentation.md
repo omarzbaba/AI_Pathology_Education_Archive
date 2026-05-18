@@ -6,7 +6,7 @@ audience: faculty
 difficulty: intermediate
 time_to_use: 2-10min
 visual: text-only
-tags: tumor-board, presentation
+tags: tumor-board, presentation, structured-format
 verified_models: TODO
 best_model: Claude Sonnet 4.6
 last_updated: 2026-05-17
@@ -14,52 +14,74 @@ last_updated: 2026-05-17
 
 ## What this prompt does
 
-Generate a tumor board case presentation outline given clinical history, imaging, and pathology findings. Tumor board presentations have a specific structure that AI can reliably scaffold.
+Generates a tumor board case presentation outline that walks through history → imaging → pathology in the order the audience needs it, ends with an explicit decision question for the board, and anticipates the 2-3 most likely follow-up questions.
+
+The hardest discipline: strip ALL patient identifiers before generating the outline. The model cannot un-see identifiers once they're in the conversation.
 
 ## When to use it
 
-When you're presenting a case at tumor board and need a structured outline to follow. Especially useful as a residency teaching tool — junior residents need to learn the structure.
+When you're presenting a case at tumor board and need a structured outline. Also useful as a teaching tool for junior residents who need to learn the structure.
+
+**Not for:** real-time presentation prep (use the tumor board prep coaching prompt instead), generating the packet (use [Tumor board case packet](library.html#/library/pillar-3-educational-operations/prompts/conferences-and-journal-clubs/tumor-board-case-packet)), or cases that can't be sufficiently de-identified.
 
 ## The prompt
 
 ```
-Generate a tumor board case presentation outline for the following case:
+You are generating a tumor board case presentation outline. STRIP ALL PATIENT IDENTIFIERS before generating. No name, no MRN, no exact age, no exact date, no rare-combination giveaways.
 
-- **Clinical history (de-identified):** [paste, no PHI]
-- **Imaging findings:** [paste]
+## Provenance check first
+
+Confirm the case I'm pasting is sufficiently de-identified. If anything looks identifiable, STOP and tell me before generating the outline.
+
+## What I'm presenting
+
+- **Clinical history (de-identified):** [paste — age range, sex if relevant, brief presentation, comorbidities, prior workup]
+- **Imaging findings:** [paste summary]
 - **Pathology findings:** [paste — gross, microscopic, IHC, molecular as available]
-- **Question for the board:** [what decision are you bringing to the multidisciplinary group? — staging, treatment plan, second opinion, etc.]
+- **Question for the board:** [the explicit decision being asked — staging, treatment, second opinion, etc.]
+- **Tumor board type:** [GU MDTB, GI MDTB, etc.]
 
-Outline structure:
+## Outline structure (3-4 minutes of presentation)
 
-1. **One-sentence patient summary** (anonymized): age range, key comorbidity if relevant, presentation.
-2. **Imaging summary** in radiologist-friendly framing: what they need to know to interpret the pathology.
-3. **Pathology in order:** gross → microscopic → IHC → molecular. Lead with the diagnostic features, not the workup history.
-4. **Diagnosis and stage** if available.
-5. **The decision point** — what the board is being asked to advise on.
-6. **The 2-3 most likely questions** from the board (med onc, rad onc, surg, radiology) and the data points you should have ready.
+1. **One-sentence patient summary** (anonymized): age range, key comorbidity if relevant, presentation
+2. **Imaging summary** in radiologist-friendly framing — what they need to know to interpret the pathology
+3. **Pathology in order:** gross → microscopic → IHC → molecular. Lead with diagnostic features, not workup history.
+4. **Diagnosis and stage** (if applicable)
+5. **The decision point** — what the board is being asked to advise on, stated explicitly
+6. **2-3 most likely questions from the board** — from med onc, rad onc, surg, radiology — and the data points to have ready
 
 Length: 3-4 minutes of presentation time. No PHI.
 
-**Important — refinement:** Strip ALL patient identifiers before pasting: no name, no MRN, no accession number, no exact age, no exact date of service, no institutional identifiers. If I paste something that looks identifiable, stop and tell me before generating the outline.
+## Hard rules
+
+- **No PHI ever** — strip identifiers before generating.
+- **Decision point explicit, not buried.** The board should know what you're asking by minute 1.
+- **Anticipated questions from each relevant specialty** present at YOUR institution's board.
+- **Pathology presented in DIAGNOSTIC order** (what tells you the diagnosis first) not workup chronological order.
+
+## What I will NOT accept
+
+- Any identifiable patient information
+- Decision question buried at the end
+- Generic anticipated questions that don't match the case
+- Pathology in workup-chronological order (boring) rather than diagnostic-priority order
 ```
 
 ## Expected output
 
-A structured outline ready to present, with anticipated questions and data points to have ready.
+A structured outline ready to present (~400-600 words) plus anticipated questions and data points.
 
 ## Common failure modes
 
-- Outline includes information that would identify a patient.
-- The 'decision point' is buried rather than stated explicitly.
-- Anticipated questions miss the actual ones that get asked at your institution's tumor board.
+- **Identifiable info slipping through.** Strip BEFORE pasting.
+- **Decision question buried.** Push back.
 
 ## Required human verification
 
-- **No PHI ever.** Strip names, MRNs, exact ages, dates of service, institutional identifiers.
-- Verify the pathology summary against your sign-out — the model may simplify in ways that mislead.
+- **No PHI ever** — verify de-identification.
+- Verify pathology summary against your sign-out.
 - Run anticipated questions by a colleague who attends your tumor board regularly.
 
 ## Best model and why
 
-**Claude Sonnet 4.6** — Structured case outlines are Sonnet's wheelhouse. The PHI-stripping discipline is more important than model choice — verify before pasting case material.
+**Claude Sonnet 4.6** — structured case outlines are Sonnet's wheelhouse. PHI discipline is more important than model choice.

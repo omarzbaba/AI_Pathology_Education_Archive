@@ -6,66 +6,60 @@ audience: faculty
 difficulty: intermediate
 time_to_use: 2-10min
 visual: text-only
-tags: journal-club, packet
+tags: journal-club, packet, paper-engagement
 verified_models: TODO
 best_model: Claude Opus 4.7 with paper attached
 last_updated: 2026-05-17
 ---
 
-## What this prompt does
-
-Generate a journal club packet with paper summary, background context, key results, methodologic critique, and discussion questions.
-
-## When to use it
-
-One week before journal club, when you're the lead and want to send pre-reading to attendees that ensures real discussion.
-
 ## The prompt
 
 ```
-Generate a journal club packet for the following paper:
+You are generating a journal club packet. Quality depends entirely on having the paper text. Refuse if you don't have it.
 
-- **Paper**: [full citation]
-- **Audience**: [PGY level, mix of residents and faculty]
-- **Discussion format**: [traditional, debate, structured critique, etc.]
+## Honesty check FIRST
 
-The packet should include:
+Do you have the full paper text? If not, STOP. Fabricated packets are worse than no packet.
 
-1. **One-paragraph background**: the state of the field before this paper. What question made this paper worth doing?
-2. **The study summary**: design, population, key results with numbers. Neutral framing, not yet interpretive.
-3. **Methodologic critique** (using the appropriate reporting guideline framework — see the [Paper methods critique prompt](library.html#/library/pillar-1-self-education/prompts/paper-methods-critique)):
-   - 2 specific strengths of the methods.
-   - 2-3 specific limitations.
-4. **The 'so what'**: what could this paper change about practice? What barriers exist to that change?
+## What I'm providing
+
+- **Paper:** [citation or attached PDF]
+- **Audience:** [PGY level + faculty mix]
+- **Discussion format:** [traditional / debate / structured critique]
+
+## Packet structure (2-3 pages)
+
+1. **Background paragraph** — state of the field before this paper
+2. **Study summary** — design, population, key results with specific numbers (neutral framing)
+3. **Methodologic critique** — 2 specific strengths + 2-3 specific limitations using the appropriate reporting guideline framework
+4. **"So what"** — what could this change about practice + barriers to that change
 5. **5 discussion questions** ordered from concrete to contested:
-   - Methods or numbers question.
-   - Generalizability question.
-   - Comparison-to-prior-literature question.
-   - Practice-change question.
-   - A genuinely contested question.
-6. **Attendee preparation note**: what they should think about before arriving.
+   - Methods/numbers
+   - Generalizability
+   - Comparison to prior literature
+   - Practice change
+   - Genuinely contested
+6. **Attendee prep note** — what to think about before arriving
 
-Length: 2-3 pages. No PHI.
+## Hard rules
 
-**Important — refinement:** If you don't have the full paper text, say so and refuse to generate the packet. Fabricated background, methods, or numbers in a journal club packet undermine the entire session.
+- Refuse if no paper text
+- Specific numbers from paper
+- Contested question must be genuinely contested
+- No PHI
+
+## What I will NOT accept
+
+- Packet from title alone
+- Fabricated numbers
+- Contested question with obvious answer
 ```
-
-## Expected output
-
-A complete packet ready to send to attendees a week before journal club.
-
-## Common failure modes
-
-- Critique is generic.
-- Discussion questions are leading rather than open.
-- Background context misses the paper's intellectual lineage.
 
 ## Required human verification
 
-- Verify all numbers against the actual paper.
-- Pre-test the contested question with a colleague.
-- Confirm citations are accurate.
+- Verify all numbers against paper.
+- Pre-test contested question with colleague.
 
 ## Best model and why
 
-**Claude Opus 4.7 with paper attached** — Quality depends on actually reading the paper. Opus with PDF attached, or Gemini 2.5 Pro for very long papers. Refuse the prompt if you don't have the paper text.
+**Claude Opus 4.7 with paper attached** for substantive engagement. **Gemini 2.5 Pro** for very long papers.

@@ -4,9 +4,9 @@ pillar: educational-operations
 event_type: rotation
 audience: program-director
 difficulty: intermediate
-time_to_use: 2-10min
+time_to_use: >10min
 visual: text-only
-tags: expectations, syllabus
+tags: expectations, syllabus, milestones
 verified_models: TODO
 best_model: Claude Sonnet 4.6
 last_updated: 2026-05-17
@@ -14,50 +14,60 @@ last_updated: 2026-05-17
 
 ## What this prompt does
 
-Generate a rotation expectations document with milestone-aligned objectives, daily and weekly responsibilities, and the supervision model.
-
-## When to use it
-
-When you're rolling out a revised rotation or onboarding a new attending who needs to understand what the program expects. Lives in the rotation handbook.
+Generates a rotation expectations document mapping objectives to milestones, specifying daily/weekly responsibilities, defining the supervision model, and naming the evaluation criteria. Lives in the rotation handbook.
 
 ## The prompt
 
 ```
-Generate a rotation expectations document for [rotation name], [N] weeks in duration, for [PGY level] residents.
+You are generating a rotation expectations document. Every objective must map to a specific milestone sub-competency code. Generic "will demonstrate competence" doesn't help the CCC.
 
-Structure:
+## What I'm providing
 
-1. **Rotation overview** (2-3 sentences): the rotation's place in the curriculum, what it builds on, what it builds toward.
-2. **Learning objectives** (5-8): milestone-aligned where possible, written in 'will be able to' language with measurable verbs.
-3. **Daily responsibilities**: a typical day's required activities (sign-out, case review, didactics).
-4. **Weekly responsibilities**: anything that recurs less than daily (journal club, case conference, presentation).
-5. **End-of-rotation requirements**: deliverables, assessments, exit interviews.
-6. **Supervision model**: what level of autonomy at the start of the rotation, what level at the end, what triggers attending involvement.
-7. **Evaluation criteria**: how the resident will be assessed, with the rubric or framework named.
+- **Rotation:** [name + duration]
+- **PGY level:** [target]
+- **Service context:** [your institution's service]
+- **Milestone document version:** [current]
+- **Supervision model:** [autonomy gradient — how it changes start to end of rotation]
+- **Evaluation framework:** [rubric or form name]
 
-This document should answer 'what is expected of me?' clearly enough that no resident has to guess.
+## What to produce
 
-Specify any institutional-specific terms (e.g., 'sign-out', 'preview') and define them on first use.
+7 sections:
 
-**Important — refinement:** Map every objective to a specific milestone sub-competency code (e.g., 'PC1.3 Interpretation of Diagnostic Studies'). Generic 'will demonstrate competence in X' is not useful for the CCC.
+1. **Rotation overview** (2-3 sentences) — place in curriculum, prerequisites, what it builds toward
+2. **Learning objectives** (5-8) — milestone-aligned, "will be able to" language with measurable verbs
+3. **Daily responsibilities** — typical day's required activities
+4. **Weekly responsibilities** — recurring less than daily
+5. **End-of-rotation requirements** — deliverables, assessments
+6. **Supervision model** — autonomy level at start, at end, triggers for attending involvement
+7. **Evaluation criteria** — framework named, when evaluated
+
+Specify any institutional-specific terms and define on first use.
+
+## Hard rules
+
+- **Every objective maps to a specific milestone sub-competency code.**
+- **Measurable verbs only** (no "understand," "know").
+- **Supervision gradient explicit.**
+- **Verify milestone codes against the current version.**
+
+## What I will NOT accept
+
+- Vague objectives ("will demonstrate competence")
+- Missing milestone mapping
+- Vague supervision model
 ```
 
 ## Expected output
 
-A complete expectations doc covering all seven areas. Suitable for the rotation handbook and onboarding.
-
-## Common failure modes
-
-- Objectives that aren't actually assessable.
-- Supervision model that's vague enough to be uninterpretable.
-- Daily/weekly responsibilities that don't match the actual rotation flow.
+A 7-section document for the rotation handbook.
 
 ## Required human verification
 
-- Verify objectives map to actual milestones in your program's current document.
-- Run by the rotation director and at least one recent rotator before finalizing.
-- Confirm the supervision model is consistent with your program's policy and any institutional credentialing rules.
+- Verify milestone codes against current document.
+- Run by rotation director and a recent rotator.
+- Confirm supervision model matches institutional policy.
 
 ## Best model and why
 
-**Claude Sonnet 4.6** — Structured doc with milestone mapping — Sonnet handles this. Verify milestone codes regardless of model.
+**Claude Sonnet 4.6** — structured doc with milestone mapping is Sonnet's range.

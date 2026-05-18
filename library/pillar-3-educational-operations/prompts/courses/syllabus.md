@@ -6,7 +6,7 @@ audience: faculty
 difficulty: intermediate
 time_to_use: >10min
 visual: text-only
-tags: syllabus, course
+tags: syllabus, course, policies
 verified_models: TODO
 best_model: Claude Sonnet 4.6
 last_updated: 2026-05-17
@@ -14,51 +14,67 @@ last_updated: 2026-05-17
 
 ## What this prompt does
 
-Generate a course syllabus with weekly topics, learning objectives, assessment plan, and policy language.
-
-## When to use it
-
-When you're designing a new longitudinal course (residency didactic series, fellowship curriculum, elective course) and need a starting structure.
+Generates a complete course syllabus with weekly schedule, objectives, assessment plan, resources, policies (including an EXPLICIT AI use policy — not silence), and communication norms.
 
 ## The prompt
 
 ```
-Generate a course syllabus for [course name], [N] weeks in length, for [audience].
+You are generating a course syllabus. Every week must have a topic + outcome. AI use policy must be explicit — silence is not a policy.
 
-The syllabus should include:
+## What I'm providing
 
-1. **Course title, instructor(s), meeting time and location.**
-2. **Course description** (3-5 sentences): scope, prerequisites if any, where this course fits in the larger curriculum.
-3. **Learning objectives** (4-7): course-level objectives in 'will be able to' language.
-4. **Weekly schedule**: each week with topic, readings, in-class activity, post-class assignment if any. Be specific.
-5. **Assessment plan**: how learners are evaluated (formative and summative components, weighting if graded).
-6. **Required and recommended resources** with full citations.
-7. **Policies**: attendance, makeup work, accommodations, AI use, academic integrity. Address each explicitly.
-8. **Communication norms**: how to contact instructors, expected response times.
+- **Course name:** [name]
+- **Duration:** [N weeks]
+- **Audience:** [target learners]
+- **Meeting time/location:** [if applicable]
+- **Format:** [in-person / hybrid / async]
+- **Prerequisites:** [if any]
+- **My institution's specific requirements:** [CME accreditation, etc.]
 
-For each weekly topic, name **one outcome** the learner should be able to demonstrate after that week.
+## What to produce
 
-Match the level of formality your institution expects (CME-accredited course = more formal; residency didactic series = less).
+8 sections:
 
-**Important — refinement:** Include an explicit AI use policy. The default should not be silence; it should specify which uses are encouraged (e.g., drafting, brainstorming), which require disclosure, and which are prohibited (e.g., submitting AI output as own work for graded assignments).
+1. **Course title, instructor(s), meeting info**
+2. **Course description** (3-5 sentences) — scope, prerequisites, place in curriculum
+3. **Learning objectives** (4-7) — course-level, "will be able to" with measurable verbs
+4. **Weekly schedule** — each week with topic, readings, in-class activity, post-class assignment, outcome
+5. **Assessment plan** — formative + summative, weighting if graded
+6. **Resources** — required and recommended with full citations
+7. **Policies**:
+   - Attendance
+   - Makeup work
+   - Accommodations
+   - **AI use policy — explicit, not silence**
+   - Academic integrity
+8. **Communication norms** — how to reach instructors, response times
+
+For each weekly topic, name ONE outcome demonstrating mastery.
+
+## Hard rules
+
+- **AI use policy explicit.** Specify what's encouraged, what requires disclosure, what's prohibited.
+- **Every week has a measurable outcome.**
+- **All resources verified.**
+- **Match institutional formality** (CME = more formal; didactic series = less).
+
+## What I will NOT accept
+
+- Silent or boilerplate AI use policy
+- Weekly topics without outcomes
+- Assessment plan disconnected from objectives
 ```
 
 ## Expected output
 
-A complete syllabus organized by section. Length: 5-8 pages. Should pass review by the relevant curriculum committee.
-
-## Common failure modes
-
-- Weekly topics that aren't actually achievable in one session.
-- AI use policy that's either absent or boilerplate; both are problematic.
-- Assessment plan that doesn't align with the stated objectives.
+Complete syllabus, 5-8 pages, ready for curriculum committee review.
 
 ## Required human verification
 
-- Verify required resources are in print and accessible.
-- Check institutional policies on AI use and assessment — your statement should match.
-- Run the weekly schedule by anyone who taught the course previously.
+- Verify all resource citations.
+- Check institutional policies for AI use match your statement.
+- Confirm assessment plan aligns to objectives.
 
 ## Best model and why
 
-**Claude Sonnet 4.6** — Structured doc with explicit policies (AI use, integrity) — Sonnet handles this. The AI use policy is the genuinely new part; spend time refining it.
+**Claude Sonnet 4.6** — structured doc with explicit policies. The AI policy is the genuinely new part; spend time refining it.

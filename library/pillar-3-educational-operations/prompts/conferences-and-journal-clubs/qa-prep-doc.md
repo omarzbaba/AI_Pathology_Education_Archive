@@ -6,63 +6,71 @@ audience: faculty
 difficulty: intermediate
 time_to_use: 2-10min
 visual: text-only
-tags: qa, prep
+tags: qa-prep, presentation, anticipation
 verified_models: TODO
 best_model: Claude Opus 4.7
 last_updated: 2026-05-17
 ---
 
-## What this prompt does
-
-Generate a Q&A preparation document anticipating audience questions and providing concise, evidence-backed responses.
-
-## When to use it
-
-The day before any presentation where the Q&A is high-stakes — board meeting, departmental presentation, conference talk, grant defense.
-
 ## The prompt
 
 ```
-Help me prepare for the Q&A portion of [presentation title], on [date]. The audience is [audience description].
+You are preparing me for a Q&A. The hardest questions section is the most valuable. Don't softball.
 
-Generate a Q&A prep document organized as:
+## What I'm preparing for
 
-1. **The 5-10 questions most likely to come up**, ranked by likelihood. For each:
-   - The question (phrased as I'd actually hear it).
-   - The questioner's likely angle (technical objection, clinical concern, scope question, etc.).
-   - A 2-3 sentence response, evidence-backed.
-   - The follow-up question I should anticipate.
-   - Any pre-prepared data, citation, or slide I should have ready.
+- **Presentation:** [title + when]
+- **Audience:** [description]
 
-2. **The 2 hardest questions**: the ones I'd dread getting. Spend more time on these. Acknowledge if I genuinely don't have a good answer; suggest how to respond honestly while preserving credibility.
+## What to produce
 
-3. **The 1 question I cannot answer**: if there's a question with no good answer (e.g., results not yet available), draft a response that doesn't dodge but acknowledges the gap.
+### 1. The 5-10 likeliest questions, ranked
 
-4. **Time management**: how long to spend per answer to leave time for multiple questions. What to do if Q&A runs short or long.
+For each:
+- Question (phrased as I'd hear it)
+- Questioner's angle (technical objection / clinical concern / scope question)
+- 2-3 sentence response, evidence-backed
+- Anticipated follow-up
+- Pre-prepared data/slide/citation to have ready
 
-5. **Body and voice**: where to look, how to handle hostile questioners, how to redirect off-topic questions.
+### 2. The 2 HARDEST questions
 
-End with: the one question I should hope someone asks, because it lets me make my strongest point.
+The ones I'd dread. Be honest if I don't have a great answer; suggest how to respond honestly while preserving credibility.
 
-**Important — refinement:** The 'hardest questions' should be genuinely hard, not softballs disguised as challenges. If you can answer one of your own 'hard' questions easily, escalate the difficulty. The 2 hardest questions are the most valuable part of this document.
+### 3. The 1 question I CANNOT answer
+
+If there's a gap, draft a response that acknowledges rather than dodges.
+
+### 4. Time management
+
+How long per answer for the available Q&A time.
+
+### 5. Body language and voice
+
+Where to look, how to handle hostile questioners, how to redirect off-topic.
+
+### 6. The question I HOPE someone asks
+
+Because it lets me make my strongest point.
+
+## Hard rules
+
+- Hardest questions must be genuinely hard, not softballs.
+- Honest acknowledgments of gaps.
+- The "hope someone asks" question should be one someone might actually ask.
+
+## What I will NOT accept
+
+- Softball "hardest" questions
+- Dodging responses to the question I cannot answer
+- Generic time management
 ```
-
-## Expected output
-
-A prep document I can study the night before. Length: 3-5 pages. Should reduce surprise during actual Q&A.
-
-## Common failure modes
-
-- The 'hardest questions' are softball.
-- 'I cannot answer' responses dodge rather than acknowledge.
-- Time management guidance is generic.
 
 ## Required human verification
 
-- Have a colleague pose the anticipated questions to you and rate your responses. The questions you flail on need more prep.
-- Verify any data, citations, or numbers you plan to reference.
-- The 'one question I hope someone asks' should actually be a question someone might ask, not a planted one that would be obvious.
+- Have a colleague pose the questions to you and rate your responses.
+- Verify any data/citations referenced.
 
 ## Best model and why
 
-**Claude Opus 4.7** — Anticipating sophisticated hostile or content-expert questions requires depth and a kind of mental adversarialism. Opus is materially better than Sonnet at the 'hardest questions' section.
+**Claude Opus 4.7** — anticipating sophisticated hostile questions requires mental adversarialism.
