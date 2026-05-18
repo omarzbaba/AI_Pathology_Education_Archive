@@ -23,6 +23,10 @@ import {
   addDoc,
   serverTimestamp
 } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js";
+import {
+  getFunctions,
+  httpsCallable
+} from "https://www.gstatic.com/firebasejs/10.12.5/firebase-functions.js";
 
 import { firebaseConfig, appCheckSiteKey } from "./firebase-config.js";
 
@@ -77,6 +81,7 @@ import { firebaseConfig, appCheckSiteKey } from "./firebase-config.js";
 // ---------------------------------------------------------------------------
 
 let db;
+let functions;
 let initError = null;
 
 try {
@@ -86,12 +91,82 @@ try {
     isTokenAutoRefreshEnabled: true
   });
   db = getFirestore(app);
+  functions = getFunctions(app);
 } catch (err) {
   initError = err;
   // Don't throw — let the form render and show a sensible error on submit.
   // This keeps the page usable during local development before Firebase is set up.
   console.warn("Firebase init failed (expected during Phase 3 setup):", err);
 }
+
+// ---------------------------------------------------------------------------
+// Returning-visitor mini-form (email shortcut)
+// ---------------------------------------------------------------------------
+
+(function wireReturningForm() {
+  const form = document.getElementById("returning-form");
+  if (!form) return; // not rendered (already-granted branch above ran)
+
+  const emailEl = document.getElementById("returning-email");
+  const btn = document.getElementById("returning-submit");
+  const statusEl = document.getElementById("returning-status");
+
+  function setStatus(msg, kind) {
+    statusEl.style.color = kind === "error" ? "var(--color-error, #8B1A2B)"
+                          : kind === "success" ? "var(--color-success, #1F5C3B)"
+                          : "var(--color-muted, #6B6F7A)";
+    statusEl.textContent = msg;
+  }
+
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const email = (emailEl.value || "").trim().toLowerCase();
+    if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) {
+      setStatus("Please enter a valid email address.", "error");
+      return;
+    }
+
+    if (initError || !functions) {
+      setStatus("Lookup not configured yet — please use the form below.", "error");
+      return;
+    }
+
+    btn.disabled = true;
+    const origLabel = btn.textContent;
+    btn.textContent = "Looking up…";
+    setStatus("", "");
+
+    try {
+      const verify = httpsCallable(functions, "verifyReturningVisitor");
+      const res = await verify({ email });
+      const r = (res && res.data) || {};
+      if (!r.found) {
+        setStatus("We don't have an entry for that email. Please fill the full form below.", "error");
+        btn.disabled = false;
+        btn.textContent = origLabel;
+        return;
+      }
+      // Restore localStorage and forward into the library
+      try {
+        localStorage.setItem("companion_access_granted", JSON.stringify({
+          name: r.name || "",
+          email: email,
+          grantedAt: new Date().toISOString()
+        }));
+      } catch (_) { /* private mode — proceed anyway */ }
+      setStatus("Welcome back. Taking you to the library…", "success");
+      window.location.href = "thank-you.html";
+    } catch (err) {
+      console.error("Returning-visitor lookup failed:", err);
+      const msg = err && err.code === "functions/unavailable"
+        ? "Lookup service is offline. Please use the form below."
+        : "Couldn't verify right now. Please use the form below.";
+      setStatus(msg, "error");
+      btn.disabled = false;
+      btn.textContent = origLabel;
+    }
+  });
+})();
 
 // ---------------------------------------------------------------------------
 // Validation & sanitization

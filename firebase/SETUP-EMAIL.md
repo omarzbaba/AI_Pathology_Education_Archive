@@ -100,11 +100,12 @@ firebase deploy --only functions
 
 First deploy takes ~5 minutes (Google provisions a Cloud Build pipeline). Subsequent deploys are faster.
 
-You'll see four functions deployed:
+You'll see five functions deployed:
 - `onCommentCreated`
 - `onSubmissionCreated`
 - `onFeedbackCreated`
 - `onSubmissionStatusChanged`
+- `verifyReturningVisitor` (this one is a callable, not a Firestore trigger — it powers the "Restore my access" email shortcut on the access form)
 
 ## Step 7 — Smoke test
 
@@ -127,7 +128,10 @@ firebase functions:delete onCommentCreated
 firebase functions:delete onSubmissionCreated
 firebase functions:delete onFeedbackCreated
 firebase functions:delete onSubmissionStatusChanged
+firebase functions:delete verifyReturningVisitor
 ```
+
+Note: deleting `verifyReturningVisitor` also disables the "Restore my access" email shortcut on the access form. Visitors who clear their browser will simply fall back to filling the full form again.
 
 Or just downgrade to Spark plan — the functions stop running automatically.
 

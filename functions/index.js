@@ -23,9 +23,15 @@
  */
 
 const { onDocumentCreated, onDocumentUpdated } = require("firebase-functions/v2/firestore");
+const { onCall, HttpsError } = require("firebase-functions/v2/https");
 const { logger } = require("firebase-functions/v2");
 const { defineSecret } = require("firebase-functions/params");
+const { initializeApp, getApps } = require("firebase-admin/app");
+const { getFirestore } = require("firebase-admin/firestore");
 const { Resend } = require("resend");
+
+if (!getApps().length) initializeApp();
+const adminDb = getFirestore();
 
 const resendKey = defineSecret("RESEND_API_KEY");
 
@@ -204,6 +210,54 @@ exports.onSubmissionStatusChanged = onDocumentUpdated(
       logger.info("Status notification sent to submitter:", after.submitter_email, "status:", after.status);
     } catch (err) {
       logger.error("Failed to send status notification:", err);
+    }
+  }
+);
+
+// ---------------------------------------------------------------------------
+// 5. Returning-visitor verification (callable)
+// ---------------------------------------------------------------------------
+//
+// Lets a returning visitor restore access with their email alone, without
+// having to re-fill the full access form. Uses Admin SDK to read access_log
+// (which is admin-only via Firestore rules) and returns the stored profile
+// so the client can restore the localStorage flag.
+//
+// App Check is enforced; rate-limited by Cloud Functions defaults.
+// Only safe fields are echoed back — never user_agent, referrer, or timestamp.
+
+exports.verifyReturningVisitor = onCall(
+  { enforceAppCheck: true, maxInstances: 10 },
+  async (request) => {
+    const data = request.data || {};
+    const rawEmail = String(data.email || "").trim().toLowerCase();
+
+    if (!rawEmail || !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(rawEmail) || rawEmail.length > 254) {
+      throw new HttpsError("invalid-argument", "A valid email is required.");
+    }
+
+    try {
+      const snap = await adminDb
+        .collection("access_log")
+        .where("email", "==", rawEmail)
+        .orderBy("timestamp", "desc")
+        .limit(1)
+        .get();
+
+      if (snap.empty) {
+        return { found: false };
+      }
+
+      const d = snap.docs[0].data();
+      return {
+        found: true,
+        name: String(d.name || ""),
+        institution: String(d.institution || ""),
+        role: String(d.role || "")
+      };
+    } catch (err) {
+      logger.error("verifyReturningVisitor failed:", err);
+      throw new HttpsError("internal", "Lookup failed.");
     }
   }
 );

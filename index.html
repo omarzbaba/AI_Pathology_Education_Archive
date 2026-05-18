@@ -81,11 +81,28 @@
         on structured AI literacy in pathology training and lets the author follow up
         with new material as the library grows.
       </p>
-      <p class="form-section__intro" style="font-size: 0.95rem; color: var(--color-muted, #666);">
-        <strong>Returning?</strong> If you've entered before on this browser, you're already recognized &mdash;
-        the library opens automatically. On a new device or after clearing your browser, fill the form again
-        with the same email; no separate &ldquo;sign in&rdquo; step is needed.
-      </p>
+
+      <!-- Returning visitor mini-form: enter email only, look up existing access_log -->
+      <div class="returning-box" style="background: var(--color-paper, #FAFAF7); border: 1px solid var(--color-rule, #E4E2DC); border-left: 3px solid var(--color-navy, #14213D); padding: 1rem 1.25rem; margin-bottom: 1.5rem; border-radius: 4px;">
+        <p style="margin: 0 0 0.5rem; font-weight: 500;">Already signed in here before?</p>
+        <p style="margin: 0 0 0.75rem; font-size: 0.92rem; color: var(--color-muted, #6B6F7A);">
+          New browser or device, or cleared your cache? Enter the email you used last time and we'll restore your access &mdash; no need to re-fill the full form.
+        </p>
+        <form id="returning-form" novalidate style="display: flex; flex-wrap: wrap; gap: 0.5rem; align-items: stretch;">
+          <input
+            type="email"
+            id="returning-email"
+            name="email"
+            placeholder="you@example.com"
+            autocomplete="email"
+            maxlength="254"
+            required
+            style="flex: 1 1 220px; min-width: 0; padding: 0.55rem 0.7rem; border: 1px solid var(--color-rule, #E4E2DC); border-radius: 4px; font: inherit;"
+          >
+          <button type="submit" class="btn" id="returning-submit" style="white-space: nowrap;">Restore my access</button>
+        </form>
+        <p id="returning-status" role="status" aria-live="polite" style="margin: 0.75rem 0 0; font-size: 0.9rem; min-height: 1.2em;"></p>
+      </div>
 
       <form id="access-form" novalidate>
         <div class="form-grid">
