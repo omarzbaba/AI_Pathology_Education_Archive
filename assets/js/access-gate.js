@@ -27,6 +27,52 @@ import {
 import { firebaseConfig, appCheckSiteKey } from "./firebase-config.js";
 
 // ---------------------------------------------------------------------------
+// Returning-visitor short-circuit
+// ---------------------------------------------------------------------------
+// If this browser already has an access-granted flag, skip the form and show
+// a "Welcome back" panel instead. The library is just a click away, no
+// re-submission needed. Clearing localStorage (e.g. private window) brings
+// the form back.
+
+(function maybeShowWelcomeBack() {
+  let granted = null;
+  try {
+    const raw = localStorage.getItem("companion_access_granted");
+    if (raw) granted = JSON.parse(raw);
+  } catch (_) { /* malformed JSON — ignore, show form */ }
+
+  if (!granted || !granted.name) return;
+
+  const section = document.querySelector(".form-section");
+  if (!section) return;
+
+  const safeName = String(granted.name).replace(/[<>&"']/g, "");
+  const firstName = safeName.split(/\s+/)[0] || safeName;
+
+  section.innerHTML =
+    '<h2>Welcome back, ' + firstName + '</h2>' +
+    '<p class="form-section__intro">' +
+      'You already have access on this browser. Jump straight in.' +
+    '</p>' +
+    '<p style="margin-top: 1.5rem;">' +
+      '<a href="thank-you.html" class="btn" style="display:inline-block; text-decoration:none;">Enter the library</a>' +
+    '</p>' +
+    '<p class="form-section__intro" style="font-size: 0.9rem; margin-top: 1.5rem;">' +
+      'Not you, or want to use a different email? ' +
+      '<a href="#" id="reset-identity">Clear and start over</a>.' +
+    '</p>';
+
+  const reset = document.getElementById("reset-identity");
+  if (reset) {
+    reset.addEventListener("click", (e) => {
+      e.preventDefault();
+      try { localStorage.removeItem("companion_access_granted"); } catch (_) {}
+      window.location.reload();
+    });
+  }
+})();
+
+// ---------------------------------------------------------------------------
 // Firebase init
 // ---------------------------------------------------------------------------
 
