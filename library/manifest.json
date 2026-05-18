@@ -10,7 +10,7 @@
           "prompts": [
             {
               "title": "Concept explanation at level",
-              "intent": "Get an explanation of a pathology concept calibrated to your current level — neither too elementary nor too advanced. The output is an *adapted*…",
+              "intent": "Get a pathology concept explained in three layers calibrated to your specific gap — not a textbook dump and not a \"for dummies\" version. The output meets…",
               "difficulty": "intermediate",
               "time_to_use": "<2min",
               "visual": "text-only",
@@ -238,13 +238,13 @@
           "prompts": [
             {
               "title": "Photomicrograph description practice",
-              "intent": "Upload a photomicrograph and have the model describe what it sees, then critique your own description against the model's. The drill is your description,…",
+              "intent": "Builds your morphologic description discipline using a published teaching image. You upload an image, the model describes what it sees and offers a…",
               "difficulty": "advanced",
               "time_to_use": "2-10min",
               "visual": "multimodal",
               "audience": "resident",
               "best_model": "Gemini 2.5 Pro",
-              "tags": "multimodal, morphology",
+              "tags": "multimodal, morphology, image-analysis, safety-critical",
               "slug": "multimodal-photomicrograph",
               "path": "library/pillar-1-self-education/prompts/multimodal-photomicrograph.md",
               "category": "image"
@@ -447,13 +447,13 @@
             },
             {
               "title": "Letter of recommendation starting draft",
-              "intent": "Generate a starting draft for a letter of recommendation. **Heavy editing required** — the model produces structurally plausible but generic prose; the…",
-              "difficulty": "intermediate",
+              "intent": "Produces a structured *scaffold* for a letter of recommendation — never a finished letter. The model holds the bones (paragraph structure, transition logic,…",
+              "difficulty": "advanced",
               "time_to_use": ">10min",
               "visual": "text-only",
               "audience": "faculty",
               "best_model": "Claude Opus 4.7",
-              "tags": "lor, narrative",
+              "tags": "lor, narrative, high-stakes",
               "slug": "lor-starting-draft",
               "path": "library/pillar-2-teaching/prompts/lor-starting-draft.md",
               "category": "write"
