@@ -605,11 +605,18 @@ function drawCommentsTable(rows) {
   };
 
   commentsEl.innerHTML =
-    '<div style="display:flex;gap:1rem;flex-wrap:wrap;margin-bottom:1rem;">' +
+    '<div style="display:flex;gap:1rem;flex-wrap:wrap;margin-bottom:1rem;align-items:center;">' +
       '<button class="btn" data-cfilter="all" style="background:var(--color-navy);">All (' + rows.length + ')</button>' +
       '<button class="btn" data-cfilter="pending">Pending (' + counts.pending + ')</button>' +
       '<button class="btn" data-cfilter="visible" style="background:var(--color-success);">Visible (' + counts.visible + ')</button>' +
       '<button class="btn" data-cfilter="hidden" style="background:var(--color-burgundy);">Hidden (' + counts.hidden + ')</button>' +
+      '<input type="search" id="comments-search" placeholder="Search name, email, text&hellip;" style="flex:1;min-width:200px;padding:0.5rem;border:1px solid var(--color-rule);border-radius:2px;">' +
+    '</div>' +
+    '<div id="bulk-actions" style="display:none;background:var(--color-paper);border:1px solid var(--color-rule);padding:0.75rem;margin-bottom:1rem;border-radius:3px;align-items:center;gap:0.75rem;flex-wrap:wrap;">' +
+      '<strong id="bulk-count" style="font-size:var(--fs-sm);">0 selected</strong>' +
+      '<button class="btn" id="bulk-approve" style="background:var(--color-success);font-size:0.85em;padding:0.4rem 0.8rem;">Approve selected</button>' +
+      '<button class="btn" id="bulk-hide" style="background:var(--color-burgundy);font-size:0.85em;padding:0.4rem 0.8rem;">Hide selected</button>' +
+      '<button class="btn" id="bulk-clear" style="background:var(--color-muted);font-size:0.85em;padding:0.4rem 0.8rem;">Clear selection</button>' +
     '</div>' +
     '<div id="comments-list">' +
       rows.map(commentModerationCardHtml).join("") +
@@ -619,12 +626,81 @@ function drawCommentsTable(rows) {
     btn.addEventListener("click", () => {
       const f = btn.getAttribute("data-cfilter");
       const filtered = f === "all" ? commentRows : commentRows.filter(r => r.status === f);
-      document.getElementById("comments-list").innerHTML = filtered.map(commentModerationCardHtml).join("");
+      const searchTerm = document.getElementById("comments-search").value.trim().toLowerCase();
+      const finalFiltered = searchTerm
+        ? filtered.filter(r => commentMatchesSearch(r, searchTerm))
+        : filtered;
+      document.getElementById("comments-list").innerHTML = finalFiltered.map(commentModerationCardHtml).join("");
       wireCommentModerationActions();
+      wireBulkActions();
     });
   });
 
+  document.getElementById("comments-search").addEventListener("input", (e) => {
+    const term = e.target.value.trim().toLowerCase();
+    const filtered = term ? commentRows.filter(r => commentMatchesSearch(r, term)) : commentRows;
+    document.getElementById("comments-list").innerHTML = filtered.map(commentModerationCardHtml).join("");
+    wireCommentModerationActions();
+    wireBulkActions();
+  });
+
   wireCommentModerationActions();
+  wireBulkActions();
+}
+
+function commentMatchesSearch(c, term) {
+  const hay = (
+    (c.commenter_name || "") + " " +
+    (c.commenter_email || "") + " " +
+    (c.commenter_affiliation || "") + " " +
+    (c.comment_text || "") + " " +
+    (c.prompt_path || "")
+  ).toLowerCase();
+  return hay.includes(term);
+}
+
+function wireBulkActions() {
+  const bulkActions = document.getElementById("bulk-actions");
+  const bulkCount = document.getElementById("bulk-count");
+
+  function updateBulkVisibility() {
+    const checked = commentsEl.querySelectorAll("input.comment-checkbox:checked");
+    if (checked.length > 0) {
+      bulkActions.style.display = "flex";
+      bulkCount.textContent = checked.length + " selected";
+    } else {
+      bulkActions.style.display = "none";
+    }
+  }
+
+  commentsEl.querySelectorAll("input.comment-checkbox").forEach((cb) => {
+    cb.addEventListener("change", updateBulkVisibility);
+  });
+
+  async function bulkUpdate(newStatus) {
+    const checked = Array.from(commentsEl.querySelectorAll("input.comment-checkbox:checked"));
+    if (checked.length === 0) return;
+    if (!confirm("Set " + checked.length + " comment(s) to '" + newStatus + "'?")) return;
+
+    const ids = checked.map(cb => cb.getAttribute("data-cid"));
+    try {
+      // Update sequentially to avoid hammering
+      for (const id of ids) {
+        await updateDoc(doc(db, "comments", id), { status: newStatus });
+      }
+      await renderCommentsModeration();
+      await checkCommentsCount();
+    } catch (err) {
+      alert("Bulk update failed: " + (err.message || "unknown error"));
+    }
+  }
+
+  document.getElementById("bulk-approve").addEventListener("click", () => bulkUpdate("visible"));
+  document.getElementById("bulk-hide").addEventListener("click", () => bulkUpdate("hidden"));
+  document.getElementById("bulk-clear").addEventListener("click", () => {
+    commentsEl.querySelectorAll("input.comment-checkbox").forEach(cb => cb.checked = false);
+    updateBulkVisibility();
+  });
 }
 
 function commentModerationCardHtml(c) {
@@ -634,7 +710,9 @@ function commentModerationCardHtml(c) {
   return (
     '<article style="border:1px solid var(--color-rule);border-radius:3px;margin-bottom:1rem;padding:1rem;background:var(--color-white);">' +
       '<div style="display:flex;justify-content:space-between;align-items:start;gap:1rem;margin-bottom:0.5rem;">' +
-        '<div>' +
+        '<div style="display:flex;gap:0.75rem;align-items:start;flex:1;">' +
+          '<input type="checkbox" class="comment-checkbox" data-cid="' + escapeHtml(c.id) + '" style="margin-top:0.25rem;">' +
+          '<div>' +
           '<p style="font-size:var(--fs-sm);margin:0 0 0.25rem;"><strong>' + escapeHtml(c.commenter_name) + '</strong>' +
             (c.commenter_affiliation ? ' (' + escapeHtml(c.commenter_affiliation) + ')' : '') +
             ' &middot; ' + escapeHtml(c.commenter_email) +
@@ -642,6 +720,7 @@ function commentModerationCardHtml(c) {
             (c.is_admin ? ' <span class="pill pill--model">Author</span>' : '') +
           '</p>' +
           '<p style="font-size:var(--fs-xs);margin:0;color:var(--color-muted);">On: ' + promptLink + '</p>' +
+          '</div>' +
         '</div>' +
         '<div>' + commentStatusPill(c.status) + '</div>' +
       '</div>' +

@@ -22,30 +22,50 @@
 let firebaseModules = null;
 let app = null;
 let db = null;
+let auth = null;
+let adminUidValue = null;
+let currentUser = null;
 
 async function ensureFirebase() {
   if (db) return db;
   if (!firebaseModules) {
     const [{ initializeApp }, { initializeAppCheck, ReCaptchaV3Provider },
            { getFirestore, collection, addDoc, setDoc, doc, query, where,
-             orderBy, getDocs, deleteDoc, serverTimestamp }] = await Promise.all([
+             orderBy, getDocs, deleteDoc, serverTimestamp },
+           { getAuth, onAuthStateChanged }] = await Promise.all([
       import("https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js"),
       import("https://www.gstatic.com/firebasejs/10.12.5/firebase-app-check.js"),
-      import("https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js")
+      import("https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js"),
+      import("https://www.gstatic.com/firebasejs/10.12.5/firebase-auth.js")
     ]);
-    const { firebaseConfig, appCheckSiteKey } = await import("./firebase-config.js");
+    const { firebaseConfig, appCheckSiteKey, adminUid } = await import("./firebase-config.js");
     firebaseModules = {
       collection, addDoc, setDoc, doc, query, where, orderBy, getDocs,
       deleteDoc, serverTimestamp
     };
+    adminUidValue = adminUid;
     app = initializeApp(firebaseConfig, "engagement-" + Date.now());
     initializeAppCheck(app, {
       provider: new ReCaptchaV3Provider(appCheckSiteKey),
       isTokenAutoRefreshEnabled: true
     });
     db = getFirestore(app);
+    auth = getAuth(app);
+
+    // Observe admin sign-in state (admin may already be signed in via admin.html)
+    onAuthStateChanged(auth, (user) => {
+      currentUser = user;
+      // Re-render the comment form if it's on the page
+      if (document.getElementById("comment-form-identity")) {
+        renderIdentityForm();
+      }
+    });
   }
   return db;
+}
+
+function isAdminSignedIn() {
+  return !!(currentUser && adminUidValue && currentUser.uid === adminUidValue);
 }
 
 // -------------------------------------------------------------------------
@@ -207,6 +227,21 @@ export async function renderEngagement(container, promptPath) {
 
 function renderIdentityForm() {
   const wrapper = document.getElementById("comment-form-identity");
+  if (!wrapper) return;
+
+  // If admin is signed in, show the privileged reply UI
+  if (isAdminSignedIn()) {
+    wrapper.innerHTML = `
+      <div style="background: var(--color-paper); border-left: 3px solid var(--color-burgundy); padding: var(--space-3) var(--space-4); margin-bottom: var(--space-3);">
+        <p style="font-size: var(--fs-sm); margin: 0;">
+          <strong>Replying as the author.</strong> This reply will post immediately (no moderation queue) and be marked with the <em>Author</em> badge.
+          <a href="admin.html">Sign out</a> to comment as a regular user.
+        </p>
+      </div>
+    `;
+    return;
+  }
+
   const id = getStoredIdentity();
   if (id) {
     wrapper.innerHTML = `
@@ -427,7 +462,46 @@ async function onCommentSubmit(promptPath) {
     return;
   }
 
-  // Resolve identity
+  await ensureFirebase();
+
+  // Admin reply path — posts directly as visible + is_admin
+  if (isAdminSignedIn()) {
+    btn.disabled = true;
+    const origLabel = btn.textContent;
+    btn.textContent = "Posting…";
+    try {
+      const { collection, addDoc, serverTimestamp } = firebaseModules;
+      const adminName = (currentUser.displayName || currentUser.email.split("@")[0] || "Author").slice(0, 100);
+      const adminEmail = (currentUser.email || "").toLowerCase().slice(0, 254);
+      await addDoc(collection(db, "comments"), {
+        timestamp: serverTimestamp(),
+        status: "visible",
+        prompt_path: promptPath,
+        commenter_name: adminName,
+        commenter_email: adminEmail,
+        commenter_affiliation: "",
+        comment_text: text,
+        is_admin: true,
+        referrer: sanitize(document.referrer, 500),
+        user_agent: sanitize(navigator.userAgent, 500)
+      });
+      textEl.value = "";
+      statusEl.className = "form-status form-status--success";
+      statusEl.textContent = "Reply posted.";
+      // Refresh the thread to show the new reply
+      await loadComments(promptPath);
+    } catch (err) {
+      console.warn("Admin reply failed:", err);
+      statusEl.className = "form-status form-status--error";
+      statusEl.textContent = "Reply failed: " + (err.message || "unknown error");
+    } finally {
+      btn.disabled = false;
+      btn.textContent = origLabel;
+    }
+    return;
+  }
+
+  // Public path — resolve identity, post as pending
   let id = getStoredIdentity();
   if (!id) {
     const name = sanitize(document.getElementById("comment-name").value, 100);
@@ -444,7 +518,6 @@ async function onCommentSubmit(promptPath) {
   btn.textContent = "Posting…";
 
   try {
-    await ensureFirebase();
     const { collection, addDoc, serverTimestamp } = firebaseModules;
     await addDoc(collection(db, "comments"), {
       timestamp: serverTimestamp(),

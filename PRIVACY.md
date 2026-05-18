@@ -81,6 +81,14 @@ The database is configured so that:
 - **Prompt submissions** are immutable in their content fields once submitted (only the status field can be updated by the admin)
 - Submissions require a valid App Check token (reCAPTCHA v3), which prevents automated bots from filling either collection
 
+### Sub-processors
+
+When email notifications are enabled (optional; see `firebase/SETUP-EMAIL.md`):
+
+- **Resend** (https://resend.com) is used to deliver transactional emails: new-comment notices and new-submission notices to the author, and submission-status updates to contributors. The recipient address, the name you submitted, the prompt content (for submissions), and your comment text (for comments) are transmitted to Resend's servers (US-based) for delivery. Resend retains delivery logs per their privacy policy.
+
+If email notifications are disabled, no sub-processor receives your information; everything stays inside Google Firebase.
+
 ## How long we keep it
 
 The data is retained for:
@@ -134,3 +142,4 @@ If this notice changes materially (new data collected, different retention perio
 ## Change log
 
 - **2026-05-17:** Initial notice.
+- **2026-05-18:** Added sub-processor section noting Resend (optional, only when email notifications are enabled).

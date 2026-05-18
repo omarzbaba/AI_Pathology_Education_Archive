@@ -140,7 +140,15 @@ If you go this route, remember to update:
 
 ---
 
-## 7. Self-host the fonts (~2 minutes, optional polish)
+## 7. (Optional) Enable email notifications (~25 minutes)
+
+If you want to be emailed when new comments or submissions land — and to have contributors auto-emailed when you change their submission status — follow [`firebase/SETUP-EMAIL.md`](firebase/SETUP-EMAIL.md). It walks through upgrading Firebase to the Blaze plan (free at our scale), creating a Resend account, configuring secrets, and deploying the three Cloud Functions in `functions/index.js`.
+
+This is genuinely optional. Without it, you monitor activity by opening the admin dashboard — the pending-count badges show you what needs attention.
+
+---
+
+## 8. Self-host the fonts (~2 minutes, optional polish)
 
 The site uses system-font fallbacks and looks fine, but the design is sharper with the custom fonts in place:
 
