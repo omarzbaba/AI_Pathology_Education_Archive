@@ -29,7 +29,8 @@ import {
   orderBy,
   getDocs,
   doc,
-  updateDoc
+  updateDoc,
+  deleteDoc
 } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js";
 
 import {
@@ -441,6 +442,7 @@ function submissionCardHtml(r) {
         '<button class="btn" data-sub-id="' + escapeHtml(r.id) + '" data-action="needs_revision" style="background:var(--color-muted);font-size:0.85em;padding:0.4rem 0.8rem;">Needs revision</button>' +
         '<button class="btn" data-sub-id="' + escapeHtml(r.id) + '" data-action="reject" style="background:var(--color-burgundy);font-size:0.85em;padding:0.4rem 0.8rem;">Reject</button>' +
         '<button class="btn" data-sub-id="' + escapeHtml(r.id) + '" data-action="export" style="background:var(--color-navy);font-size:0.85em;padding:0.4rem 0.8rem;">Export as markdown</button>' +
+        '<button class="btn" data-sub-id="' + escapeHtml(r.id) + '" data-action="delete" style="background:#7a1c28;border:1px solid #4a0f17;font-size:0.85em;padding:0.4rem 0.8rem;" title="Permanently delete this submission">Delete…</button>' +
       '</div>' +
     '</article>'
   );
@@ -456,6 +458,24 @@ function wireSubmissionActions() {
 
       if (action === "export") {
         exportSubmissionAsMarkdown(sub);
+        return;
+      }
+
+      if (action === "delete") {
+        const label = (sub.prompt_title || "untitled").slice(0, 60);
+        if (!confirm("Permanently delete the submission \"" + label + "\"?\n\nThis CANNOT be undone — the row is removed from Firestore.")) return;
+        btn.disabled = true;
+        const orig = btn.textContent;
+        btn.textContent = "Deleting…";
+        try {
+          await deleteDoc(doc(db, "prompt_submissions", id));
+          await renderSubmissions();
+          await checkSubmissionCount();
+        } catch (err) {
+          alert("Delete failed: " + (err.message || "unknown error"));
+          btn.disabled = false;
+          btn.textContent = orig;
+        }
         return;
       }
 
@@ -737,6 +757,7 @@ function commentModerationCardHtml(c) {
         (c.status !== "pending"
           ? '<button class="btn" data-cid="' + escapeHtml(c.id) + '" data-caction="pending" style="background:var(--color-muted);font-size:0.85em;padding:0.4rem 0.8rem;">Reset to pending</button>'
           : '') +
+        '<button class="btn" data-cid="' + escapeHtml(c.id) + '" data-caction="delete" style="background:#7a1c28;border:1px solid #4a0f17;font-size:0.85em;padding:0.4rem 0.8rem;" title="Permanently delete this comment">Delete…</button>' +
       '</div>' +
     '</article>'
   );
@@ -746,7 +767,26 @@ function wireCommentModerationActions() {
   commentsEl.querySelectorAll("button[data-caction]").forEach((btn) => {
     btn.addEventListener("click", async () => {
       const id = btn.getAttribute("data-cid");
-      const newStatus = btn.getAttribute("data-caction");
+      const action = btn.getAttribute("data-caction");
+
+      if (action === "delete") {
+        if (!confirm("Permanently delete this comment?\n\nThis CANNOT be undone — the row is removed from Firestore.")) return;
+        btn.disabled = true;
+        const orig = btn.textContent;
+        btn.textContent = "Deleting…";
+        try {
+          await deleteDoc(doc(db, "comments", id));
+          await renderCommentsModeration();
+          await checkCommentsCount();
+        } catch (err) {
+          alert("Delete failed: " + (err.message || "unknown error"));
+          btn.disabled = false;
+          btn.textContent = orig;
+        }
+        return;
+      }
+
+      const newStatus = action;
       if (!confirm("Set this comment to '" + newStatus + "'?")) return;
       btn.disabled = true;
       const orig = btn.textContent;

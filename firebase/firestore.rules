@@ -154,7 +154,7 @@ service cloud.firestore {
       allow create:        if isValidSubmissionPayload();
       allow read, list:    if isAdmin();
       allow update:        if isAdmin() && isAdminStatusUpdate();
-      allow delete:        if false;
+      allow delete:        if isAdmin();
     }
 
     // ---- comments ----
@@ -219,7 +219,7 @@ service cloud.firestore {
       allow create:        if isValidCommentPayload();
       allow read, list:    if isAdmin() || resource.data.status == 'visible';
       allow update:        if isAdmin() && isAdminCommentUpdate();
-      allow delete:        if false;
+      allow delete:        if isAdmin();
     }
 
     // ---- votes ----

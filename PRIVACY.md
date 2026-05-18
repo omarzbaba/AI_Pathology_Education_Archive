@@ -78,7 +78,7 @@ The database is configured so that:
 
 - Only the author can read the data (enforced by Firebase Authentication and Firestore security rules)
 - **Access form entries** cannot be edited or deleted by anyone after submission (append-only, enforced at the database rule layer)
-- **Prompt submissions** are immutable in their content fields once submitted (only the status field can be updated by the admin)
+- **Prompt submissions and comments** are immutable in their content fields (only the status field can be updated). The admin can permanently delete a row to remove spam, off-topic noise, or test entries; deletion is logged in the admin's own activity but the deleted row is gone from Firestore.
 - Submissions require a valid App Check token (reCAPTCHA v3), which prevents automated bots from filling either collection
 
 ### Sub-processors
@@ -143,3 +143,4 @@ If this notice changes materially (new data collected, different retention perio
 
 - **2026-05-17:** Initial notice.
 - **2026-05-18:** Added sub-processor section noting Resend (optional, only when email notifications are enabled).
+- **2026-05-18:** Admin can now permanently delete prompt submissions and comments (previously only status-change was possible). Used for spam, off-topic noise, and test entries. Access-form entries remain strictly append-only.
