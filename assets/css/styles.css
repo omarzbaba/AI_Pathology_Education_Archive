@@ -472,6 +472,194 @@ hr {
 .meta-card dd { margin: 0; color: var(--color-navy); }
 
 /* -------------------------------------------------------------------------
+   Prompt card grid (pillar index pages)
+   ------------------------------------------------------------------------- */
+
+.card-section { margin: var(--space-7) 0; }
+.card-section__title {
+  font-family: var(--font-serif);
+  font-size: var(--fs-xl);
+  margin: 0 0 var(--space-4);
+  padding-bottom: var(--space-2);
+  border-bottom: 1px solid var(--color-rule);
+}
+
+.prompt-card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: var(--space-4);
+}
+
+.prompt-card {
+  display: flex;
+  gap: var(--space-3);
+  padding: var(--space-4);
+  background: var(--color-white);
+  border: 1px solid var(--color-rule);
+  border-radius: 3px;
+  text-decoration: none;
+  color: var(--color-navy);
+  transition: border-color 0.15s ease, box-shadow 0.15s ease, transform 0.15s ease;
+  position: relative;
+}
+.prompt-card:hover {
+  border-color: var(--color-burgundy);
+  box-shadow: 0 2px 8px rgba(20, 33, 61, 0.06);
+  transform: translateY(-1px);
+}
+.prompt-card:focus-visible {
+  outline: 2px solid var(--color-burgundy);
+  outline-offset: 2px;
+}
+
+.prompt-card__icon {
+  flex-shrink: 0;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-paper);
+  border: 1px solid var(--color-rule);
+  border-radius: 50%;
+  color: var(--color-burgundy);
+}
+
+.prompt-card__body {
+  flex: 1;
+  min-width: 0;
+}
+
+.prompt-card__title {
+  font-family: var(--font-serif);
+  font-size: 1.125rem;
+  margin: 0 0 var(--space-2);
+  line-height: 1.25;
+  color: var(--color-navy);
+}
+
+.prompt-card__intent {
+  font-size: var(--fs-sm);
+  color: var(--color-navy-soft);
+  margin: 0 0 var(--space-3);
+  line-height: 1.4;
+}
+
+.prompt-card__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin-top: auto;
+}
+
+/* -------------------------------------------------------------------------
+   Pills (difficulty, time, format, model)
+   ------------------------------------------------------------------------- */
+
+.pill {
+  display: inline-block;
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  padding: 0.15rem 0.55rem;
+  border-radius: 999px;
+  border: 1px solid var(--color-rule);
+  background: var(--color-white);
+  color: var(--color-navy-soft);
+  white-space: nowrap;
+  line-height: 1.5;
+}
+.pill--easy {
+  background: #ecf3ef;
+  color: #1F5C3B;
+  border-color: #c8e0d2;
+}
+.pill--mid {
+  background: #faf3e6;
+  color: #7a5a13;
+  border-color: #ead9b8;
+}
+.pill--hard {
+  background: #fbeaec;
+  color: var(--color-burgundy);
+  border-color: #e8c5cc;
+}
+.pill--time {
+  background: var(--color-paper);
+  color: var(--color-navy-soft);
+}
+.pill--multimodal {
+  background: #eef2f8;
+  color: #2c4a78;
+  border-color: #d0dceb;
+}
+.pill--model {
+  background: var(--color-navy);
+  color: var(--color-white);
+  border-color: var(--color-navy);
+}
+
+/* -------------------------------------------------------------------------
+   Prompt detail page — prominent Copy button at top
+   ------------------------------------------------------------------------- */
+
+.prompt-actions {
+  margin: var(--space-5) 0 var(--space-6);
+  display: flex;
+  gap: var(--space-3);
+}
+
+.btn-copy-prompt {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-family: var(--font-sans);
+  font-size: var(--fs-sm);
+  font-weight: 500;
+  background: var(--color-burgundy);
+  color: var(--color-white);
+  border: 0;
+  padding: var(--space-3) var(--space-5);
+  border-radius: 3px;
+  cursor: pointer;
+  transition: background 0.12s ease, transform 0.12s ease;
+}
+.btn-copy-prompt:hover {
+  background: var(--color-burgundy-dark);
+  transform: translateY(-1px);
+}
+.btn-copy-prompt:focus-visible {
+  outline: 2px solid var(--color-burgundy);
+  outline-offset: 3px;
+}
+.btn-copy-prompt--copied {
+  background: var(--color-success);
+}
+.btn-copy-prompt--copied:hover {
+  background: var(--color-success);
+}
+
+/* -------------------------------------------------------------------------
+   Code-block copy button (top-right of <pre> blocks)
+   ------------------------------------------------------------------------- */
+
+.copy-btn {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  font-size: 0.75rem;
+  font-family: var(--font-sans);
+  padding: 0.25rem 0.6rem;
+  background: var(--color-navy);
+  color: var(--color-white);
+  border: 0;
+  border-radius: 2px;
+  cursor: pointer;
+  transition: background 0.12s ease;
+}
+.copy-btn:hover { background: var(--color-navy-soft); }
+
+/* -------------------------------------------------------------------------
    Utility
    ------------------------------------------------------------------------- */
 
