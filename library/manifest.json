@@ -346,6 +346,180 @@
               "category": "drill"
             }
           ]
+        },
+        {
+          "title": "Source-grounded AI (NotebookLM & Claude Projects)",
+          "prompts": [
+            {
+              "title": "Choose your tool — NotebookLM vs Claude Projects vs generic chat",
+              "intent": "A decision rubric for which AI tool to use when. Source-grounded AI (NotebookLM, Claude Projects, ChatGPT Custom GPTs) is different from generic chat —…",
+              "difficulty": "quick-win",
+              "time_to_use": "<2min",
+              "visual": "text-only",
+              "audience": "resident",
+              "best_model": "Claude Sonnet 4.6",
+              "tags": "source-grounded, notebooklm, claude-projects, decision-rubric",
+              "slug": "sg-choose-your-tool",
+              "path": "library/pillar-1-self-education/prompts/sg-choose-your-tool.md",
+              "category": "notebook"
+            },
+            {
+              "title": "Source curation principles for AI notebooks",
+              "intent": "Principles for choosing what to upload to your AI notebook. The discipline that distinguishes a useful notebook from a noisy one: every source should earn…",
+              "difficulty": "intermediate",
+              "time_to_use": "2-10min",
+              "visual": "text-only",
+              "audience": "resident",
+              "best_model": "Claude Sonnet 4.6",
+              "tags": "source-grounded, curation, principles",
+              "slug": "sg-source-curation",
+              "path": "library/pillar-1-self-education/prompts/sg-source-curation.md",
+              "category": "notebook"
+            },
+            {
+              "title": "Verify your AI notebook is actually grounded",
+              "intent": "Source-grounded AI tools claim to answer \"only from your uploaded sources.\" In practice, they drift — pulling from the model's general training data when…",
+              "difficulty": "intermediate",
+              "time_to_use": "2-10min",
+              "visual": "text-only",
+              "audience": "resident",
+              "best_model": "Claude Sonnet 4.6",
+              "tags": "source-grounded, verification, grounding-drift",
+              "slug": "sg-grounding-verification",
+              "path": "library/pillar-1-self-education/prompts/sg-grounding-verification.md",
+              "category": "notebook"
+            },
+            {
+              "title": "Privacy and copyright for source-grounded AI",
+              "intent": "Walks through the privacy, copyright, and institutional-policy considerations BEFORE you upload anything to an AI notebook. Source-grounded AI is genuinely…",
+              "difficulty": "intermediate",
+              "time_to_use": "2-10min",
+              "visual": "text-only",
+              "audience": "resident",
+              "best_model": "Claude Sonnet 4.6",
+              "tags": "source-grounded, privacy, copyright, safety",
+              "slug": "sg-privacy-and-copyright",
+              "path": "library/pillar-1-self-education/prompts/sg-privacy-and-copyright.md",
+              "category": "notebook"
+            },
+            {
+              "title": "Build a board prep notebook",
+              "intent": "Step-by-step setup for a board prep notebook (NotebookLM or Claude Projects) that becomes your study companion for the months leading up to RISE, ABPath, or…",
+              "difficulty": "intermediate",
+              "time_to_use": ">10min",
+              "visual": "text-only",
+              "audience": "resident",
+              "best_model": "Claude Sonnet 4.6",
+              "tags": "source-grounded, board-prep, notebooklm, claude-projects",
+              "slug": "sg-board-prep-notebook",
+              "path": "library/pillar-1-self-education/prompts/sg-board-prep-notebook.md",
+              "category": "notebook"
+            },
+            {
+              "title": "Build a sign-out preview notebook",
+              "intent": "Sets up a subspecialty-specific notebook for the rotation you're on right now. Becomes your \"preview before sign-out\" tool — you load yesterday's cases…",
+              "difficulty": "intermediate",
+              "time_to_use": ">10min",
+              "visual": "text-only",
+              "audience": "resident",
+              "best_model": "Claude Sonnet 4.6",
+              "tags": "source-grounded, sign-out, rotation, notebooklm, claude-projects",
+              "slug": "sg-signout-notebook",
+              "path": "library/pillar-1-self-education/prompts/sg-signout-notebook.md",
+              "category": "notebook"
+            },
+            {
+              "title": "Build a journal club notebook",
+              "intent": "Sets up a journal-club-specific notebook containing the paper you're presenting plus 5-10 related papers, so you can discuss your paper in deep context —…",
+              "difficulty": "intermediate",
+              "time_to_use": ">10min",
+              "visual": "text-only",
+              "audience": "resident",
+              "best_model": "Claude Opus 4.7",
+              "tags": "source-grounded, journal-club, notebooklm, claude-projects, literature",
+              "slug": "sg-journal-club-notebook",
+              "path": "library/pillar-1-self-education/prompts/sg-journal-club-notebook.md",
+              "category": "notebook"
+            },
+            {
+              "title": "Source-grounded concept explanation",
+              "intent": "The source-grounded version of [Concept explanation at level](library.html#/library/pillar-1-self-education/prompts/concept-explanation-at-level). Anchors…",
+              "difficulty": "intermediate",
+              "time_to_use": "<2min",
+              "visual": "text-only",
+              "audience": "resident",
+              "best_model": "Claude Sonnet 4.6",
+              "tags": "source-grounded, concept, citation-required",
+              "slug": "sg-concept-explanation-sourced",
+              "path": "library/pillar-1-self-education/prompts/sg-concept-explanation-sourced.md",
+              "category": "notebook"
+            },
+            {
+              "title": "Source-grounded self-quiz from notebook material",
+              "intent": "The source-grounded version of [Self-quiz one at a time](library.html#/library/pillar-1-self-education/prompts/self-quiz-one-at-a-time). Drills you with…",
+              "difficulty": "quick-win",
+              "time_to_use": "2-10min",
+              "visual": "text-only",
+              "audience": "resident",
+              "best_model": "Claude Sonnet 4.6",
+              "tags": "source-grounded, self-quiz, drilling",
+              "slug": "sg-self-quiz-sourced",
+              "path": "library/pillar-1-self-education/prompts/sg-self-quiz-sourced.md",
+              "category": "notebook"
+            },
+            {
+              "title": "Source-grounded MCQ generation",
+              "intent": "The source-grounded version of [MCQ generation with rationales](library.html#/library/pillar-1-self-education/prompts/mcq-generation-with-rationales).…",
+              "difficulty": "intermediate",
+              "time_to_use": "2-10min",
+              "visual": "text-only",
+              "audience": "resident",
+              "best_model": "Claude Opus 4.7",
+              "tags": "source-grounded, mcq, board-prep",
+              "slug": "sg-mcq-generation-sourced",
+              "path": "library/pillar-1-self-education/prompts/sg-mcq-generation-sourced.md",
+              "category": "notebook"
+            },
+            {
+              "title": "Knowledge gap discovery from uploaded sources",
+              "intent": "Asks the notebook to surface YOUR knowledge gaps relative to YOUR uploaded study material — through an adaptive quiz that progressively narrows on weak…",
+              "difficulty": "intermediate",
+              "time_to_use": ">10min",
+              "visual": "text-only",
+              "audience": "resident",
+              "best_model": "Claude Opus 4.7",
+              "tags": "source-grounded, gap-discovery, study-planning",
+              "slug": "sg-knowledge-gap-discovery",
+              "path": "library/pillar-1-self-education/prompts/sg-knowledge-gap-discovery.md",
+              "category": "notebook"
+            },
+            {
+              "title": "Source-grounded paper critique against your corpus",
+              "intent": "Critiques a paper against the broader literature in your notebook — not against the model's general training. Surfaces where this paper agrees with,…",
+              "difficulty": "advanced",
+              "time_to_use": "2-10min",
+              "visual": "text-only",
+              "audience": "resident",
+              "best_model": "Claude Opus 4.7",
+              "tags": "source-grounded, paper-critique, cross-source-comparison",
+              "slug": "sg-paper-critique-against-corpus",
+              "path": "library/pillar-1-self-education/prompts/sg-paper-critique-against-corpus.md",
+              "category": "notebook"
+            },
+            {
+              "title": "Cross-source comparison drill",
+              "intent": "Asks the notebook to compare how multiple uploaded sources address the same topic — surfacing discrepancies, definitional differences, and version drift…",
+              "difficulty": "intermediate",
+              "time_to_use": "2-10min",
+              "visual": "text-only",
+              "audience": "resident",
+              "best_model": "Claude Opus 4.7",
+              "tags": "source-grounded, comparison, discrepancy-detection",
+              "slug": "sg-cross-source-comparison",
+              "path": "library/pillar-1-self-education/prompts/sg-cross-source-comparison.md",
+              "category": "notebook"
+            }
+          ]
         }
       ]
     },

@@ -57,6 +57,29 @@ A few principles run through every prompt in this pillar:
 - [Molecular result interpretation drill](library.html#/library/pillar-1-self-education/prompts/molecular-result-interpretation)
 - [Critical value workflow drill](library.html#/library/pillar-1-self-education/prompts/critical-value-workflow)
 
+### Source-grounded AI (NotebookLM & Claude Projects)
+
+*Use AI grounded in your own source materials — board prep notebooks, sign-out preview corpora, journal club libraries — instead of generic chat. Different setup, different prompts, different failure modes.*
+
+**Decision rubric & principles:**
+- [Choose your tool — NotebookLM vs Claude Projects vs generic chat](library.html#/library/pillar-1-self-education/prompts/sg-choose-your-tool)
+- [Source curation principles for AI notebooks](library.html#/library/pillar-1-self-education/prompts/sg-source-curation)
+- [Verify your AI notebook is actually grounded](library.html#/library/pillar-1-self-education/prompts/sg-grounding-verification)
+- [Privacy and copyright for source-grounded AI](library.html#/library/pillar-1-self-education/prompts/sg-privacy-and-copyright)
+
+**Setup guides for specific use cases:**
+- [Build a board prep notebook](library.html#/library/pillar-1-self-education/prompts/sg-board-prep-notebook)
+- [Build a sign-out preview notebook](library.html#/library/pillar-1-self-education/prompts/sg-signout-notebook)
+- [Build a journal club notebook](library.html#/library/pillar-1-self-education/prompts/sg-journal-club-notebook)
+
+**Prompt templates (source-grounded versions):**
+- [Source-grounded concept explanation](library.html#/library/pillar-1-self-education/prompts/sg-concept-explanation-sourced)
+- [Source-grounded self-quiz](library.html#/library/pillar-1-self-education/prompts/sg-self-quiz-sourced)
+- [Source-grounded MCQ generation](library.html#/library/pillar-1-self-education/prompts/sg-mcq-generation-sourced)
+- [Knowledge gap discovery from sources](library.html#/library/pillar-1-self-education/prompts/sg-knowledge-gap-discovery)
+- [Source-grounded paper critique against your corpus](library.html#/library/pillar-1-self-education/prompts/sg-paper-critique-against-corpus)
+- [Cross-source comparison drill](library.html#/library/pillar-1-self-education/prompts/sg-cross-source-comparison)
+
 ### Worked examples
 
 - [Self-quizzing through SPEP interpretation](library.html#/library/pillar-1-self-education/examples/spep-self-quiz)
