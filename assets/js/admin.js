@@ -75,12 +75,16 @@ const passwordInput  = document.getElementById("admin-password");
 const tabAccessLog   = document.getElementById("tab-access-log");
 const tabSubmissions = document.getElementById("tab-submissions");
 const tabComments    = document.getElementById("tab-comments");
+const tabFeedback    = document.getElementById("tab-feedback");
 const submissionsBadge = document.getElementById("submissions-badge");
 const commentsBadge    = document.getElementById("comments-badge");
+const feedbackBadge    = document.getElementById("feedback-badge");
 const accessLogSection   = document.getElementById("access-log-section");
 const submissionsSection = document.getElementById("submissions-section");
 const commentsSection    = document.getElementById("comments-section");
+const feedbackSection    = document.getElementById("feedback-section");
 const commentsEl     = document.getElementById("comments-content");
+const feedbackEl     = document.getElementById("feedback-content");
 const signoutLink    = document.getElementById("admin-signout-link");
 
 function setSigninStatus(msg, kind) {
@@ -105,12 +109,14 @@ function showTab(which) {
   const sections = {
     "access-log": accessLogSection,
     "submissions": submissionsSection,
-    "comments": commentsSection
+    "comments": commentsSection,
+    "feedback": feedbackSection
   };
   const tabs = {
     "access-log": tabAccessLog,
     "submissions": tabSubmissions,
-    "comments": tabComments
+    "comments": tabComments,
+    "feedback": tabFeedback
   };
   for (const key of Object.keys(sections)) {
     sections[key].hidden = (key !== which);
@@ -122,6 +128,7 @@ function showTab(which) {
 tabAccessLog.addEventListener("click", (e) => { e.preventDefault(); showTab("access-log"); });
 tabSubmissions.addEventListener("click", (e) => { e.preventDefault(); showTab("submissions"); renderSubmissions(); });
 tabComments.addEventListener("click", (e) => { e.preventDefault(); showTab("comments"); renderCommentsModeration(); });
+tabFeedback.addEventListener("click", (e) => { e.preventDefault(); showTab("feedback"); renderFeedback(); });
 signoutLink.addEventListener("click", (e) => { e.preventDefault(); signOut(auth); });
 
 // ---------------------------------------------------------------------------
@@ -177,6 +184,7 @@ if (auth) {
       await renderAccessLog();
       await checkSubmissionCount();
       await checkCommentsCount();
+      await checkFeedbackCount();
     } else {
       if (user) {
         await signOut(auth);
@@ -795,6 +803,156 @@ function wireCommentModerationActions() {
         await updateDoc(doc(db, "comments", id), { status: newStatus });
         await renderCommentsModeration();
         await checkCommentsCount();
+      } catch (err) {
+        alert("Update failed: " + (err.message || "unknown error"));
+        btn.disabled = false;
+        btn.textContent = orig;
+      }
+    });
+  });
+}
+
+// ---------------------------------------------------------------------------
+// Feedback inbox
+// ---------------------------------------------------------------------------
+
+let feedbackRows = [];
+
+async function checkFeedbackCount() {
+  try {
+    const snap = await getDocs(query(collection(db, "feedback"), orderBy("timestamp", "desc")));
+    let newCount = 0;
+    snap.forEach((d) => { if (d.data().status === "new") newCount++; });
+    if (newCount > 0) {
+      feedbackBadge.textContent = String(newCount);
+      feedbackBadge.style.display = "";
+    } else {
+      feedbackBadge.style.display = "none";
+    }
+  } catch (_) { /* silent */ }
+}
+
+async function renderFeedback() {
+  feedbackEl.innerHTML = '<p>Loading feedback&hellip;</p>';
+  try {
+    const snap = await getDocs(query(collection(db, "feedback"), orderBy("timestamp", "desc")));
+    feedbackRows = [];
+    snap.forEach((d) => feedbackRows.push({ id: d.id, ...d.data() }));
+    drawFeedbackList(feedbackRows);
+  } catch (err) {
+    feedbackEl.innerHTML =
+      '<p class="form-status form-status--error">Failed to load: ' +
+      escapeHtml(err.message) + '</p>';
+  }
+}
+
+function feedbackStatusPill(status) {
+  const bg =
+    status === "new" ? "var(--color-burgundy)" :
+    status === "triaged" ? "var(--color-muted)" :
+    status === "resolved" ? "var(--color-success)" : "var(--color-navy)";
+  return '<span class="pill" style="background:' + bg + ';color:white;">' + escapeHtml(status || "new") + '</span>';
+}
+
+function drawFeedbackList(rows) {
+  if (!rows.length) {
+    feedbackEl.innerHTML = '<p>No feedback yet.</p>';
+    return;
+  }
+  const counts = { new: 0, triaged: 0, resolved: 0 };
+  rows.forEach(r => { counts[r.status] = (counts[r.status] || 0) + 1; });
+
+  feedbackEl.innerHTML =
+    '<div style="margin-bottom: var(--space-4); display:flex; gap:0.5rem; flex-wrap:wrap;">' +
+      '<button class="btn" data-ffilter="all" style="background:var(--color-navy);">All (' + rows.length + ')</button>' +
+      '<button class="btn" data-ffilter="new" style="background:var(--color-burgundy);">New (' + (counts.new || 0) + ')</button>' +
+      '<button class="btn" data-ffilter="triaged" style="background:var(--color-muted);">Triaged (' + (counts.triaged || 0) + ')</button>' +
+      '<button class="btn" data-ffilter="resolved" style="background:var(--color-success);">Resolved (' + (counts.resolved || 0) + ')</button>' +
+    '</div>' +
+    '<div id="feedback-list">' + rows.map(feedbackCardHtml).join("") + '</div>';
+
+  feedbackEl.querySelectorAll("button[data-ffilter]").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const f = btn.getAttribute("data-ffilter");
+      const filtered = f === "all" ? rows : rows.filter(r => r.status === f);
+      document.getElementById("feedback-list").innerHTML =
+        filtered.length ? filtered.map(feedbackCardHtml).join("") : '<p>No feedback in this state.</p>';
+      wireFeedbackActions();
+    });
+  });
+
+  wireFeedbackActions();
+}
+
+function feedbackCardHtml(r) {
+  const identity = r.submitter_name || r.submitter_email
+    ? escapeHtml(r.submitter_name || "(no name)") + (r.submitter_email ? ' &lt;' + escapeHtml(r.submitter_email) + '&gt;' : "")
+    : '<em>Anonymous</em>';
+  const page = r.page_url ? '<p style="margin:0.25rem 0; font-size:0.85em; color: var(--color-muted);">From: <a href="' + escapeHtml(r.page_url) + '" target="_blank" rel="noopener">' + escapeHtml(r.page_url) + '</a></p>' : '';
+  const replyLink = r.submitter_email
+    ? '<a href="mailto:' + escapeHtml(r.submitter_email) + '?subject=Re%3A%20your%20feedback%20on%20the%20Companion%20Library" class="btn" style="background:var(--color-navy);font-size:0.85em;padding:0.4rem 0.8rem;text-decoration:none;">Reply via email</a>'
+    : '';
+  return (
+    '<article class="card" style="margin-bottom: var(--space-4); padding: var(--space-4);">' +
+      '<div style="display:flex; justify-content:space-between; align-items:flex-start; gap:0.5rem; margin-bottom:0.5rem;">' +
+        '<div>' +
+          '<p style="margin:0; font-weight: 500;">' + identity + '</p>' +
+          '<p style="margin:0.25rem 0; font-size:0.85em; color: var(--color-muted);">' + escapeHtml(fmtTimestamp(r.timestamp)) + '</p>' +
+          page +
+        '</div>' +
+        feedbackStatusPill(r.status) +
+      '</div>' +
+      '<blockquote style="border-left: 3px solid var(--color-burgundy); padding-left: 1rem; margin: 0.75rem 0; white-space: pre-wrap;">' +
+        escapeHtml(r.message || "") +
+      '</blockquote>' +
+      '<div style="display:flex;gap:0.5rem;flex-wrap:wrap;">' +
+        (r.status !== "triaged"
+          ? '<button class="btn" data-fid="' + escapeHtml(r.id) + '" data-faction="triaged" style="background:var(--color-muted);font-size:0.85em;padding:0.4rem 0.8rem;">Mark triaged</button>'
+          : '') +
+        (r.status !== "resolved"
+          ? '<button class="btn" data-fid="' + escapeHtml(r.id) + '" data-faction="resolved" style="background:var(--color-success);font-size:0.85em;padding:0.4rem 0.8rem;">Mark resolved</button>'
+          : '') +
+        (r.status !== "new"
+          ? '<button class="btn" data-fid="' + escapeHtml(r.id) + '" data-faction="new" style="background:var(--color-burgundy);font-size:0.85em;padding:0.4rem 0.8rem;">Re-open</button>'
+          : '') +
+        replyLink +
+        '<button class="btn" data-fid="' + escapeHtml(r.id) + '" data-faction="delete" style="background:#7a1c28;border:1px solid #4a0f17;font-size:0.85em;padding:0.4rem 0.8rem;" title="Permanently delete">Delete&hellip;</button>' +
+      '</div>' +
+    '</article>'
+  );
+}
+
+function wireFeedbackActions() {
+  feedbackEl.querySelectorAll("button[data-faction]").forEach((btn) => {
+    btn.addEventListener("click", async () => {
+      const id = btn.getAttribute("data-fid");
+      const action = btn.getAttribute("data-faction");
+
+      if (action === "delete") {
+        if (!confirm("Permanently delete this feedback?\n\nThis CANNOT be undone.")) return;
+        btn.disabled = true;
+        const orig = btn.textContent;
+        btn.textContent = "Deleting…";
+        try {
+          await deleteDoc(doc(db, "feedback", id));
+          await renderFeedback();
+          await checkFeedbackCount();
+        } catch (err) {
+          alert("Delete failed: " + (err.message || "unknown error"));
+          btn.disabled = false;
+          btn.textContent = orig;
+        }
+        return;
+      }
+
+      const newStatus = action;
+      btn.disabled = true;
+      const orig = btn.textContent;
+      btn.textContent = "Updating…";
+      try {
+        await updateDoc(doc(db, "feedback", id), { status: newStatus });
+        await renderFeedback();
+        await checkFeedbackCount();
       } catch (err) {
         alert("Update failed: " + (err.message || "unknown error"));
         btn.disabled = false;

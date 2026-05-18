@@ -47,7 +47,20 @@ When you post a comment on a prompt detail page, the following is recorded:
 
 Comments are **pre-moderated** — they do not appear publicly until the author has reviewed and approved them. Once visible, comments can be set back to "hidden" by the author (the content remains stored for audit purposes but is not displayed). The author cannot delete comments outright; the audit trail is preserved.
 
-### Context 4 — Votes on prompts
+### Context 4 — Feedback messages
+
+When you click the floating **Feedback** button on any page and send a message:
+
+- **Your name and email** if you've already provided them via the access form, or what you type into the optional fields if you haven't (both fields are optional; anonymous feedback is allowed)
+- **Your message text**
+- **The page URL you were on** when you sent the message (helps the author triage bug reports)
+- **Status** (initially "new"; the author marks it "triaged" or "resolved" as they work through the queue)
+- **Referrer URL and user agent**
+- **Server timestamp**
+
+Feedback messages are admin-only; they are never displayed publicly. If you provide an email, the author may reply directly.
+
+### Context 5 — Votes on prompts
 
 When you upvote a prompt:
 
@@ -144,3 +157,4 @@ If this notice changes materially (new data collected, different retention perio
 - **2026-05-17:** Initial notice.
 - **2026-05-18:** Added sub-processor section noting Resend (optional, only when email notifications are enabled).
 - **2026-05-18:** Admin can now permanently delete prompt submissions and comments (previously only status-change was possible). Used for spam, off-topic noise, and test entries. Access-form entries remain strictly append-only.
+- **2026-05-18:** Added the **feedback** collection (Context 4 above) — a floating Feedback button on every page collects bug reports, suggestions, and questions for the author. Anonymous submissions allowed; if you include an email the author may reply. Admin-only read.

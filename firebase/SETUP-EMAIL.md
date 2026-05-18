@@ -6,6 +6,7 @@ This walkthrough enables email notifications for new comments, new submissions, 
 
 - **You** get an email when a new comment is submitted (linked to the prompt + admin dashboard)
 - **You** get an email when a new prompt submission lands (with the full submission body)
+- **You** get an email when a visitor sends feedback via the floating Feedback button (with Reply-To set to their email if provided, so you can reply directly)
 - **Submitters** get an email when their submission status changes (approved / rejected / needs revision)
 
 ## What it costs
@@ -99,9 +100,10 @@ firebase deploy --only functions
 
 First deploy takes ~5 minutes (Google provisions a Cloud Build pipeline). Subsequent deploys are faster.
 
-You'll see three functions deployed:
+You'll see four functions deployed:
 - `onCommentCreated`
 - `onSubmissionCreated`
+- `onFeedbackCreated`
 - `onSubmissionStatusChanged`
 
 ## Step 7 — Smoke test
@@ -123,6 +125,7 @@ If you want to stop notifications:
 ```bash
 firebase functions:delete onCommentCreated
 firebase functions:delete onSubmissionCreated
+firebase functions:delete onFeedbackCreated
 firebase functions:delete onSubmissionStatusChanged
 ```
 

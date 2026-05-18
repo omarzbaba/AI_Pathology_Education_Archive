@@ -119,7 +119,45 @@ exports.onSubmissionCreated = onDocumentCreated(
 );
 
 // ---------------------------------------------------------------------------
-// 3. Submission status changed → email submitter
+// 3. New feedback → email admin
+// ---------------------------------------------------------------------------
+
+exports.onFeedbackCreated = onDocumentCreated(
+  { document: "feedback/{fbId}", secrets: [resendKey] },
+  async (event) => {
+    const f = event.data.data();
+    try {
+      const resend = getResend();
+      const adminUrl = SITE_URL + "/admin.html";
+      const identity = f.submitter_name || f.submitter_email
+        ? escapeHtml(f.submitter_name || "(no name)") + (f.submitter_email ? " &lt;" + escapeHtml(f.submitter_email) + "&gt;" : "")
+        : "<em>Anonymous</em>";
+
+      await resend.emails.send({
+        from: RESEND_FROM,
+        to: ADMIN_EMAIL,
+        replyTo: f.submitter_email || undefined,
+        subject: "[Companion] Feedback from " + (f.submitter_name || f.submitter_email || "anonymous"),
+        html: `
+          <h2>New feedback</h2>
+          <p><strong>From:</strong> ${identity}</p>
+          <p><strong>Page:</strong> <a href="${escapeHtml(f.page_url || "")}">${escapeHtml(f.page_url || "")}</a></p>
+          <hr>
+          <blockquote style="border-left: 3px solid #7A1C28; padding-left: 1rem; margin: 1rem 0; white-space: pre-wrap;">
+            ${escapeHtml(f.message || "")}
+          </blockquote>
+          <p><a href="${escapeHtml(adminUrl)}">Open admin dashboard &rarr;</a></p>
+        `
+      });
+      logger.info("Feedback notification sent for", event.params.fbId);
+    } catch (err) {
+      logger.error("Failed to send feedback notification:", err);
+    }
+  }
+);
+
+// ---------------------------------------------------------------------------
+// 4. Submission status changed → email submitter
 // ---------------------------------------------------------------------------
 
 exports.onSubmissionStatusChanged = onDocumentUpdated(

@@ -262,6 +262,58 @@ service cloud.firestore {
       allow delete:        if isAdmin();
     }
 
+    // ---- feedback ----
+    //
+    // Free-form feedback / bug reports / suggestions from any visitor.
+    // - create: anyone with App Check + valid shape. Identity is optional
+    //   (anonymous feedback allowed); if present, must be valid email.
+    // - read/list/update/delete: admin only.
+
+    function isValidFeedbackPayload() {
+      let d = request.resource.data;
+      let keys = d.keys();
+      let required = [
+        'timestamp', 'status',
+        'submitter_name', 'submitter_email',
+        'message', 'page_url',
+        'referrer', 'user_agent'
+      ];
+      return
+        keys.hasAll(required) && keys.hasOnly(required)
+        && d.timestamp == request.time
+        && d.status == 'new'
+        && d.submitter_name is string && d.submitter_name.size() <= 120
+        && d.submitter_email is string && d.submitter_email.size() <= 254
+        && (d.submitter_email.size() == 0
+            || d.submitter_email.matches('^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$'))
+        && d.message is string && d.message.size() >= 10 && d.message.size() <= 3000
+        && d.page_url is string && d.page_url.size() <= 500
+        && d.referrer is string && d.referrer.size() <= 500
+        && d.user_agent is string && d.user_agent.size() <= 500;
+    }
+
+    function isAdminFeedbackUpdate() {
+      let before = resource.data;
+      let after = request.resource.data;
+      let allowedStatuses = ['new', 'triaged', 'resolved'];
+      let immutable = [
+        'timestamp',
+        'submitter_name', 'submitter_email',
+        'message', 'page_url',
+        'referrer', 'user_agent'
+      ];
+      return
+        !(before.diff(after).affectedKeys().hasAny(immutable))
+        && after.status is string && after.status in allowedStatuses;
+    }
+
+    match /feedback/{docId} {
+      allow create:        if isValidFeedbackPayload();
+      allow read, list:    if isAdmin();
+      allow update:        if isAdmin() && isAdminFeedbackUpdate();
+      allow delete:        if isAdmin();
+    }
+
     // ---- deny-by-default for everything else ----
 
     match /{document=**} {
