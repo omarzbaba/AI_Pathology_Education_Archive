@@ -157,6 +157,111 @@ service cloud.firestore {
       allow delete:        if false;
     }
 
+    // ---- comments ----
+    //
+    // Community comments on prompts.
+    // - create: anyone with App Check + valid shape. Starts as 'pending';
+    //   admin moderates before public visibility.
+    // - read/list: anyone can read VISIBLE comments. Pending/hidden are
+    //   admin-only.
+    // - update: admin only (status changes; can also write admin replies
+    //   with is_admin=true via separate creates).
+    // - delete: never (hide instead, preserve audit trail).
+
+    function isValidCommentPayload() {
+      let d = request.resource.data;
+      let keys = d.keys();
+      let required = [
+        'timestamp', 'status',
+        'prompt_path',
+        'commenter_name', 'commenter_email', 'commenter_affiliation',
+        'comment_text',
+        'is_admin', 'referrer', 'user_agent'
+      ];
+      let allowedStatuses = ['pending', 'visible', 'hidden'];
+
+      return
+        keys.hasAll(required) && keys.hasOnly(required)
+        && d.timestamp == request.time
+        // Public-created comments start as 'pending' (admin moderates).
+        // Admin-created comments (is_admin=true) can start as 'visible'.
+        && (
+          (d.status == 'pending' && d.is_admin == false)
+          || (isAdmin() && d.status == 'visible' && d.is_admin == true)
+        )
+        && d.prompt_path is string && d.prompt_path.size() >= 1 && d.prompt_path.size() <= 300
+        && d.prompt_path.matches('^[A-Za-z0-9_/\\-]+$')
+        && d.commenter_name is string && d.commenter_name.size() >= 1 && d.commenter_name.size() <= 100
+        && d.commenter_email is string && d.commenter_email.size() >= 5 && d.commenter_email.size() <= 254
+        && d.commenter_email.matches('^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$')
+        && d.commenter_affiliation is string && d.commenter_affiliation.size() <= 200
+        && d.comment_text is string && d.comment_text.size() >= 10 && d.comment_text.size() <= 2000
+        && d.is_admin is bool
+        && d.referrer is string && d.referrer.size() <= 500
+        && d.user_agent is string && d.user_agent.size() <= 500;
+    }
+
+    function isAdminCommentUpdate() {
+      let before = resource.data;
+      let after = request.resource.data;
+      let allowedStatuses = ['pending', 'visible', 'hidden'];
+      let immutable = [
+        'timestamp', 'prompt_path',
+        'commenter_name', 'commenter_email', 'commenter_affiliation',
+        'comment_text', 'is_admin', 'referrer', 'user_agent'
+      ];
+      return
+        !(before.diff(after).affectedKeys().hasAny(immutable))
+        && after.status is string && after.status in allowedStatuses;
+    }
+
+    match /comments/{docId} {
+      allow create:        if isValidCommentPayload();
+      allow read, list:    if isAdmin() || resource.data.status == 'visible';
+      allow update:        if isAdmin() && isAdminCommentUpdate();
+      allow delete:        if false;
+    }
+
+    // ---- votes ----
+    //
+    // Upvotes on prompts. One vote per email per prompt enforced by
+    // deterministic doc ID (prompt_path__email_hash).
+    // - create: anyone with App Check + valid shape. Existing doc at same
+    //   ID means "already voted"; client should not re-write.
+    // - read/list: anyone can read aggregate counts (count of vote docs
+    //   per prompt_path).
+    // - update: nobody (votes are immutable; you either voted or you
+    //   didn't).
+    // - delete: client can delete their own vote (un-vote) ONLY if the
+    //   voter_email matches what they submit. (Note: this is a courtesy
+    //   gate; full deletion-by-non-owner protection requires Firebase
+    //   Auth, which we don't require for voting.)
+
+    function isValidVotePayload() {
+      let d = request.resource.data;
+      let keys = d.keys();
+      let required = [
+        'timestamp', 'prompt_path', 'voter_email',
+        'referrer', 'user_agent'
+      ];
+      return
+        keys.hasAll(required) && keys.hasOnly(required)
+        && d.timestamp == request.time
+        && d.prompt_path is string && d.prompt_path.size() >= 1 && d.prompt_path.size() <= 300
+        && d.prompt_path.matches('^[A-Za-z0-9_/\\-]+$')
+        && d.voter_email is string && d.voter_email.size() >= 5 && d.voter_email.size() <= 254
+        && d.voter_email.matches('^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$')
+        && d.referrer is string && d.referrer.size() <= 500
+        && d.user_agent is string && d.user_agent.size() <= 500;
+    }
+
+    match /votes/{docId} {
+      allow create:        if isValidVotePayload();
+      allow read, list:    if true;
+      allow update:        if false;
+      allow delete:        if isAdmin();
+    }
+
     // ---- deny-by-default for everything else ----
 
     match /{document=**} {

@@ -73,9 +73,9 @@ These don't change day-to-day work for a solo author, but they prevent accidents
 
 ---
 
-## 4b. Re-deploy Firestore rules after Phase B (~1 minute)
+## 4b. Re-deploy Firestore rules after Phase B + C1 (~1 minute)
 
-Phase B added the `prompt_submissions` collection. The Firestore rules need to be re-deployed so the new collection is gated correctly.
+Phase B added the `prompt_submissions` collection. Phase C1 added the `comments` and `votes` collections. The Firestore rules need to be re-deployed so the new collections are gated correctly.
 
 **Option A — paste in console (fastest):**
 1. Firebase console → Firestore Database → Rules tab

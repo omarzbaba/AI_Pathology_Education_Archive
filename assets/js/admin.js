@@ -73,9 +73,13 @@ const passwordInput  = document.getElementById("admin-password");
 
 const tabAccessLog   = document.getElementById("tab-access-log");
 const tabSubmissions = document.getElementById("tab-submissions");
+const tabComments    = document.getElementById("tab-comments");
 const submissionsBadge = document.getElementById("submissions-badge");
+const commentsBadge    = document.getElementById("comments-badge");
 const accessLogSection   = document.getElementById("access-log-section");
 const submissionsSection = document.getElementById("submissions-section");
+const commentsSection    = document.getElementById("comments-section");
+const commentsEl     = document.getElementById("comments-content");
 const signoutLink    = document.getElementById("admin-signout-link");
 
 function setSigninStatus(msg, kind) {
@@ -97,21 +101,26 @@ function escapeHtml(s) {
 // ---------------------------------------------------------------------------
 
 function showTab(which) {
-  if (which === "access-log") {
-    accessLogSection.hidden = false;
-    submissionsSection.hidden = true;
-    tabAccessLog.classList.add("admin-tab--active");
-    tabSubmissions.classList.remove("admin-tab--active");
-  } else {
-    accessLogSection.hidden = true;
-    submissionsSection.hidden = false;
-    tabAccessLog.classList.remove("admin-tab--active");
-    tabSubmissions.classList.add("admin-tab--active");
+  const sections = {
+    "access-log": accessLogSection,
+    "submissions": submissionsSection,
+    "comments": commentsSection
+  };
+  const tabs = {
+    "access-log": tabAccessLog,
+    "submissions": tabSubmissions,
+    "comments": tabComments
+  };
+  for (const key of Object.keys(sections)) {
+    sections[key].hidden = (key !== which);
+    if (key === which) tabs[key].classList.add("admin-tab--active");
+    else tabs[key].classList.remove("admin-tab--active");
   }
 }
 
 tabAccessLog.addEventListener("click", (e) => { e.preventDefault(); showTab("access-log"); });
 tabSubmissions.addEventListener("click", (e) => { e.preventDefault(); showTab("submissions"); renderSubmissions(); });
+tabComments.addEventListener("click", (e) => { e.preventDefault(); showTab("comments"); renderCommentsModeration(); });
 signoutLink.addEventListener("click", (e) => { e.preventDefault(); signOut(auth); });
 
 // ---------------------------------------------------------------------------
@@ -166,6 +175,7 @@ if (auth) {
       armIdleTimer();
       await renderAccessLog();
       await checkSubmissionCount();
+      await checkCommentsCount();
     } else {
       if (user) {
         await signOut(auth);
@@ -537,4 +547,140 @@ function exportSubmissionAsMarkdown(sub) {
   ].join("\n");
 
   downloadFile(fm, slug + ".md", "text/markdown");
+}
+
+// ---------------------------------------------------------------------------
+// Comments moderation
+// ---------------------------------------------------------------------------
+
+let commentRows = [];
+
+async function checkCommentsCount() {
+  try {
+    const q = query(collection(db, "comments"), orderBy("timestamp", "desc"));
+    const snap = await getDocs(q);
+    let pending = 0;
+    snap.forEach((doc) => {
+      if (doc.data().status === "pending") pending++;
+    });
+    if (pending > 0) {
+      commentsBadge.textContent = pending;
+      commentsBadge.style.display = "inline-block";
+    } else {
+      commentsBadge.style.display = "none";
+    }
+  } catch (_) { /* ignore */ }
+}
+
+async function renderCommentsModeration() {
+  commentsEl.innerHTML = '<p>Loading comments&hellip;</p>';
+  try {
+    const q = query(collection(db, "comments"), orderBy("timestamp", "desc"));
+    const snap = await getDocs(q);
+    commentRows = [];
+    snap.forEach((doc) => commentRows.push({ id: doc.id, ...doc.data() }));
+    drawCommentsTable(commentRows);
+  } catch (err) {
+    commentsEl.innerHTML =
+      '<p class="form-status form-status--error">Failed to load: ' +
+      escapeHtml(err.message) + '</p>';
+  }
+}
+
+function commentStatusPill(status) {
+  const map = {
+    pending: { cls: "pill pill--mid",    label: "Pending" },
+    visible: { cls: "pill pill--easy",   label: "Visible" },
+    hidden:  { cls: "pill pill--hard",   label: "Hidden" }
+  };
+  const m = map[status] || { cls: "pill pill--neutral", label: status || "?" };
+  return '<span class="' + m.cls + '">' + escapeHtml(m.label) + '</span>';
+}
+
+function drawCommentsTable(rows) {
+  const counts = {
+    pending: rows.filter(r => r.status === "pending").length,
+    visible: rows.filter(r => r.status === "visible").length,
+    hidden:  rows.filter(r => r.status === "hidden").length,
+  };
+
+  commentsEl.innerHTML =
+    '<div style="display:flex;gap:1rem;flex-wrap:wrap;margin-bottom:1rem;">' +
+      '<button class="btn" data-cfilter="all" style="background:var(--color-navy);">All (' + rows.length + ')</button>' +
+      '<button class="btn" data-cfilter="pending">Pending (' + counts.pending + ')</button>' +
+      '<button class="btn" data-cfilter="visible" style="background:var(--color-success);">Visible (' + counts.visible + ')</button>' +
+      '<button class="btn" data-cfilter="hidden" style="background:var(--color-burgundy);">Hidden (' + counts.hidden + ')</button>' +
+    '</div>' +
+    '<div id="comments-list">' +
+      rows.map(commentModerationCardHtml).join("") +
+    '</div>';
+
+  commentsEl.querySelectorAll("button[data-cfilter]").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const f = btn.getAttribute("data-cfilter");
+      const filtered = f === "all" ? commentRows : commentRows.filter(r => r.status === f);
+      document.getElementById("comments-list").innerHTML = filtered.map(commentModerationCardHtml).join("");
+      wireCommentModerationActions();
+    });
+  });
+
+  wireCommentModerationActions();
+}
+
+function commentModerationCardHtml(c) {
+  const promptLink = c.prompt_path
+    ? '<a href="library.html#/' + escapeHtml(c.prompt_path) + '" target="_blank" rel="noopener">' + escapeHtml(c.prompt_path.split("/").pop()) + ' &rarr;</a>'
+    : '(no path)';
+  return (
+    '<article style="border:1px solid var(--color-rule);border-radius:3px;margin-bottom:1rem;padding:1rem;background:var(--color-white);">' +
+      '<div style="display:flex;justify-content:space-between;align-items:start;gap:1rem;margin-bottom:0.5rem;">' +
+        '<div>' +
+          '<p style="font-size:var(--fs-sm);margin:0 0 0.25rem;"><strong>' + escapeHtml(c.commenter_name) + '</strong>' +
+            (c.commenter_affiliation ? ' (' + escapeHtml(c.commenter_affiliation) + ')' : '') +
+            ' &middot; ' + escapeHtml(c.commenter_email) +
+            ' &middot; ' + escapeHtml(fmtTimestamp(c.timestamp)) +
+            (c.is_admin ? ' <span class="pill pill--model">Author</span>' : '') +
+          '</p>' +
+          '<p style="font-size:var(--fs-xs);margin:0;color:var(--color-muted);">On: ' + promptLink + '</p>' +
+        '</div>' +
+        '<div>' + commentStatusPill(c.status) + '</div>' +
+      '</div>' +
+      '<blockquote style="margin:0.75rem 0;padding:0.5rem 0.75rem;border-left:3px solid var(--color-rule);background:var(--color-paper);font-size:var(--fs-sm);">' +
+        escapeHtml(c.comment_text || "").split("\n").map(p => '<p style="margin:0.25rem 0;">' + p + '</p>').join("") +
+      '</blockquote>' +
+      '<div style="display:flex;gap:0.5rem;flex-wrap:wrap;">' +
+        (c.status !== "visible"
+          ? '<button class="btn" data-cid="' + escapeHtml(c.id) + '" data-caction="visible" style="background:var(--color-success);font-size:0.85em;padding:0.4rem 0.8rem;">Approve / Show</button>'
+          : '') +
+        (c.status !== "hidden"
+          ? '<button class="btn" data-cid="' + escapeHtml(c.id) + '" data-caction="hidden" style="background:var(--color-burgundy);font-size:0.85em;padding:0.4rem 0.8rem;">Hide</button>'
+          : '') +
+        (c.status !== "pending"
+          ? '<button class="btn" data-cid="' + escapeHtml(c.id) + '" data-caction="pending" style="background:var(--color-muted);font-size:0.85em;padding:0.4rem 0.8rem;">Reset to pending</button>'
+          : '') +
+      '</div>' +
+    '</article>'
+  );
+}
+
+function wireCommentModerationActions() {
+  commentsEl.querySelectorAll("button[data-caction]").forEach((btn) => {
+    btn.addEventListener("click", async () => {
+      const id = btn.getAttribute("data-cid");
+      const newStatus = btn.getAttribute("data-caction");
+      if (!confirm("Set this comment to '" + newStatus + "'?")) return;
+      btn.disabled = true;
+      const orig = btn.textContent;
+      btn.textContent = "Updating…";
+      try {
+        await updateDoc(doc(db, "comments", id), { status: newStatus });
+        await renderCommentsModeration();
+        await checkCommentsCount();
+      } catch (err) {
+        alert("Update failed: " + (err.message || "unknown error"));
+        btn.disabled = false;
+        btn.textContent = orig;
+      }
+    });
+  });
 }

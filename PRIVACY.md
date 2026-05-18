@@ -33,6 +33,33 @@ When you submit a prompt via the [Submit a prompt](/submit.html) form, the follo
 
 Submitted prompt content is stored even if rejected — we keep the audit trail so that contributors can ask why their submission was declined, but rejected submissions are NOT made public.
 
+### Context 3 — Comments on prompts
+
+When you post a comment on a prompt detail page, the following is recorded:
+
+- **Your name** (displayed publicly with the comment after approval)
+- **Your email address** (stored privately; not displayed publicly)
+- **Your institution / affiliation** (optional, displayed publicly if provided)
+- **Your comment text** (displayed publicly after approval)
+- **Status** (initially "pending"; admin reviews and sets to "visible" or "hidden")
+- **Referrer URL and user agent**
+- **Server timestamp**
+
+Comments are **pre-moderated** — they do not appear publicly until the author has reviewed and approved them. Once visible, comments can be set back to "hidden" by the author (the content remains stored for audit purposes but is not displayed). The author cannot delete comments outright; the audit trail is preserved.
+
+### Context 4 — Votes on prompts
+
+When you upvote a prompt:
+
+- **Your email address** is stored as part of a vote record (one vote per email per prompt, enforced by deterministic record ID)
+- **The prompt voted on**
+- **Server timestamp**
+- **Referrer URL and user agent**
+
+The email is used to prevent duplicate voting; it is not displayed publicly. Vote counts are public; individual votes are not attributed in any public display.
+
+If you provided your email via the access form or a comment, it is reused for voting so you don't need to enter it again.
+
 ### What's the same across both contexts
 
 No other information is collected. The site does not load analytics scripts, tracking pixels, third-party tags, or social-media widgets. The site does not write tracking cookies. The only browser storage used is a single localStorage entry that holds your first name (for personalized greeting) and a flag that you've already signed in.

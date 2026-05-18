@@ -256,6 +256,11 @@
     );
   }
 
+  function isPromptDetailPath(path) {
+    return /^library\/pillar-[^\/]+\/prompts\/[^\/]+\.md$/.test(path)
+        || /^library\/pillar-[^\/]+\/prompts\/[^\/]+\/[^\/]+\.md$/.test(path);
+  }
+
   function renderDetail(text, path) {
     const { data, body } = parseFrontmatter(text);
     setPageTitle(data.title || path);
@@ -274,12 +279,16 @@
     const heading = data.title ? '<h1>' + escapeHtml(data.title) + '</h1>' : '';
     const promptText = extractPromptText(body);
     const promptActions = promptText ? copyButtonHtml(promptText) : '';
+    const engagementSlot = isPromptDetailPath(path)
+      ? '<div id="engagement-slot"></div>'
+      : '';
 
     contentEl.innerHTML =
       heading +
       buildMetaCard(data) +
       promptActions +
-      cleanHtml;
+      cleanHtml +
+      engagementSlot;
 
     if (promptText) wirePromptCopyAction(promptText);
 
@@ -292,6 +301,17 @@
     });
 
     addCopyButtons();
+
+    // Lazy-load engagement (comments + votes) only for prompt detail pages
+    if (isPromptDetailPath(path)) {
+      // Strip the .md extension for the canonical prompt_path identifier
+      const promptPath = path.replace(/\.md$/, "");
+      import("./engagement.js")
+        .then(({ renderEngagement }) =>
+          renderEngagement(document.getElementById("engagement-slot"), promptPath))
+        .catch((err) => console.warn("Engagement load failed:", err));
+    }
+
     window.scrollTo({ top: 0, behavior: "instant" });
   }
 
