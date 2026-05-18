@@ -6,55 +6,96 @@ audience: faculty
 difficulty: quick-win
 time_to_use: 2-10min
 visual: text-only
-tags: design, badges
+tags: design, badges, accessibility
 verified_models: TODO
 best_model: Claude Haiku 4.5
-last_updated: 2026-05-17
+last_updated: 2026-05-18
 ---
 
 ## What this prompt does
 
-Draft a specification for printable workshop badges — fields, dimensions, color, accessibility, and print-shop-ready dimensions.
+Drafts a printable badge spec: dimensions, fields, font sizes (meeting WCAG accessibility minimums for name visibility), color palette, lanyard/holder type, and a 10% buffer quantity for last-minute attendees and reprints.
 
 ## When to use it
 
-3-4 weeks before the workshop, when you're ordering supplies and need a spec to send to the print shop or graphic designer.
+3-4 weeks before the workshop, when you're placing print orders.
 
 ## The prompt
 
 ```
-Draft a print specification for workshop attendee badges. Workshop: [name and date].
+You are drafting a badge print spec. Name font ≥24pt for in-person events (legible from across a room). Order with 10% buffer.
 
-The spec should include:
+## What I'm producing
 
-- **Dimensions:** physical size of the badge (mm or inches), orientation (portrait/landscape), bleed area if printed professionally.
-- **Required fields:** what appears on the badge (name in large type, institution in smaller type, role, date or event name, etc.) with the relative font size and position of each.
-- **Optional fields:** any conditional content (faculty/attendee/staff color coding, table assignment, dietary marker if used).
-- **Color palette:** specific colors with hex codes; reasonable defaults if I don't specify.
-- **Font:** legible at distance, with size minimums for accessibility (e.g., name in 24-32pt).
-- **Lanyard / holder type:** clip vs lanyard, hole position, paper weight or material.
-- **Quantity to order** with at least 10% buffer for last-minute attendees and reprints.
+- **Workshop name + date:** [name + date]
+- **Expected attendee count:** [N]
+- **Print method:** [in-house printer / professional print shop]
+- **Holder type preference:** [lanyard / clip / pin]
+- **Branding constraints:** [institutional colors, logo placement requirements]
 
-End with a print-shop-ready summary I can paste into an order form.
+## What to produce
 
-**Important — refinement:** Verify font size meets accessibility minimums: name in ≥24pt for in-person events (legible from across a room). If institutional branding requirements conflict with accessibility, name the conflict explicitly.
+### Dimensions
+- Physical size (mm or inches)
+- Orientation (portrait or landscape)
+- Bleed area if professionally printed
+
+### Required fields with position and font size
+- Name (largest type, top)
+- Institution (smaller, below name)
+- Role (e.g., "Faculty" / "Attendee" / "Staff")
+- Date or event name
+- Logo placement (if applicable)
+
+### Optional conditional fields
+- Color coding (faculty / attendee / staff)
+- Table or group assignment
+- Dietary marker
+- Pronouns line
+
+### Color palette
+- Specific colors with hex codes (defaults if I don't specify)
+- Verify WCAG AA contrast for text on background
+
+### Font
+- Sans-serif legible at distance
+- Name in ≥24pt
+- Institution in ≥14pt
+
+### Lanyard / holder
+- Type (clip, lanyard, pin)
+- Hole position
+- Paper weight or material recommendation
+
+### Quantity to order
+- N attendees + 10% buffer + 5-10 spare for staff/walk-ins
+
+### Print-shop-ready summary
+A single-paragraph summary I can paste into an order form.
+
+## Hard rules
+
+- **Name font ≥24pt.** Non-negotiable for in-person events.
+- **WCAG AA contrast.** Verify the color combinations.
+- **10% buffer minimum.**
+- **Specific holder type matched to badge dimensions.**
+
+## What I will NOT accept
+
+- Name fonts that won't be legible across a room
+- Missing buffer quantity
+- Color combinations that fail contrast
 ```
 
 ## Expected output
 
-A spec document plus a print-shop summary. Should be unambiguous enough that two designers would produce identical badges.
-
-## Common failure modes
-
-- Font sizes too small to read from across a room.
-- No buffer quantity, so you run out at registration.
-- Color choices that don't meet WCAG contrast for the text-on-background.
+A complete spec + a print-shop-ready summary paragraph.
 
 ## Required human verification
 
 - Print one prototype and test legibility from 6 feet.
-- Verify the lanyard/holder type matches the badges you're ordering.
+- Verify holder type matches badges you're ordering.
 
 ## Best model and why
 
-**Claude Haiku 4.5** — Print specification is fast and structured. Haiku is sufficient and cheap.
+**Claude Haiku 4.5** — print spec is fast and structured.

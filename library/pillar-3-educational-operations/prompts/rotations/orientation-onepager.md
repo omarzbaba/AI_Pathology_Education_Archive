@@ -6,55 +6,74 @@ audience: program-director
 difficulty: quick-win
 time_to_use: 2-10min
 visual: text-only
-tags: orientation, onepager
+tags: orientation, onepager, day-one
 verified_models: TODO
 best_model: Claude Sonnet 4.6
-last_updated: 2026-05-17
+last_updated: 2026-05-18
 ---
 
 ## What this prompt does
 
-Generate a one-page rotation orientation covering schedule, expectations, key contacts, and what success looks like by day 5.
+Generates a one-page rotation orientation that removes day-1 confusion. Ruthlessly prioritized — the one-page constraint is the value, forcing cuts to anything that's not essential.
 
 ## When to use it
 
-Send to incoming residents the week before they start a rotation. The goal is to remove the 'I don't know what I don't know' fog of the first day.
+Send to incoming residents the week before they start a rotation. Update at least annually as contacts and workflows change.
 
 ## The prompt
 
 ```
-Generate a one-page orientation document for the [rotation name] rotation. Audience: [PGY level] residents starting the rotation.
+You are generating a one-page rotation orientation document. The one-page constraint is the entire value — be ruthless about what gets cut.
 
-The page should fit on one printed page (so be ruthless about what to include). Sections:
+## What I'm providing
 
-1. **Welcome and orientation logistics** (3-4 sentences): when and where to arrive on day 1, who to find, what to bring.
-2. **Daily schedule template**: typical Monday-Friday, with sign-out times, didactics, conferences.
-3. **Key contacts**: 3-5 people the resident should know (lab director, attending of the week, fellow, charge tech, scheduler). Name, role, how to reach.
-4. **Reading for day 1**: 1-3 items, with rationale. Don't pad.
-5. **What success looks like by end of week 1**: 3-4 observable indicators that the resident is on track.
-6. **What to do if things aren't clear**: explicit escalation path.
+- **Rotation name:** [name]
+- **Duration:** [N weeks]
+- **Audience:** [PGY level + relevant context]
+- **Service environment:** [institution + service]
+- **Day-1 logistics:** [arrival time, location, person to find]
+- **Daily schedule shape:** [sign-out times, didactics, conferences]
+- **Key contacts:** [3-5 names, roles, contact methods]
+- **Required day-1 reading:** [1-3 items max with rationale]
 
-Tone: welcoming, concrete, no jargon you wouldn't explain.
+## Sections (one page, ~400 words)
 
-**Important — refinement:** If you can't fit something on one page, cut it. The one-page constraint is the value — it forces ruthless prioritization of what a day-1 resident actually needs.
+1. **Welcome + day-1 logistics** (3-4 sentences) — when, where, who to find, what to bring
+2. **Daily schedule template** — typical Mon-Fri with sign-out, didactics, conferences
+3. **Key contacts (3-5 people)** — name, role, how to reach (email or phone)
+4. **Reading for day 1** — 1-3 items max with one-sentence rationale per item
+5. **What success looks like by end of week 1** — 3-4 observable indicators
+6. **What to do if things aren't clear** — explicit escalation path (who to ask, when to escalate to the PD)
+
+## Tone
+
+Welcoming, concrete, no jargon you wouldn't explain. Resident-friendly.
+
+## Hard rules
+
+- **One page maximum.** If you can't fit something, cut it.
+- **Day-1 reading is 1-3 items MAX.** Aspirational reading lists go unread.
+- **Key contacts include actual ways to reach them.**
+- **Success indicators are observable**, not "demonstrates engagement."
+
+## What I will NOT accept
+
+- A two-page document called "one-pager"
+- Reading list with more than 3 items
+- Vague success indicators
+- Missing escalation path
 ```
 
 ## Expected output
 
-A one-page document, printable and skimmable, that removes day-1 confusion.
-
-## Common failure modes
-
-- Tries to fit too much, defeats the one-page constraint.
-- 'Key contacts' don't include the people who actually answer questions on day 1.
-- Reading list is aspirational rather than essential.
+A one-page printable orientation document.
 
 ## Required human verification
 
-- Pilot with a recent rotator: would they have wanted this document?
+- Pilot with a recent rotator — would they have wanted this document?
 - Verify contact info is current.
-- Update each rotation block (don't recycle stale info).
+- Update annually.
 
 ## Best model and why
 
-**Claude Sonnet 4.6** — One-page format with ruthless prioritization — Sonnet handles the constraint well. Haiku can work but tends to omit useful detail.
+**Claude Sonnet 4.6** — one-page format with constraint discipline.

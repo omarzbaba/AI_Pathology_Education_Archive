@@ -6,15 +6,17 @@ audience: faculty
 difficulty: intermediate
 time_to_use: >10min
 visual: text-only
-tags: operations, station-guide
+tags: station-guide, parallel-documents,rotating-stations
 verified_models: TODO
 best_model: Claude Sonnet 4.6
-last_updated: 2026-05-17
+last_updated: 2026-05-18
 ---
 
 ## What this prompt does
 
-Generate per-station facilitator guides for a rotating-station workshop, including learning objectives, materials, timing, and assessment per station.
+Generates per-station facilitator guides for a rotating-station workshop. Each station gets its own consistent-format guide: objectives, materials, setup, minute-by-minute script, reset instructions, what attendees walk away with, common questions, and an optional deepening activity for early finishers.
+
+The discipline this enforces: each station's minute-by-minute should account for ~90% of the time allocation, leaving 10% as buffer.
 
 ## When to use it
 
@@ -23,44 +25,72 @@ Generate per-station facilitator guides for a rotating-station workshop, includi
 ## The prompt
 
 ```
-Generate a per-station facilitator guide for a rotating-station workshop. Each station gets its own guide.
+You are generating per-station facilitator guides. Consistent format across stations so facilitators can find what they need fast. Each station's script accounts for ~90% of time allocation; 10% is buffer.
 
-Stations: [list each station with its topic and lead facilitator]
-Time per station: [minutes per rotation]
-Number of rotations: [how many groups will cycle through each station]
+## What I'm planning
 
-For EACH station, produce:
+- **Workshop title + date:** [name + date]
+- **Stations:** [list each with topic and lead facilitator]
+- **Time per station rotation:** [minutes per rotation]
+- **Number of rotations:** [how many groups cycle through]
+- **Attendee group size per rotation:** [how many at each station at once]
 
-1. **Station header:** name, lead facilitator, topic, time allocation.
-2. **Learning objectives** (2-3, in 'will be able to' language).
-3. **Materials list:** everything the station owner needs (paperwork, samples, AV, models).
-4. **Setup instructions:** what to do before the first group arrives.
-5. **Minute-by-minute script for one rotation:** opening, content blocks, closing. Should fit in the time allocation with 2-3 min buffer.
-6. **What to do between rotations:** reset instructions.
-7. **What an attendee should walk away with** (the artifact, the demonstrated skill, the question they can now answer).
-8. **Common attendee questions and the prepared answer.**
-9. **If you have extra time:** an optional deepening activity.
+## For EACH station, produce this consistent structure
 
-Format consistently across all stations so facilitators can quickly find what they need.
+### Header
+- Station name + lead facilitator + topic
+- Time allocation per rotation
 
-**Important — refinement:** Each station's minute-by-minute should account for ~90% of the time allocation, leaving 10% as buffer for transitions and unexpected questions. Stations packed to 100% run over.
+### Learning objectives (2-3, in "will be able to" language)
+
+### Materials list
+Everything the station owner needs: paperwork, samples, AV, models, props.
+
+### Setup instructions
+What to do before the first group arrives. Specific.
+
+### Minute-by-minute script for ONE rotation
+- Opening (greeting, frame, ground rules) — 1-2 min
+- Content blocks — bulk of time
+- Active engagement / hands-on / case discussion
+- Closing wrap — last 2-3 min
+
+Must add to ~90% of time allocation, leaving 10% buffer.
+
+### Reset instructions
+What to do between rotations (re-stocking, cleanup, repositioning).
+
+### What attendee walks away with
+The specific artifact, demonstrated skill, or question they can now answer.
+
+### Common attendee questions
+3-5 likely questions and the prepared answer for each.
+
+### If you have extra time
+An optional deepening activity for groups who finish early.
+
+## Hard rules
+
+- **Consistent format across all stations.** Facilitators reference different stations during setup; they need to find sections fast.
+- **Time budget verified.** Script + buffer = total time. Verify.
+- **Walk-away is specific** — not "they'll have learned about X" but "they'll have made a labeled diagram", "they'll be able to interpret a normal vs abnormal trace at first glance", etc.
+
+## What I will NOT accept
+
+- Inconsistent format across stations
+- Scripts that exceed time allocation
+- Vague walk-away
 ```
 
 ## Expected output
 
-One guide per station, each in the same format. Total length: 1-2 pages per station.
-
-## Common failure modes
-
-- Objectives aren't actually achievable in the time allocated.
-- Minute-by-minute timing doesn't include reset time between rotations.
-- No accommodation for early-finisher groups.
+One guide per station, consistent format. 1-2 pages each. Print-ready.
 
 ## Required human verification
 
-- Run through one station's guide as if you were the facilitator, with a stopwatch. Adjust timing.
-- Have each station's actual lead read and edit their own guide before the day.
+- Run through one station's guide as the facilitator with a stopwatch. Adjust.
+- Each station's lead reads and edits their own guide before the day.
 
 ## Best model and why
 
-**Claude Sonnet 4.6** — Parallel structured documents (one per station, same format) is exactly Sonnet's strength.
+**Claude Sonnet 4.6** — parallel structured documents are Sonnet's strength.

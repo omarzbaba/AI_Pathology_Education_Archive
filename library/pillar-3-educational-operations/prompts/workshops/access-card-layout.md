@@ -6,64 +6,83 @@ audience: faculty
 difficulty: quick-win
 time_to_use: <2min
 visual: text-only
-tags: design, access-cards
+tags: design, access-card, qr-code
 verified_models: TODO
 best_model: Claude Haiku 4.5
-last_updated: 2026-05-17
+last_updated: 2026-05-18
 ---
 
 ## What this prompt does
 
-Specify a printable access card layout for workshop attendees with QR code, name, role, and event branding.
+Specifies a printable access card (business card or keycard size) with a QR code linking to the companion site, attendee name, usage instructions, and contact-for-help info. Enforces ≥25mm QR code with error correction level H so it survives imperfect printing and low-light scanning.
 
 ## When to use it
 
-When attendees need a card that grants access to a companion site, a Slack channel, or other workshop resources. Pairs with the badge but is more durable and portable.
+2-3 weeks before the workshop, paired with the badge order.
 
 ## The prompt
 
 ```
-Specify a print layout for an attendee access card for [workshop name].
+You are specifying a printable access card. QR code ≥25mm, error correction level H. Include a fallback URL in case QR fails.
 
-The card should be **the size of a business card or hotel keycard** (specify exactly) and include:
+## What I'm producing
 
-1. Front of card:
-   - Workshop title and date.
-   - Attendee name (placeholder for personalization).
-   - A QR code linking to [specific URL — e.g., the companion site, a Slack invite, the workshop schedule].
-   - Event branding (color, logo if applicable).
-2. Back of card:
-   - 1-3 line description of what scanning the QR gets the attendee.
-   - Any usage instructions (e.g., 'access valid through [date]', 'one-time use').
-   - Contact for help.
+- **Workshop name + date:** [name + date]
+- **QR code destination URL:** [the companion site or specific resource]
+- **Attendee count:** [N]
+- **Card size:** [business card / hotel keycard / custom]
+- **Branding:** [institutional colors, logo placement]
 
-Include:
+## What to produce
 
-- Exact dimensions and bleed area.
-- QR code size minimum to ensure scannability (typically 1 inch / 25mm minimum).
-- Font sizes for name vs body text.
-- File format expected by your print shop (PDF, AI, etc.).
+### Card dimensions and bleed area
 
-End with a sample of the front and back as ASCII art so I can visualize the layout.
+### Front of card
+- Workshop title + date
+- Attendee name placeholder
+- QR code (≥25mm square, error correction level H)
+- Event branding (color, logo)
 
-**Important — refinement:** QR code must be ≥25mm square and use error correction level H (30% recovery). Smaller codes or lower error correction levels fail when printed with imperfect ink coverage or scanned in low light.
+### Back of card
+- 1-3 line description of what the QR opens
+- Usage instructions (validity period, single-use vs persistent)
+- Fallback URL (printed in small but legible text in case QR fails)
+- Contact for help
+
+### Print specifications
+- File format expected (PDF, AI, etc.)
+- Color profile
+- Paper recommendation (card stock weight)
+
+### ASCII art preview
+A sketch of the front and back so I can visualize before ordering.
+
+### Order quantity
+Attendee count + 10% buffer.
+
+## Hard rules
+
+- **QR code ≥25mm with error correction H.** Smaller codes fail in real-world printing.
+- **Fallback URL printed legibly.** QR codes fail; the URL is the safety net.
+- **Validity instructions explicit** if access is time-limited.
+
+## What I will NOT accept
+
+- QR code <25mm
+- Missing fallback URL
+- Vague validity instructions
 ```
 
 ## Expected output
 
-Full specification + visualized layout. Should be print-shop-ready.
-
-## Common failure modes
-
-- QR code too small to scan reliably.
-- No fallback instruction if the QR doesn't work (e.g., 'or visit [URL]').
-- Layout is busy and the QR is hard to find.
+Full specification + ASCII preview + order quantity.
 
 ## Required human verification
 
 - Print one prototype and scan the QR with multiple phone types and lighting conditions.
-- Verify the URL is correct and resolves to the intended destination.
+- Verify the URL resolves to the intended destination.
+- Confirm fallback URL is correct.
 
 ## Best model and why
 
-**Claude Haiku 4.5** — Card layout spec — Haiku is sufficient. The accessibility/QR constraints are the discipline; the model is the easy part.
+**Claude Haiku 4.5** — fast structured spec.

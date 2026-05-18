@@ -6,54 +6,88 @@ audience: faculty
 difficulty: quick-win
 time_to_use: 2-10min
 visual: text-only
-tags: marketing, copy
+tags: marketing, copy, registration
 verified_models: TODO
 best_model: Claude Sonnet 4.6
-last_updated: 2026-05-17
+last_updated: 2026-05-18
 ---
 
 ## What this prompt does
 
-Draft the announcement and registration copy for a workshop, including objectives, audience, prerequisites, and a clear call to action.
+Drafts a workshop announcement that drives registration without overpromising — a 100-word promotional blurb, a full registration page, and a registration confirmation email. The hardest discipline this enforces: no empty intensifiers ("cutting-edge", "revolutionary"). Every claim earns its place by being specific.
 
 ## When to use it
 
-When you've committed to running a workshop and need to publicize it 6-10 weeks out. The copy needs to drive registration without overpromising.
+When you've committed to a workshop and need to publicize it 6-10 weeks out. Useful for both first-iteration workshops (more detail required) and recurring events (lean on prior attendee testimonials and outcomes).
+
+**Not for:** internal training announcements (different audience), CME-marketing copy (regulated language), or workshops you haven't planned in detail yet.
 
 ## The prompt
 
 ```
-Write an announcement and registration page for the following workshop:
+You are drafting workshop publicity. Specific outcomes only. No empty intensifiers — if you find yourself reaching for "cutting-edge" or "transformative," replace with a specific concrete outcome.
 
-- **Title:** [workshop title]
-- **Audience:** [who it's for, level, prerequisites if any]
+## What I'm publicizing
+
+- **Workshop title:** [name]
+- **Audience:** [who it's for, level, prerequisites]
 - **Date / location / format:** [in-person / hybrid / virtual, dates, venue]
-- **Duration:** [hours, breaks, end-of-day plans]
+- **Duration:** [hours, breaks, end plans]
 - **Faculty:** [names + roles]
-- **What attendees will be able to do after:** [3-5 learning outcomes in 'will be able to' language]
+- **Learning outcomes:** [3-5 in "will be able to" language — concrete and assessable]
 - **Cost / registration cap:** [if any]
-- **Registration deadline and link/process:** [exact instructions]
+- **Registration deadline and process:** [exact instructions]
 
-Produce:
+## What to produce — three deliverables
 
-1. A 100-word **promotional blurb** suitable for email, Twitter, society newsletters.
-2. A **full announcement page** (~300-400 words) with: opening 2-sentence hook, audience and prerequisites, learning outcomes, schedule overview, faculty bios in 1-2 sentences each, logistics, registration call-to-action.
-3. A **registration confirmation email** template (~150 words) for attendees who sign up.
+### 1. Promotional blurb (100 words MAX)
+For email, Twitter, society newsletter. Must be:
+- Concrete about audience and outcomes
+- Specific about date and registration
+- Free of marketing intensifiers
+- Skim-friendly (front-load what matters)
 
-Tone: professional, specific, slightly warmer than a journal abstract. Avoid 'cutting-edge', 'revolutionary', and similar empty intensifiers.
+### 2. Full announcement page (~300-400 words)
+- 2-sentence opening hook (specific problem this workshop addresses)
+- Audience description and prerequisites
+- Learning outcomes (the "will be able to" list)
+- Schedule overview (not minute-by-minute; just the arc)
+- Faculty bios in 1-2 sentences each (specific credentials, not "leading expert")
+- Logistics: location, format, cost, what's included
+- Registration call-to-action with deadline and link
 
-**Important — refinement:** Avoid empty intensifiers ('cutting-edge', 'revolutionary', 'transformative'). If you use one, replace it with a specific concrete outcome attendees will achieve.
+### 3. Registration confirmation email (~150 words)
+For attendees who sign up. Include:
+- Confirmation of registration
+- What to prepare before the workshop
+- Logistics they need (parking, dress code, equipment to bring)
+- Who to contact with questions
+- A note that materials/companion site will follow ~1 week before
+
+## Hard rules
+
+- **No empty intensifiers.** "Cutting-edge", "revolutionary", "transformative", "groundbreaking" — strike them. If you used one, replace with a specific outcome.
+- **Specific learning outcomes.** "Gain insights" is not an outcome; "Be able to interpret an IFE trace for 8 common patterns" is.
+- **Confirmation email must include what attendees actually need to prepare.** Not a thank-you; a usable next-step note.
+- **Faculty bios are specific.** "Internationally recognized expert" is generic; "Director of Clinical Chemistry at [institution] for 12 years, lead author on the 2023 CLSI guideline for [topic]" is specific.
+
+## What I will NOT accept
+
+- Marketing-speak filler
+- Vague outcomes
+- Confirmation email that just says "thanks"
+- Generic faculty bios
 ```
 
 ## Expected output
 
-Three deliverables: blurb, announcement, confirmation email. Each calibrated to its medium.
+Three deliverables: blurb, announcement, confirmation email. Each calibrated to its medium and length.
 
 ## Common failure modes
 
-- Empty intensifiers and corporate-marketing tone ('don't miss this exciting opportunity').
-- Vague learning outcomes ('participants will gain insight').
-- Confirmation email that doesn't include what attendees actually need to prepare.
+- **Intensifier creep.** Push back when "exciting" or "transformative" shows up.
+- **Vague outcomes.** Push for specific assessable behaviors.
+- **Confirmation email without preparation info.** Push back.
 
 ## Required human verification
 
@@ -63,4 +97,4 @@ Three deliverables: blurb, announcement, confirmation email. Each calibrated to 
 
 ## Best model and why
 
-**Claude Sonnet 4.6** — Marketing copy that avoids empty intensifiers — Sonnet is reasonably disciplined about this. Add explicit 'no cutting-edge, no revolutionary' instructions to any model.
+**Claude Sonnet 4.6** — marketing copy with discipline against intensifiers is Sonnet's strength. Avoid GPT models for this prompt — they default to marketing-tone.

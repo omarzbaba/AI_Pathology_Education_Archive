@@ -6,62 +6,76 @@ audience: faculty
 difficulty: quick-win
 time_to_use: 2-10min
 visual: text-only
-tags: feedback, form
+tags: feedback, survey, completion-rate
 verified_models: TODO
 best_model: Claude Sonnet 4.6
-last_updated: 2026-05-17
+last_updated: 2026-05-18
 ---
 
 ## What this prompt does
 
-Generate a course feedback form with quantitative and qualitative items balanced for completion rate and signal quality.
+Generates a course feedback form designed to actually be completed (under 5 minutes, bias toward structured items) and to actually inform decisions (every item maps to a specific change you'd make for the next iteration).
 
-## When to use it
-
-At the end of a course block (mid-course and end-of-course), when you want actionable feedback rather than vague satisfaction scores.
+The discipline: if you can't name the decision an item would inform, cut it.
 
 ## The prompt
 
 ```
-Generate a course feedback form for [course name]. Audience: [learners — number, level].
+You are designing a course feedback form. Under 5 minutes, bias toward structured items, every item must map to a decision I'll make.
 
-The form should:
+## What I'm building
 
-1. Take **under 5 minutes** to complete. Hard cap.
-2. Mix structured (numeric/Likert) and unstructured (free text) items, but bias toward structured to keep completion high.
-3. Yield **actionable** results — every item should map to a decision I could make for the next iteration.
+- **Course name:** [name]
+- **Audience:** [learners, count, level]
+- **Format:** [in-person / online / hybrid]
+- **Decisions I might make for next iteration:** [list — drop modules, adjust difficulty, change format, etc.]
 
-Sections:
+## Form structure
 
-1. **Course-level Likerts** (3-4 items): pacing, difficulty, value relative to time invested.
-2. **Module-level rapid rating** (1 item per module): grade each module on usefulness 1-5.
-3. **Open free text** (2 items only):
-   - 'One thing that should change about this course before next iteration.'
-   - 'One thing that should NOT change.'
-4. **Demographics** (2-3 items, all optional): role, prior experience with the topic, anything you actually need for stratifying results.
-5. **Optional self-report on learning** (1 item): how much they think they learned, with a calibration note ('We'll compare this to pre/post assessment results').
+### 1. Course-level Likerts (3-4 items)
+Pacing, difficulty, value relative to time invested.
 
-For each item, include the question, the response format, and a one-sentence rationale ('I'll use this to decide whether to drop Module X next year').
+### 2. Module-level rapid rating (1 item per module)
+Grade each module on usefulness 1-5.
 
-**Important — refinement:** Every item must map to a specific decision I would make based on the response. If you can't name the decision for an item, cut the item. Survey length is the enemy of response rate.
+### 3. Open free text (2 items MAX)
+- "One thing that should change about this course before next iteration"
+- "One thing that should NOT change"
+
+### 4. Demographics (2-3 optional items)
+Role, prior experience with topic, anything you actually need for stratifying.
+
+### 5. Optional self-report on learning (1 item)
+How much they think they learned, with calibration note ("we'll compare to pre/post assessment results")
+
+### For each item:
+- The question text
+- Response format (single-select, Likert, free text)
+- **The decision I'll make based on the answer** (the test — if you can't name a decision, cut)
+
+## Hard rules
+
+- **Under 5 minutes.** Hard cap.
+- **Every item maps to a decision.** Cut items that don't.
+- **At most 2 free-text fields.**
+- **No "what would you change about the course" generic question** — too open.
+
+## What I will NOT accept
+
+- Form over 5 minutes
+- Items without decision mapping
+- More than 2 free-text fields
 ```
 
 ## Expected output
 
-A 5-minute form with item-by-item rationale. Should produce data you can actually act on.
-
-## Common failure modes
-
-- Form is too long; completion rate drops below 50% and you have selection bias.
-- Free text questions are too open; results are unanalyzable.
-- 'How satisfied were you' generic items that don't inform any decision.
+A 5-min form with per-item rationale + completion-time estimate.
 
 ## Required human verification
 
-- Pilot with 2-3 learners and time them.
-- Confirm each item maps to a specific decision.
-- Plan how you'll analyze free text responses before sending the survey — otherwise the data won't get used.
+- Pilot with 2-3 learners and time.
+- Plan how you'll analyze free-text responses before sending.
 
 ## Best model and why
 
-**Claude Sonnet 4.6** — Survey design balancing completion and signal — Sonnet handles this. Test the 'every item maps to a decision' discipline regardless of model.
+**Claude Sonnet 4.6** — survey design.

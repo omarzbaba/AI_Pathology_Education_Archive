@@ -6,56 +6,82 @@ audience: program-director
 difficulty: intermediate
 time_to_use: 2-10min
 visual: text-only
-tags: evaluation, end-of-rotation
+tags: evaluation, end-of-rotation, milestone-aligned
 verified_models: TODO
 best_model: Claude Sonnet 4.6
-last_updated: 2026-05-17
+last_updated: 2026-05-18
 ---
 
 ## What this prompt does
 
-Generate an end-of-rotation evaluation form aligned to milestones, with both numeric and narrative sections.
+Generates an end-of-rotation evaluation form aligned to milestones, with numeric ratings, narrative comments per dimension, an overall narrative, a specific commitment for next rotation, and an "unable to assess" gate to prevent defaulting to 3/5 for dimensions the evaluator hasn't observed.
 
 ## When to use it
 
-When you're updating an evaluation form or when residents and attendings both complain the current form doesn't capture what matters.
+When updating an evaluation form or when residents and attendings both complain the current form doesn't capture what matters.
 
 ## The prompt
 
 ```
-Generate an end-of-rotation evaluation form for [rotation name], [PGY level], using the evaluation rubric I've provided (or a new one if I haven't).
+You are generating an end-of-rotation evaluation form. Include an "unable to assess" option for each dimension — otherwise raters default to 3/5 for things they didn't observe. False data is worse than no data.
 
-The form should include:
+## What I'm building
 
-1. **Header**: resident name, rotation name, dates, supervising attending(s), number of weeks evaluated.
-2. **Numeric ratings**: each dimension from the rubric, rated 1-5 with the anchor text visible.
-3. **Narrative comment for each dimension**: prompted with a specific question ('Describe a specific instance where you observed this resident at this level').
-4. **Overall narrative**: 1-2 paragraph free text covering the resident's trajectory, strengths, and growth opportunities.
-5. **Specific commitment for next rotation**: 1-2 behavioral targets the resident should focus on.
-6. **Quality of evaluation gates**: a question to the evaluator about whether they had sufficient observation to evaluate this resident (mitigates the 'I'll just give 4s' default).
-7. **Resident sign-off**: a box for the resident to acknowledge they received and discussed the evaluation.
+- **Rotation:** [name]
+- **PGY level:** [target]
+- **Evaluation rubric to use:** [paste, or generate using the evaluation-rubric prompt first]
+- **Estimated time available for an attending:** [target ≤30 min]
 
-Make the form completable in 20-30 minutes by an attending who knows the resident well.
+## Form sections
 
-**Important — refinement:** Include a 'minimum observations' gate at each dimension. An evaluator who has not observed a specific dimension should be able to mark 'unable to assess' rather than defaulting to 3/5. False data is worse than no data.
+1. **Header**
+   - Resident name + rotation + dates + supervising attending(s) + weeks evaluated
+
+2. **Numeric ratings**
+   - Each dimension from rubric, rated 1-5 with anchor text visible
+   - **"Unable to assess" option for each dimension** — non-negotiable
+
+3. **Narrative comment per dimension**
+   - Prompted with: "Describe a specific instance where you observed this resident at this level"
+
+4. **Overall narrative**
+   - 1-2 paragraph free text
+   - Trajectory, strengths, growth opportunities
+
+5. **Specific commitment for next rotation**
+   - 1-2 behavioral targets for resident focus
+
+6. **Quality-of-evaluation gate**
+   - "Did you have sufficient observation to evaluate this resident on the dimensions you rated?" yes/no/partial with comment
+
+7. **Resident sign-off**
+   - Box for resident acknowledgment of receipt and discussion
+
+## Hard rules
+
+- **"Unable to assess" option on every dimension.** Stops default-to-3 behavior.
+- **Narrative prompts are specific** ("describe a specific instance"), not vague.
+- **20-30 min completion time** for an attending who knows the resident well.
+- **Quality gate prevents inflated ratings** from undersampled observations.
+
+## What I will NOT accept
+
+- Missing "unable to assess" option
+- Vague narrative prompts
+- Forms that take an hour
+- No quality gate
 ```
 
 ## Expected output
 
-A complete evaluation form ready for use, with numeric and narrative sections and sufficient observation gating.
-
-## Common failure modes
-
-- Narratives become 'no comments' because the prompts are weak.
-- Numeric ratings default to all-fours because the anchors don't distinguish levels.
-- The form takes so long that attendings rush it.
+A complete evaluation form covering all sections.
 
 ## Required human verification
 
-- Pilot with one attending on one resident; iterate the form based on what they say is hard.
+- Pilot with one attending on one resident; iterate based on what's hard to complete.
 - Verify milestone alignment.
-- Check that the form complies with any institutional or ACGME documentation requirements.
+- Confirm form complies with institutional or ACGME documentation requirements.
 
 ## Best model and why
 
-**Claude Sonnet 4.6** — Form generation with milestone alignment — Sonnet is sufficient. Verify milestone codes.
+**Claude Sonnet 4.6** — form generation with milestone alignment.

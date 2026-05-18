@@ -6,61 +6,80 @@ audience: faculty
 difficulty: quick-win
 time_to_use: 2-10min
 visual: text-only
-tags: schedule, rotation
+tags: schedule, topic-rotation, presenter-balance
 verified_models: TODO
 best_model: Claude Sonnet 4.6
-last_updated: 2026-05-17
+last_updated: 2026-05-18
 ---
 
 ## What this prompt does
 
-Generate a quarterly or annual conference schedule with topic rotation across subspecialties and assigned presenters.
+Generates a quarterly or annual conference schedule with topic rotation across subspecialties, balanced presenter loads, required-topic coverage, and buffer sessions. Includes a draft invitation email template.
 
 ## When to use it
 
-Annually when you're planning the conference series for the academic year, or quarterly for shorter cycles.
+Annually when planning the academic year's conference series, or quarterly for shorter cycles.
 
 ## The prompt
 
 ```
-Generate a [quarterly / annual] conference schedule for [conference series name — e.g., 'Tuesday morning CP didactics']. Audience: [target audience and level].
+You are generating a conference schedule. Balance topics across subspecialties, balance presenter loads, include buffer sessions, and confirm with each presenter before publishing.
 
-Constraints:
-- **Frequency**: [weekly / biweekly]
-- **Number of sessions to fill**: [N]
-- **Available presenters**: [list of presenters with their subspecialties and rotation availability]
-- **Required topic coverage**: [subspecialties or specific topics that must be covered, e.g., RISE prep blocks]
-- **Standing items**: [recurring slots — journal club every Nth week, in-service review, etc.]
+## What I'm building
 
-Produce:
+- **Conference series name:** [e.g., "Tuesday morning CP didactics"]
+- **Audience:** [target + level]
+- **Frequency:** [weekly / biweekly]
+- **Number of sessions to fill:** [N]
+- **Available presenters:** [list with subspecialties and rotation availability]
+- **Required topic coverage:** [subspecialties or specific topics that must be covered, e.g., RISE prep blocks]
+- **Standing items:** [recurring slots — journal club every Nth week, in-service review, etc.]
 
-1. A full schedule with date, topic, presenter, and any pre-reading.
-2. **Balance check**: distribution of topics across subspecialties. If some subspecialties are over- or under-represented, flag it and suggest adjustments.
-3. **Presenter load check**: distribution of sessions per presenter. Avoid overloading any one person.
-4. **Buffer sessions**: 1-2 unscheduled or flexible sessions per quarter to accommodate guest speakers, schedule slips, or topic substitutions.
-5. **Logistics**: room, AV needs, recording status, attendance tracking.
+## What to produce
 
-End with: a draft email template I can use to invite each presenter with their assigned date and topic.
+### Full schedule
+Date, topic, presenter, any pre-reading.
 
-**Important — refinement:** The model can suggest a schedule but YOU must confirm each presenter's availability before publishing. Do not treat suggested presenters as confirmed.
+### Balance check
+- Distribution of topics across subspecialties
+- Flag if some subspecialties are over- or under-represented; suggest adjustments
+
+### Presenter load check
+- Distribution of sessions per presenter
+- Flag if any presenter is overloaded (>X sessions in Y weeks)
+
+### Buffer sessions
+- 1-2 unscheduled or flexible sessions per quarter for guest speakers, schedule slips, or topic substitutions
+
+### Logistics
+- Room, AV needs, recording status, attendance tracking
+
+### Invitation email template
+Draft email I can use to invite each presenter with their assigned date and topic.
+
+## Hard rules
+
+- **Verify presenter availability before publishing.** Model can suggest; you must confirm.
+- **Buffer sessions are non-optional.**
+- **Sequencing constraints respected** (e.g., RISE prep BEFORE the exam, not after).
+
+## What I will NOT accept
+
+- Schedule that assumes presenters are available without verification
+- No buffer sessions
+- Required-coverage topics scheduled at suboptimal times
 ```
 
 ## Expected output
 
-A schedule + balance and load checks + buffer sessions + logistics + invitation template.
-
-## Common failure modes
-
-- Schedule is balanced on paper but a single presenter has 3 sessions in a row.
-- No buffer sessions, so any schedule change cascades.
-- 'Required coverage' items get scheduled but in suboptimal weeks (e.g., RISE prep after the exam).
+Schedule + balance check + presenter load check + buffer + logistics + invitation template.
 
 ## Required human verification
 
-- Verify each presenter's availability before publishing.
+- **Verify each presenter's availability before publishing.**
 - Confirm room and AV bookings.
-- Validate the topic order against any sequencing constraints (e.g., a topic that's a prerequisite for another).
+- Validate sequencing against constraints.
 
 ## Best model and why
 
-**Claude Sonnet 4.6** — Schedule planning with constraints — Sonnet handles this. Confirm presenter availability regardless of what the model suggests.
+**Claude Sonnet 4.6** — schedule planning with constraints.

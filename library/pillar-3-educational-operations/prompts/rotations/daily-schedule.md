@@ -6,64 +6,83 @@ audience: program-director
 difficulty: quick-win
 time_to_use: <2min
 visual: text-only
-tags: schedule, ops
+tags: schedule, daily-template, protected-time
 verified_models: TODO
 best_model: Claude Haiku 4.5
-last_updated: 2026-05-17
+last_updated: 2026-05-18
 ---
 
 ## What this prompt does
 
-Generate a daily schedule template for a rotation, with placeholders for sign-out, didactics, case review, and protected reading time.
+Generates a typical-day schedule template for a rotation with required blocks (sign-out, didactics, case review, protected reading) and explicit acknowledgment of when protected reading time is unrealistic given the rotation's workload.
+
+The discipline this enforces: protected reading time is ≥60 contiguous minutes. If the rotation doesn't allow it, name the trade-off explicitly rather than scheduling 30-minute fragments.
 
 ## When to use it
 
-When you're standardizing a rotation's day or when residents complain the day feels chaotic. The template doesn't constrain — it gives a default that everyone can plan around.
+When you're standardizing a rotation's day, or when residents complain the day feels chaotic.
 
 ## The prompt
 
 ```
-Generate a typical-day schedule template for [rotation name], [PGY level] resident.
+You are generating a typical-day rotation schedule. Protected reading time is ≥60 contiguous minutes — if workload doesn't allow it, name the trade-off explicitly.
 
-Format as a timed schedule from arrival to departure, with each block including:
+## What I'm building
 
-- Time range.
-- Activity name.
-- Who leads (resident, attending, fellow, tech, group).
-- Brief note on what happens in the block.
+- **Rotation:** [name]
+- **PGY level:** [target]
+- **Typical workload:** [case volume, on-call expectations, special services]
+- **Sign-out convention:** [morning sign-out / end-of-day / both]
+- **Required didactics or conferences:** [days and times these occur]
+- **Lunch convention:** [time + duration]
+
+## What to produce
+
+### Timed schedule, arrival to departure
+
+| Time range | Activity | Lead | Notes |
 
 Required blocks:
-- Arrival / chart review or prep.
-- Sign-out (morning or end-of-day per service convention — specify).
-- Didactics or conferences (state which days these occur).
-- Case review or workup blocks.
-- **Protected reading time** (this is the block residents say is most often eroded — protect it explicitly).
-- Lunch.
-- End-of-day wrap-up.
+- Arrival / chart review or prep
+- Sign-out
+- Didactics or conferences (specify days)
+- Case review or workup blocks
+- **Protected reading time** (≥60 contiguous min)
+- Lunch
+- End-of-day wrap-up
 
-Notes section after the schedule:
-- Days when this template doesn't apply (call days, conference days, etc.).
-- Common ways the schedule slips and what to do about each.
-- Who to tell if you're going to be off the schedule (e.g., late, leaving early).
+### Notes section
 
-**Important — refinement:** Protected reading time should be at least 60 contiguous minutes. If the rotation workload makes that infeasible, name the trade-off explicitly rather than silently scheduling 30-minute fragments.
+- Days when template doesn't apply (call days, conference days, etc.)
+- Common ways the schedule slips and what to do
+- Who to tell if you'll be off the schedule (late, leaving early)
+
+### If protected reading time is mathematically infeasible
+
+State this honestly. Name the trade-off — what would have to give to create 60 contiguous protected minutes?
+
+## Hard rules
+
+- **Protected reading ≥60 contiguous minutes.** If not feasible, say so.
+- **Specific times, not "morning."**
+- **Slip-handling protocol included.**
+
+## What I will NOT accept
+
+- Schedule that pretends protected time exists when it doesn't
+- Vague time ranges
+- Missing slip-handling
 ```
 
 ## Expected output
 
-A timed template with all required blocks, plus notes on exceptions and slip handling.
-
-## Common failure modes
-
-- Protected reading time is in the schedule but functionally unprotected.
-- No accommodation for clinical workload variability.
-- Schedule assumes residents start at 7 am if you don't specify.
+A timed template + notes section + honest trade-off statement if protected reading is infeasible.
 
 ## Required human verification
 
-- Validate against actual recent rotators — does the template match their real days?
-- Confirm with attendings that they expect residents to be available during the blocks the schedule suggests.
+- Validate against recent rotators — does the template match real days?
+- Confirm with attendings that they expect residents available during the blocks shown.
 
 ## Best model and why
 
-**Claude Haiku 4.5** — Template generation — Haiku is sufficient. The constraints (protected reading, slip handling) come from your prompt, not from model depth.
+**Claude Haiku 4.5** — template generation.

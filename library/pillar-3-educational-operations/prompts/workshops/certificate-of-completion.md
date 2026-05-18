@@ -6,65 +6,81 @@ audience: faculty
 difficulty: quick-win
 time_to_use: 2-10min
 visual: text-only
-tags: design, certificates
+tags: design, certificates, accreditation
 verified_models: TODO
 best_model: Claude Haiku 4.5
-last_updated: 2026-05-17
+last_updated: 2026-05-18
 ---
 
 ## What this prompt does
 
-Draft a certificate of completion template with attestation language, signature blocks, and a layout brief.
+Drafts a certificate of completion template with attestation language, signature blocks, optional authentication elements (certificate number, QR code), and a designer-ready layout brief. Strict rule: NO CME, MOC, or continuing education credit language unless accreditation is confirmed.
 
 ## When to use it
 
-The week before the workshop, so certificates can be printed (or set up for digital delivery) ahead of the closing session.
+The week before the workshop, so certificates can be printed or set up for digital delivery ahead of the closing session.
 
 ## The prompt
 
 ```
-Draft a certificate of completion template for [workshop name] on [date], held at [location].
+You are drafting a certificate of completion template. Do NOT include CME, MOC, or continuing education credit claims unless I have confirmed accreditation. False credit claims are a regulatory issue.
 
-The certificate should include:
+## What I'm producing
 
-1. Standard certificate header: 'Certificate of Completion' or equivalent.
-2. **Attestation language**: 'This certifies that [Name] has successfully completed [workshop title] on [date] in [city]', with the workshop's hour count if applicable.
-3. **Learning outcomes**: list the workshop's stated objectives (so the certificate documents what the attendee was certified to have completed).
-4. **Issuing organization** with logo placeholder.
-5. **Signature blocks**: typically 1-2 signers (workshop director, institutional sponsor). Include printed name, title, and signature line.
-6. **Authentication elements**: certificate number, QR code linking to a verification page (optional), date of issue.
+- **Workshop name + date + location:** [name + date + city]
+- **Accreditation status:** [CME-accredited / not accredited / pending — be specific]
+- **Hour count (if applicable):** [N hours]
+- **Issuing organization:** [name + logo availability]
+- **Signers (typically 1-2):** [names + titles]
+- **Workshop learning outcomes:** [from the announcement — to be listed on certificate]
+- **Format:** [printable / digital / both]
 
-Layout brief:
-- Orientation (landscape recommended for certificates).
-- Suggested font (a serif display face for traditional feel; a clean sans-serif for modern).
-- Color palette (institutional colors or neutral palette).
-- Border style (none, simple line, classical ornament).
+## What to produce
 
-Produce both:
-1. The plain-text content with placeholders for name and date.
-2. A layout brief that a designer could use to produce the visual template.
+### The certificate content (plain text with placeholders)
 
-Avoid CME claims unless I've specified the workshop is CME-accredited.
+1. **Header:** "Certificate of Completion" or equivalent
+2. **Attestation language:** "This certifies that [Name] has successfully completed [workshop title] on [date] in [city]" with hour count if applicable
+3. **Learning outcomes:** the workshop's stated objectives (so the cert documents what was completed)
+4. **Issuing organization:** name + logo placeholder
+5. **Signature blocks:** for each signer — printed name, title, signature line
+6. **Authentication elements (optional):**
+   - Certificate number (if generating unique IDs)
+   - QR code linking to verification page (if you have one)
+   - Date of issue
 
-**Important — refinement:** Do NOT include CME, MOC, or any continuing education credit language unless I have explicitly confirmed the workshop is accredited for that credit. False credit claims are a regulatory issue.
+### Layout brief (for a designer or for you to lay out)
+
+- Orientation (landscape recommended)
+- Suggested font (serif display for traditional; clean sans-serif for modern)
+- Color palette (institutional colors or neutral)
+- Border style (none / simple line / classical ornament)
+- Paper recommendation if printed
+
+## Hard rules
+
+- **Do NOT include CME, MOC, or any continuing education credit language unless explicitly confirmed accredited.** False credit claims are a regulatory matter.
+- **Hour count only if accurate and documented.**
+- **Signers' titles current and accurate.**
+- **Authentication elements optional — but if used, the verification page must actually exist before going live.**
+
+## What I will NOT accept
+
+- Implied or false credit claims
+- Inaccurate hour count
+- Authentication elements without a working verification page
 ```
 
 ## Expected output
 
-The text content + the visual layout brief. Together they enable production of the certificate.
-
-## Common failure modes
-
-- Includes CME credit claims without verifying accreditation.
-- Attestation language is so generic the certificate is meaningless.
-- Learning outcomes section is omitted, reducing the certificate's documentary value.
+Plain-text content + layout brief.
 
 ## Required human verification
 
-- If claiming CME or any continuing education credit, verify accreditation status before including.
+- Verify accreditation status with your CME/CE office before including any credit language.
 - Confirm signers' titles are current.
-- Have one printed prototype reviewed for any layout issues at full size.
+- Print one prototype at full size and review.
 
 ## Best model and why
 
-**Claude Haiku 4.5** — Template generation suits Haiku. Verify CME/accreditation language regardless of model — false credit claims are a regulatory issue, not a model issue.
+**Claude Haiku 4.5** — template generation.
