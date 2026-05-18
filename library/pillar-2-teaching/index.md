@@ -33,18 +33,26 @@ Principles for this pillar:
 - [Visual metaphor brainstorming](library.html#/library/pillar-2-teaching/prompts/visual-metaphor)
 - [Audience poll question generation](library.html#/library/pillar-2-teaching/prompts/audience-polls)
 - [Video script and storyboard](library.html#/library/pillar-2-teaching/prompts/video-script)
+- [Microscopy teaching session design](library.html#/library/pillar-2-teaching/prompts/microscopy-teaching-session)
 
 ### Written feedback and narrative
 
 - [Resident feedback note drafting](library.html#/library/pillar-2-teaching/prompts/resident-feedback-note)
 - [CCC narrative comment drafting](library.html#/library/pillar-2-teaching/prompts/ccc-narrative-comment)
 - [Letter of recommendation starting draft](library.html#/library/pillar-2-teaching/prompts/lor-starting-draft)
+- [Difficult feedback conversation prep](library.html#/library/pillar-2-teaching/prompts/difficult-feedback-conversation-prep)
 
 ### Discussion-based formats
 
 - [Journal club discussion questions](library.html#/library/pillar-2-teaching/prompts/journal-club-discussion-q)
 - [Tumor board case presentation template](library.html#/library/pillar-2-teaching/prompts/tumor-board-presentation)
 - [Resident-as-teacher scaffolding](library.html#/library/pillar-2-teaching/prompts/resident-as-teacher)
+- [Sign-out teaching turn](library.html#/library/pillar-2-teaching/prompts/sign-out-teaching-turn)
+- [Tumor board prep coaching](library.html#/library/pillar-2-teaching/prompts/tumor-board-prep-coaching)
+
+### Resident communication
+
+- [Sub-specialty rotation goals letter](library.html#/library/pillar-2-teaching/prompts/subspecialty-rotation-goals-letter)
 
 ### Worked examples
 

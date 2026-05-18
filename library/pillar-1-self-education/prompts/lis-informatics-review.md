@@ -6,7 +6,7 @@ audience: resident
 difficulty: intermediate
 time_to_use: 2-10min
 visual: text-only
-tags: informatics, lis
+tags: informatics, lis, standards
 verified_models: TODO
 best_model: Claude Opus 4.7
 last_updated: 2026-05-17
@@ -14,45 +14,79 @@ last_updated: 2026-05-17
 
 ## What this prompt does
 
-Get an explanation of LIS, middleware, or informatics concepts at a level useful for clinical pathologists who are not full-time informaticists. Bridges the vocabulary gap that often blocks meaningful conversation with IT.
+Bridges the vocabulary gap between clinical pathologists and informatics. You name a concept (HL7 segments, FHIR resources, middleware autoverification, LOINC mapping, instrument interfacing); the model gives you the mental model, the working vocabulary, the most common failure mode, and one specific question you can ask in a vendor or IT meeting that distinguishes a substantive answer from a hand-wave.
 
 ## When to use it
 
-When you're attending an informatics committee meeting, evaluating a vendor proposal, or trying to understand why a workflow change is taking longer than expected.
+Before an informatics committee meeting, when evaluating a vendor proposal, when a workflow issue gets escalated to IT, or when you want to participate substantively in a discussion about lab IT infrastructure rather than just listening.
+
+**Not for:** deep informatics certification prep (read a textbook), implementation-specific configuration questions (those need an actual informaticist), or settled questions you can just look up.
 
 ## The prompt
 
 ```
-Explain [informatics concept — e.g., 'HL7 v2.5.1 segment structure', 'middleware autoverification logic', 'LIS-to-EHR interface mapping', 'LOINC code harmonization'] for a clinical pathologist who runs a lab but is not a full-time informaticist.
+You are explaining an informatics concept to me — a clinical pathologist who runs a lab but is not a full-time informaticist. The goal is to give me the mental model, the working vocabulary, and the ability to participate meaningfully in a vendor or IT meeting on this topic.
 
-Structure:
+## What I'm asking about
 
-1. **The problem it solves** (2-3 sentences): why this concept exists in the first place.
-2. **The mental model** (2-3 sentences): an analogy or simplified diagram (described in words) that captures the essence.
-3. **The vocabulary I need to participate in a meeting**: 5-7 terms with one-sentence definitions. These are the words I'll hear thrown around.
-4. **The most common failure mode** for this concept in real labs — the thing that breaks and causes downtime or wrong results.
-5. **One question I can ask in a vendor or IT meeting that distinguishes a good answer from a hand-wave.**
+- **Concept:** [e.g., "HL7 v2.5.1 ORU result segment structure", "FHIR Observation resource", "middleware autoverification logic", "LOINC code harmonization across two instruments", "IHE LAW profile"]
+- **My existing knowledge:** [what I know already and what's still fuzzy]
+- **The specific situation prompting this:** [optional — e.g., "we're evaluating a middleware vendor next week", "our chemistry instrument is throwing OBX-5 errors"]
 
-Avoid jargon I haven't already heard — if you need to use a term, define it inline.
+## What to produce — 5 parts
 
-**Important — refinement:** Cite the specific standard (HL7 segment name, LOINC code, FHIR resource, IHE profile) where applicable rather than paraphrasing it. If you're unsure whether a term is current vocabulary in this domain, say so.
+### 1. The problem this concept solves (2-3 sentences)
+
+Why does this thing exist? What does it make possible that wasn't possible before? Ground it in a concrete lab problem.
+
+### 2. The mental model (2-3 sentences)
+
+An analogy or simplified description that captures the essence. Be careful: the analogy should illuminate, not mislead. If the analogy breaks down at a critical point, name where.
+
+### 3. The working vocabulary (5-7 terms)
+
+The terms I'll hear thrown around in a meeting, each with a one-sentence definition. These are the words I need to follow the conversation — not exhaustive, just the high-frequency ones.
+
+### 4. The most common failure mode in real labs (2-3 sentences)
+
+The thing that breaks. What goes wrong, what it looks like (downtime, wrong results, missed criticals), what the typical root cause is, and what the fix typically involves.
+
+### 5. One question I can ask in a meeting (1 question + brief rationale)
+
+A specific question that, if asked, would distinguish a vendor who knows what they're doing from one who's improvising. Or a question that would clarify a confusion point that's slowing your meeting. The question should be answerable but not trivial — a good vendor will respect that you asked it.
+
+## Hard rules
+
+- **Cite specific standards by name and version** where applicable. "HL7 v2.5.1 OBX-5", "FHIR R4 Observation.code", "LOINC 33747-0". Do not paraphrase the standard.
+- **If you're not sure whether a term or concept is current vocabulary**, say so. Informatics terminology changes (HL7 v2 → FHIR; SNOMED-CT version drift).
+- **The mental model analogy must be honest about where it breaks.** Cute analogies that mislead are worse than no analogy.
+- **The "common failure mode" should be a real-world failure**, not a textbook risk.
+- **The "question to ask" must be specific enough to use in a meeting** without further translation.
+
+## What I will NOT accept
+
+- Vocabulary terms that are themselves opaque (defining one informatics term using three others I don't know)
+- A "common failure mode" that's generic ("configuration errors happen")
+- An analogy that's accurate at the surface but breaks at the point of usefulness
+- A vendor question that's so basic any answer would seem fine
 ```
 
 ## Expected output
 
-The five-section breakdown, total ~300-500 words. The 'one question to ask' should be specific enough that you could actually use it in a meeting.
+Five parts in order. Total length 400-600 words. The vendor question is often the most useful part — it gives you a concrete handle for the meeting.
 
 ## Common failure modes
 
-- The 'mental model' analogy is too cute and loses precision (e.g., 'it's like a post office for lab results').
-- The vocabulary section uses terms that are themselves unfamiliar — recursive opacity.
-- The 'most common failure mode' is generic ('configuration errors').
+- **Model uses informatics jargon while explaining informatics jargon** (recursive opacity). Push back: "Define [term you used] in plain language too."
+- **The "most common failure mode" is generic** rather than the actual recurring failure in real labs. Push back for specific.
+- **Standard versions misnamed.** Verify against the actual standard.
 
 ## Required human verification
 
-- Verify the technical specifics (e.g., HL7 segment names, LOINC structure) against authoritative documentation. The model sometimes mis-names protocol elements.
-- The 'question to ask' is a starting point — have an informatics colleague pressure-test it before relying on it in a high-stakes meeting.
+- Verify any cited standard, segment name, code, or version against authoritative documentation (HL7.org, hl7.fhir.org, LOINC.org).
+- For high-stakes situations (vendor selection, contract review), have an informaticist colleague pressure-test the question you plan to ask before relying on it.
+- The mental model is most useful when validated by someone who has actually built or maintained this in production.
 
 ## Best model and why
 
-**Claude Opus 4.7** — Informatics standards (HL7, FHIR, LOINC) require depth and specificity. Opus 4.7 cites segment names and resource types more reliably. Sonnet works as a fallback but is more likely to paraphrase the standard rather than name it.
+**Claude Opus 4.7** — informatics standards (HL7, FHIR, LOINC) require depth and specificity. Opus cites segment names and resource types more reliably than Sonnet and is more careful about version disclosure. **Avoid GPT models** for this prompt — they confuse HL7 v2 segment names with FHIR resource fields more often than is comfortable.

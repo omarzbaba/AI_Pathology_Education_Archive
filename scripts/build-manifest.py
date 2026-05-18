@@ -60,6 +60,12 @@ CATEGORY = {
     "journal-club-discussion-q": "discuss",
     "tumor-board-presentation": "discuss",
     "resident-as-teacher": "teach",
+    # New Pillar 2 prompts (batch 2)
+    "microscopy-teaching-session": "teach",
+    "sign-out-teaching-turn": "teach",
+    "tumor-board-prep-coaching": "discuss",
+    "subspecialty-rotation-goals-letter": "comms",
+    "difficult-feedback-conversation-prep": "write",
     # Pillar 3 — Operations
     "announcement-registration": "comms",
     "pre-workshop-survey": "comms",
@@ -122,12 +128,18 @@ PILLAR_DIRS = [
         ]),
         ("Lectures & presentations", "library/pillar-2-teaching/prompts", [
             "slide-outline-1hr","speaker-notes","visual-metaphor","audience-polls","video-script",
+            "microscopy-teaching-session",
         ]),
         ("Written feedback & narrative", "library/pillar-2-teaching/prompts", [
             "resident-feedback-note","ccc-narrative-comment","lor-starting-draft",
+            "difficult-feedback-conversation-prep",
         ]),
         ("Discussion-based formats", "library/pillar-2-teaching/prompts", [
             "journal-club-discussion-q","tumor-board-presentation","resident-as-teacher",
+            "sign-out-teaching-turn","tumor-board-prep-coaching",
+        ]),
+        ("Resident communication", "library/pillar-2-teaching/prompts", [
+            "subspecialty-rotation-goals-letter",
         ]),
     ]),
     ("pillar-3-educational-operations", "Educational Operations & Documentation", "Using AI to produce the artifacts around teaching events", [

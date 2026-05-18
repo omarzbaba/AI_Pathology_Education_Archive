@@ -14,48 +14,77 @@ last_updated: 2026-05-17
 
 ## What this prompt does
 
-Convert a topic, paper, or set of notes into Anki-ready flashcards in a format you can paste directly into Anki's import dialog. The structure matters because Anki rewards atomic, single-concept cards.
+Converts a topic, paper, set of notes, or lecture into Anki-import-ready flashcards in tab-separated format. The prompt enforces *atomic* cards (one fact per card), *specific* questions (not "what is X"), and *verification flags* for any specific value the model isn't certain about.
 
 ## When to use it
 
-When you've just done dense reading and want to convert it into spaced-repetition material before you forget. Best within an hour of the reading session.
+Within an hour of finishing a dense reading session, while the material is still fresh enough for you to spot misformulated cards quickly. Also useful for converting a lecture's slide deck into review material.
+
+**Not for:** building a comprehensive deck from scratch (this is for incremental additions, not bulk creation), high-stakes question banks (those need editorial review per card), or material you're seeing for the first time (study first, then make cards).
 
 ## The prompt
 
 ```
-Convert the following [topic / source: paper title / notes] into Anki flashcards.
+You are generating Anki flashcards from source material. Output must be tab-separated, atomic, and specific. If you cannot verify a specific value (cutoff, dose, gene name), flag it [VERIFY] rather than committing to it.
 
-Output format: tab-separated values, one card per line. Each line is:
+## What I'm converting
 
+- **Source:** [topic name / paper citation / pasted notes / lecture title]
+- **Source material:** [paste the content, or describe if it's a known topic]
+- **Number of cards:** [e.g., 15 — don't pad; fewer good cards is better than more weak ones]
+- **Card style:** [Basic Q/A — default, unless I say cloze]
+- **My level:** [PGY level — calibrates how specific the questions should be]
+
+## Output format — tab-separated, one card per line
+
+Each line:
 `question[TAB]answer`
 
-Rules:
+## Rules — applied to every card
 
-1. **Atomic cards.** Each card tests ONE fact or concept. If a card has 'and' or 'or' in the answer, split it into two cards.
-2. **Specific questions.** 'What is X?' is weak. 'In a patient with X, what laboratory finding distinguishes A from B?' is strong.
-3. **No clozes** unless I ask. Plain Q/A only.
-4. **Aim for [N] cards.** Don't pad. If the material doesn't justify N cards, give me fewer good ones.
-5. Use the actual numbers, names, and details from the source. If you don't know a specific value, leave it blank rather than guessing.
+1. **Atomic.** Each card tests ONE fact or concept. If a card uses "and" or "or" in the answer, split it into two cards.
+2. **Specific question framing.** "What is X?" is a weak question. "In a patient with X, what laboratory finding distinguishes A from B?" is strong. Questions should require retrieval, not recognition.
+3. **Use actual numbers, names, and details from the source.** If the source doesn't have a specific value and you're filling it in from memory, append [VERIFY] to the answer.
+4. **No clozes unless I asked.** Plain Q/A only by default.
+5. **Don't pad to reach N cards.** If the material only supports 10 good cards, give me 10.
+6. **No card should test two things at once.** "What are the four causes of X?" is weak (forces dump). "Among the four causes of X, which one is associated with [specific feature]?" is strong.
 
-After the cards, add a one-sentence note about anything in the source you decided NOT to make a card for and why.
+## After the cards, add a brief note
 
-**Important — refinement:** Mark any answer where you are uncertain about a specific value, gene name, or threshold with `[VERIFY]` at the end. Better to flag uncertainty than ship a wrong card into spaced repetition.
+Add one short paragraph noting:
+- What you deliberately did NOT make a card for (and why)
+- Any [VERIFY]-flagged values I should double-check before adding the deck to active review
+
+## Hard rules
+
+- Tab-separated format, no extra commentary mixed with cards
+- Atomic cards always
+- [VERIFY] flag on any value you're not certain about
+- Source-grounded specificity over generic phrasing
+
+## What I will NOT accept
+
+- "What is X?" style cards as default framing
+- Cards that test multiple facts ("List the three reasons for Y")
+- Padding with weak cards to reach the requested number
+- Confidently stated specific values without verification
 ```
 
 ## Expected output
 
-N tab-separated lines, one card per line, plus a brief note on what was deliberately excluded. The cards should be import-ready: paste into Anki → Import → Text File.
+N tab-separated lines (one card per line) plus a brief note about exclusions and verification flags. Lines should be import-ready: paste into Anki → Import → Text File.
 
 ## Common failure modes
 
-- Cards that test 'what is X' without context — useless for retention. Ask for more specific question framings.
-- Cards that try to test multiple facts at once. Split them.
-- Made-up specific values when the source didn't have them. Verify any specific number, dose, or threshold before incorporating into your deck.
+- **"What is X" cards.** Push back: "Reframe these as specific retrieval questions."
+- **Cards testing multiple facts.** Split them.
+- **Confidently made-up specific values.** Add [VERIFY] manually before adding to your deck.
 
 ## Required human verification
 
-- Scan the answers for any numerical value, drug dose, gene name, or specific reference range. Verify each against the source or an authoritative reference. The model will sometimes invent plausible-looking specifics.
+- Scan every answer with a specific numerical value, drug dose, gene name, or threshold. Verify against the source. The model sometimes invents plausible-looking specifics.
+- For cards built from your own notes, double-check that the model preserved your wording rather than rewriting subtly.
 
 ## Best model and why
 
-**Claude Haiku 4.5** — Flashcard conversion is a fast, structured task — Haiku handles it well and at a fraction of the cost. Bump to Sonnet only if the source material is dense (a methods-heavy paper, a complex algorithm).
+**Claude Haiku 4.5** — flashcard conversion is a fast, structured task. Haiku handles it well at a fraction of the cost. Bump to **Sonnet 4.6** only if the source material is dense (methods-heavy paper, complex algorithm) where atomicity is harder to maintain.

@@ -23,7 +23,7 @@
             },
             {
               "title": "Compare and contrast",
-              "intent": "Generate a side-by-side comparison of two entities that are easy to confuse, focused on the *discriminating* features rather than a comprehensive list of…",
+              "intent": "Produces a focused side-by-side comparison of two entities you confuse, organized around the *discriminating* features that actually separate them — not a…",
               "difficulty": "intermediate",
               "time_to_use": "2-10min",
               "visual": "text-only",
@@ -36,7 +36,7 @@
             },
             {
               "title": "Guideline plain-language translation",
-              "intent": "Translate a published guideline into plain language at a target reading level, preserving the recommendations and grading.",
+              "intent": "Translates published guideline recommendations into plain language at a target reading level while **preserving every qualifier, conditional, and…",
               "difficulty": "quick-win",
               "time_to_use": "2-10min",
               "visual": "text-only",
@@ -49,13 +49,13 @@
             },
             {
               "title": "LIS / informatics concept review",
-              "intent": "Get an explanation of LIS, middleware, or informatics concepts at a level useful for clinical pathologists who are not full-time informaticists. Bridges the…",
+              "intent": "Bridges the vocabulary gap between clinical pathologists and informatics. You name a concept (HL7 segments, FHIR resources, middleware autoverification,…",
               "difficulty": "intermediate",
               "time_to_use": "2-10min",
               "visual": "text-only",
               "audience": "resident",
               "best_model": "Claude Opus 4.7",
-              "tags": "informatics, lis",
+              "tags": "informatics, lis, standards",
               "slug": "lis-informatics-review",
               "path": "library/pillar-1-self-education/prompts/lis-informatics-review.md",
               "category": "learn"
@@ -93,7 +93,7 @@
             },
             {
               "title": "Anki flashcard generation",
-              "intent": "Convert a topic, paper, or set of notes into Anki-ready flashcards in a format you can paste directly into Anki's import dialog. The structure matters…",
+              "intent": "Converts a topic, paper, set of notes, or lecture into Anki-import-ready flashcards in tab-separated format. The prompt enforces *atomic* cards (one fact…",
               "difficulty": "quick-win",
               "time_to_use": "2-10min",
               "visual": "text-only",
@@ -106,7 +106,7 @@
             },
             {
               "title": "Board prep schedule",
-              "intent": "Generate a personalized board prep schedule based on weeks remaining, daily study hours, and your strongest/weakest subspecialties.",
+              "intent": "Generates a personalized board prep schedule that adapts to your actual constraints (weeks remaining, daily hours available, strongest/weakest…",
               "difficulty": "quick-win",
               "time_to_use": ">10min",
               "visual": "text-only",
@@ -119,13 +119,13 @@
             },
             {
               "title": "Question bank gap analysis",
-              "intent": "Paste a list of question topics you've missed and have the model identify the underlying concept gaps and suggest a targeted review plan.",
+              "intent": "Takes a list of qbank questions you've missed and identifies the underlying *concept gaps* — not the surface-level facts you didn't know, but the recurring…",
               "difficulty": "intermediate",
               "time_to_use": ">10min",
               "visual": "text-only",
               "audience": "resident",
               "best_model": "Claude Opus 4.7",
-              "tags": "board-prep, gap-analysis",
+              "tags": "board-prep, gap-analysis, metacognition",
               "slug": "question-bank-gap-analysis",
               "path": "library/pillar-1-self-education/prompts/question-bank-gap-analysis.md",
               "category": "drill"
@@ -137,13 +137,13 @@
           "prompts": [
             {
               "title": "Diagnostic algorithm walkthrough",
-              "intent": "Walk through a published diagnostic algorithm step by step, with the model explaining each decision point and the consequences of choosing each branch.",
+              "intent": "Walks through a published diagnostic algorithm step by step — not just naming what happens at each decision point but explaining *why* the question is being…",
               "difficulty": "intermediate",
               "time_to_use": "2-10min",
               "visual": "text-only",
               "audience": "resident",
               "best_model": "Claude Opus 4.7",
-              "tags": "algorithm, diagnostic-workup",
+              "tags": "algorithm, diagnostic-workup, guidelines",
               "slug": "diagnostic-algorithm-walkthrough",
               "path": "library/pillar-1-self-education/prompts/diagnostic-algorithm-walkthrough.md",
               "category": "drill"
@@ -163,26 +163,26 @@
             },
             {
               "title": "Forward case drill — diagnosis to expected findings",
-              "intent": "Name a diagnosis and have the model generate the constellation of findings you would expect to see, then quiz yourself on which findings are pathognomonic…",
+              "intent": "Reverses the usual study direction: instead of given-findings-name-diagnosis, you name a diagnosis and the model generates the full constellation of…",
               "difficulty": "intermediate",
               "time_to_use": "2-10min",
               "visual": "text-only",
               "audience": "resident",
               "best_model": "Claude Opus 4.7",
-              "tags": "case-based, drilling",
+              "tags": "case-based, drilling, expected-findings",
               "slug": "forward-case-drill",
               "path": "library/pillar-1-self-education/prompts/forward-case-drill.md",
               "category": "drill"
             },
             {
               "title": "Negative drill — what would change the diagnosis",
-              "intent": "Take a settled diagnosis and ask the model to enumerate the findings or test results that would force you to reconsider, ranked by likelihood. Trains the…",
+              "intent": "Trains the habit of *disconfirmation*: take a working diagnosis you're confident in and ask the model to enumerate the findings or test results that would…",
               "difficulty": "advanced",
               "time_to_use": "2-10min",
               "visual": "text-only",
               "audience": "resident",
               "best_model": "Claude Opus 4.7",
-              "tags": "case-based, drilling",
+              "tags": "disconfirmation, counterfactual-reasoning",
               "slug": "negative-drill",
               "path": "library/pillar-1-self-education/prompts/negative-drill.md",
               "category": "drill"
@@ -246,13 +246,13 @@
             },
             {
               "title": "Journal club pre-read prep",
-              "intent": "Generate a one-page pre-read for a journal club paper covering background, key results, and 5 discussion questions. Designed to be sent to attendees the day…",
+              "intent": "Generates a one-page pre-read for a journal club paper that attendees can actually use to arrive prepared. Includes background context, study summary with…",
               "difficulty": "quick-win",
               "time_to_use": "2-10min",
               "visual": "text-only",
               "audience": "resident",
               "best_model": "Claude Opus 4.7 with paper attached",
-              "tags": "journal-club, preparation",
+              "tags": "journal-club, preparation, literature",
               "slug": "journal-club-preread",
               "path": "library/pillar-1-self-education/prompts/journal-club-preread.md",
               "category": "read"
@@ -277,13 +277,13 @@
             },
             {
               "title": "SPEP / IFE trace interpretation walkthrough",
-              "intent": "Upload a SPEP or IFE trace and have the model walk through the interpretation, with you predicting each step before the model reveals it.",
+              "intent": "Walks through SPEP or IFE interpretation as a guided drill — you commit at each step before the model reveals what it sees. Builds the regional reading…",
               "difficulty": "advanced",
               "time_to_use": "2-10min",
               "visual": "multimodal",
               "audience": "resident",
               "best_model": "Claude Sonnet 4.6",
-              "tags": "multimodal, spep, ife",
+              "tags": "multimodal, spep, ife, paraprotein",
               "slug": "multimodal-spep-ife",
               "path": "library/pillar-1-self-education/prompts/multimodal-spep-ife.md",
               "category": "image"
@@ -359,26 +359,26 @@
           "prompts": [
             {
               "title": "ACGME / EPA learning objective generation",
-              "intent": "Generate ACGME-milestone-aligned or EPA-mapped learning objectives for a teaching session on a given topic.",
+              "intent": "Generates learning objectives in the format your CCC and program leadership expect: measurable verbs, conditions, criteria, and an explicit map to a…",
               "difficulty": "intermediate",
               "time_to_use": "2-10min",
               "visual": "text-only",
               "audience": "faculty",
               "best_model": "Claude Sonnet 4.6",
-              "tags": "learning-objectives, acgme, epa",
+              "tags": "learning-objectives, acgme, epa, assessment",
               "slug": "acgme-epa-objectives",
               "path": "library/pillar-2-teaching/prompts/acgme-epa-objectives.md",
               "category": "assess"
             },
             {
               "title": "Bloom's taxonomy MCQ generation",
-              "intent": "Generate MCQs at a specified Bloom's level (recall vs application vs analysis) with rationales calibrated to the cognitive task. The Bloom's level matters…",
+              "intent": "Generates MCQs at specified Bloom's taxonomy levels — Application, Analysis, Evaluation — with rationales calibrated to the cognitive task each question…",
               "difficulty": "intermediate",
               "time_to_use": "2-10min",
               "visual": "text-only",
               "audience": "faculty",
               "best_model": "Claude Opus 4.7",
-              "tags": "mcq, assessment, blooms",
+              "tags": "mcq, assessment, blooms, cognitive-level",
               "slug": "blooms-mcq",
               "path": "library/pillar-2-teaching/prompts/blooms-mcq.md",
               "category": "assess"
@@ -390,13 +390,13 @@
           "prompts": [
             {
               "title": "Case vignette at PGY level",
-              "intent": "Generate a case vignette calibrated to a specific PGY level — appropriate complexity, age-appropriate red herrings, the right amount of clinical context.",
+              "intent": "Generates a case vignette calibrated to a specific PGY level, with the right complexity, the right amount of clinical context, and demographics that reflect…",
               "difficulty": "intermediate",
               "time_to_use": "2-10min",
               "visual": "text-only",
               "audience": "faculty",
               "best_model": "Claude Opus 4.7",
-              "tags": "vignette, case-based",
+              "tags": "vignette, case-based, level-calibration",
               "slug": "case-vignette-pgy",
               "path": "library/pillar-2-teaching/prompts/case-vignette-pgy.md",
               "category": "teach"
@@ -416,13 +416,13 @@
             },
             {
               "title": "OSCE station drafting",
-              "intent": "Draft an OSCE station with patient script, stem, expected examinee actions, and a scoring rubric.",
+              "intent": "Drafts a complete OSCE station: examinee instructions, simulated-other-party script that handles real conversational variation, expected examinee actions…",
               "difficulty": "advanced",
               "time_to_use": ">10min",
               "visual": "text-only",
               "audience": "faculty",
               "best_model": "Claude Opus 4.7",
-              "tags": "osce, assessment",
+              "tags": "osce, assessment, simulation",
               "slug": "osce-station",
               "path": "library/pillar-2-teaching/prompts/osce-station.md",
               "category": "assess"
@@ -496,6 +496,19 @@
               "slug": "video-script",
               "path": "library/pillar-2-teaching/prompts/video-script.md",
               "category": "teach"
+            },
+            {
+              "title": "Microscopy teaching session design",
+              "intent": "Designs a microscopy-anchored teaching session built around 6-10 images rather than slides of text. Generates per-image talking points, discussion…",
+              "difficulty": "intermediate",
+              "time_to_use": ">10min",
+              "visual": "text-only",
+              "audience": "faculty",
+              "best_model": "Claude Opus 4.7",
+              "tags": "teaching, microscopy, image-based, session-design",
+              "slug": "microscopy-teaching-session",
+              "path": "library/pillar-2-teaching/prompts/microscopy-teaching-session.md",
+              "category": "teach"
             }
           ]
         },
@@ -517,13 +530,13 @@
             },
             {
               "title": "CCC narrative comment drafting",
-              "intent": "Convert milestone scores and bullet observations into a CCC narrative comment that connects evidence to the assigned milestone level.",
+              "intent": "Converts your bullet observations into a CCC narrative comment that defensibly maps evidence to milestone level. Strict discipline about not inflating…",
               "difficulty": "intermediate",
               "time_to_use": "2-10min",
               "visual": "text-only",
               "audience": "faculty",
               "best_model": "Claude Opus 4.7",
-              "tags": "ccc, narrative",
+              "tags": "ccc, narrative, milestone-evidence, high-stakes",
               "slug": "ccc-narrative-comment",
               "path": "library/pillar-2-teaching/prompts/ccc-narrative-comment.md",
               "category": "write"
@@ -539,6 +552,19 @@
               "tags": "lor, narrative, high-stakes",
               "slug": "lor-starting-draft",
               "path": "library/pillar-2-teaching/prompts/lor-starting-draft.md",
+              "category": "write"
+            },
+            {
+              "title": "Difficult feedback conversation prep",
+              "intent": "Preps you for a feedback conversation that's harder than usual — a struggling resident, a professionalism concern, performance below expectations, or a…",
+              "difficulty": "advanced",
+              "time_to_use": ">10min",
+              "visual": "text-only",
+              "audience": "faculty",
+              "best_model": "Claude Opus 4.7",
+              "tags": "feedback, hard-conversation, professionalism",
+              "slug": "difficult-feedback-conversation-prep",
+              "path": "library/pillar-2-teaching/prompts/difficult-feedback-conversation-prep.md",
               "category": "write"
             }
           ]
@@ -584,6 +610,50 @@
               "slug": "resident-as-teacher",
               "path": "library/pillar-2-teaching/prompts/resident-as-teacher.md",
               "category": "teach"
+            },
+            {
+              "title": "Sign-out teaching turn",
+              "intent": "Converts a sign-out moment — a case that just came up, a finding that's worth pausing on, a question a resident asked — into a structured 3-5 minute…",
+              "difficulty": "quick-win",
+              "time_to_use": "<2min",
+              "visual": "text-only",
+              "audience": "faculty",
+              "best_model": "Claude Sonnet 4.6",
+              "tags": "teaching, sign-out, capture-the-moment",
+              "slug": "sign-out-teaching-turn",
+              "path": "library/pillar-2-teaching/prompts/sign-out-teaching-turn.md",
+              "category": "teach"
+            },
+            {
+              "title": "Tumor board prep coaching",
+              "intent": "Coaches a resident who will present at tumor board. The model interviews them on the case, identifies where their presentation is weakest, and gives them…",
+              "difficulty": "intermediate",
+              "time_to_use": ">10min",
+              "visual": "text-only",
+              "audience": "faculty",
+              "best_model": "Claude Opus 4.7",
+              "tags": "tumor-board, coaching, presentation-skills",
+              "slug": "tumor-board-prep-coaching",
+              "path": "library/pillar-2-teaching/prompts/tumor-board-prep-coaching.md",
+              "category": "discuss"
+            }
+          ]
+        },
+        {
+          "title": "Resident communication",
+          "prompts": [
+            {
+              "title": "Sub-specialty rotation goals letter",
+              "intent": "Drafts the \"here's what I'd like to get out of this rotation\" letter or email that a resident sends to their incoming rotation director a week or two before…",
+              "difficulty": "quick-win",
+              "time_to_use": "2-10min",
+              "visual": "text-only",
+              "audience": "resident",
+              "best_model": "Claude Sonnet 4.6",
+              "tags": "rotation, goal-setting, communication",
+              "slug": "subspecialty-rotation-goals-letter",
+              "path": "library/pillar-2-teaching/prompts/subspecialty-rotation-goals-letter.md",
+              "category": "comms"
             }
           ]
         }
