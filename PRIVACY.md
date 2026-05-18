@@ -6,6 +6,10 @@ This notice describes what information the AI in Pathology Education Companion L
 
 ## What we collect
 
+The site collects information in **two distinct contexts**, each with its own purpose and rules:
+
+### Context 1 — Access form submissions
+
 When you submit the access form on the companion site, the following information is recorded:
 
 - **Name** (the value you enter)
@@ -15,6 +19,21 @@ When you submit the access form on the companion site, the following information
 - **Referrer URL** (where you came from, if your browser provides it)
 - **User agent string** (your browser identifier, automatically sent by your browser)
 - **Server timestamp** (set by the database, not by your browser)
+
+### Context 2 — Prompt submissions
+
+When you submit a prompt via the [Submit a prompt](/submit.html) form, the following information is recorded:
+
+- **Your name and email address** (required, so we can attribute and follow up)
+- **Your institution / affiliation** (optional)
+- **The prompt content itself** (title, intent, when to use it, the prompt text, expected output, failure modes, verification, suggested model, audience, difficulty, time)
+- **Status** (initially "pending", updated by the admin to approved / rejected / needs revision)
+- **Referrer URL and user agent** (same as access form)
+- **Server timestamp**
+
+Submitted prompt content is stored even if rejected — we keep the audit trail so that contributors can ask why their submission was declined, but rejected submissions are NOT made public.
+
+### What's the same across both contexts
 
 No other information is collected. The site does not load analytics scripts, tracking pixels, third-party tags, or social-media widgets. The site does not write tracking cookies. The only browser storage used is a single localStorage entry that holds your first name (for personalized greeting) and a flag that you've already signed in.
 
@@ -31,8 +50,9 @@ The information is stored in Google Firebase Firestore, hosted in a Google Cloud
 The database is configured so that:
 
 - Only the author can read the data (enforced by Firebase Authentication and Firestore security rules)
-- Entries cannot be edited or deleted by anyone after submission (append-only, enforced at the database rule layer)
-- Submissions require a valid App Check token (reCAPTCHA v3), which prevents automated bots from filling the log
+- **Access form entries** cannot be edited or deleted by anyone after submission (append-only, enforced at the database rule layer)
+- **Prompt submissions** are immutable in their content fields once submitted (only the status field can be updated by the admin)
+- Submissions require a valid App Check token (reCAPTCHA v3), which prevents automated bots from filling either collection
 
 ## How long we keep it
 

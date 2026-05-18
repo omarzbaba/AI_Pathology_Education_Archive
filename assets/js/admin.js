@@ -1,16 +1,14 @@
 /*
  * Admin dashboard — Firebase Auth sign-in + Firestore reads.
  *
+ * Two views:
+ * 1. Access log (append-only contact-capture submissions)
+ * 2. Prompt submissions queue (community contributions for review)
+ *
  * Security model:
- *   - The page itself is publicly served. The Firestore rule
- *     (request.auth.uid == ADMIN_UID) is the actual gate; this script
- *     is just the UX.
- *   - Even if a non-admin signs in via the form, the dashboard query
- *     will be rejected by Firestore. We belt-and-brace by checking
- *     user.uid client-side and force-signing-out non-admins.
- *   - 30-minute idle auto-sign-out reduces window if the browser is
- *     left unlocked.
- *   - Append-only enforcement lives in the rules, not here.
+ *   - Firebase Auth (email/password); admin UID gated at Firestore rule level.
+ *   - Non-admin authenticated users are force-signed-out.
+ *   - 30-min idle auto sign-out.
  */
 
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js";
@@ -29,7 +27,9 @@ import {
   collection,
   query,
   orderBy,
-  getDocs
+  getDocs,
+  doc,
+  updateDoc
 } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js";
 
 import {
@@ -65,10 +65,18 @@ try {
 const signinPanel    = document.getElementById("signin-panel");
 const dashboardPanel = document.getElementById("dashboard-panel");
 const dashboardEl    = document.getElementById("dashboard-content");
+const submissionsEl  = document.getElementById("submissions-content");
 const signinForm     = document.getElementById("signin-form");
 const signinStatus   = document.getElementById("signin-status");
 const emailInput     = document.getElementById("admin-email");
 const passwordInput  = document.getElementById("admin-password");
+
+const tabAccessLog   = document.getElementById("tab-access-log");
+const tabSubmissions = document.getElementById("tab-submissions");
+const submissionsBadge = document.getElementById("submissions-badge");
+const accessLogSection   = document.getElementById("access-log-section");
+const submissionsSection = document.getElementById("submissions-section");
+const signoutLink    = document.getElementById("admin-signout-link");
 
 function setSigninStatus(msg, kind) {
   signinStatus.className = "form-status form-status--" + kind;
@@ -83,6 +91,28 @@ function escapeHtml(s) {
     .replace(/"/g, "&quot;")
     .replace(/'/g, "&#39;");
 }
+
+// ---------------------------------------------------------------------------
+// Tabs
+// ---------------------------------------------------------------------------
+
+function showTab(which) {
+  if (which === "access-log") {
+    accessLogSection.hidden = false;
+    submissionsSection.hidden = true;
+    tabAccessLog.classList.add("admin-tab--active");
+    tabSubmissions.classList.remove("admin-tab--active");
+  } else {
+    accessLogSection.hidden = true;
+    submissionsSection.hidden = false;
+    tabAccessLog.classList.remove("admin-tab--active");
+    tabSubmissions.classList.add("admin-tab--active");
+  }
+}
+
+tabAccessLog.addEventListener("click", (e) => { e.preventDefault(); showTab("access-log"); });
+tabSubmissions.addEventListener("click", (e) => { e.preventDefault(); showTab("submissions"); renderSubmissions(); });
+signoutLink.addEventListener("click", (e) => { e.preventDefault(); signOut(auth); });
 
 // ---------------------------------------------------------------------------
 // Idle timeout — 30 minutes
@@ -103,7 +133,7 @@ function armIdleTimer() {
 );
 
 // ---------------------------------------------------------------------------
-// Sign-in form
+// Sign-in
 // ---------------------------------------------------------------------------
 
 signinForm.addEventListener("submit", async (e) => {
@@ -112,7 +142,7 @@ signinForm.addEventListener("submit", async (e) => {
   signinStatus.textContent = "";
 
   if (initError || !auth) {
-    setSigninStatus("Firebase not configured. Complete Phase 3 setup first.", "error");
+    setSigninStatus("Firebase not configured. Complete setup first.", "error");
     return;
   }
 
@@ -125,7 +155,7 @@ signinForm.addEventListener("submit", async (e) => {
 });
 
 // ---------------------------------------------------------------------------
-// Auth state — show/hide panels, load data
+// Auth state
 // ---------------------------------------------------------------------------
 
 if (auth) {
@@ -134,10 +164,10 @@ if (auth) {
       signinPanel.hidden = true;
       dashboardPanel.hidden = false;
       armIdleTimer();
-      await renderDashboard();
+      await renderAccessLog();
+      await checkSubmissionCount();
     } else {
       if (user) {
-        // Authenticated but wrong UID — refuse and sign out.
         await signOut(auth);
         setSigninStatus("That account is not authorized for the admin dashboard.", "error");
       }
@@ -149,31 +179,29 @@ if (auth) {
 }
 
 // ---------------------------------------------------------------------------
-// Dashboard rendering
+// Access log
 // ---------------------------------------------------------------------------
 
-let allRows = [];
+let accessLogRows = [];
 
-async function renderDashboard() {
+async function renderAccessLog() {
   dashboardEl.innerHTML = '<p>Loading access log&hellip;</p>';
   try {
     const q = query(collection(db, "access_log"), orderBy("timestamp", "desc"));
     const snap = await getDocs(q);
-    allRows = [];
+    accessLogRows = [];
     snap.forEach((doc) => {
       const d = doc.data();
-      allRows.push({
+      accessLogRows.push({
         id:          doc.id,
         timestamp:   d.timestamp,
         name:        d.name        || "",
         email:       d.email       || "",
         role:        d.role        || "",
         institution: d.institution || "",
-        referrer:    d.referrer    || "",
-        user_agent:  d.user_agent  || ""
       });
     });
-    drawTable(allRows);
+    drawAccessLogTable(accessLogRows);
   } catch (err) {
     dashboardEl.innerHTML =
       '<p class="form-status form-status--error">Failed to load: ' +
@@ -183,19 +211,16 @@ async function renderDashboard() {
 
 function fmtTimestamp(ts) {
   if (!ts) return "";
-  // Firestore Timestamp object has toDate()
   if (typeof ts.toDate === "function") return ts.toDate().toLocaleString();
   return String(ts);
 }
 
-function drawTable(rows) {
-  const total = allRows.length;
+function drawAccessLogTable(rows) {
+  const total = accessLogRows.length;
   const showing = rows.length;
-
   dashboardEl.innerHTML =
     '<div class="admin-controls" style="display:flex;gap:1rem;flex-wrap:wrap;align-items:center;margin-bottom:1rem;">' +
-      '<input type="search" id="admin-search" placeholder="Search name, email, institution&hellip;" ' +
-        'style="flex:1;min-width:240px;padding:0.5rem;border:1px solid var(--color-rule);border-radius:2px;">' +
+      '<input type="search" id="admin-search" placeholder="Search name, email, institution&hellip;" style="flex:1;min-width:240px;padding:0.5rem;border:1px solid var(--color-rule);border-radius:2px;">' +
       '<select id="admin-role-filter" style="padding:0.5rem;border:1px solid var(--color-rule);border-radius:2px;">' +
         '<option value="">All roles</option>' +
         '<option value="resident">Resident</option>' +
@@ -205,23 +230,17 @@ function drawTable(rows) {
         '<option value="other">Other</option>' +
       '</select>' +
       '<button class="btn" id="admin-export">Export CSV</button>' +
-      '<button class="btn" id="admin-signout" style="background:var(--color-navy);">Sign out</button>' +
     '</div>' +
-    '<p style="font-size:var(--fs-sm);color:var(--color-muted);margin:0 0 1rem;">' +
-      'Showing ' + showing + ' of ' + total + ' entries.' +
-    '</p>' +
+    '<p style="font-size:var(--fs-sm);color:var(--color-muted);margin:0 0 1rem;">Showing ' + showing + ' of ' + total + ' entries.</p>' +
     '<div style="overflow-x:auto;border:1px solid var(--color-rule);">' +
       '<table style="width:100%;border-collapse:collapse;font-size:var(--fs-sm);">' +
-        '<thead style="background:var(--color-paper);">' +
-          '<tr>' +
-            '<th style="text-align:left;padding:0.5rem;border-bottom:1px solid var(--color-rule);">Timestamp</th>' +
-            '<th style="text-align:left;padding:0.5rem;border-bottom:1px solid var(--color-rule);">Name</th>' +
-            '<th style="text-align:left;padding:0.5rem;border-bottom:1px solid var(--color-rule);">Email</th>' +
-            '<th style="text-align:left;padding:0.5rem;border-bottom:1px solid var(--color-rule);">Role</th>' +
-            '<th style="text-align:left;padding:0.5rem;border-bottom:1px solid var(--color-rule);">Institution</th>' +
-          '</tr>' +
-        '</thead>' +
-        '<tbody>' +
+        '<thead style="background:var(--color-paper);"><tr>' +
+          '<th style="text-align:left;padding:0.5rem;border-bottom:1px solid var(--color-rule);">Timestamp</th>' +
+          '<th style="text-align:left;padding:0.5rem;border-bottom:1px solid var(--color-rule);">Name</th>' +
+          '<th style="text-align:left;padding:0.5rem;border-bottom:1px solid var(--color-rule);">Email</th>' +
+          '<th style="text-align:left;padding:0.5rem;border-bottom:1px solid var(--color-rule);">Role</th>' +
+          '<th style="text-align:left;padding:0.5rem;border-bottom:1px solid var(--color-rule);">Institution</th>' +
+        '</tr></thead><tbody>' +
           rows.map((r) =>
             '<tr>' +
               '<td style="padding:0.5rem;border-bottom:1px solid var(--color-rule);white-space:nowrap;">' + escapeHtml(fmtTimestamp(r.timestamp)) + '</td>' +
@@ -231,20 +250,16 @@ function drawTable(rows) {
               '<td style="padding:0.5rem;border-bottom:1px solid var(--color-rule);">' + escapeHtml(r.institution) + '</td>' +
             '</tr>'
           ).join("") +
-        '</tbody>' +
-      '</table>' +
-    '</div>';
-
-  document.getElementById("admin-search").addEventListener("input", applyFilters);
-  document.getElementById("admin-role-filter").addEventListener("change", applyFilters);
-  document.getElementById("admin-export").addEventListener("click", exportCsv);
-  document.getElementById("admin-signout").addEventListener("click", () => signOut(auth));
+        '</tbody></table></div>';
+  document.getElementById("admin-search").addEventListener("input", applyAccessLogFilters);
+  document.getElementById("admin-role-filter").addEventListener("change", applyAccessLogFilters);
+  document.getElementById("admin-export").addEventListener("click", exportAccessLogCsv);
 }
 
-function applyFilters() {
+function applyAccessLogFilters() {
   const term = document.getElementById("admin-search").value.trim().toLowerCase();
   const role = document.getElementById("admin-role-filter").value;
-  const filtered = allRows.filter((r) => {
+  const filtered = accessLogRows.filter((r) => {
     if (role && r.role !== role) return false;
     if (term) {
       const hay = (r.name + " " + r.email + " " + r.institution).toLowerCase();
@@ -252,13 +267,13 @@ function applyFilters() {
     }
     return true;
   });
-  drawTable(filtered);
+  drawAccessLogTable(filtered);
 }
 
-function exportCsv() {
+function exportAccessLogCsv() {
   const term = document.getElementById("admin-search").value.trim().toLowerCase();
   const role = document.getElementById("admin-role-filter").value;
-  const rows = allRows.filter((r) => {
+  const rows = accessLogRows.filter((r) => {
     if (role && r.role !== role) return false;
     if (term) {
       const hay = (r.name + " " + r.email + " " + r.institution).toLowerCase();
@@ -266,27 +281,260 @@ function exportCsv() {
     }
     return true;
   });
-
-  const header = ["timestamp", "name", "email", "role", "institution", "referrer", "user_agent"];
+  const header = ["timestamp", "name", "email", "role", "institution"];
   const csvRows = [header.join(",")];
   for (const r of rows) {
     csvRows.push(header.map((k) => csvCell(k === "timestamp" ? fmtTimestamp(r.timestamp) : r[k])).join(","));
   }
-  const csv = csvRows.join("\n");
-
-  const blob = new Blob([csv], { type: "text/csv;charset=utf-8" });
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement("a");
-  a.href = url;
-  a.download = "access_log_" + new Date().toISOString().slice(0, 10) + ".csv";
-  document.body.appendChild(a);
-  a.click();
-  document.body.removeChild(a);
-  URL.revokeObjectURL(url);
+  downloadFile(csvRows.join("\n"), "access_log_" + new Date().toISOString().slice(0, 10) + ".csv", "text/csv");
 }
 
 function csvCell(v) {
   const s = String(v == null ? "" : v);
   if (/[",\n\r]/.test(s)) return '"' + s.replace(/"/g, '""') + '"';
   return s;
+}
+
+function downloadFile(content, filename, mimeType) {
+  const blob = new Blob([content], { type: mimeType + ";charset=utf-8" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = filename;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+
+// ---------------------------------------------------------------------------
+// Submissions queue
+// ---------------------------------------------------------------------------
+
+let submissionRows = [];
+
+async function checkSubmissionCount() {
+  try {
+    const q = query(collection(db, "prompt_submissions"), orderBy("timestamp", "desc"));
+    const snap = await getDocs(q);
+    let pending = 0;
+    snap.forEach((doc) => {
+      if (doc.data().status === "pending") pending++;
+    });
+    if (pending > 0) {
+      submissionsBadge.textContent = pending;
+      submissionsBadge.style.display = "inline-block";
+    } else {
+      submissionsBadge.style.display = "none";
+    }
+  } catch (_) { /* ignore — will show when tab is opened */ }
+}
+
+async function renderSubmissions() {
+  submissionsEl.innerHTML = '<p>Loading submissions&hellip;</p>';
+  try {
+    const q = query(collection(db, "prompt_submissions"), orderBy("timestamp", "desc"));
+    const snap = await getDocs(q);
+    submissionRows = [];
+    snap.forEach((doc) => {
+      submissionRows.push({ id: doc.id, ...doc.data() });
+    });
+    drawSubmissionsTable(submissionRows);
+  } catch (err) {
+    submissionsEl.innerHTML =
+      '<p class="form-status form-status--error">Failed to load: ' +
+      escapeHtml(err.message) + '</p>';
+  }
+}
+
+function statusPill(status) {
+  const map = {
+    pending:         { cls: "pill pill--mid", label: "Pending" },
+    approved:        { cls: "pill pill--easy", label: "Approved" },
+    rejected:        { cls: "pill pill--hard", label: "Rejected" },
+    needs_revision:  { cls: "pill pill--neutral", label: "Needs revision" }
+  };
+  const m = map[status] || { cls: "pill pill--neutral", label: status || "?" };
+  return '<span class="' + m.cls + '">' + escapeHtml(m.label) + '</span>';
+}
+
+function drawSubmissionsTable(rows) {
+  const counts = {
+    pending: rows.filter(r => r.status === "pending").length,
+    approved: rows.filter(r => r.status === "approved").length,
+    rejected: rows.filter(r => r.status === "rejected").length,
+    needs_revision: rows.filter(r => r.status === "needs_revision").length,
+  };
+
+  submissionsEl.innerHTML =
+    '<div style="display:flex;gap:1rem;flex-wrap:wrap;margin-bottom:1rem;">' +
+      '<button class="btn" data-filter="all" style="background:var(--color-navy);">All (' + rows.length + ')</button>' +
+      '<button class="btn" data-filter="pending">Pending (' + counts.pending + ')</button>' +
+      '<button class="btn" data-filter="approved" style="background:var(--color-success);">Approved (' + counts.approved + ')</button>' +
+      '<button class="btn" data-filter="needs_revision" style="background:var(--color-muted);">Needs revision (' + counts.needs_revision + ')</button>' +
+      '<button class="btn" data-filter="rejected" style="background:var(--color-burgundy);">Rejected (' + counts.rejected + ')</button>' +
+    '</div>' +
+    '<div id="submissions-list">' +
+      rows.map(submissionCardHtml).join("") +
+    '</div>';
+
+  // Wire filter buttons
+  submissionsEl.querySelectorAll("button[data-filter]").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const f = btn.getAttribute("data-filter");
+      const filtered = f === "all" ? submissionRows : submissionRows.filter(r => r.status === f);
+      document.getElementById("submissions-list").innerHTML = filtered.map(submissionCardHtml).join("");
+      wireSubmissionActions();
+    });
+  });
+
+  wireSubmissionActions();
+}
+
+function submissionCardHtml(r) {
+  const id = "sub-" + r.id;
+  return (
+    '<article style="border:1px solid var(--color-rule);border-radius:3px;margin-bottom:1rem;padding:1rem;background:var(--color-white);">' +
+      '<div style="display:flex;justify-content:space-between;align-items:start;gap:1rem;margin-bottom:0.5rem;">' +
+        '<div>' +
+          '<h3 style="font-family:var(--font-serif);margin:0 0 0.25rem;font-size:1.125rem;">' + escapeHtml(r.prompt_title) + '</h3>' +
+          '<p style="font-size:var(--fs-sm);color:var(--color-muted);margin:0;">' +
+            'From <strong>' + escapeHtml(r.submitter_name) + '</strong>' +
+            (r.submitter_affiliation ? ' (' + escapeHtml(r.submitter_affiliation) + ')' : '') +
+            ' &middot; ' + escapeHtml(r.submitter_email) +
+            ' &middot; ' + escapeHtml(fmtTimestamp(r.timestamp)) +
+          '</p>' +
+        '</div>' +
+        '<div>' + statusPill(r.status) + '</div>' +
+      '</div>' +
+      '<div style="display:flex;gap:0.5rem;flex-wrap:wrap;margin-bottom:0.75rem;font-size:var(--fs-xs);">' +
+        '<span class="pill">' + escapeHtml(r.prompt_pillar) + '</span>' +
+        (r.prompt_audience ? '<span class="pill">' + escapeHtml(r.prompt_audience) + '</span>' : '') +
+        (r.prompt_difficulty ? '<span class="pill">' + escapeHtml(r.prompt_difficulty) + '</span>' : '') +
+        (r.prompt_time ? '<span class="pill">' + escapeHtml(r.prompt_time) + '</span>' : '') +
+        (r.prompt_best_model ? '<span class="pill pill--model">' + escapeHtml(r.prompt_best_model) + '</span>' : '') +
+      '</div>' +
+      '<details style="margin-bottom:0.75rem;">' +
+        '<summary style="cursor:pointer;font-weight:500;font-size:var(--fs-sm);">View submission</summary>' +
+        '<div style="margin-top:0.75rem;padding-top:0.75rem;border-top:1px solid var(--color-rule);font-size:var(--fs-sm);">' +
+          '<p><strong>What it does:</strong> ' + escapeHtml(r.prompt_intent) + '</p>' +
+          (r.prompt_when ? '<p><strong>When to use:</strong> ' + escapeHtml(r.prompt_when) + '</p>' : '') +
+          '<p><strong>The prompt:</strong></p>' +
+          '<pre style="background:var(--color-paper);border:1px solid var(--color-rule);padding:0.75rem;overflow-x:auto;white-space:pre-wrap;font-size:0.85em;">' + escapeHtml(r.prompt_text) + '</pre>' +
+          (r.prompt_expected_output ? '<p><strong>Expected output:</strong> ' + escapeHtml(r.prompt_expected_output) + '</p>' : '') +
+          (r.prompt_failure_modes ? '<p><strong>Failure modes:</strong> ' + escapeHtml(r.prompt_failure_modes) + '</p>' : '') +
+          (r.prompt_verification ? '<p><strong>Verification:</strong> ' + escapeHtml(r.prompt_verification) + '</p>' : '') +
+        '</div>' +
+      '</details>' +
+      '<div style="display:flex;gap:0.5rem;flex-wrap:wrap;">' +
+        '<button class="btn" data-sub-id="' + escapeHtml(r.id) + '" data-action="approve" style="background:var(--color-success);font-size:0.85em;padding:0.4rem 0.8rem;">Approve</button>' +
+        '<button class="btn" data-sub-id="' + escapeHtml(r.id) + '" data-action="needs_revision" style="background:var(--color-muted);font-size:0.85em;padding:0.4rem 0.8rem;">Needs revision</button>' +
+        '<button class="btn" data-sub-id="' + escapeHtml(r.id) + '" data-action="reject" style="background:var(--color-burgundy);font-size:0.85em;padding:0.4rem 0.8rem;">Reject</button>' +
+        '<button class="btn" data-sub-id="' + escapeHtml(r.id) + '" data-action="export" style="background:var(--color-navy);font-size:0.85em;padding:0.4rem 0.8rem;">Export as markdown</button>' +
+      '</div>' +
+    '</article>'
+  );
+}
+
+function wireSubmissionActions() {
+  submissionsEl.querySelectorAll("button[data-action]").forEach((btn) => {
+    btn.addEventListener("click", async () => {
+      const id = btn.getAttribute("data-sub-id");
+      const action = btn.getAttribute("data-action");
+      const sub = submissionRows.find(r => r.id === id);
+      if (!sub) return;
+
+      if (action === "export") {
+        exportSubmissionAsMarkdown(sub);
+        return;
+      }
+
+      const newStatus =
+        action === "approve" ? "approved" :
+        action === "needs_revision" ? "needs_revision" :
+        action === "reject" ? "rejected" : null;
+      if (!newStatus) return;
+
+      if (!confirm("Set this submission to '" + newStatus + "'?")) return;
+
+      btn.disabled = true;
+      const orig = btn.textContent;
+      btn.textContent = "Updating…";
+      try {
+        await updateDoc(doc(db, "prompt_submissions", id), { status: newStatus });
+        // Re-render
+        await renderSubmissions();
+        await checkSubmissionCount();
+      } catch (err) {
+        alert("Update failed: " + (err.message || "unknown error"));
+        btn.disabled = false;
+        btn.textContent = orig;
+      }
+    });
+  });
+}
+
+function exportSubmissionAsMarkdown(sub) {
+  // Generate a ready-to-paste .md file in the prompt format
+  const slug = (sub.prompt_title || "untitled")
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "")
+    .slice(0, 80);
+
+  const today = new Date().toISOString().slice(0, 10);
+
+  const fm = [
+    "---",
+    "title: " + sub.prompt_title,
+    "pillar: " + sub.prompt_pillar,
+    "event_type: " + "n/a",
+    "audience: " + (sub.prompt_audience || "mixed"),
+    "difficulty: " + (sub.prompt_difficulty || "intermediate"),
+    "time_to_use: " + (sub.prompt_time || "2-10min"),
+    "visual: " + "text-only",
+    "tags: " + "community-contributed",
+    "verified_models: TODO",
+    "best_model: " + (sub.prompt_best_model || "Claude Sonnet 4.6"),
+    "contributor: " + sub.submitter_name + (sub.submitter_affiliation ? " (" + sub.submitter_affiliation + ")" : ""),
+    "last_updated: " + today,
+    "---",
+    "",
+    "## What this prompt does",
+    "",
+    sub.prompt_intent,
+    "",
+    "## When to use it",
+    "",
+    sub.prompt_when || "TODO",
+    "",
+    "## The prompt",
+    "",
+    "```",
+    sub.prompt_text,
+    "```",
+    "",
+    "## Expected output",
+    "",
+    sub.prompt_expected_output || "TODO",
+    "",
+    "## Common failure modes",
+    "",
+    sub.prompt_failure_modes || "TODO",
+    "",
+    "## Required human verification",
+    "",
+    sub.prompt_verification || "TODO",
+    "",
+    "## Best model and why",
+    "",
+    "**" + (sub.prompt_best_model || "Claude Sonnet 4.6") + "** — TODO add rationale.",
+    "",
+    "## Contributed by",
+    "",
+    sub.submitter_name + (sub.submitter_affiliation ? ", " + sub.submitter_affiliation : "") + ". Submitted " + fmtTimestamp(sub.timestamp) + ".",
+    ""
+  ].join("\n");
+
+  downloadFile(fm, slug + ".md", "text/markdown");
 }

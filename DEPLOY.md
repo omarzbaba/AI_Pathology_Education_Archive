@@ -73,6 +73,22 @@ These don't change day-to-day work for a solo author, but they prevent accidents
 
 ---
 
+## 4b. Re-deploy Firestore rules after Phase B (~1 minute)
+
+Phase B added the `prompt_submissions` collection. The Firestore rules need to be re-deployed so the new collection is gated correctly.
+
+**Option A — paste in console (fastest):**
+1. Firebase console → Firestore Database → Rules tab
+2. Select-all and delete the existing text
+3. Paste the current contents of `firebase/firestore.rules` (now includes the `prompt_submissions` block)
+4. Click **Publish** → confirm
+
+**Option B — Firebase CLI:** `firebase deploy --only firestore:rules`
+
+After deploy, smoke-test by submitting a prompt at `/submit.html` and confirming it lands in the Firestore console under the `prompt_submissions` collection.
+
+---
+
 ## 5. Generate the QR code for the workshop slide (~5 minutes)
 
 Two options. Pick whichever is easier:

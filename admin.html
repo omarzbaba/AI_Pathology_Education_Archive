@@ -15,7 +15,7 @@
     <div class="masthead">
       <p class="masthead__eyebrow">Internal &middot; Authorized access only</p>
       <h1 class="masthead__title" style="font-size: 2.5rem;">Admin</h1>
-      <p class="masthead__signature">Access log dashboard</p>
+      <p class="masthead__signature">Access log + submission queue</p>
     </div>
   </header>
 
@@ -48,16 +48,39 @@
       </form>
     </section>
 
-    <!-- Dashboard panel (shown when signed in, populated in Phase 3) -->
-    <section id="dashboard-panel" hidden aria-labelledby="dashboard-heading">
-      <h2 id="dashboard-heading" class="mt-0">Access log</h2>
-      <p class="form-section__intro" style="background: var(--color-paper); border: 1px solid var(--color-rule); border-left: 3px solid var(--color-burgundy); padding: var(--space-3) var(--space-4);">
-        <strong>Append-only.</strong> Entries cannot be edited or deleted &mdash;
-        not by you, not by anyone. Export a CSV if you need to annotate the data.
-      </p>
-      <div id="dashboard-content">
-        <p>Phase 3 will render the paginated table, filters, search, CSV export, and sign-out here.</p>
-      </div>
+    <!-- Dashboard panel (shown when signed in) -->
+    <section id="dashboard-panel" hidden>
+
+      <!-- Tabs -->
+      <nav class="nav" aria-label="Admin sections" style="margin-bottom: var(--space-5);">
+        <a href="#" id="tab-access-log" class="admin-tab admin-tab--active">Access log</a>
+        <a href="#" id="tab-submissions" class="admin-tab">Submissions <span id="submissions-badge" class="pill pill--mid" style="margin-left: 0.5rem; display: none;">0</span></a>
+        <a href="#" id="admin-signout-link" style="margin-left: auto; color: var(--color-navy);">Sign out</a>
+      </nav>
+
+      <!-- Access log section -->
+      <section id="access-log-section" aria-labelledby="access-log-heading">
+        <h2 id="access-log-heading" class="mt-0">Access log</h2>
+        <p class="form-section__intro" style="background: var(--color-paper); border: 1px solid var(--color-rule); border-left: 3px solid var(--color-burgundy); padding: var(--space-3) var(--space-4);">
+          <strong>Append-only.</strong> Entries cannot be edited or deleted &mdash;
+          not by you, not by anyone. Export a CSV if you need to annotate the data.
+        </p>
+        <div id="dashboard-content">
+          <p>Loading access log&hellip;</p>
+        </div>
+      </section>
+
+      <!-- Submissions section -->
+      <section id="submissions-section" aria-labelledby="submissions-heading" hidden>
+        <h2 id="submissions-heading" class="mt-0">Prompt submissions queue</h2>
+        <p class="form-section__intro" style="background: var(--color-paper); border: 1px solid var(--color-rule); border-left: 3px solid var(--color-burgundy); padding: var(--space-3) var(--space-4);">
+          Review each submission, then mark it <strong>approved</strong>, <strong>rejected</strong>, or <strong>needs revision</strong>. For approved submissions, use the "Export as markdown" button to produce a ready-to-paste .md file for the library.
+        </p>
+        <div id="submissions-content">
+          <p>Loading submissions&hellip;</p>
+        </div>
+      </section>
+
     </section>
 
   </main>

@@ -71,6 +71,92 @@ service cloud.firestore {
       allow update, delete: if false;
     }
 
+    // ---- prompt_submissions ----
+    //
+    // Community-contributed prompt submissions.
+    // - create: anyone (via App Check) with valid payload shape
+    // - read/list: admin only
+    // - update: admin only, and limited to status/review fields
+    //   (the submitted content itself is immutable to preserve audit trail)
+    // - delete: never
+
+    function isValidSubmissionPayload() {
+      let d = request.resource.data;
+      let keys = d.keys();
+      let required = [
+        'timestamp', 'status',
+        'submitter_name', 'submitter_email', 'submitter_affiliation',
+        'prompt_title', 'prompt_pillar', 'prompt_audience',
+        'prompt_difficulty', 'prompt_time',
+        'prompt_intent', 'prompt_when', 'prompt_text',
+        'prompt_expected_output', 'prompt_failure_modes', 'prompt_verification',
+        'prompt_best_model',
+        'referrer', 'user_agent'
+      ];
+      let allowedPillars = ['self-education', 'teaching', 'educational-operations'];
+      let allowedAudiences = ['resident', 'fellow', 'faculty', 'program-director', 'learner', 'mixed', ''];
+      let allowedDifficulties = ['quick-win', 'intermediate', 'advanced', ''];
+      let allowedTimes = ['<2min', '2-10min', '>10min', ''];
+
+      return
+        keys.hasAll(required) && keys.hasOnly(required)
+        && d.timestamp == request.time
+        && d.status == 'pending'
+        // Submitter fields
+        && d.submitter_name is string && d.submitter_name.size() >= 1 && d.submitter_name.size() <= 120
+        && d.submitter_email is string && d.submitter_email.size() >= 5 && d.submitter_email.size() <= 254
+        && d.submitter_email.matches('^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$')
+        && d.submitter_affiliation is string && d.submitter_affiliation.size() <= 200
+        // Prompt basics
+        && d.prompt_title is string && d.prompt_title.size() >= 1 && d.prompt_title.size() <= 200
+        && d.prompt_pillar is string && d.prompt_pillar in allowedPillars
+        && d.prompt_audience is string && d.prompt_audience in allowedAudiences
+        && d.prompt_difficulty is string && d.prompt_difficulty in allowedDifficulties
+        && d.prompt_time is string && d.prompt_time in allowedTimes
+        // Content fields
+        && d.prompt_intent is string && d.prompt_intent.size() >= 20 && d.prompt_intent.size() <= 800
+        && d.prompt_when is string && d.prompt_when.size() <= 800
+        && d.prompt_text is string && d.prompt_text.size() >= 50 && d.prompt_text.size() <= 8000
+        && d.prompt_expected_output is string && d.prompt_expected_output.size() <= 800
+        && d.prompt_failure_modes is string && d.prompt_failure_modes.size() <= 1500
+        && d.prompt_verification is string && d.prompt_verification.size() <= 1500
+        && d.prompt_best_model is string && d.prompt_best_model.size() <= 100
+        // Diagnostic fields
+        && d.referrer is string && d.referrer.size() <= 500
+        && d.user_agent is string && d.user_agent.size() <= 500;
+    }
+
+    function isAdminStatusUpdate() {
+      // Admin can update ONLY status and review_notes / reviewed_at;
+      // all other fields must remain unchanged.
+      let before = resource.data;
+      let after = request.resource.data;
+      let allowedStatuses = ['pending', 'approved', 'rejected', 'needs_revision'];
+      let immutable = [
+        'timestamp',
+        'submitter_name', 'submitter_email', 'submitter_affiliation',
+        'prompt_title', 'prompt_pillar', 'prompt_audience',
+        'prompt_difficulty', 'prompt_time',
+        'prompt_intent', 'prompt_when', 'prompt_text',
+        'prompt_expected_output', 'prompt_failure_modes', 'prompt_verification',
+        'prompt_best_model',
+        'referrer', 'user_agent'
+      ];
+      // No immutable field is being modified
+      let allImmutableUnchanged = immutable.hasAll(immutable) &&
+        !(before.diff(after).affectedKeys().hasAny(immutable));
+      // Status must be a valid value
+      let validStatus = after.status is string && after.status in allowedStatuses;
+      return allImmutableUnchanged && validStatus;
+    }
+
+    match /prompt_submissions/{docId} {
+      allow create:        if isValidSubmissionPayload();
+      allow read, list:    if isAdmin();
+      allow update:        if isAdmin() && isAdminStatusUpdate();
+      allow delete:        if false;
+    }
+
     // ---- deny-by-default for everything else ----
 
     match /{document=**} {
