@@ -165,7 +165,13 @@
       if (!panel) return;
       if (e.key === "ArrowDown") { e.preventDefault(); moveActive(1); }
       else if (e.key === "ArrowUp") { e.preventDefault(); moveActive(-1); }
-      else if (e.key === "Enter")    { e.preventDefault(); openActive(); }
+      else if (e.key === "Enter")    {
+        e.preventDefault();
+        // Analytics: log the query they actually committed to
+        const q = (input.value || "").trim();
+        if (q && window.analytics) window.analytics.track("search", { query: q });
+        openActive();
+      }
       else if (e.key === "Escape")   { closePanel(); input.blur(); }
     });
 

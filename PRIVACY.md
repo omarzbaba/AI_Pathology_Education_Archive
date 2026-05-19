@@ -60,7 +60,28 @@ When you click the floating **Feedback** button on any page and send a message:
 
 Feedback messages are admin-only; they are never displayed publicly. If you provide an email, the author may reply directly.
 
-### Context 5 — Votes on prompts
+### Context 5 — Page-level analytics events
+
+The companion site logs three kinds of interaction events to a `page_events` Firestore collection so the author can see which prompts and tutorials are actually used:
+
+- **Page views** — when you load any public page or navigate to a prompt / tutorial inside the library, an event is logged with the page path
+- **Copy-prompt clicks** — when you click the "Copy prompt" button on a prompt detail page, an event is logged with the prompt's path (not its text)
+- **Search queries** — when you press Enter in the search box, the query text is logged
+
+Each event includes:
+
+- **Type** (view / copy / search)
+- **Path** (which page or prompt)
+- **Query text** (for searches only, capped at 200 characters)
+- **A random session ID** (stored in your browser's localStorage; lets the author distinguish one visit from many without identifying you personally)
+- **Your email** if you've signed in via the access form, or empty string if you haven't
+- **Referrer URL and timestamp**
+
+These events are admin-only read; they never appear publicly. The data stays in your own Firestore project — no third-party analytics service (no Google Analytics, no Plausible, no tracking pixels). If you visit while signed out, the event is recorded with an empty email and only the random session ID — the author cannot tie that activity to you personally.
+
+If you'd like your activity excluded from analytics, you can clear `companion_session_id` from your browser's localStorage between visits, or use private/incognito mode.
+
+### Context 6 — Votes on prompts
 
 When you upvote a prompt:
 
@@ -75,7 +96,7 @@ If you provided your email via the access form or a comment, it is reused for vo
 
 ### What's the same across both contexts
 
-No other information is collected. The site does not load analytics scripts, tracking pixels, third-party tags, or social-media widgets. The site does not write tracking cookies. The only browser storage used is a single localStorage entry that holds your first name (for personalized greeting) and a flag that you've already signed in.
+No other information is collected. The site does not load third-party analytics scripts, tracking pixels, third-party tags, or social-media widgets — first-party page-events are logged to the author's own Firestore (Context 5 above), not sent to Google, Meta, or any other vendor. The site does not write tracking cookies. The browser storage used is limited to: one localStorage entry holding your first name and a flag that you've already signed in, plus a random session ID for the analytics events described above.
 
 ## Why we collect it
 
@@ -157,3 +178,4 @@ If this notice changes materially (new data collected, different retention perio
 - **2026-05-18:** Admin can now permanently delete prompt submissions and comments (previously only status-change was possible). Used for spam, off-topic noise, and test entries. Access-form entries remain strictly append-only.
 - **2026-05-18:** Added the **feedback** collection (Context 4 above) — a floating Feedback button on every page collects bug reports, suggestions, and questions for the author. Anonymous submissions allowed; if you include an email the author may reply. Admin-only read.
 - **2026-05-18:** Added a **returning-visitor email lookup**. If you've already signed in once and later clear your browser or switch devices, you can re-enter just your email and a server-side Cloud Function (running in our Firebase project, no third-party sub-processor) looks up the existing access_log entry and restores access. The function only echoes back the name, role, and institution you previously provided; it never returns referrer, user agent, or timestamps. The function requires a valid App Check token to prevent automated email enumeration.
+- **2026-05-18:** Added the **page_events** collection (Context 5 above) — first-party analytics logging page views, copy-prompt clicks, and search queries. Data stays in our own Firestore (no Google Analytics, no Plausible, no third-party analytics). Admin-only read. Visitors who want to opt out can clear `companion_session_id` from localStorage between visits, or browse in private/incognito mode.

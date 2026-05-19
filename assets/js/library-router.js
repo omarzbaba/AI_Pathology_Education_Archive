@@ -325,6 +325,11 @@
         const orig = label.textContent;
         label.textContent = "Copied";
         btn.classList.add("btn-copy-prompt--copied");
+        // Analytics: copy event
+        if (window.analytics) {
+          const promptPath = (window.location.hash || "").replace(/^#\//, "");
+          window.analytics.track("copy", { prompt_path: promptPath });
+        }
         setTimeout(() => {
           label.textContent = orig;
           btn.classList.remove("btn-copy-prompt--copied");

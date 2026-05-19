@@ -76,6 +76,7 @@ const tabAccessLog   = document.getElementById("tab-access-log");
 const tabSubmissions = document.getElementById("tab-submissions");
 const tabComments    = document.getElementById("tab-comments");
 const tabFeedback    = document.getElementById("tab-feedback");
+const tabAnalytics   = document.getElementById("tab-analytics");
 const submissionsBadge = document.getElementById("submissions-badge");
 const commentsBadge    = document.getElementById("comments-badge");
 const feedbackBadge    = document.getElementById("feedback-badge");
@@ -83,8 +84,10 @@ const accessLogSection   = document.getElementById("access-log-section");
 const submissionsSection = document.getElementById("submissions-section");
 const commentsSection    = document.getElementById("comments-section");
 const feedbackSection    = document.getElementById("feedback-section");
+const analyticsSection   = document.getElementById("analytics-section");
 const commentsEl     = document.getElementById("comments-content");
 const feedbackEl     = document.getElementById("feedback-content");
+const analyticsEl    = document.getElementById("analytics-content");
 const signoutLink    = document.getElementById("admin-signout-link");
 
 function setSigninStatus(msg, kind) {
@@ -110,13 +113,15 @@ function showTab(which) {
     "access-log": accessLogSection,
     "submissions": submissionsSection,
     "comments": commentsSection,
-    "feedback": feedbackSection
+    "feedback": feedbackSection,
+    "analytics": analyticsSection
   };
   const tabs = {
     "access-log": tabAccessLog,
     "submissions": tabSubmissions,
     "comments": tabComments,
-    "feedback": tabFeedback
+    "feedback": tabFeedback,
+    "analytics": tabAnalytics
   };
   for (const key of Object.keys(sections)) {
     sections[key].hidden = (key !== which);
@@ -129,6 +134,7 @@ tabAccessLog.addEventListener("click", (e) => { e.preventDefault(); showTab("acc
 tabSubmissions.addEventListener("click", (e) => { e.preventDefault(); showTab("submissions"); renderSubmissions(); });
 tabComments.addEventListener("click", (e) => { e.preventDefault(); showTab("comments"); renderCommentsModeration(); });
 tabFeedback.addEventListener("click", (e) => { e.preventDefault(); showTab("feedback"); renderFeedback(); });
+tabAnalytics.addEventListener("click", (e) => { e.preventDefault(); showTab("analytics"); renderAnalytics(); });
 signoutLink.addEventListener("click", (e) => { e.preventDefault(); signOut(auth); });
 
 // ---------------------------------------------------------------------------
@@ -960,4 +966,200 @@ function wireFeedbackActions() {
       }
     });
   });
+}
+
+// ---------------------------------------------------------------------------
+// Analytics
+// ---------------------------------------------------------------------------
+
+async function renderAnalytics() {
+  analyticsEl.innerHTML = '<p>Loading analytics&hellip;</p>';
+  try {
+    const snap = await getDocs(query(collection(db, "page_events"), orderBy("timestamp", "desc")));
+    const events = [];
+    snap.forEach((d) => events.push(d.data()));
+    drawAnalytics(events);
+  } catch (err) {
+    analyticsEl.innerHTML =
+      '<p class="form-status form-status--error">Failed to load: ' +
+      escapeHtml(err.message) + '</p>';
+  }
+}
+
+function drawAnalytics(events) {
+  if (!events.length) {
+    analyticsEl.innerHTML =
+      '<p>No analytics events yet. Once visitors start browsing, you\'ll see page views, copy clicks, and search queries here.</p>' +
+      '<p style="color: var(--color-muted); font-size: 0.9rem;">If you just deployed the rules, try loading <a href="thank-you.html" target="_blank">the library</a> in another tab and reloading this page.</p>';
+    return;
+  }
+
+  // Compute time-bucketed counts
+  const now = Date.now();
+  const day = 86400000;
+  const buckets = {
+    "24h":   { ms: 1 * day,  views: 0, copies: 0, searches: 0, sessions: new Set(), emails: new Set() },
+    "7d":    { ms: 7 * day,  views: 0, copies: 0, searches: 0, sessions: new Set(), emails: new Set() },
+    "30d":   { ms: 30 * day, views: 0, copies: 0, searches: 0, sessions: new Set(), emails: new Set() },
+    "all":   { ms: Infinity, views: 0, copies: 0, searches: 0, sessions: new Set(), emails: new Set() }
+  };
+
+  const viewsByPath = {};
+  const copiesByPrompt = {};
+  const queriesByText = {};
+  const sessionEventCount = {};
+  const sessionFirstSeen = {};
+
+  for (const e of events) {
+    const ts = e.timestamp && typeof e.timestamp.toDate === "function"
+      ? e.timestamp.toDate().getTime() : 0;
+    const ageMs = now - ts;
+
+    for (const key of Object.keys(buckets)) {
+      const b = buckets[key];
+      if (ageMs <= b.ms) {
+        if (e.type === "view")   b.views++;
+        if (e.type === "copy")   b.copies++;
+        if (e.type === "search") b.searches++;
+        if (e.session_id) b.sessions.add(e.session_id);
+        if (e.email)      b.emails.add(e.email);
+      }
+    }
+
+    if (e.type === "view" && e.path) {
+      viewsByPath[e.path] = (viewsByPath[e.path] || 0) + 1;
+    }
+    if (e.type === "copy" && e.prompt_path) {
+      copiesByPrompt[e.prompt_path] = (copiesByPrompt[e.prompt_path] || 0) + 1;
+    }
+    if (e.type === "search" && e.query) {
+      const q = e.query.toLowerCase().trim();
+      if (q) queriesByText[q] = (queriesByText[q] || 0) + 1;
+    }
+    if (e.session_id) {
+      sessionEventCount[e.session_id] = (sessionEventCount[e.session_id] || 0) + 1;
+      if (!sessionFirstSeen[e.session_id] || ts < sessionFirstSeen[e.session_id]) {
+        sessionFirstSeen[e.session_id] = ts;
+      }
+    }
+  }
+
+  const topPages = topN(viewsByPath, 15);
+  const topCopies = topN(copiesByPrompt, 15);
+  const topSearches = topN(queriesByText, 15);
+
+  // Returning vs new (sessions in last 30d that existed before vs new this period)
+  const cutoff30 = now - 30 * day;
+  let newSessions = 0, returningSessions = 0;
+  for (const sid of Object.keys(sessionFirstSeen)) {
+    if (sessionFirstSeen[sid] >= cutoff30) newSessions++;
+    else if (sessionEventCount[sid] > 1) returningSessions++;
+  }
+
+  analyticsEl.innerHTML =
+    '<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: var(--space-3); margin-bottom: var(--space-5);">' +
+      summaryCard("Last 24 hours", buckets["24h"]) +
+      summaryCard("Last 7 days",   buckets["7d"]) +
+      summaryCard("Last 30 days",  buckets["30d"]) +
+      summaryCard("All time",      buckets["all"]) +
+    '</div>' +
+
+    '<div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-4); margin-bottom: var(--space-5);">' +
+      listCard("Top pages by views", topPages, "page") +
+      listCard("Top prompts by copy clicks", topCopies, "page") +
+    '</div>' +
+
+    '<div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-4);">' +
+      listCard("Top search queries", topSearches, "text") +
+      sessionInfoCard(newSessions, returningSessions, events.length) +
+    '</div>';
+}
+
+function summaryCard(label, b) {
+  return (
+    '<div style="background: var(--color-paper); border: 1px solid var(--color-rule); border-top: 4px solid var(--color-burgundy); padding: var(--space-3) var(--space-4); border-radius: 4px;">' +
+      '<p style="margin: 0; font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--color-burgundy); font-weight: 500;">' + escapeHtml(label) + '</p>' +
+      '<p style="margin: 0.5rem 0 0; font-size: 1.6rem; font-weight: 600;">' + b.views + ' <span style="font-size: 0.85rem; font-weight: 400; color: var(--color-muted);">views</span></p>' +
+      '<p style="margin: 0.25rem 0 0; font-size: 0.88rem; color: var(--color-muted);">' +
+        b.copies + ' copies &middot; ' + b.searches + ' searches' +
+      '</p>' +
+      '<p style="margin: 0.25rem 0 0; font-size: 0.88rem; color: var(--color-muted);">' +
+        b.sessions.size + ' sessions &middot; ' + b.emails.size + ' signed-in' +
+      '</p>' +
+    '</div>'
+  );
+}
+
+function listCard(title, items, kind) {
+  if (!items.length) {
+    return cardWrap(title, '<p style="color: var(--color-muted); margin: 0;">No data yet.</p>');
+  }
+  const max = items[0].count;
+  const rows = items.map(item => {
+    const pct = Math.round((item.count / max) * 100);
+    const label = kind === "page"
+      ? '<a href="' + escapeHtml(toViewerHref(item.key)) + '" target="_blank" style="color: var(--color-navy); text-decoration: none;">' + escapeHtml(humanizePath(item.key)) + '</a>'
+      : escapeHtml(item.key);
+    return (
+      '<div style="margin-bottom: 0.5rem;">' +
+        '<div style="display: flex; justify-content: space-between; gap: 0.5rem; font-size: 0.88rem; margin-bottom: 2px;">' +
+          '<span style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;" title="' + escapeHtml(item.key) + '">' + label + '</span>' +
+          '<span style="color: var(--color-muted); font-variant-numeric: tabular-nums;">' + item.count + '</span>' +
+        '</div>' +
+        '<div style="height: 4px; background: var(--color-rule); border-radius: 2px; overflow: hidden;">' +
+          '<div style="width: ' + pct + '%; height: 100%; background: var(--color-burgundy);"></div>' +
+        '</div>' +
+      '</div>'
+    );
+  }).join("");
+  return cardWrap(title, rows);
+}
+
+function sessionInfoCard(newCount, returningCount, totalEvents) {
+  const body =
+    '<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; text-align: center; margin-bottom: 0.75rem;">' +
+      '<div><p style="margin:0; font-size: 1.4rem; font-weight: 600;">' + newCount + '</p><p style="margin:0; font-size: 0.78rem; color: var(--color-muted); text-transform: uppercase; letter-spacing: 0.06em;">New sessions</p></div>' +
+      '<div><p style="margin:0; font-size: 1.4rem; font-weight: 600;">' + returningCount + '</p><p style="margin:0; font-size: 0.78rem; color: var(--color-muted); text-transform: uppercase; letter-spacing: 0.06em;">Returning</p></div>' +
+    '</div>' +
+    '<p style="margin: 0; font-size: 0.88rem; color: var(--color-muted);">Total events in dataset: <strong style="color: var(--color-navy);">' + totalEvents.toLocaleString() + '</strong></p>' +
+    '<p style="margin: 0.5rem 0 0; font-size: 0.78rem; color: var(--color-muted); line-height: 1.4;">A session is a browser with a stable random session ID. "Returning" means a session with multiple events recorded over time.</p>';
+  return cardWrap("Session activity (last 30 days)", body);
+}
+
+function cardWrap(title, body) {
+  return (
+    '<div style="background: var(--color-paper); border: 1px solid var(--color-rule); padding: var(--space-3) var(--space-4); border-radius: 4px;">' +
+      '<p style="margin: 0 0 0.75rem; font-family: var(--font-serif); font-size: 1.15rem; color: var(--color-navy);">' + escapeHtml(title) + '</p>' +
+      body +
+    '</div>'
+  );
+}
+
+function topN(counts, n) {
+  return Object.entries(counts)
+    .map(([key, count]) => ({ key, count }))
+    .sort((a, b) => b.count - a.count)
+    .slice(0, n);
+}
+
+function humanizePath(path) {
+  // /thank-you.html#/library/.../prompts/foo  →  prompts/foo
+  // /thank-you.html                            →  home
+  let p = String(path || "");
+  if (p.startsWith("/")) p = p.slice(1);
+  if (p === "" || p === "thank-you.html") return "home (library)";
+  if (p === "index.html" || p === "/") return "home (access gate)";
+  if (p === "submit.html") return "submit a prompt";
+  const m = p.match(/^library\.html#\/?(.*)$/);
+  if (m) return m[1] || "library home";
+  return p;
+}
+
+function toViewerHref(path) {
+  // page_events.path looks like "/thank-you.html#/library/..." — open in viewer
+  let p = String(path || "");
+  if (p.includes("#")) {
+    return "library.html" + p.substring(p.indexOf("#"));
+  }
+  return p.startsWith("/") ? p.substring(1) : p;
 }

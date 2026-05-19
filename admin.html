@@ -57,6 +57,7 @@
         <a href="#" id="tab-submissions" class="admin-tab">Submissions <span id="submissions-badge" class="pill pill--mid" style="margin-left: 0.5rem; display: none;">0</span></a>
         <a href="#" id="tab-comments" class="admin-tab">Comments <span id="comments-badge" class="pill pill--mid" style="margin-left: 0.5rem; display: none;">0</span></a>
         <a href="#" id="tab-feedback" class="admin-tab">Feedback <span id="feedback-badge" class="pill pill--mid" style="margin-left: 0.5rem; display: none;">0</span></a>
+        <a href="#" id="tab-analytics" class="admin-tab">Analytics</a>
         <a href="#" id="admin-signout-link" style="margin-left: auto; color: var(--color-navy);">Sign out</a>
       </nav>
 
@@ -94,6 +95,17 @@
         </div>
       </section>
 
+      <!-- Analytics section -->
+      <section id="analytics-section" aria-labelledby="analytics-heading" hidden>
+        <h2 id="analytics-heading" class="mt-0">Analytics</h2>
+        <p class="form-section__intro" style="background: var(--color-paper); border: 1px solid var(--color-rule); border-left: 3px solid var(--color-burgundy); padding: var(--space-3) var(--space-4);">
+          First-party traffic and engagement data from the <code>page_events</code> collection. Page views, copy-prompt clicks, and search queries are logged when visitors interact with the public site (admin sessions are not tracked). All data stays in your Firestore &mdash; no third parties.
+        </p>
+        <div id="analytics-content">
+          <p>Loading analytics&hellip;</p>
+        </div>
+      </section>
+
       <!-- Feedback section -->
       <section id="feedback-section" aria-labelledby="feedback-heading" hidden>
         <h2 id="feedback-heading" class="mt-0">Feedback inbox</h2>
@@ -106,7 +118,7 @@
       </section>
 
       <!-- Admins shouldn't get the floating button themselves -->
-      <script>document.body.classList.add("fbw-suppress");</script>
+      <script>document.body.classList.add("fbw-suppress"); document.body.classList.add("analytics-suppress");</script>
 
     </section>
 

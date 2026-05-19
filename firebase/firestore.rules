@@ -314,6 +314,45 @@ service cloud.firestore {
       allow delete:        if isAdmin();
     }
 
+    // ---- page_events ----
+    //
+    // First-party analytics: page views, copy-prompt clicks, search queries.
+    // - create: anyone with App Check + valid payload shape
+    // - read/list/update/delete: admin only
+    //
+    // Fields are length-capped to prevent abuse. Email is optional (empty
+    // string for anonymous events). No PII is collected beyond what the user
+    // already submitted to the access form.
+
+    function isValidEventPayload() {
+      let d = request.resource.data;
+      let keys = d.keys();
+      let required = [
+        'timestamp', 'type', 'session_id',
+        'path', 'email', 'referrer',
+        'query', 'prompt_path'
+      ];
+      let allowedTypes = ['view', 'copy', 'search'];
+      return
+        keys.hasAll(required) && keys.hasOnly(required)
+        && d.timestamp == request.time
+        && d.type is string && d.type in allowedTypes
+        && d.session_id is string && d.session_id.size() <= 64
+        && d.path is string && d.path.size() <= 500
+        && d.email is string && d.email.size() <= 254
+        && (d.email.size() == 0
+            || d.email.matches('^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$'))
+        && d.referrer is string && d.referrer.size() <= 500
+        && d.query is string && d.query.size() <= 200
+        && d.prompt_path is string && d.prompt_path.size() <= 300;
+    }
+
+    match /page_events/{docId} {
+      allow create:        if isValidEventPayload();
+      allow read, list:    if isAdmin();
+      allow update, delete: if isAdmin();
+    }
+
     // ---- deny-by-default for everything else ----
 
     match /{document=**} {
