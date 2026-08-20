@@ -13,6 +13,29 @@ A few principles run through every prompt in this pillar:
 - **Chain in one session.** Most of these prompts are designed to be used in sequence — explain a concept, then deepen it, then drill it. The same conversation thread keeps the model's mental model of you intact.
 - **Verify before you trust.** Every prompt in this pillar ends with a *Required human verification* section that names specifically what you must check before treating the output as correct.
 
+<div class="flagship">
+<p class="flagship__eyebrow">Start here &middot; Flagship worked example</p>
+<h2 class="flagship__title">Three weeks to close your weakest topic</h2>
+<p class="flagship__premise">A PGY-2 has three weeks to the in-service exam and keeps reversing CLL/SLL and mantle cell lymphoma under time pressure. Follow the complete self-study loop she ran &mdash; eight prompts from this pillar, in sequence, including the model error she caught and why it mattered.</p>
+<ul class="flagship__meta">
+<li>Hematopathology</li>
+<li>PGY-2</li>
+<li>8 prompts chained</li>
+<li>~4 h over 3 weeks</li>
+</ul>
+<ol class="arc">
+<li>Name the gap</li>
+<li>Schedule it</li>
+<li>Concept at level</li>
+<li>Discriminators</li>
+<li>Self-quiz</li>
+<li>Reverse drill</li>
+<li>Generate &amp; audit items</li>
+<li>Bank what survived</li>
+</ol>
+<p><a class="btn" href="library.html#/library/pillar-1-self-education/examples/three-weeks-cd5-lpd">Walk through the example &rarr;</a></p>
+</div>
+
 ## Prompt index
 
 ### Concept work
@@ -82,4 +105,5 @@ A few principles run through every prompt in this pillar:
 
 ### Worked examples
 
+- [**Flagship** — Three weeks to close your weakest topic](library.html#/library/pillar-1-self-education/examples/three-weeks-cd5-lpd)
 - [Self-quizzing through SPEP interpretation](library.html#/library/pillar-1-self-education/examples/spep-self-quiz)

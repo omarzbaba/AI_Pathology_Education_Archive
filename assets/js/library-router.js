@@ -189,6 +189,28 @@
     );
   }
 
+  function flagshipHtml(f) {
+    if (!f) return "";
+    const href = "library.html#/" + String(f.path || "").replace(/\.md$/, "");
+    const meta = (f.meta || []).map(function (m) {
+      return '<li>' + escapeHtml(m) + '</li>';
+    }).join("");
+    const arc = (f.arc || []).map(function (a) {
+      return '<li>' + escapeHtml(a) + '</li>';
+    }).join("");
+    return (
+      '<div class="flagship">' +
+        '<p class="flagship__eyebrow">' + escapeHtml(f.eyebrow || "Start here \u00b7 Flagship worked example") + '</p>' +
+        '<h2 class="flagship__title">' + escapeHtml(f.title || "") + '</h2>' +
+        '<p class="flagship__premise">' + escapeHtml(f.premise || "") + '</p>' +
+        (meta ? '<ul class="flagship__meta">' + meta + '</ul>' : '') +
+        (arc ? '<ol class="arc">' + arc + '</ol>' : '') +
+        '<p><a class="btn" href="' + escapeHtml(href) + '">' +
+          escapeHtml(f.cta || "Walk through the example") + ' \u2192</a></p>' +
+      '</div>'
+    );
+  }
+
   function renderPillarCards(pillar) {
     setPageTitle(pillar.title);
     const sectionsHtml = pillar.sections.map((s) =>
@@ -202,6 +224,7 @@
     contentEl.innerHTML =
       '<h1>' + escapeHtml(pillar.title) + '</h1>' +
       '<p class="lead">' + escapeHtml(pillar.description) + '</p>' +
+      flagshipHtml(pillar.flagship) +
       sectionsHtml;
     window.scrollTo({ top: 0, behavior: "instant" });
   }

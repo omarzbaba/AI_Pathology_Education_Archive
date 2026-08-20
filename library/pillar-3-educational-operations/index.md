@@ -65,4 +65,5 @@ A note on the **Companion App Builder** at the bottom of this page: it is a stan
 
 ### Worked examples
 
+- [**Flagship** — Designing a resident's rotation curriculum](library.html#/library/pillar-3-educational-operations/examples/designing-a-rotation-curriculum)
 - [Coagulation rotation orientation packet](library.html#/library/pillar-3-educational-operations/examples/coag-rotation-orientation)

@@ -56,4 +56,5 @@ Principles for this pillar:
 
 ### Worked examples
 
+- [**Flagship** — From empty calendar slot to a taught session](library.html#/library/pillar-2-teaching/examples/one-hour-session-interference)
 - [Designing a PGY-2 transfusion reaction teaching session](library.html#/library/pillar-2-teaching/examples/pgy2-transfusion-reaction)

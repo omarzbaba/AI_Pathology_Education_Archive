@@ -469,7 +469,29 @@
             }
           ]
         }
-      ]
+      ],
+      "flagship": {
+        "title": "Three weeks to close your weakest topic",
+        "premise": "A PGY-2 has three weeks to the in-service exam and keeps reversing CLL/SLL and mantle cell lymphoma under pressure. Follow the complete self-study loop she ran — eight prompts from this pillar, in sequence, including the model error she caught and why it mattered.",
+        "meta": [
+          "Hematopathology",
+          "PGY-2",
+          "8 prompts chained",
+          "~4 h over 3 weeks"
+        ],
+        "arc": [
+          "Name the gap",
+          "Schedule it",
+          "Concept at level",
+          "Discriminators",
+          "Self-quiz",
+          "Reverse drill",
+          "Generate & audit items",
+          "Bank what survived"
+        ],
+        "cta": "Walk through the example",
+        "path": "library/pillar-1-self-education/examples/three-weeks-cd5-lpd.md"
+      }
     },
     {
       "slug": "pillar-2-teaching",
@@ -779,7 +801,29 @@
             }
           ]
         }
-      ]
+      ],
+      "flagship": {
+        "title": "From empty calendar slot to a taught session",
+        "premise": "A faculty member has one week's notice to fill a one-hour PGY-2 slot on immunoassay interference — no objectives, no cases, no assessment, no slides. Follow the ninety minutes of prep that produced all of it, including the confidently-wrong quiz item she caught because it contradicted her own teaching case.",
+        "meta": [
+          "Clinical chemistry",
+          "Faculty",
+          "8 prompts chained",
+          "90 min of prep"
+        ],
+        "arc": [
+          "Objectives",
+          "Teaching case",
+          "Matched pair",
+          "Items & audit",
+          "OSCE station",
+          "Slide outline",
+          "Facilitator notes",
+          "Poll & bias screen"
+        ],
+        "cta": "Walk through the example",
+        "path": "library/pillar-2-teaching/examples/one-hour-session-interference.md"
+      }
     },
     {
       "slug": "pillar-3-educational-operations",
@@ -1248,7 +1292,29 @@
             }
           ]
         }
-      ]
+      ],
+      "flagship": {
+        "title": "Designing a resident's rotation curriculum",
+        "premise": "A new rotation director inherits a folder of slides, no written curriculum, and a PGY-2 starting in eighteen days. Follow the design of a four-week transfusion medicine and coagulation rotation — and the fabricated accreditation requirement that nearly became programme policy.",
+        "meta": [
+          "Transfusion medicine & coagulation",
+          "Rotation director",
+          "8 steps across 3 pillars",
+          "~6 h of design"
+        ],
+        "arc": [
+          "Scope it",
+          "Map to milestones",
+          "Sequence 4 weeks",
+          "Orientation",
+          "Reading list",
+          "Assessment",
+          "Evaluation",
+          "Package it"
+        ],
+        "cta": "Walk through the example",
+        "path": "library/pillar-3-educational-operations/examples/designing-a-rotation-curriculum.md"
+      }
     }
   ]
 }

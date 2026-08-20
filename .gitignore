@@ -29,3 +29,6 @@ Thumbs.db
 # Local-only working files
 TODO.local.md
 NOTES.local.md
+
+# local dev server config (not part of the site)
+.claude/
